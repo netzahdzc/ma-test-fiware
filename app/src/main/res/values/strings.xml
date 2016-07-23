@@ -1,0 +1,236 @@
+<resources>
+    <string name="app_name" translatable="false">3Ollin Test</string>
+    <string name="increase">Add a new Patient</string>
+    <string name="edit_title">Updating</string>
+    <string name="update_button">Update</string>
+    <string name="edit">Updating</string>
+    <string name="delete_button">Remove</string>
+    <string name="update">Please, check that you are typing correct values.</string>
+    <string name="updated">File updated.</string>
+    <string name="validation">Please, check that you are typing correct values.</string>
+    <string name="load_image">[ Change photo ]</string>
+    <string name="confirmation">This task could not be restored. Do you want to continue?</string>
+    <string name="select_picture">Select a picture</string>
+    <string name="patient">Paciente</string>
+    <string name="header_add_patient">Add a new Patient</string>
+    <string name="submit_form">Submit</string>
+    <string name="header_edit_patient">Edit patient</string>
+    <string name="header_settings">Settings</string>
+    <string name="test">Perform test</string>
+    <string name="title_activity_navigation" translatable="false">NavigationActivity</string>
+
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="add_participant">Add new participant</string>
+    <string name="patient_list">Patient list</string>
+    <string name="drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="button_finished">Finish</string>
+    <string name="button_save">Save</string>
+    <string name="activation_code">Activation code</string>
+    <string name="header_about">About</string>
+    <string name="header_privacy">Privacy terms</string>
+    <string name="header_activation">Activation code</string>
+    <string name="update_form">Update</string>
+    <string name="update_data">[ Update ]</string>
+    <string name="header_folder">Record</string>
+    <string name="header_tests">Tests</string>
+    <string name="header_control">Control measurements</string>
+    <string name="header_edit_user_acount">Edit profile</string>
+    <string name="material_icon_box_full" translatable="false">[O]</string>
+    <string name="material_icon_check_empty" translatable="false">[X]</string>
+    <string name="cd_main_image" translatable="false">main image</string>
+    <string name="lorem_ipsum_long" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
+    <string name="header_walking_tests">Walking test</string>
+    <string name="header_wizard_tests">Overview for test</string>
+    <string name="header_balance_test">Balance test options</string>
+    <string name="button_start">Start</string>
+    <string name="button_end">Stop</string>
+    <string name="header_counter">Counter</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="button_restart">Restart</string>
+    <string name="header_evaluation">Test evaluation</string>
+    <string name="repeat_test">Repeat test</string>
+    <string name="button_continue">Continue</string>
+    <string name="header_faqs">FAQs</string>
+    <string name="walking_question_one">No abnormal gait</string>
+    <string name="walking_question_two">Slow pace</string>
+    <string name="walking_question_three">Loss of balance</string>
+    <string name="walking_question_four">Tour at a single point</string>
+    <string name="walking_question_five">Little or no arm swing</string>
+    <string name="walking_question_six">Stabilization walls</string>
+    <string name="walking_question_seven">Drag your feet when walking</string>
+    <string name="walking_question_eight">Short steps</string>
+    <string name="walking_question_nine">Do not use the device correctly assistance</string>
+    <string name="strength_question_one">The Elderly concluded smoothly tests</string>
+    <string name="strength_question_two">The Elderly shuffled his feet</string>
+    <string name="strength_question_three">The Elderly need help to maintain balance</string>
+    <string name="balance_question_one">The Elderly test ended without problems</string>
+    <string name="balance_question_two">The Elderly could not perform the test</string>
+    <string name="balance_question_three">The Elderly used the arms to join</string>
+    <string name="header_walkability_evaluation">Walkability test evaluation</string>
+    <string name="button_repeat">Repeat test</string>
+    <string name="header_balance_evaluation">Balance test evaluation</string>
+    <string name="header_strength_evaluation">Strength test evaluation</string>
+    <string name="button_quality">Mark quality of data</string>
+    <string name="header_concentrated">Final report</string>
+    <string name="button_finish_test">Finish test</string>
+    <string name="request_password">Request</string>
+    <string name="header_recover_password">Recover password</string>
+    <string name="header_sign_up">Sign Up</string>
+    <string name="username">Username</string>
+    <string name="email" translatable="false">E-mail</string>
+    <string name="password">Password</string>
+    <string name="project_name" translatable="false">3Ollin Test</string>
+    <string name="register">Sign Up</string>
+    <string name="login">Log In</string>
+    <string name="header_login" translatable="false">3Ollin Test</string>
+    <string name="app_version">Version 1.0</string>
+    <string name="app_long_name">Application for Monitoring Physical Performance Testing: Run, Strength, and Balance.</string>
+    <string name="privacy_terms_tab">Terminos de privacidad</string>
+    <string name="activation_code_description">The activation code lets you have the full services of 3Ollin Test, for instance the provision of information collected via online.
+        \n\n
+        The activation code distribution is limited to physicians and specialists who cooperate with the National Institute of Geriatrics of Mexico City.</string>
+    <string name="button_next">Next</string>
+    <string name="button_skip">Skip</string>
+    <string name="patient_name_hint">Name</string>
+    <string name="patient_surname_hint">Surname</string>
+    <string name="patient_gender_hint">Gender</string>
+    <string name="patient_birthday_hint">Date of birth</string>
+    <string name="button_semi_tandem_test">Semi-tandem</string>
+    <string name="button_tandem_test">Tandem</string>
+    <string name="button_one_leg_test">One leg</string>
+    <string name="label_register_number">Folio:</string>
+    <string name="label_test_type">Test type:</string>
+    <string name="label_quality">Data quality:</string>
+    <string name="patient_weight_hint">Weight</string>
+    <string name="patient_height_hint">Height</string>
+    <string name="patient_waist_size_hint">Waist size</string>
+    <string name="patient_heart_rate_hint">Heart rate</string>
+    <string name="patient_sys_blood_hint">Systolic blood pressure</string>
+    <string name="patient_dia_blood_hint">Diastolic blood pressure</string>
+    <string name="label_counting" translatable="false">3-2-1</string>
+    <string name="user_passwords">Password</string>
+    <string name="user_password_confirmation">Repeat Password</string>
+    <string name="user_birthday_hint">Date of birth</string>
+    <string name="user_gender_hint">Gender</string>
+    <string name="user_surname_hint">Surname</string>
+    <string name="user_name_hint">Name</string>
+    <string name="button_control">Control</string>
+    <string name="button_tests">Tests</string>
+    <string name="label_update">Update:</string>
+    <string name="label_weight">Weight:</string>
+    <string name="label_height">Height:</string>
+    <string name="label_waits_size">Waist size:</string>
+    <string name="label_heart_rate">Heart rate:</string>
+    <string name="label_sys_blood">Systolic blood pressure:</string>
+    <string name="label_dia_blood">Diastolic blood pressure:</string>
+    <string name="label_last_records">Last records</string>
+    <string name="label_walking_test">TUG:</string>
+    <string name="label_balance_test">Balance:</string>
+    <string name="label_strength_test">Strength:</string>
+    <string name="privacy_terms_content" translatable="false">El propósito de estas Políticas de Privacidad es informar a los usuarios sobre el uso de su información personal al completar la solicitud de registro en 3Ollin Test.
+\n\n
+Nota: definimos información personal como el conjunto de datos que permiten identificarle, como por ejemplo su nombre, domicilio, correo electrónico, y número telefónico.
+\n\n
+A. USO DE INFORMACIÓN. La información personal recolectada por consentimiento del usuario directo e indirectos será utilizada como parte del expediente electrónico de los pacientes para el monitoreo de riesgo de caídas. Esta información podrá ser utilizada con fines estadísticos por la organización responsable de esta aplicación; respetando en todo momento la identidad del usuarios.
+\n\n
+B. REVELACIÓN DE INFORMACIÓN. La organización responsable de esta aplicación no comercializará ni arrendará información personal de los usuarios del sistema. No se utilizará ni revelará a terceros información individual proporcionada. Sólo la información estadística podrá ser revelada a terceros.
+\n\n
+C. SEGURIDAD. En ciertos módulos de la aplicación para teléfonos celulares, la información es tratada y almacenada en formato codificada.
+\n\n
+D. MODIFICACIONES EN LAS POLÍTICAS DE PRIVACIDAD. La organización responsable de esta aplicación se reserva el derecho de introducir modificaciones en sus Políticas de Privacidad, con el fin de adaptarlas a nuevos requerimientos legislativos, jurisprudencia, técnicos o por cualquier otro motivo que le permita brindar un mejor servicio a los usuarios. La organización responsable de esta aplicación se compromete a publicará tales modificaciones a través de este medio.
+\n\n
+E. INTEGRIDAD. Las presentes Políticas de Privacidad son parte integrante de los Términos y Condiciones de Uso del Sistema. En consecuencia, el uso que los usuarios pudieran hacer de los servicios de esta aplicación para teléfonos celulares implica que han leído, entendido y aceptado los términos antes expuestos. Si el usuario no estuviera de acuerdo con tales Políticas y/o con sus Términos de Uso, tendrá la opción de no utilizar la aplicación.
+</string>
+    <string name="label_request_password">Request a new password by typing the E-mail you used to create you account:</string>
+    <string name="label_email" translatable="false">E-mail</string>
+    <string name="label_user">User</string>
+    <string name="user_edit_account_tab">Edit account</string>
+    <string name="user_activate_account_tab">Activate account</string>
+    <string name="label_generals">Generals</string>
+    <string name="about_tab">About</string>
+    <string name="user_email_hint">E-mail</string>
+    <string name="label_evaluation">Evaluation</string>
+    <string name="label_evaluation_directions">Note: 0 represents that the patient did not follow indications, and 5 stars means that the patient followed indications precisely.</string>
+    <string name="labl_relevant_observations">Relevant observations:</string>
+    <string name="observations_hint">Type your observations here</string>
+    <string name="button_walking_test">TUG test</string>
+    <string name="button_strength_test">Strength test</string>
+    <string name="button_balance_test">Balance test</string>
+    <string name="button_restore">[ Restore password ]</string>
+    <string name="balance_step_stay_next_elderly">WARNING: Always stay near the Elderly (AM) to prevent falls.</string>
+    <string name="balance_step_stay_one_leg">Describe and demonstrate the position on one foot.</string>
+    <string name="balance_step_stay_semi_tandem">Describe and display the position of feet in semitandem.</string>
+    <string name="balance_step_stay_tandem">Describe and show the position tandem.</string>
+    <string name="balance_step_stay_feet_together">Describe and show the position of your feet together.</string>
+    <string name="balance_step_hold_elderly">Hold Elderly\'s arms and help him to assume the correct position of the feet.</string>
+    <string name="balance_step_release_elderly">When the Elderly is stable, release him, but stay close to return hold in case you lose your balance.</string>
+    <string name="balance_step_to_start">Press START, the application makes a countdown: 3, 2, 1, accompanied by a sound start. Say \"Now\" when the count reaches zero to begin the test. After 10 seconds, the application chirps high.</string>
+    <string name="balance_step_if_cannot_hold">IMPORTANT: If the patient can hold the position for 10 seconds without moving your feet or you need help, go to the next position. If not, stop the test.</string>
+    <string name="strength_test_warning">WARNING: Always stay near the Elderly (AM) to prevent falls.</string>
+    <string name="strength_test_preparation">Tell the AM to sit in the middle of a chair without armrests, place your hands on the opposite shoulder across her wrists and hold your arms against his chest, feet flat on the floor and back straight.</string>
+    <string name="strength_test_start">Press START begins a countdown, say \"Now\" when the count reaches zero to begin the test.</string>
+    <string name="tug_test_warning">WARNING: Always stay near the Elderly (AM) to prevent falls.</string>
+    <string name="tug_test_preparation">The AM should use your regular shoes and can have help walking if necessary. Start laying the AM in a chair without armrests and identify a line on the ground to 3 meters.</string>
+    <string name="tug_test_start">Press START begins a countdown, say \"Now\" when the count reaches zero to begin the test.</string>
+    <string name="tug_test_get_up">Tell the Elderly to get out of the chair.</string>
+    <string name="tug_test_walk">Tell the Elderly to walk to the line marked on the floor to its normal rhythm.</string>
+    <string name="tug_test_turn_around">Tell the Elderly to turn around.</string>
+    <string name="tug_test_return">Tell the Elderly to return to the chair to its normal rhythm.</string>
+    <string name="tug_test_sit">Tell the Elderly to sit again.</string>
+    <string name="tug_test_stop">Stop the app after the Elderly has returned to sit down.</string>
+    <string name="strength_test_indications">Instruct to the Elderly that when he hears \"Now\", he should joins a full standing position and then sit back down.</string>
+    <string name="strength_test_30_seconds">Tell the AM you should repeat this for 30 seconds as fast as possible.</string>
+    <string name="strength_test_time_over">The application makes a sound to indicate that the time is over.</string>
+    <string name="strength_test_important">IMPORTANT: If the patient uses the arms to join the study stops and zero scores on your score.</string>
+    <string name="label_tug_test_name">TUG test</string>
+    <string name="label_strength_test_name">Strength test</string>
+    <string name="label_balance_test_name">Balance test</string>
+    <string name="label_balance_tandem_option">Tandem</string>
+    <string name="label_balance_semi_tandem_option">Semi-tandem</string>
+    <string name="label_balance_semi_feet_together_option">Feet together</string>
+    <string name="label_balance_semi_feet_one_leg_option">One leg</string>
+    <string name="select_a_picture_header">Select a picture</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="deleting_header">Deleting</string>
+    <string name="faq_q_activation_code">How to get an activation code?</string>
+    <string name="faq_r_activation_code">Activation codes are assigned and distributed only to members of the Institute of Geriatrics of Mexico City.</string>
+    <string name="faq_q_tug_test">What are the driving tests?</string>
+    <string name="faq_r_tug_test">Example of answer.</string>
+    <string name="faq_q_contact_data">Contact data</string>
+    <string name="faq_r_contact_data">To erquest personalized aupport, please, e-mail you situation to: example@gmail.com</string>
+    <string name="left_menu_home">Home</string>
+    <string name="left_menu_setting">Settings</string>
+    <string name="left_menu_help">Help</string>
+    <string name="left_menu_logout">Logout</string>
+    <string name="left_menu_title">Menu</string>
+    <string name="button_continue_test">Continuar con la prueba</string>
+    <string name="removed">Removed</string>
+    <string name="authentication">Authentication</string>
+    <string name="authentication_message">User no found.</string>
+    <string name="ok">Ok</string>
+    <string name="authentication_password_no">Please, type your password again. Seems that they don\'t match.</string>
+    <string name="user_gender_male">Male</string>
+    <string name="user_gender_female">Female</string>
+    <string name="spinner_select_option">[ Select an option ]</string>
+    <string name="user_created_successfuly">User created successfully</string>
+    <string name="patient_created_successfuly">Patient created successfully</string>
+    <string name="user_already_exist">The e-mail you are trying to use is already associated to another account. Please, request a new password to keep previous record account.</string>
+    <string name="password_if_want_change">Type a new password bellow ONLY if you want to change current one:</string>
+    <string name="user_updated_successfuly">User account updated successfully.</string>
+    <string name="wrong_activation_code">The code has not been autorized, please try later of get in touch with respective technical support.</string>
+    <string name="activation_code_updated">Code successfully updated.</string>
+    <string name="account_already_activated">This account has already been activated.</string>
+    <string name="add_patient">Add a new patient</string>
+    <string name="recover_password_successfuly">We have created a temporal password for you. Please login with below code:</string>
+    <string name="email_no_exist">The e-mail is not associated to any account. Please confirm and try again.</string>
+    <string name="header_new_patient">Patient record</string>
+    <string name="header_update_patient">Patient profile</string>
+    <string name="control_data_stored">Control data integrated to patient record.</string>
+    <string name="validation_with_photo">Please, ensure you have typed correct values and selected a photo.</string>
+    <string name="button_feet_together">Feet together</string>
+</resources>

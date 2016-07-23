@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2016 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <!-- Primary color of the app (shown in the app bar) -->
+    <color name="primary_color">#3374ba</color>
+
+    <!-- Primary dark color of the app (shown in the status bar) -->
+    <color name="primary_dark_color">#14499e</color>
+
+    <!-- Background color for app -->
+    <color name="tan_background">#ededed</color>
+
+    <!-- Background color for the numbers category -->
+    <color name="green">#43A047</color>
+
+    <!-- Background color for the family members category -->
+    <color name="increase">#388E3C</color>
+
+    <!-- Background color for the colors category -->
+    <color name="request">#2E7D32</color>
+
+    <color name="button_text">#ffffff</color>
+
+    <!-- Blue -->
+    <color name="material_blue_500">#478fcc</color>
+    <color name="material_blue_50">#e4f1fb</color>
+    <color name="material_blue_100">#bdddf4</color>
+    <color name="material_blue_200">#95c7ec</color>
+    <color name="material_blue_300">#70b2e1</color>
+    <color name="material_blue_400">#569fd7</color>
+    <color name="clicked_button">#3d82c4</color>
+    <color name="ok_button">#3374ba</color>
+    <color name="material_blue_800">#2a65b0</color>
+    <color name="material_blue_900">#14499e</color>
+    <color name="material_blue_A100">#8caedb</color>
+    <color name="material_blue_A200">#5880c1</color>
+    <color name="material_blue_A400">#4972b8</color>
+    <color name="material_blue_A700">#4666af</color>
+
+    <!-- Red -->
+    <color name="material_red_500">#ef4437</color>
+    <color name="material_red_50">#fdebed</color>
+    <color name="material_red_100">#faccd2</color>
+    <color name="material_red_200">#ee999a</color>
+    <color name="material_red_300">#e57272</color>
+    <color name="material_red_400">#ef5350</color>
+    <color name="material_red_600">#e53934</color>
+    <color name="danger_button">#d32e2e</color>
+    <color name="material_red_800">#c52828</color>
+    <color name="material_red_900">#b62025</color>
+    <color name="material_red_A100">#f48980</color>
+    <color name="material_red_A200">#f05454</color>
+    <color name="material_red_A400">#ed2648</color>
+    <color name="material_red_A700">#d31f26</color>
+
+    <!-- Grey -->
+    <color name="material_grey_500">#9d9d9d</color>
+    <color name="material_grey_50">#f9fafa</color>
+    <color name="material_grey_100">#f4f5f5</color>
+    <color name="material_grey_200">#eeeeee</color>
+    <color name="material_grey_300">#e0e0e0</color>
+    <color name="hint">#bdbcbc</color>
+    <color name="title_header">#757575</color>
+    <color name="shadow">#616161</color>
+    <color name="dark">#424242</color>
+    <color name="material_grey_900">#202020</color>
+    <color name="background">#ebebeb</color>
+    <color name="black">#000000</color>
+
+</resources>

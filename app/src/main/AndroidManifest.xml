@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.android.ollintest">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:largeHeap="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="com.example.android.ollintest.MainActivity"
+            android:label="@string/patient_list"></activity>
+        <activity
+            android:name="com.example.android.ollintest.IncreaseActivity"
+            android:label="@string/header_add_patient"
+            android:parentActivityName="com.example.android.ollintest.MainActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.ollintest.IncreaseActivity" />
+        </activity>
+        <activity
+            android:name="com.example.android.ollintest.EditActivity"
+            android:label="@string/header_edit_patient"
+            android:parentActivityName="com.example.android.ollintest.PatientFolderActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.ollintest.EditActivity" />
+        </activity>
+        <activity
+            android:name="com.example.android.ollintest.SettingsActivity"
+            android:label="@string/header_settings"
+            android:parentActivityName="com.example.android.ollintest.MainActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.ollintest.SettingsActivity" />
+        </activity>
+        <activity
+            android:name="com.example.android.ollintest.AboutActivity"
+            android:label="@string/header_about"
+            android:parentActivityName="com.example.android.ollintest.SettingsActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.ollintest.AboutActivity" />
+        </activity>
+        <activity
+            android:name="com.example.android.ollintest.PrivacyActivity"
+            android:label="@string/header_privacy"
+            android:parentActivityName="com.example.android.ollintest.AboutActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.ollintest.PrivacyActivity" />
+        </activity>
+        <activity
+            android:name="com.example.android.ollintest.ActivationAccountActivity"
+            android:label="@string/header_activation"
+            android:parentActivityName="com.example.android.ollintest.SettingsActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.ollintest.ActivationAccountActivity" />
+        </activity>
+        <activity
+            android:name="com.example.android.ollintest.EditAccountActivity"
+            android:label="@string/header_edit_user_acount"
+            android:parentActivityName="com.example.android.ollintest.SettingsActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.ollintest.EditAccountActivity" />
+        </activity>
+        <activity
+            android:name="com.example.android.ollintest.FAQsListViewActivity"
+            android:label="@string/header_faqs">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.ollintest.FAQsListViewActivity" />
+        </activity>
+        <activity
+            android:name="com.example.android.ollintest.PatientControlActivity"
+            android:label="@string/header_control"
+            android:parentActivityName="com.example.android.ollintest.PatientFolderActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.ollintest.PatientControlActivity" />
+        </activity>
+        <activity
+            android:name="com.example.android.ollintest.PatientFolderActivity"
+            android:label="@string/header_folder"
+            android:parentActivityName="com.example.android.ollintest.MainActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.ollintest.PatientFolderActivity" />
+        </activity>
+        <activity
+            android:name="com.example.android.ollintest.TestsActivity"
+            android:label="@string/header_tests"
+            android:parentActivityName="com.example.android.ollintest.PatientFolderActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.ollintest.TestsActivity" />
+        </activity>
+        <activity
+            android:name="com.example.android.ollintest.WizardTestActivity"
+            android:label="@string/header_wizard_tests"
+            android:parentActivityName="com.example.android.ollintest.TestsActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.ollintest.WizardTestActivity" />
+        </activity>
+        <activity
+            android:name="com.example.android.ollintest.BalanceTestOptionsActivity"
+            android:label="@string/header_balance_test"
+            android:parentActivityName="com.example.android.ollintest.TestsActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.ollintest.BalanceTestOptionsActivity" />
+        </activity>
+        <activity
+            android:name="com.example.android.ollintest.WizardBalanceTestActivity"
+            android:label="@string/header_wizard_tests"
+            android:parentActivityName="com.example.android.ollintest.BalanceTestOptionsActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.ollintest.WizardBalanceTestActivity" />
+        </activity>
+        <activity
+            android:name="com.example.android.ollintest.WalkingEvaluationListActivity"
+            android:label="@string/header_walkability_evaluation"></activity>
+        <activity
+            android:name="com.example.android.ollintest.BalanceEvaluationListActivity"
+            android:label="@string/header_balance_evaluation"></activity>
+        <activity
+            android:name="com.example.android.ollintest.StrengthEvaluationListActivity"
+            android:label="@string/header_strength_evaluation"></activity>
+        <activity
+            android:name="com.example.android.ollintest.CountDownActivity"
+            android:label="@string/header_counter"></activity>
+        <activity
+            android:name="com.example.android.ollintest.ConcentratedReportActivity"
+            android:label="@string/header_concentrated"></activity>
+        <activity
+            android:name="com.example.android.ollintest.RecoverPasswordActivity"
+            android:label="@string/header_recover_password"></activity>
+        <activity
+            android:name="com.example.android.ollintest.SignUpActivity"
+            android:label="@string/header_sign_up"></activity>
+        <activity
+            android:name="com.example.android.ollintest.LoginActivity"
+            android:label="@string/header_login">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

@@ -146,16 +146,16 @@
     <string name="patient">Paciente</string>
     <string name="patient_birthday_hint">Fecha de nacimiento</string>
     <string name="patient_created_successfuly">Expediente de paciente creado satisfactoriamente</string>
-    <string name="patient_dia_blood_hint">Presión diastólica</string>
+    <string name="patient_dia_blood_hint">Presión diastólica (mm Hg)</string>
     <string name="patient_gender_hint">Género</string>
-    <string name="patient_heart_rate_hint">Frecuencia cardiaca</string>
-    <string name="patient_height_hint">Altura</string>
+    <string name="patient_heart_rate_hint">Frecuencia cardiaca (lpm)</string>
+    <string name="patient_height_hint">Altura (cm)</string>
     <string name="patient_list">Lista de pacientes</string>
     <string name="patient_name_hint">Nombre</string>
     <string name="patient_surname_hint">Apellido(s)</string>
-    <string name="patient_sys_blood_hint">Presión sistólica</string>
-    <string name="patient_waist_size_hint">Cintura</string>
-    <string name="patient_weight_hint">Peso</string>
+    <string name="patient_sys_blood_hint">Presión sistólica (mm Hg)</string>
+    <string name="patient_waist_size_hint">Cintura (cm)</string>
+    <string name="patient_weight_hint">Peso (kg)</string>
     <string name="privacy_terms_tab">Términos de privacidad</string>
     <string name="recover_password_successfuly">Le hemos generado una contraseña temporal. Por favor, inicie sesión con el sigiente código:</string>
     <string name="register">Registrar</string>
@@ -164,7 +164,7 @@
     <string name="request_password">Solicitar</string>
     <string name="select_a_picture_header">Seleccioinar photo</string>
     <string name="select_picture">Seleccionar photo</string>
-    <string name="spinner_select_option">[ Seleccionar una opción ]</string>
+    <string name="spinner_select_option">[ Seleccione una opción ]</string>
     <string name="strength_test_30_seconds">Indique al AM que debe repetir esto durante 30 segundos tan rápido como pueda.</string>
     <string name="strength_test_important">IMPORTANTE: Si el paciente usa los brazos para incorporarse, se detiene el estudio y se anota cero en su puntuación.</string>
     <string name="strength_test_indications">Indique al AM que al escuchar \"Ahora\" se incorpore a una posición de parado completo y que luego vuelva a sentarse.</string>
@@ -205,4 +205,14 @@
     <string name="username">Nombre de usuario</string>
     <string name="validation">Por favor, verifique que sus datos han sido capturados correctamente.</string>
     <string name="validation_with_photo">Por favor, verifique que haya capturado todos los campos del formulario y seleccionado la foto del paciente.</string>
+    <string name="patient_birthday_select">[ Seleccione una fecha ]</string>
+    <string name="suffix_year">años</string>
+    <string name="suffix_hour">horas</string>
+    <string name="suffix_score">/5 estrellas</string>
+    <string name="units_kg">kg</string>
+    <string name="units_cm">cm</string>
+    <string name="units_bpm">bmp</string>
+    <string name="units_mmHH">mm HH</string>
+    <string name="important">Importante</string>
+    <string name="something_wrong_with_sensors">Ups!, algo salió mal con los sensores del dispositivo. Por favor, intente nuevamente.</string>
 </resources>

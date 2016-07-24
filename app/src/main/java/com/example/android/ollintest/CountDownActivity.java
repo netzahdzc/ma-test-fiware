@@ -12,9 +12,9 @@ import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.android.ollintest.util.AccDBHandlerUtils;
-import com.example.android.ollintest.util.ControlDBHandlerUtils;
+import com.example.android.ollintest.service.MotionSensors;
 import com.example.android.ollintest.util.DateUtil;
+import com.example.android.ollintest.util.DialogMessageUtils;
 import com.example.android.ollintest.util.PatientDBHandlerUtils;
 import com.example.android.ollintest.util.PatientUtils;
 import com.example.android.ollintest.util.SessionUtil;
@@ -35,8 +35,10 @@ public class CountDownActivity extends AppCompatActivity {
     final int FEET_TOGETHER_TEST_OPTION = 3;
     final int ONE_LEG_TEST_OPTION = 4;
 
+    private DialogMessageUtils mMessage;
     private Chronometer crono = null;
 
+    private Intent accService;
     private long uniquePatientId;
     private int testType;
     private int balanceTestOption;
@@ -47,6 +49,9 @@ public class CountDownActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.count_down);
+
+        accService = new Intent(getApplicationContext(), MotionSensors.class);
+        mMessage = new DialogMessageUtils(this);
 
         testType = getIntent().getIntExtra("testType", 0);
         balanceTestOption = getIntent().getIntExtra("balanceTestOption", 0);
@@ -197,7 +202,8 @@ public class CountDownActivity extends AppCompatActivity {
                 patientNameText.setText(PatientUtils.getFormatName(mPatientName + " " + mPatientSurname));
 
                 TextView patientAgeText = (TextView) findViewById(R.id.header_patient_age);
-                patientAgeText.setText(PatientUtils.getAgeName(mPatientBirthday));
+                patientAgeText.setText(PatientUtils.getAge(mPatientBirthday) +
+                        getResources().getString(R.string.suffix_year));
 
             }
         } catch (Exception e) {
@@ -275,13 +281,15 @@ public class CountDownActivity extends AppCompatActivity {
     }
 
     public void startCollectingAccData() {
-        AccDBHandlerUtils accDBObj = new AccDBHandlerUtils(getApplicationContext());
-        accDBObj.openDB();
+        if (uniqueTestId != 0)
+            startService(accService);
+        else
+            mMessage.dialogWarningMessage(
+                    getResources().getString(R.string.important), //Title
+                    getResources().getString(R.string.something_wrong_with_sensors), //Body message
+                    false //To close current Activity when confirm
+            );
 
-        accDBObj.insertData(uniquePatientId, uniqueTestId, "accTimestamp", "accAccuracy",
-                "accX", "accY", "accZ", "accType");
-
-        accDBObj.closeDB();
     }
 
     public void stopCollectingAccData() {
@@ -291,23 +299,28 @@ public class CountDownActivity extends AppCompatActivity {
         testDBObj.updateData(uniqueTestId, 0, 0, 0, "", "", "", "", "", "", "",
                 "", "", "", "", 0, "", "sensorStopped");
 
+        stopService(accService);
+
         testDBObj.closeDB();
     }
 
     public void restartCollectingAccData() {
-        TestDBHandlerUtils testDBObj = new TestDBHandlerUtils(getApplicationContext());
-        AccDBHandlerUtils accDBObj = new AccDBHandlerUtils(getApplicationContext());
-        accDBObj.openDB();
-        testDBObj.openDB();
+        if (uniqueTestId != 0) {
+            TestDBHandlerUtils testDBObj = new TestDBHandlerUtils(getApplicationContext());
+            testDBObj.openDB();
 
-        testDBObj.updateData(uniqueTestId, 0, 0, 0, "", "", "", "", "", "", "",
-                "", "", "", "", 0, "", "sensorRestarted");
+            testDBObj.updateData(uniqueTestId, 0, 0, 0, "", "", "", "", "", "", "",
+                    "", "", "", "", 0, "", "sensorRestarted");
 
-        accDBObj.insertData(uniquePatientId, uniqueTestId, "accTimestamp", "accAccuracy",
-                "accX", "accY", "accZ", "accType");
+            testDBObj.closeDB();
 
-        testDBObj.closeDB();
-        accDBObj.closeDB();
+            startService(new Intent(CountDownActivity.this, MotionSensors.class));
+        } else
+            mMessage.dialogWarningMessage(
+                    getResources().getString(R.string.important), //Title
+                    getResources().getString(R.string.something_wrong_with_sensors), //Body message
+                    false //To close current Activity when confirm
+            );
     }
 
     public void finishCollectingData() {
@@ -317,6 +330,8 @@ public class CountDownActivity extends AppCompatActivity {
 
         testDBObj.updateData(uniqueTestId, 0, 0, 0, dateObj.getCurrentDate(), "", "", "",
                 "", "", "", "", "", "", "", 0, "", "sensorFinished");
+
+        stopService(accService);
 
         testDBObj.closeDB();
     }

@@ -19,30 +19,40 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.ollintest.fragment.DatePickerFragment;
 import com.example.android.ollintest.util.DialogMessageUtils;
 import com.example.android.ollintest.util.PatientDBHandlerUtils;
+import com.example.android.ollintest.util.PatientUtils;
 import com.example.android.ollintest.util.SessionUtil;
 import com.example.android.ollintest.util.UserDBHandlerUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class IncreaseActivity extends AppCompatActivity {
 
     private static final int SELECT_PICTURE = 100;
+    final int BIRTHDAY_FORMAT = 1;
+    final int UPDATE_FORMAT = 2;
 
     private ImageView patientPhoto;
     private DialogMessageUtils mMessage;
+    private Spinner mSpinnerGender;
 
     private byte[] inputPatientPhotoData;
 
@@ -52,6 +62,7 @@ public class IncreaseActivity extends AppCompatActivity {
         setContentView(R.layout.add_patient);
 
         mMessage = new DialogMessageUtils(this);
+        createAndFillSpinner();
 
         final TextView button = (TextView) findViewById(R.id.button_add_patient);
 
@@ -63,16 +74,20 @@ public class IncreaseActivity extends AppCompatActivity {
                 TextView patientSurname = (TextView) findViewById(R.id.patient_surname);
                 String mPatientSurname = patientSurname.getText().toString();
 
-                TextView patientGender = (TextView) findViewById(R.id.patient_gender);
-                String mPatientGender = patientGender.getText().toString();
+                Spinner patientGender = (Spinner) findViewById(R.id.patient_gender);
+                int mPatientGender = patientGender.getSelectedItemPosition();
 
-                TextView patientBirthday = (TextView) findViewById(R.id.patient_birthday);
+//                TextView patientGender = (TextView) findViewById(R.id.patient_gender);
+//                String mPatientGender = patientGender.getText().toString();
+
+                TextView patientBirthday = (TextView) findViewById(R.id.date_field);
                 String mPatientBirthday = patientBirthday.getText().toString();
 
                 if (validate(mPatientName, mPatientSurname, mPatientGender, mPatientBirthday, getImage())) {
                     PatientDBHandlerUtils patientDBObj = new PatientDBHandlerUtils(getApplicationContext());
                     patientDBObj.openDB();
-                    patientDBObj.insertData(mPatientName, mPatientSurname, mPatientGender, mPatientBirthday, getImage());
+                    patientDBObj.insertData(mPatientName, mPatientSurname, mPatientGender,
+                            PatientUtils.convertToISO8601(mPatientBirthday, BIRTHDAY_FORMAT), getImage());
 
                     mMessage.dialogWarningMessage(
                             getResources().getString(R.string.header_new_patient), //Title
@@ -100,12 +115,18 @@ public class IncreaseActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, getResources().getString(R.string.select_picture)), SELECT_PICTURE);
+                startActivityForResult(Intent.createChooser(intent,
+                        getResources().getString(R.string.select_picture)), SELECT_PICTURE);
             }
         });
 
         // To avoid starting keyword automatically
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+    }
+
+    public void showDatePickerDialog(View v) {
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
     // To save image in a temporal variable
@@ -119,18 +140,35 @@ public class IncreaseActivity extends AppCompatActivity {
         }
     }
 
+    public void createAndFillSpinner() {
+        // Set gender dropdown
+        mSpinnerGender = (Spinner) findViewById(R.id.patient_gender);
+
+        List<String> list = new ArrayList<String>();
+        list.add(getResources().getString(R.string.spinner_select_option));
+        list.add(getResources().getString(R.string.user_gender_male));
+        list.add(getResources().getString(R.string.user_gender_female));
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
+                (this, android.R.layout.simple_spinner_item, list);
+
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        mSpinnerGender.setAdapter(dataAdapter);
+    }
+
     // To get image loaded when select
     byte[] getImage() {
         return inputPatientPhotoData;
     }
 
     // This method validate empty and integer values
-    public boolean validate(String patientName, String patientSurname, String patientGender,
+    public boolean validate(String patientName, String patientSurname, int patientGender,
                             String patientBirthday, byte patientPhoto[]) {
         boolean flag = false;
 
         try {
-            if (patientName != "" && patientSurname != "" && patientGender != "" &&
+            if (patientName != "" && patientSurname != "" && patientGender != 0 &&
                     patientBirthday != "" && patientPhoto != null) {
                 flag = true;
             }
@@ -149,10 +187,13 @@ public class IncreaseActivity extends AppCompatActivity {
         TextView patientSurname = (TextView) findViewById(R.id.patient_surname);
         patientSurname.setText("");
 
-        TextView patientGender = (TextView) findViewById(R.id.patient_gender);
-        patientGender.setText("");
+        Spinner userGender = (Spinner) findViewById(R.id.patient_gender);
+        userGender.setSelection(0);
 
-        TextView patientBirthday = (TextView) findViewById(R.id.patient_birthday);
+//        TextView patientGender = (TextView) findViewById(R.id.patient_gender);
+//        patientGender.setText("");
+
+        TextView patientBirthday = (TextView) findViewById(R.id.date_field);
         patientBirthday.setText("");
 
         ImageView patientPhoto = (ImageView) findViewById(R.id.patient_photo);

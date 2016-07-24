@@ -56,13 +56,13 @@ public class LoginActivity extends AppCompatActivity {
                     UserDBHandlerUtils userDBObj = new UserDBHandlerUtils(getApplicationContext());
                     userDBObj.openDB();
 
-                    Cursor cursorUser = userDBObj.readAllData();
-
                     EditText userEmail = (EditText) findViewById(R.id.user_email);
                     String mUserEmail = userEmail.getText().toString();
 
                     EditText userPassword = (EditText) findViewById(R.id.user_password);
                     String mUserPassword = userPassword.getText().toString();
+
+                    Cursor cursorUser = userDBObj.readData(mUserEmail);
 
                     if (authentication(cursorUser, mUserEmail, mUserPassword)) {
                         Intent loginScreen = new Intent(getApplicationContext(), MainActivity.class);
@@ -114,7 +114,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public boolean authentication(Cursor cursor, String email, String password) {
-        int mUniqueUserId = 0;
+        long mUniqueUserId = 0;
         boolean mFlag = false;
 
         try {
@@ -129,7 +129,7 @@ public class LoginActivity extends AppCompatActivity {
                     );
 
                     if (email.equals(mUserEmail) && password.equals(mUserPassword)) {
-                        mUniqueUserId = cursor.getInt(
+                        mUniqueUserId = cursor.getLong(
                                 cursor.getColumnIndexOrThrow(DatabaseContract.User._ID)
                         );
                     }
@@ -149,8 +149,8 @@ public class LoginActivity extends AppCompatActivity {
         return mFlag;
     }
 
-    public int getUniqueUserId(Cursor cursor, String email, String password) {
-        int mUniqueUserId = 0;
+    public long getUniqueUserId(Cursor cursor, String email, String password) {
+        long mUniqueUserId = 0;
 
         try {
             if (cursor.moveToFirst()) {
@@ -164,7 +164,7 @@ public class LoginActivity extends AppCompatActivity {
                     );
 
                     if (email.equals(mUserEmail) && password.equals(mUserPassword)) {
-                        mUniqueUserId = cursor.getInt(
+                        mUniqueUserId = cursor.getLong(
                                 cursor.getColumnIndexOrThrow(DatabaseContract.User._ID)
                         );
                     }

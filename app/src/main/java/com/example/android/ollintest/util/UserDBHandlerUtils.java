@@ -113,7 +113,8 @@ public class UserDBHandlerUtils {
         // you will actually use after this query.
         String[] projection = {
                 DatabaseContract.User._ID,
-                DatabaseContract.User.COLUMN_NAME_COL4
+                DatabaseContract.User.COLUMN_NAME_COL4,
+                DatabaseContract.User.COLUMN_NAME_COL5
         };
 
         // How you want the results sorted in the resulting Cursor

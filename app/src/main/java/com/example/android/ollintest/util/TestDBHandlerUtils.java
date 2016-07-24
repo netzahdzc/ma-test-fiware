@@ -233,7 +233,53 @@ public class TestDBHandlerUtils {
         return c;
     }
 
-    public String getLatestTestType(long uniqueParticipantIt, int testTypeId) {
+    public long getUniqueIDOfLatestTestType(long uniqueParticipantId) {
+
+        long latestTestID = 0;
+
+        // Define a projection that specifies which columns from the database
+        // you will actually use after this query.
+        String[] projection = {
+                DatabaseContract.Test._ID,
+                DatabaseContract.Test.COLUMN_NAME_COL1,
+                DatabaseContract.Test.COLUMN_NAME_COL19
+        };
+
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder =
+                DatabaseContract.Test._ID + " DESC LIMIT 1";
+
+        // Define 'where' part of query.
+        String selection = DatabaseContract.Test.COLUMN_NAME_COL1 + " LIKE ? ";
+
+        // Specify arguments in placeholder order.
+        String[] selectionArgs = {String.valueOf(uniqueParticipantId)};
+
+        Cursor cursor = db.query(
+                DatabaseContract.Test.TABLE_NAME, // The table to query
+                projection,                         // The columns to return
+                selection,                          // The columns for the WHERE clause
+                selectionArgs,                      // The values for the WHERE clause
+                null,                               // don't group the rows
+                null,                               // don't filter by row groups
+                sortOrder                           // The sort order
+        );
+
+        // Reading all data and setting it up to be displayed
+        if (cursor.moveToFirst()) {
+            latestTestID = cursor.getLong(
+                    cursor.getColumnIndexOrThrow(DatabaseContract.Test._ID)
+            );
+        }
+
+//        cursor.close();
+
+//        db.close();
+
+        return latestTestID;
+    }
+
+    public String getLatestTestType(long uniqueParticipantId, int testTypeId) {
 
         String latestTest = "";
 
@@ -255,7 +301,7 @@ public class TestDBHandlerUtils {
                 DatabaseContract.Test.COLUMN_NAME_COL2 + " LIKE ? ";
 
         // Specify arguments in placeholder order.
-        String[] selectionArgs = {String.valueOf(uniqueParticipantIt), String.valueOf(testTypeId)};
+        String[] selectionArgs = {String.valueOf(uniqueParticipantId), String.valueOf(testTypeId)};
 
         Cursor cursor = db.query(
                 DatabaseContract.Test.TABLE_NAME, // The table to query
@@ -274,7 +320,7 @@ public class TestDBHandlerUtils {
             );
         }
 
-        cursor.close();
+//        cursor.close();
 
 //        db.close();
 

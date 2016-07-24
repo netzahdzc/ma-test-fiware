@@ -25,26 +25,17 @@ public class BalanceTestOptionsActivity extends AppCompatActivity {
     final int FEET_TOGETHER_TEST_OPTION = 3;
     final int ONE_LEG_TEST_OPTION = 4;
 
-    long uniquePatientId;
-    SessionUtil sessionObj;
-    PatientDBHandlerUtils patientDBObj;
-    Cursor mCursorPatient;
-    byte[] inputPatientPhotoData;
+    private long uniquePatientId;
+    private byte[] inputPatientPhotoData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.balance_test_options);
 
-        patientDBObj = new PatientDBHandlerUtils(getApplicationContext());
-        sessionObj = new SessionUtil(getApplicationContext());
+        loadActivityData();
 
-        uniquePatientId = sessionObj.getPatientSession();
-        mCursorPatient = patientDBObj.readData(uniquePatientId);
-
-        loadHeaderData(mCursorPatient);
-
-        final TextView button_feet_together_option= (TextView) findViewById(R.id.button_feet_together_option);
+        final TextView button_feet_together_option = (TextView) findViewById(R.id.button_feet_together_option);
 
         button_feet_together_option.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -55,7 +46,7 @@ public class BalanceTestOptionsActivity extends AppCompatActivity {
             }
         });
 
-        final TextView button_semi_tandem_option= (TextView) findViewById(R.id.button_semi_tandem_option);
+        final TextView button_semi_tandem_option = (TextView) findViewById(R.id.button_semi_tandem_option);
 
         button_semi_tandem_option.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -66,7 +57,7 @@ public class BalanceTestOptionsActivity extends AppCompatActivity {
             }
         });
 
-        final TextView button_tandem_option= (TextView) findViewById(R.id.button_tandem_option);
+        final TextView button_tandem_option = (TextView) findViewById(R.id.button_tandem_option);
 
         button_tandem_option.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -77,7 +68,7 @@ public class BalanceTestOptionsActivity extends AppCompatActivity {
             }
         });
 
-        final TextView button_one_leg_option= (TextView) findViewById(R.id.button_one_leg_option);
+        final TextView button_one_leg_option = (TextView) findViewById(R.id.button_one_leg_option);
 
         button_one_leg_option.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -91,57 +82,70 @@ public class BalanceTestOptionsActivity extends AppCompatActivity {
 
     // This method load data to be displayed on screen
     public void loadHeaderData(Cursor cursor) {
-        // Reading all data and setting it up to be displayed
-        if (cursor.moveToFirst()) {
-            String mPatientName = cursor.getString(
-                    cursor.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL1)
-            );
+        try {
+            // Reading all data and setting it up to be displayed
+            if (cursor.moveToFirst()) {
+                String mPatientName = cursor.getString(
+                        cursor.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL1)
+                );
 
-            String mPatientSurname = cursor.getString(
-                    cursor.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL2)
-            );
+                String mPatientSurname = cursor.getString(
+                        cursor.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL2)
+                );
 
-            String mPatientBirthday = cursor.getString(
-                    cursor.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL4)
-            );
+                String mPatientBirthday = cursor.getString(
+                        cursor.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL4)
+                );
 
-            byte[] mPatientPhoto = cursor.getBlob(
-                    cursor.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL5)
-            );
+                byte[] mPatientPhoto = cursor.getBlob(
+                        cursor.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL5)
+                );
 
-            ImageView patientPhoto = (ImageView) findViewById(R.id.header_patient_photo);
-            patientPhoto.setImageBitmap(Utilities.getImage(mPatientPhoto));
-            setOriginalImage(mPatientPhoto);
+                ImageView patientPhoto = (ImageView) findViewById(R.id.header_patient_photo);
+                patientPhoto.setImageBitmap(Utilities.getImage(mPatientPhoto));
+                setOriginalImage(mPatientPhoto);
 
-            TextView patientNameText = (TextView) findViewById(R.id.header_patient_name);
-            patientNameText.setText(PatientUtils.getFormatName(mPatientName + " " + mPatientSurname));
+                TextView patientNameText = (TextView) findViewById(R.id.header_patient_name);
+                patientNameText.setText(PatientUtils.getFormatName(mPatientName + " " + mPatientSurname));
 
-            TextView patientAgeText = (TextView) findViewById(R.id.header_patient_age);
-            patientAgeText.setText(PatientUtils.getAgeName(mPatientBirthday));
+                TextView patientAgeText = (TextView) findViewById(R.id.header_patient_age);
+                patientAgeText.setText(PatientUtils.getAge(mPatientBirthday) +
+                        getResources().getString(R.string.suffix_year));
 
+            }
+        } catch (Exception e) {
+            // exception handling
+        } finally {
+            if (cursor != null) {
+//                cursor.close();
+            }
         }
-        cursor.close();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        patientDBObj = new PatientDBHandlerUtils(getApplicationContext());
-        sessionObj = new SessionUtil(getApplicationContext());
-
-        // I'm not using previous Cursor objects, since data might be changed in previous Activity
-        loadHeaderData(patientDBObj.readData(uniquePatientId));
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        patientDBObj.closeDB();
+        loadActivityData();
     }
 
     // To get image loaded when select
     void setOriginalImage(byte[] imageBytes) {
         inputPatientPhotoData = imageBytes;
+    }
+
+    public void loadActivityData() {
+        PatientDBHandlerUtils patientDBObj = new PatientDBHandlerUtils(getApplicationContext());
+        SessionUtil sessionObj = new SessionUtil(getApplicationContext());
+        patientDBObj.openDB();
+        sessionObj.openDB();
+
+        uniquePatientId = sessionObj.getPatientSession();
+        Cursor mCursorPatient = patientDBObj.readData(uniquePatientId);
+
+        loadHeaderData(mCursorPatient);
+
+        patientDBObj.closeDB();
+        sessionObj.closeDB();
     }
 
 }

@@ -39,7 +39,28 @@ public class WalkingEvaluationListActivity extends AppCompatActivity {
         final TextView button_continue_evaluation = (TextView) findViewById(R.id.button_continue_evaluation);
         button_continue_evaluation.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                dialog.showDialog(uniqueTestId);
+                CheckBox q1 = (CheckBox) findViewById(R.id.checkbox_one);
+                CheckBox q2 = (CheckBox) findViewById(R.id.checkbox_two);
+                CheckBox q3 = (CheckBox) findViewById(R.id.checkbox_three);
+                CheckBox q4 = (CheckBox) findViewById(R.id.checkbox_four);
+                CheckBox q5 = (CheckBox) findViewById(R.id.checkbox_five);
+                CheckBox q6 = (CheckBox) findViewById(R.id.checkbox_six);
+                CheckBox q7 = (CheckBox) findViewById(R.id.checkbox_seven);
+                CheckBox q8 = (CheckBox) findViewById(R.id.checkbox_eight);
+                CheckBox q9 = (CheckBox) findViewById(R.id.checkbox_nine);
+
+                boolean q1Checkbox = q1.isChecked();
+                boolean q2Checkbox = q2.isChecked();
+                boolean q3Checkbox = q3.isChecked();
+                boolean q4Checkbox = q4.isChecked();
+                boolean q5Checkbox = q5.isChecked();
+                boolean q6Checkbox = q6.isChecked();
+                boolean q7Checkbox = q7.isChecked();
+                boolean q8Checkbox = q8.isChecked();
+                boolean q9Checkbox = q9.isChecked();
+
+                dialog.showDialog(uniqueTestId, q1Checkbox, q2Checkbox, q3Checkbox, q4Checkbox,
+                        q5Checkbox, q6Checkbox, q7Checkbox, q8Checkbox, q9Checkbox, false);
             }
         });
 
@@ -102,7 +123,8 @@ public class WalkingEvaluationListActivity extends AppCompatActivity {
                 patientNameText.setText(PatientUtils.getFormatName(mPatientName + " " + mPatientSurname));
 
                 TextView patientAgeText = (TextView) findViewById(R.id.header_patient_age);
-                patientAgeText.setText(PatientUtils.getAgeName(mPatientBirthday));
+                patientAgeText.setText(PatientUtils.getAge(mPatientBirthday) +
+                        getResources().getString(R.string.suffix_year));
 
             }
         } catch (Exception e) {

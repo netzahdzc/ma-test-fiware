@@ -180,7 +180,8 @@
                     <EditText
                         android:id="@+id/user_password"
                         style="@style/FormFieldsStyle"
-                        android:hint="@string/user_passwords"></EditText>
+                        android:hint="@string/user_passwords"
+                        android:password="true"></EditText>
                 </LinearLayout>
             </LinearLayout>
 
@@ -203,7 +204,8 @@
                     <EditText
                         android:id="@+id/user_password_confirm"
                         style="@style/FormFieldsStyle"
-                        android:hint="@string/user_password_confirmation"></EditText>
+                        android:hint="@string/user_password_confirmation"
+                        android:password="true"></EditText>
                 </LinearLayout>
             </LinearLayout>
 

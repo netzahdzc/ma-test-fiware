@@ -103,7 +103,7 @@ public class ConcentratedReportActivity extends AppCompatActivity {
                 );
 
                 String mTestScore = cursor.getString(
-                        cursor.getColumnIndexOrThrow(DatabaseContract.Test.COLUMN_NAME_COL4)
+                        cursor.getColumnIndexOrThrow(DatabaseContract.Test.COLUMN_NAME_COL16)
                 );
 
                 TextView uniqueTestId = (TextView) findViewById(R.id.concentrated_record_id);
@@ -136,7 +136,7 @@ public class ConcentratedReportActivity extends AppCompatActivity {
                 testTypeText.setText(testTypeDummy);
 
                 TextView testScoreText = (TextView) findViewById(R.id.concentrated_test_score);
-                testScoreText.setText(mTestScore);
+                testScoreText.setText(mTestScore + getResources().getString(R.string.suffix_score));
             }
         } catch (Exception e) {
             // exception handling
@@ -175,7 +175,8 @@ public class ConcentratedReportActivity extends AppCompatActivity {
                 patientNameText.setText(PatientUtils.getFormatName(mPatientName + " " + mPatientSurname));
 
                 TextView patientAgeText = (TextView) findViewById(R.id.header_patient_age);
-                patientAgeText.setText(PatientUtils.getAgeName(mPatientBirthday));
+                patientAgeText.setText(PatientUtils.getAge(mPatientBirthday) +
+                        getResources().getString(R.string.suffix_year));
 
             }
         } catch (Exception e) {
@@ -187,7 +188,7 @@ public class ConcentratedReportActivity extends AppCompatActivity {
         }
     }
 
-    public void loadActivityData(long mUniqueTestId){
+    public void loadActivityData(long mUniqueTestId) {
         PatientDBHandlerUtils patientDBObj = new PatientDBHandlerUtils(getApplicationContext());
         SessionUtil sessionObj = new SessionUtil(getApplicationContext());
         patientDBObj.openDB();
@@ -197,7 +198,6 @@ public class ConcentratedReportActivity extends AppCompatActivity {
 
         Cursor mCursorPatient = patientDBObj.readData(uniquePatientId);
         loadHeaderData(mCursorPatient);
-
 
 
         TestDBHandlerUtils testDBObj = new TestDBHandlerUtils(getApplicationContext());

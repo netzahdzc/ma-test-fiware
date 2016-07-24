@@ -15,6 +15,7 @@
  */
 package com.example.android.ollintest;
 
+import android.app.DatePickerDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -22,30 +23,43 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.ollintest.fragment.DatePickerFragment;
 import com.example.android.ollintest.util.DialogMessageUtils;
 import com.example.android.ollintest.util.PatientDBHandlerUtils;
+import com.example.android.ollintest.util.PatientUtils;
 import com.example.android.ollintest.util.SessionUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 public class EditActivity extends AppCompatActivity {
 
     private static final int SELECT_PICTURE = 100;
+    final int BIRTHDAY_FORMAT = 1;
+    final int UPDATE_FORMAT = 2;
 
     private DialogMessageUtils mMessage;
     private ImageView patientPhoto;
+    private Spinner mSpinnerGender;
 
     private byte[] inputPatientPhotoData;
     private long uniquePatientId;
@@ -73,10 +87,13 @@ public class EditActivity extends AppCompatActivity {
                 EditText lastName = (EditText) findViewById(R.id.edit_patient_surname);
                 String mLastName = lastName.getText().toString();
 
-                EditText patientSex = (EditText) findViewById(R.id.edit_patient_gender);
-                String mPatientSex = patientSex.getText().toString();
+                Spinner userGender = (Spinner) findViewById(R.id.edit_patient_gender);
+                int mPatientSex = userGender.getSelectedItemPosition();
 
-                EditText patientBirthDate = (EditText) findViewById(R.id.edit_patient_birthday);
+//                EditText patientSex = (EditText) findViewById(R.id.edit_patient_gender);
+//                String mPatientSex = patientSex.getText().toString();
+
+                TextView patientBirthDate = (TextView) findViewById(R.id.date_field);
                 String mPatientBirthDate = patientBirthDate.getText().toString();
 
                 if (validate(mName, mLastName, mPatientSex, mPatientBirthDate, getImage())) {
@@ -84,7 +101,7 @@ public class EditActivity extends AppCompatActivity {
                     patientDBObj.openDB();
 
                     patientDBObj.updateData(Integer.parseInt(mUniqueId), mName, mLastName, mPatientSex,
-                            mPatientBirthDate, getImage());
+                            PatientUtils.convertToISO8601(mPatientBirthDate, BIRTHDAY_FORMAT), getImage());
 
                     mMessage.dialogWarningMessage(
                             getResources().getString(R.string.header_update_patient), //Title
@@ -152,6 +169,28 @@ public class EditActivity extends AppCompatActivity {
         }
     }
 
+    public void showDatePickerDialog(View v) {
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "datePicker");
+    }
+
+    public void createAndFillSpinner() {
+        // Set gender dropdown
+        mSpinnerGender = (Spinner) findViewById(R.id.edit_patient_gender);
+
+        List<String> list = new ArrayList<String>();
+        list.add(getResources().getString(R.string.spinner_select_option));
+        list.add(getResources().getString(R.string.user_gender_male));
+        list.add(getResources().getString(R.string.user_gender_female));
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
+                (this, android.R.layout.simple_spinner_item, list);
+
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        mSpinnerGender.setAdapter(dataAdapter);
+    }
+
     // To save image in a temporal variable
     Boolean setImage(Uri selectedImageUri) {
         try {
@@ -213,9 +252,13 @@ public class EditActivity extends AppCompatActivity {
                         cursor.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL2)
                 );
 
-                String mPatientGender = cursor.getString(
+                int mPatientGender = cursor.getInt(
                         cursor.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL3)
                 );
+
+//                String mPatientGender = cursor.getString(
+//                        cursor.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL3)
+//                );
 
                 String mPatientBirthday = cursor.getString(
                         cursor.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL4)
@@ -238,11 +281,14 @@ public class EditActivity extends AppCompatActivity {
                 TextView patientSurnameNameText = (TextView) findViewById(R.id.edit_patient_surname);
                 patientSurnameNameText.setText(mPatientSurname);
 
-                TextView patientGenderText = (TextView) findViewById(R.id.edit_patient_gender);
-                patientGenderText.setText(mPatientGender);
+                Spinner patientGenderText = (Spinner) findViewById(R.id.edit_patient_gender);
+                patientGenderText.setSelection(mPatientGender);
 
-                TextView patientBirthdayText = (TextView) findViewById(R.id.edit_patient_birthday);
-                patientBirthdayText.setText(mPatientBirthday);
+//                TextView patientGenderText = (TextView) findViewById(R.id.edit_patient_gender);
+//                patientGenderText.setText(mPatientGender);
+
+                TextView patientBirthdayText = (TextView) findViewById(R.id.date_field);
+                patientBirthdayText.setText(PatientUtils.convertFromISO8601(mPatientBirthday, BIRTHDAY_FORMAT));
             }
         } catch (Exception e) {
             // exception handling
@@ -255,12 +301,12 @@ public class EditActivity extends AppCompatActivity {
 
     // This method validate empty and integer values
 
-    public boolean validate(String patientName, String patientSurname, String patientGender,
+    public boolean validate(String patientName, String patientSurname, int patientGender,
                             String patientBirthday, byte patientPhoto[]) {
         boolean flag = false;
 
         try {
-            if (patientName != "" && patientSurname != "" && patientGender != "" &&
+            if (patientName != "" && patientSurname != "" && patientGender != 0 &&
                     patientBirthday != "" && patientPhoto != null) {
                 flag = true;
             }
@@ -280,6 +326,7 @@ public class EditActivity extends AppCompatActivity {
         uniquePatientId = sessionObj.getPatientSession();
         Cursor mCursorPatient = patientDBObj.readData(uniquePatientId);
 
+        createAndFillSpinner();
         loadData(mCursorPatient);
 
         patientDBObj.closeDB();

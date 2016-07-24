@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,7 +38,7 @@ public class PatientDBHandlerUtils {
     }
 
     // This method allows to store info into database
-    public long insertData(String patientName, String patientSurname, String patientGender,
+    public long insertData(String patientName, String patientSurname, int patientGender,
                            String patientBirthday, byte[] patientPhoto) {
 
         // Gets the data repository in write mode
@@ -174,8 +175,8 @@ public class PatientDBHandlerUtils {
 
     // This method updates info from database
     public int updateData(long uniquePatientId, String patientName, String patientSurname,
-                          String patientGender, String patientBirthday, byte[] patientPhoto) {
-
+                          int patientGender, String patientBirthday, byte[] patientPhoto) {
+Log.v("XXX", "uniquePatientId:"+uniquePatientId+", patientGender:"+ patientGender +", patientBirthday"+ patientBirthday);
         DateUtil dateObj = new DateUtil();
 
         // New value for one column

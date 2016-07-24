@@ -7,7 +7,7 @@ import android.provider.BaseColumns;
  */
 public final class DatabaseContract {
 
-    public static final int DATABASE_VERSION = 22;
+    public static final int DATABASE_VERSION = 24;
     public static final String DATABASE_NAME = "ollintest.db";
     private static final String INT_TYPE = " INTEGER";
     private static final String REAL_TYPE = " REAL";
@@ -35,7 +35,7 @@ public final class DatabaseContract {
                 _ID + INT_TYPE + " PRIMARY KEY" + COMMA_SEP +
                 COLUMN_NAME_COL1 + TEXT_TYPE + COMMA_SEP +
                 COLUMN_NAME_COL2 + TEXT_TYPE + COMMA_SEP +
-                COLUMN_NAME_COL3 + TEXT_TYPE + COMMA_SEP +
+                COLUMN_NAME_COL3 + INT_TYPE + COMMA_SEP +
                 COLUMN_NAME_COL4 + TEXT_TYPE + COMMA_SEP +
                 COLUMN_NAME_COL5 + IMAGE_TYPE + COMMA_SEP +
                 COLUMN_NAME_COL6 + INT_TYPE + COMMA_SEP +
@@ -165,11 +165,11 @@ public final class DatabaseContract {
                 TABLE_NAME + " (" +
                 COLUMN_NAME_COL1 + INT_TYPE + COMMA_SEP +
                 COLUMN_NAME_COL2 + INT_TYPE + COMMA_SEP +
-                COLUMN_NAME_COL3 + TEXT_TYPE + COMMA_SEP +
-                COLUMN_NAME_COL4 + TEXT_TYPE + COMMA_SEP +
-                COLUMN_NAME_COL5 + TEXT_TYPE + COMMA_SEP +
-                COLUMN_NAME_COL6 + TEXT_TYPE + COMMA_SEP +
-                COLUMN_NAME_COL7 + TEXT_TYPE + COMMA_SEP +
+                COLUMN_NAME_COL3 + REAL_TYPE + COMMA_SEP +
+                COLUMN_NAME_COL4 + INT_TYPE + COMMA_SEP +
+                COLUMN_NAME_COL5 + REAL_TYPE + COMMA_SEP +
+                COLUMN_NAME_COL6 + REAL_TYPE + COMMA_SEP +
+                COLUMN_NAME_COL7 + REAL_TYPE + COMMA_SEP +
                 COLUMN_NAME_COL8 + TEXT_TYPE + COMMA_SEP +
                 COLUMN_NAME_COL9 + TEXT_TYPE + " )";
 

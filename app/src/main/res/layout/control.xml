@@ -58,67 +58,145 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical">
+                android:layout_marginBottom="10dp"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/control_weight"
-                    style="@style/FormFieldsStyle"
-                    android:hint="@string/patient_weight_hint"></EditText>
+                <TextView
+                    style="@style/LabelTitleFieldsStyle"
+                    android:text="@string/patient_weight_hint" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
+
+                    <EditText
+                        android:id="@+id/control_weight"
+                        style="@style/FormFieldsStyle"
+                        android:hint="@string/patient_weight_hint"
+                        android:inputType="numberDecimal"></EditText>
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical">
+                android:layout_marginBottom="10dp"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/control_height"
-                    style="@style/FormFieldsStyle"
-                    android:hint="@string/patient_height_hint"></EditText>
+                <TextView
+                    style="@style/LabelTitleFieldsStyle"
+                    android:text="@string/patient_height_hint" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
+
+                    <EditText
+                        android:id="@+id/control_height"
+                        style="@style/FormFieldsStyle"
+                        android:hint="@string/patient_height_hint"
+                        android:inputType="numberDecimal"></EditText>
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical">
+                android:layout_marginBottom="10dp"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/control_waist"
-                    style="@style/FormFieldsStyle"
-                    android:hint="@string/patient_waist_size_hint"></EditText>
+                <TextView
+                    style="@style/LabelTitleFieldsStyle"
+                    android:text="@string/patient_waist_size_hint" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
+
+                    <EditText
+                        android:id="@+id/control_waist"
+                        style="@style/FormFieldsStyle"
+                        android:hint="@string/patient_waist_size_hint"
+                        android:inputType="numberDecimal"></EditText>
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical">
+                android:layout_marginBottom="10dp"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/control_heart_rate"
-                    style="@style/FormFieldsStyle"
-                    android:hint="@string/patient_heart_rate_hint"></EditText>
+                <TextView
+                    style="@style/LabelTitleFieldsStyle"
+                    android:text="@string/patient_heart_rate_hint" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
+
+                    <EditText
+                        android:id="@+id/control_heart_rate"
+                        style="@style/FormFieldsStyle"
+                        android:hint="@string/patient_heart_rate_hint"
+                        android:inputType="number"></EditText>
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical">
+                android:layout_marginBottom="10dp"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/control_blood_pressure_sis"
-                    style="@style/FormFieldsStyle"
-                    android:hint="@string/patient_sys_blood_hint"></EditText>
+                <TextView
+                    style="@style/LabelTitleFieldsStyle"
+                    android:text="@string/patient_sys_blood_hint" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
+
+                    <EditText
+                        android:id="@+id/control_blood_pressure_sis"
+                        style="@style/FormFieldsStyle"
+                        android:hint="@string/patient_sys_blood_hint"
+                        android:inputType="number"></EditText>
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical">
+                android:layout_marginBottom="10dp"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/control_blood_pressure_dia"
-                    style="@style/FormFieldsStyle"
-                    android:hint="@string/patient_dia_blood_hint"></EditText>
+                <TextView
+                    style="@style/LabelTitleFieldsStyle"
+                    android:text="@string/patient_dia_blood_hint" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
+
+                    <EditText
+                        android:id="@+id/control_blood_pressure_dia"
+                        style="@style/FormFieldsStyle"
+                        android:hint="@string/patient_dia_blood_hint"
+                        android:inputType="number"></EditText>
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout

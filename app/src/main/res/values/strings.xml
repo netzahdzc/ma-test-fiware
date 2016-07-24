@@ -105,12 +105,12 @@
     <string name="label_register_number">Folio:</string>
     <string name="label_test_type">Test type:</string>
     <string name="label_quality">Data quality:</string>
-    <string name="patient_weight_hint">Weight</string>
-    <string name="patient_height_hint">Height</string>
-    <string name="patient_waist_size_hint">Waist size</string>
-    <string name="patient_heart_rate_hint">Heart rate</string>
-    <string name="patient_sys_blood_hint">Systolic blood pressure</string>
-    <string name="patient_dia_blood_hint">Diastolic blood pressure</string>
+    <string name="patient_weight_hint">Weight (kg)</string>
+    <string name="patient_height_hint">Height (cm)</string>
+    <string name="patient_waist_size_hint">Waist size (cm)</string>
+    <string name="patient_heart_rate_hint">Heart rate (bpm)</string>
+    <string name="patient_sys_blood_hint">Systolic blood pressure (mm Hg)</string>
+    <string name="patient_dia_blood_hint">Diastolic blood pressure (mm Hg)</string>
     <string name="label_counting" translatable="false">3-2-1</string>
     <string name="user_passwords">Password</string>
     <string name="user_password_confirmation">Repeat Password</string>
@@ -233,4 +233,14 @@ E. INTEGRIDAD. Las presentes Políticas de Privacidad son parte integrante de lo
     <string name="control_data_stored">Control data integrated to patient record.</string>
     <string name="validation_with_photo">Please, ensure you have typed correct values and selected a photo.</string>
     <string name="button_feet_together">Feet together</string>
+    <string name="patient_birthday_select">[ Select a date ]</string>
+    <string name="suffix_year">years</string>
+    <string name="suffix_hour">hours</string>
+    <string name="suffix_score">/5 stars</string>
+    <string name="units_kg">kg</string>
+    <string name="units_cm">cm</string>
+    <string name="units_bpm">bmp</string>
+    <string name="units_mmHH">mm HH</string>
+    <string name="important">Important</string>
+    <string name="something_wrong_with_sensors">Someting when wrong with sensors. Please, star over.</string>
 </resources>

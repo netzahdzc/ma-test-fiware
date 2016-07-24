@@ -66,20 +66,13 @@ public class WizardTestActivity extends ActionBarActivity {
         pager.setOnPageChangeListener(new OnPageChangeListener() {
 
             @Override
-            public void onPageSelected(int position) {
-                // TODO Auto-generated method stub
-
-            }
+            public void onPageSelected(int position) { }
 
             @Override
-            public void onPageScrolled(int arg0, float arg1, int arg2) {
-                // TODO Auto-generated method stub
-
-            }
+            public void onPageScrolled(int arg0, float arg1, int arg2) { }
 
             @Override
             public void onPageScrollStateChanged(int position) {
-                // TODO Auto-generated method stub
                 if (pager.getCurrentItem() == (pager.getAdapter().getCount() - 1)) {
                     nextButton.setText(getResources().getString(R.string.button_continue_test));
                 } else {

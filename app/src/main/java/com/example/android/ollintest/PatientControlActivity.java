@@ -113,7 +113,8 @@ public class PatientControlActivity extends AppCompatActivity {
                 patientNameText.setText(PatientUtils.getFormatName(mPatientName + " " + mPatientSurname));
 
                 TextView patientAgeText = (TextView) findViewById(R.id.header_patient_age);
-                patientAgeText.setText(PatientUtils.getAgeName(mPatientBirthday));
+                patientAgeText.setText(PatientUtils.getAge(mPatientBirthday)+
+                        getResources().getString(R.string.suffix_year));
 
             }
         } catch (Exception e) {

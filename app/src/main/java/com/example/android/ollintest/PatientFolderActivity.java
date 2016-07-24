@@ -2,6 +2,7 @@ package com.example.android.ollintest;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,9 @@ import com.example.android.ollintest.util.TestDBHandlerUtils;
  * Created by netzahdzc on 7/18/16.
  */
 public class PatientFolderActivity extends AppCompatActivity {
+
+    static final int BIRTHDAY_FORMAT = 1;
+    static final int UPDATE_FORMAT = 2;
 
     final int WALKING_TEST = 1;
     final int STRENGTH_TEST = 2;
@@ -96,14 +100,15 @@ public class PatientFolderActivity extends AppCompatActivity {
                 patientNameText.setText(PatientUtils.getFormatName(mPatientName + " " + mPatientSurname));
 
                 TextView patientAgeText = (TextView) findViewById(R.id.header_patient_age);
-                patientAgeText.setText(PatientUtils.getAgeName(mPatientBirthday));
+                patientAgeText.setText(PatientUtils.getAge(mPatientBirthday) +
+                        getResources().getString(R.string.suffix_year));
 
             }
         } catch (Exception e) {
             // exception handling
         } finally {
             if (cursor != null) {
-                cursor.close();
+//                cursor.close();
             }
         }
     }
@@ -142,25 +147,25 @@ public class PatientFolderActivity extends AppCompatActivity {
                 );
 
                 TextView patientWeightText = (TextView) findViewById(R.id.control_weight);
-                patientWeightText.setText(mPatientWeight);
+                patientWeightText.setText(mPatientWeight + " " + getResources().getString(R.string.units_kg));
 
                 TextView patientHeightText = (TextView) findViewById(R.id.control_height);
-                patientHeightText.setText(mPatientHeight);
+                patientHeightText.setText(mPatientHeight + " " + getResources().getString(R.string.units_cm));
 
                 TextView patientWaistText = (TextView) findViewById(R.id.control_waist);
-                patientWaistText.setText(mPatientWaist);
+                patientWaistText.setText(mPatientWaist + " " + getResources().getString(R.string.units_cm));
 
                 TextView patientHeartRateText = (TextView) findViewById(R.id.control_heart_rate);
-                patientHeartRateText.setText(mPatientHeartRate);
+                patientHeartRateText.setText(mPatientHeartRate + " " + getResources().getString(R.string.units_bpm));
 
                 TextView patientBloodPressSisText = (TextView) findViewById(R.id.control_blood_pressure_sis);
-                patientBloodPressSisText.setText(mPatientBloodPressSis);
+                patientBloodPressSisText.setText(mPatientBloodPressSis + " " + getResources().getString(R.string.units_mmHH));
 
                 TextView patientBloodPressDiaText = (TextView) findViewById(R.id.control_blood_pressure_dia);
-                patientBloodPressDiaText.setText(mPatientBloodPressDia);
+                patientBloodPressDiaText.setText(mPatientBloodPressDia + " " + getResources().getString(R.string.units_mmHH));
 
                 TextView patientControlDateText = (TextView) findViewById(R.id.last_updated_control);
-                patientControlDateText.setText(mPatientControlDate);
+                patientControlDateText.setText(PatientUtils.convertFromISO8601(mPatientControlDate, UPDATE_FORMAT));
 
             }
         } catch (Exception e) {
@@ -178,13 +183,16 @@ public class PatientFolderActivity extends AppCompatActivity {
         testDBObj.openDB();
 
         TextView tugTestText = (TextView) findViewById(R.id.last_tug_test);
-        tugTestText.setText(testDBObj.getLatestTestType(uniquePatientId, WALKING_TEST));
+        tugTestText.setText(PatientUtils.convertFromISO8601(testDBObj.
+                getLatestTestType(uniquePatientId, WALKING_TEST), UPDATE_FORMAT));
 
-        TextView balanceTestText = (TextView) findViewById(R.id.last_strength_test);
-        balanceTestText.setText(testDBObj.getLatestTestType(uniquePatientId, STRENGTH_TEST));
+        TextView balanceTestText = (TextView) findViewById(R.id.last_balance_test);
+        balanceTestText.setText(PatientUtils.convertFromISO8601(testDBObj.
+                getLatestTestType(uniquePatientId, STRENGTH_TEST), UPDATE_FORMAT));
 
-        TextView strengthTestText = (TextView) findViewById(R.id.last_balance_test);
-        strengthTestText.setText(testDBObj.getLatestTestType(uniquePatientId, BALANCE_TEST));
+        TextView strengthTestText = (TextView) findViewById(R.id.last_strength_test);
+        strengthTestText.setText(PatientUtils.convertFromISO8601(testDBObj.
+                getLatestTestType(uniquePatientId, BALANCE_TEST), UPDATE_FORMAT));
 
         testDBObj.closeDB();
     }

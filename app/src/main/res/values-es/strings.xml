@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">3Ollin Test</string>
+    <string name="app_name">3Ollin-Test</string>
     <string name="about_tab">Acerca de</string>
     <string name="account_already_activated">Su cuenta ha sido activada.</string>
     <string name="action_settings">Configuración</string>
@@ -61,15 +61,15 @@
     <string name="button_tandem_test">Tándem</string>
     <string name="button_tests">Pruebas</string>
     <string name="button_walking_test">Prueba TUG</string>
-    <string name="cd_main_image"></string>
+    <string name="cd_main_image">imagen principal</string>
     <string name="confirmation">Esta operación no se podrá recuperar. ¿Desea continar?</string>
     <string name="control_data_stored">Datos de control integrados en el expediente.</string>
     <string name="delete_button">Borrar</string>
     <string name="deleting_header">Eliminando</string>
-    <string name="drawer_close"></string>
+    <string name="drawer_close">Cerrar navegador</string>
     <string name="edit">Actualizando</string>
     <string name="edit_title">Actualizando</string>
-    <string name="email"></string>
+    <string name="email">E-mail</string>
     <string name="email_no_exist">El e-mail no esta asociada a ninguna cuenta. Por favor, confirme e intente nuevamente.</string>
     <string name="faq_q_activation_code">¿Cómo obtener un código de activación?</string>
     <string name="faq_q_contact_data">Datos de contacto</string>
@@ -137,7 +137,7 @@
     <string name="load_image">[ Cambiar foto ]</string>
     <string name="login">Iniciar</string>
     <string name="no">No</string>
-    <string name="ok" translatable="false">Enterado</string>
+    <string name="ok">Enterado</string>
     <string name="observations_hint">Capture sus observaciones aquí</string>
     <string name="password">Contraseña</string>
     <string name="yes">Sí</string>
@@ -215,4 +215,16 @@
     <string name="units_mmHH">mm HH</string>
     <string name="important">Importante</string>
     <string name="something_wrong_with_sensors">Ups!, algo salió mal con los sensores del dispositivo. Por favor, intente nuevamente.</string>
+    <string name="drawer_open">Abrir navegador</string>
+    <string name="header_login">3Ollin-Test</string>
+    <string name="label_counting">3-2-1</string>
+    <string name="label_email">E-mail</string>
+    <string name="lorem_ipsum_long">Contenido de prueba: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
+    <string name="material_icon_box_full">[O]</string>
+    <string name="material_icon_check_empty">[X]</string>
+    <string name="navigation_drawer_close">Cerrar navegador</string>
+    <string name="navigation_drawer_open">Abrir navegador</string>
+    <string name="privacy_terms_content">El propósito de estas Políticas de Privacidad es informar a los usuarios del uso de su información personal al completar la solicitud de registro en 3Ollin Test. \n\n Nota: definimos información personal como el conjunto de datos que permiten identificarle, como por ejemplo su nombre, domicilio, correo electrónico, y número telefónico. \n\n A. USO DE INFORMACIÓN. La información personal recolectada por consentimiento del usuario directo e indirectos será utilizada como parte del expediente electrónico de los pacientes para el monitoreo de riesgo de caídas. Esta información podrá ser utilizada con fines estadísticos por la organización responsable de esta aplicación; respetando en todo momento la identidad del usuarios. \n\n B. REVELACIÓN DE INFORMACIÓN. La organización responsable de esta aplicación no comercializará ni arrendará información personal de los usuarios del sistema. No se utilizará ni revelará a terceros información individual proporcionada. Sólo la información estadística podrá ser revelada a terceros. \n\n C. SEGURIDAD. En ciertos módulos de la aplicación para teléfonos celulares, la información es tratada y almacenada en formato codificada. \n\n D. MODIFICACIONES EN LAS POLÍTICAS DE PRIVACIDAD. La organización responsable de esta aplicación se reserva el derecho de introducir modificaciones en sus Políticas de Privacidad, con el fin de adaptarlas a nuevos requerimientos legislativos, jurisprudencia, técnicos o por cualquier otro motivo que le permita brindar un mejor servicio a los usuarios. La organización responsable de esta aplicación se compromete a publicará tales modificaciones a través de este medio. \n\n E. INTEGRIDAD. Las presentes Políticas de Privacidad son parte integrante de los Términos y Condiciones de Uso del Sistema. En consecuencia, el uso que los usuarios pudieran hacer de los servicios de esta aplicación para teléfonos celulares implica que han leído, entendido y aceptado los términos antes expuestos. Si el usuario no estuviera de acuerdo con tales Políticas y/o con sus Términos de Uso, tendrá la opción de no utilizar la aplicación.</string>
+    <string name="project_name">3Ollin-Test</string>
+    <string name="title_activity_navigation">Título de navegador</string>
 </resources>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">3Ollin Test</string>
+    <string name="app_name">3Ollin Test</string>
     <string name="increase">Add a new Patient</string>
     <string name="edit_title">Updating</string>
     <string name="update_button">Update</string>
@@ -17,16 +17,16 @@
     <string name="header_edit_patient">Edit patient</string>
     <string name="header_settings">Settings</string>
     <string name="test">Perform test</string>
-    <string name="title_activity_navigation" translatable="false">NavigationActivity</string>
+    <string name="title_activity_navigation">Navigation Activity</string>
 
-    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
-    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
     <string name="add_participant">Add new participant</string>
     <string name="patient_list">Patient list</string>
-    <string name="drawer_open" translatable="false">Open navigation drawer</string>
-    <string name="drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
     <string name="button_finished">Finish</string>
     <string name="button_save">Save</string>
     <string name="activation_code">Activation code</string>
@@ -39,10 +39,10 @@
     <string name="header_tests">Tests</string>
     <string name="header_control">Control measurements</string>
     <string name="header_edit_user_acount">Edit profile</string>
-    <string name="material_icon_box_full" translatable="false">[O]</string>
-    <string name="material_icon_check_empty" translatable="false">[X]</string>
-    <string name="cd_main_image" translatable="false">main image</string>
-    <string name="lorem_ipsum_long" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
+    <string name="material_icon_box_full">[0]</string>
+    <string name="material_icon_check_empty">[-]</string>
+    <string name="cd_main_image">main image</string>
+    <string name="lorem_ipsum_long">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
     <string name="header_walking_tests">Walking test</string>
     <string name="header_wizard_tests">Overview for test</string>
     <string name="header_balance_test">Balance test options</string>
@@ -81,12 +81,12 @@
     <string name="header_recover_password">Recover password</string>
     <string name="header_sign_up">Sign Up</string>
     <string name="username">Username</string>
-    <string name="email" translatable="false">E-mail</string>
+    <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="project_name" translatable="false">3Ollin Test</string>
+    <string name="project_name">3Ollin Test</string>
     <string name="register">Sign Up</string>
     <string name="login">Log In</string>
-    <string name="header_login" translatable="false">3Ollin Test</string>
+    <string name="header_login">3Ollin Test</string>
     <string name="app_version">Version 1.0</string>
     <string name="app_long_name">Application for Monitoring Physical Performance Testing: Run, Strength, and Balance.</string>
     <string name="privacy_terms_tab">Terminos de privacidad</string>
@@ -111,7 +111,7 @@
     <string name="patient_heart_rate_hint">Heart rate (bpm)</string>
     <string name="patient_sys_blood_hint">Systolic blood pressure (mm Hg)</string>
     <string name="patient_dia_blood_hint">Diastolic blood pressure (mm Hg)</string>
-    <string name="label_counting" translatable="false">3-2-1</string>
+    <string name="label_counting">3 2 1</string>
     <string name="user_passwords">Password</string>
     <string name="user_password_confirmation">Repeat Password</string>
     <string name="user_birthday_hint">Date of birth</string>
@@ -131,7 +131,7 @@
     <string name="label_walking_test">TUG:</string>
     <string name="label_balance_test">Balance:</string>
     <string name="label_strength_test">Strength:</string>
-    <string name="privacy_terms_content" translatable="false">El propósito de estas Políticas de Privacidad es informar a los usuarios sobre el uso de su información personal al completar la solicitud de registro en 3Ollin Test.
+    <string name="privacy_terms_content">El propósito de estas Políticas de Privacidad es informar a los usuarios sobre el uso de su información personal al completar la solicitud de registro en 3Ollin Test.
 \n\n
 Nota: definimos información personal como el conjunto de datos que permiten identificarle, como por ejemplo su nombre, domicilio, correo electrónico, y número telefónico.
 \n\n
@@ -146,7 +146,7 @@ D. MODIFICACIONES EN LAS POLÍTICAS DE PRIVACIDAD. La organización responsable 
 E. INTEGRIDAD. Las presentes Políticas de Privacidad son parte integrante de los Términos y Condiciones de Uso del Sistema. En consecuencia, el uso que los usuarios pudieran hacer de los servicios de esta aplicación para teléfonos celulares implica que han leído, entendido y aceptado los términos antes expuestos. Si el usuario no estuviera de acuerdo con tales Políticas y/o con sus Términos de Uso, tendrá la opción de no utilizar la aplicación.
 </string>
     <string name="label_request_password">Request a new password by typing the E-mail you used to create you account:</string>
-    <string name="label_email" translatable="false">E-mail</string>
+    <string name="label_email">Email</string>
     <string name="label_user">User</string>
     <string name="user_edit_account_tab">Edit account</string>
     <string name="user_activate_account_tab">Activate account</string>
@@ -242,5 +242,5 @@ E. INTEGRIDAD. Las presentes Políticas de Privacidad son parte integrante de lo
     <string name="units_bpm">bmp</string>
     <string name="units_mmHH">mm HH</string>
     <string name="important">Important</string>
-    <string name="something_wrong_with_sensors">Someting when wrong with sensors. Please, star over.</string>
+    <string name="something_wrong_with_sensors">Someting when wrong with sensors. Please, start over.</string>
 </resources>

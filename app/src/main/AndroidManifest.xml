@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.android.ollintest">
+    package="com.inger.android.ollintest">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
@@ -18,177 +18,174 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.example.android.ollintest.MainActivity"
+            android:name="com.inger.android.ollintest.MainActivity"
             android:label="@string/patient_list"></activity>
         <activity
-            android:name="com.example.android.ollintest.IncreaseActivity"
+            android:name="com.inger.android.ollintest.IncreaseActivity"
             android:label="@string/header_add_patient"
-            android:parentActivityName="com.example.android.ollintest.MainActivity">
+            android:parentActivityName="com.inger.android.ollintest.MainActivity">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.ollintest.IncreaseActivity" />
+                android:value="com.inger.android.ollintest.IncreaseActivity" />
         </activity>
         <activity
-            android:name="com.example.android.ollintest.EditActivity"
+            android:name="com.inger.android.ollintest.EditActivity"
             android:label="@string/header_edit_patient"
-            android:parentActivityName="com.example.android.ollintest.PatientFolderActivity">
+            android:parentActivityName="com.inger.android.ollintest.PatientFolderActivity">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.ollintest.EditActivity" />
+                android:value="com.inger.android.ollintest.EditActivity" />
         </activity>
         <activity
-            android:name="com.example.android.ollintest.SettingsActivity"
+            android:name="com.inger.android.ollintest.SettingsActivity"
             android:label="@string/header_settings"
-            android:parentActivityName="com.example.android.ollintest.MainActivity">
+            android:parentActivityName="com.inger.android.ollintest.MainActivity">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.ollintest.SettingsActivity" />
+                android:value="com.inger.android.ollintest.SettingsActivity" />
         </activity>
         <activity
-            android:name="com.example.android.ollintest.AboutActivity"
+            android:name="com.inger.android.ollintest.AboutActivity"
             android:label="@string/header_about"
-            android:parentActivityName="com.example.android.ollintest.SettingsActivity">
+            android:parentActivityName="com.inger.android.ollintest.SettingsActivity">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.ollintest.AboutActivity" />
+                android:value="com.inger.android.ollintest.AboutActivity" />
         </activity>
         <activity
-            android:name="com.example.android.ollintest.PrivacyActivity"
+            android:name="com.inger.android.ollintest.PrivacyActivity"
             android:label="@string/header_privacy"
-            android:parentActivityName="com.example.android.ollintest.AboutActivity">
+            android:parentActivityName="com.inger.android.ollintest.AboutActivity">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.ollintest.PrivacyActivity" />
+                android:value="com.inger.android.ollintest.PrivacyActivity" />
         </activity>
         <activity
-            android:name="com.example.android.ollintest.ActivationAccountActivity"
+            android:name="com.inger.android.ollintest.ActivationAccountActivity"
             android:label="@string/header_activation"
-            android:parentActivityName="com.example.android.ollintest.SettingsActivity">
+            android:parentActivityName="com.inger.android.ollintest.SettingsActivity">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.ollintest.ActivationAccountActivity" />
+                android:value="com.inger.android.ollintest.ActivationAccountActivity" />
         </activity>
         <activity
-            android:name="com.example.android.ollintest.EditAccountActivity"
+            android:name="com.inger.android.ollintest.EditAccountActivity"
             android:label="@string/header_edit_user_acount"
-            android:parentActivityName="com.example.android.ollintest.SettingsActivity">
+            android:parentActivityName="com.inger.android.ollintest.SettingsActivity">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.ollintest.EditAccountActivity" />
+                android:value="com.inger.android.ollintest.EditAccountActivity" />
         </activity>
         <activity
-            android:name="com.example.android.ollintest.FAQsListViewActivity"
+            android:name="com.inger.android.ollintest.FAQsListViewActivity"
             android:label="@string/header_faqs">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.ollintest.FAQsListViewActivity" />
+                android:value="com.inger.android.ollintest.FAQsListViewActivity" />
         </activity>
         <activity
-            android:name="com.example.android.ollintest.PatientControlActivity"
+            android:name="com.inger.android.ollintest.PatientControlActivity"
             android:label="@string/header_control"
-            android:parentActivityName="com.example.android.ollintest.PatientFolderActivity">
+            android:parentActivityName="com.inger.android.ollintest.PatientFolderActivity">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.ollintest.PatientControlActivity" />
+                android:value="com.inger.android.ollintest.PatientControlActivity" />
         </activity>
         <activity
-            android:name="com.example.android.ollintest.PatientFolderActivity"
+            android:name="com.inger.android.ollintest.PatientFolderActivity"
             android:label="@string/header_folder"
-            android:parentActivityName="com.example.android.ollintest.MainActivity">
+            android:parentActivityName="com.inger.android.ollintest.MainActivity">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.ollintest.PatientFolderActivity" />
+                android:value="com.inger.android.ollintest.PatientFolderActivity" />
         </activity>
         <activity
-            android:name="com.example.android.ollintest.TestsActivity"
+            android:name="com.inger.android.ollintest.TestsActivity"
             android:label="@string/header_tests"
-            android:parentActivityName="com.example.android.ollintest.PatientFolderActivity">
+            android:parentActivityName="com.inger.android.ollintest.PatientFolderActivity">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.ollintest.TestsActivity" />
+                android:value="com.inger.android.ollintest.TestsActivity" />
         </activity>
         <activity
-            android:name="com.example.android.ollintest.WizardTestActivity"
+            android:name="com.inger.android.ollintest.WizardTestActivity"
             android:label="@string/header_wizard_tests"
-            android:parentActivityName="com.example.android.ollintest.TestsActivity">
+            android:parentActivityName="com.inger.android.ollintest.TestsActivity">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.ollintest.WizardTestActivity" />
+                android:value="com.inger.android.ollintest.WizardTestActivity" />
         </activity>
         <activity
-            android:name="com.example.android.ollintest.BalanceTestOptionsActivity"
+            android:name="com.inger.android.ollintest.BalanceTestOptionsActivity"
             android:label="@string/header_balance_test"
-            android:parentActivityName="com.example.android.ollintest.TestsActivity">
+            android:parentActivityName="com.inger.android.ollintest.TestsActivity">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.ollintest.BalanceTestOptionsActivity" />
+                android:value="com.inger.android.ollintest.BalanceTestOptionsActivity" />
         </activity>
         <activity
-            android:name="com.example.android.ollintest.WizardBalanceTestActivity"
+            android:name="com.inger.android.ollintest.WizardBalanceTestActivity"
             android:label="@string/header_wizard_tests"
-            android:parentActivityName="com.example.android.ollintest.BalanceTestOptionsActivity">
+            android:parentActivityName="com.inger.android.ollintest.BalanceTestOptionsActivity">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.ollintest.WizardBalanceTestActivity" />
+                android:value="com.inger.android.ollintest.WizardBalanceTestActivity" />
         </activity>
         <activity
-            android:name="com.example.android.ollintest.WalkingEvaluationListActivity"
+            android:name="com.inger.android.ollintest.WalkingEvaluationListActivity"
             android:label="@string/header_walkability_evaluation"></activity>
         <activity
-            android:name="com.example.android.ollintest.BalanceEvaluationListActivity"
+            android:name="com.inger.android.ollintest.BalanceEvaluationListActivity"
             android:label="@string/header_balance_evaluation"></activity>
         <activity
-            android:name="com.example.android.ollintest.StrengthEvaluationListActivity"
+            android:name="com.inger.android.ollintest.StrengthEvaluationListActivity"
             android:label="@string/header_strength_evaluation"></activity>
         <activity
-            android:name="com.example.android.ollintest.CountDownActivity"
+            android:name="com.inger.android.ollintest.CountDownActivity"
             android:label="@string/header_counter"></activity>
         <activity
-            android:name="com.example.android.ollintest.ConcentratedReportActivity"
+            android:name="com.inger.android.ollintest.ConcentratedReportActivity"
             android:label="@string/header_concentrated"></activity>
         <activity
-            android:name="com.example.android.ollintest.RecoverPasswordActivity"
+            android:name="com.inger.android.ollintest.RecoverPasswordActivity"
             android:label="@string/header_recover_password"></activity>
         <activity
-            android:name="com.example.android.ollintest.SignUpActivity"
+            android:name="com.inger.android.ollintest.SignUpActivity"
             android:label="@string/header_sign_up"></activity>
-        <activity
-            android:name="com.example.android.ollintest.util.UploadToServer"
-            android:label="@string/header_sign_up"
-            android:theme="@android:style/Theme.NoDisplay"></activity>
 
-        <service android:name="com.example.android.ollintest.service.MotionSensors" />
+        <service android:name="com.inger.android.ollintest.service.MotionSensors" />
+        <service android:name="com.inger.android.ollintest.service.UploadToServer" />
 
         <activity
-            android:name="com.example.android.ollintest.LoginActivity"
+            android:name="com.inger.android.ollintest.LoginActivity"
             android:label="@string/header_login">
 
             <intent-filter>
@@ -197,7 +194,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name="com.example.android.ollintest.broadcast.NetworkMonitor">
+        <receiver android:name="com.inger.android.ollintest.broadcast.NetworkMonitor">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
                 <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />

@@ -61,6 +61,7 @@ public class MotionSensors extends Service {
         HandlerThread mThread = new HandlerThread("RecorderThread");
         mThread.start();
 
+        // TODO what sensor will I use? should I include gyro?
         mSensor = mSensorManager.getDefaultSensor(
                 Sensor.TYPE_ACCELEROMETER
 //                | Sensor.TYPE_MAGNETIC_FIELD

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -18,17 +19,26 @@ import com.example.android.ollintest.util.DialogMessageUtils;
 import com.example.android.ollintest.util.SessionUtil;
 import com.example.android.ollintest.util.UserDBHandlerUtils;
 
+import java.io.File;
+import java.io.IOException;
+
 /**
  * Created by netzahdzc on 7/18/16.
  */
 public class LoginActivity extends AppCompatActivity {
 
+    private static final String APP_NAME = "three_ollin_test";
+    private final String APP_ACC_DIRECTORY_PATH = String.valueOf(
+            Environment.getExternalStorageDirectory() + "/" + APP_NAME + "/acc");
     private DialogMessageUtils mMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
+
+        // This function helps to ensure there is a container to store databases
+        checkAppDirectory();
 
         //Before start anything, we check if there is any session activated to start directly on the MainActivity
         SessionUtil sessionObj = new SessionUtil(getApplicationContext());
@@ -102,6 +112,19 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(registerScreen);
                 }
             });
+        }
+    }
+
+    public void checkAppDirectory(){
+        File myFile = new File(APP_ACC_DIRECTORY_PATH);
+
+        if (!myFile.exists()) {
+            myFile.mkdirs();
+            try {
+                myFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

@@ -21,10 +21,11 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 public class WizardWalkingTestFragment extends Fragment {
 
     private static final String ARG_POSITION = "position";
-
-    private int position;
     private ImageView image;
     private TextView text;
+    private View rootView;
+
+    private int position;
 
     public static WizardWalkingTestFragment newInstance(int position) {
         WizardWalkingTestFragment f = new WizardWalkingTestFragment();
@@ -62,7 +63,7 @@ public class WizardWalkingTestFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_wizard_social,
+        rootView = inflater.inflate(R.layout.fragment_wizard_social,
                 container, false);
         image = (ImageView) rootView
                 .findViewById(R.id.fragment_wizard_social_image);

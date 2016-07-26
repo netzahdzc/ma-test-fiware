@@ -1,5 +1,6 @@
 package com.example.android.ollintest;
 
+import android.os.Environment;
 import android.provider.BaseColumns;
 
 /**
@@ -7,7 +8,7 @@ import android.provider.BaseColumns;
  */
 public final class DatabaseContract {
 
-    public static final int DATABASE_VERSION = 24;
+    public static final int DATABASE_VERSION = 27;
     public static final String DATABASE_NAME = "ollintest.db";
     private static final String INT_TYPE = " INTEGER";
     private static final String REAL_TYPE = " REAL";
@@ -144,34 +145,6 @@ public final class DatabaseContract {
                 COLUMN_NAME_COL6 + TEXT_TYPE + COMMA_SEP +
                 COLUMN_NAME_COL7 + TEXT_TYPE + COMMA_SEP +
                 COLUMN_NAME_COL8 + TEXT_TYPE + " )";
-
-        public static final String DELETE_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
-    }
-
-    public static abstract class SensorAcc implements BaseColumns {
-        public static final String TABLE_NAME = "sensor_acc";
-        public static final String COLUMN_NAME_COL1 = "patient_id";
-        public static final String COLUMN_NAME_COL2 = "test_id";
-        public static final String COLUMN_NAME_COL3 = "timestamp";
-        public static final String COLUMN_NAME_COL4 = "accuracy";
-        public static final String COLUMN_NAME_COL5 = "x";
-        public static final String COLUMN_NAME_COL6 = "y";
-        public static final String COLUMN_NAME_COL7 = "z";
-        public static final String COLUMN_NAME_COL8 = "type";
-        public static final String COLUMN_NAME_COL9 = "created";
-
-
-        public static final String CREATE_TABLE = "CREATE TABLE " +
-                TABLE_NAME + " (" +
-                COLUMN_NAME_COL1 + INT_TYPE + COMMA_SEP +
-                COLUMN_NAME_COL2 + INT_TYPE + COMMA_SEP +
-                COLUMN_NAME_COL3 + REAL_TYPE + COMMA_SEP +
-                COLUMN_NAME_COL4 + INT_TYPE + COMMA_SEP +
-                COLUMN_NAME_COL5 + REAL_TYPE + COMMA_SEP +
-                COLUMN_NAME_COL6 + REAL_TYPE + COMMA_SEP +
-                COLUMN_NAME_COL7 + REAL_TYPE + COMMA_SEP +
-                COLUMN_NAME_COL8 + TEXT_TYPE + COMMA_SEP +
-                COLUMN_NAME_COL9 + TEXT_TYPE + " )";
 
         public static final String DELETE_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
     }

@@ -63,10 +63,12 @@ public class WizardBalanceTestActivity extends ActionBarActivity {
         pager.setOnPageChangeListener(new OnPageChangeListener() {
 
             @Override
-            public void onPageSelected(int position) { }
+            public void onPageSelected(int position) {
+            }
 
             @Override
-            public void onPageScrolled(int arg0, float arg1, int arg2) { }
+            public void onPageScrolled(int arg0, float arg1, int arg2) {
+            }
 
             @Override
             public void onPageScrollStateChanged(int position) {
@@ -175,21 +177,14 @@ public class WizardBalanceTestActivity extends ActionBarActivity {
 
         @Override
         public Fragment getItem(int position) {
-            if (testType == WALKING_TEST) {
-                return WizardWalkingTestFragment.newInstance(position);
-            } else if (testType == STRENGTH_TEST) {
-                return WizardStrengthTestFragment.newInstance(position);
+            if (balanceTestOption == TANDEM_TEST_OPTION) {
+                return WizardBalanceTestOptionTandemFragment.newInstance(position);
+            } else if (balanceTestOption == SEMI_TANDEM_TEST_OPTION) {
+                return WizardBalanceTestOptionSemiTandemFragment.newInstance(position);
+            } else if (balanceTestOption == FEET_TOGETHER_TEST_OPTION) {
+                return WizardBalanceTestOptionTogetherFragment.newInstance(position);
             } else {
-                if (balanceTestOption == TANDEM_TEST_OPTION) {
-                    return WizardBalanceTestOptionTandemFragment.newInstance(position);
-                } else if (balanceTestOption == SEMI_TANDEM_TEST_OPTION) {
-                    return WizardBalanceTestOptionSemiTandemFragment.newInstance(position);
-                } else if (balanceTestOption == FEET_TOGETHER_TEST_OPTION) {
-                    return WizardBalanceTestOptionTogetherFragment.newInstance(position);
-                } else {
-                    return WizardBalanceTestOptionOneLegFragment.newInstance(position);
-                }
-
+                return WizardBalanceTestOptionOneLegFragment.newInstance(position);
             }
         }//End of fragment function
     }

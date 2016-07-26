@@ -4,13 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.android.ollintest.DatabaseContract;
 import com.example.android.ollintest.DatabaseHelper;
-import com.example.android.ollintest.R;
-import com.example.android.ollintest.Utilities;
 
 /**
  * Created by netzahdzc on 7/20/16.

@@ -15,16 +15,13 @@
  */
 package com.example.android.ollintest;
 
-import android.app.DatePickerDialog;
-import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -32,23 +29,21 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.android.ollintest.fragment.DatePickerFragment;
 import com.example.android.ollintest.util.DialogMessageUtils;
 import com.example.android.ollintest.util.PatientDBHandlerUtils;
 import com.example.android.ollintest.util.PatientUtils;
 import com.example.android.ollintest.util.SessionUtil;
+import com.example.android.ollintest.util.Utilities;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class EditActivity extends AppCompatActivity {
@@ -162,7 +157,12 @@ public class EditActivity extends AppCompatActivity {
                 Uri selectedImageUri = data.getData();
                 if (null != selectedImageUri) {
                     if (setImage(selectedImageUri)) {
-                        patientPhoto.setImageURI(selectedImageUri);
+                        Utilities obj = new Utilities();
+                        try {
+                            patientPhoto.setImageBitmap(Utilities.scaleImage(getApplicationContext(), selectedImageUri));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }
@@ -194,8 +194,14 @@ public class EditActivity extends AppCompatActivity {
     // To save image in a temporal variable
     Boolean setImage(Uri selectedImageUri) {
         try {
-            InputStream iStream = getContentResolver().openInputStream(selectedImageUri);
-            inputPatientPhotoData = Utilities.getBytes(iStream);
+            Utilities obj = new Utilities();
+            Bitmap bmp = Utilities.scaleImage(getApplicationContext(), selectedImageUri);
+
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bmp.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            byte[] byteArray = stream.toByteArray();
+
+            inputPatientPhotoData = byteArray;
             return true;
         } catch (IOException ioe) {
             return false;

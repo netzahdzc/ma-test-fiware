@@ -66,10 +66,12 @@ public class WizardTestActivity extends ActionBarActivity {
         pager.setOnPageChangeListener(new OnPageChangeListener() {
 
             @Override
-            public void onPageSelected(int position) { }
+            public void onPageSelected(int position) {
+            }
 
             @Override
-            public void onPageScrolled(int arg0, float arg1, int arg2) { }
+            public void onPageScrolled(int arg0, float arg1, int arg2) {
+            }
 
             @Override
             public void onPageScrollStateChanged(int position) {
@@ -176,7 +178,6 @@ public class WizardTestActivity extends ActionBarActivity {
 
         @Override
         public Fragment getItem(int position) {
-
             if (testType == WALKING_TEST) {
                 return WizardWalkingTestFragment.newInstance(position);
             } else if (testType == STRENGTH_TEST) {

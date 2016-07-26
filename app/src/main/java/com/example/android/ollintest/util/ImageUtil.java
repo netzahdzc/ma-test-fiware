@@ -42,7 +42,6 @@ public class ImageUtil {
         }
     }
 
-    //TODO Change default image for the app logo
     private static final DisplayImageOptions.Builder DEFAULT_DISPLAY_IMAGE_OPTIONS_BUIDLER
             = new DisplayImageOptions.Builder()
             .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)

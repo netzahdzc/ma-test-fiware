@@ -28,12 +28,7 @@
 
                 <ImageView
                     android:id="@+id/patient_photo"
-                    android:layout_width="66dp"
-                    android:layout_height="61dp"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="10dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="centerCrop"
+                    style="@style/generalHeaderImageStyle"
                     android:src="@drawable/profile"></ImageView>
 
 

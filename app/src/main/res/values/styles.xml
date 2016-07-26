@@ -134,7 +134,7 @@
 
     <style name="generalHeaderImageStyle">
         <item name="android:layout_width">66dp</item>
-        <item name="android:layout_height">61dp</item>
+        <item name="android:layout_height">66dp</item>
         <item name="android:adjustViewBounds">true</item>
         <item name="android:scaleType">centerCrop</item>
         <item name="android:src">@drawable/profile</item>

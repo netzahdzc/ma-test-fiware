@@ -7,6 +7,8 @@ import android.hardware.SensorEventListener;
 import android.util.Log;
 
 
+import com.example.android.ollintest.DatabaseHelper;
+import com.example.android.ollintest.DatabaseHelperAcc;
 import com.example.android.ollintest.util.AccDBHandlerUtils;
 
 /**
@@ -15,6 +17,7 @@ import com.example.android.ollintest.util.AccDBHandlerUtils;
 public class MotionSensorListener implements SensorEventListener {
 
     private AccDBHandlerUtils accDBObj;
+
     private long mUniquePatientId;
     private long mUniqueTestId;
 
@@ -36,6 +39,7 @@ public class MotionSensorListener implements SensorEventListener {
             } else {
                 int j = (sensor.getType() == Sensor.TYPE_ACCELEROMETER) ? 1 : 0;
                 if (j == 1) {
+                    accDBObj.openDB();
 //                if (sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
                     // TODO define how am I going to get correct acc values. Search about sensor fusion (the idea will be to implement for devices capable to collect such sensors).?
                     final double accX, accY, accZ, accTimestamp;
@@ -65,6 +69,7 @@ public class MotionSensorListener implements SensorEventListener {
 
                     accDBObj.insertData(mUniquePatientId, mUniqueTestId, accTimestamp, accAccuracy,
                             accX, accY, accZ, "ga");
+                    accDBObj.closeDB();
                 }
             }
         }

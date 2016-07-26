@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.example.android.ollintest.util.PatientDBHandlerUtils;
 import com.example.android.ollintest.util.PatientUtils;
 import com.example.android.ollintest.util.SessionUtil;
-import com.example.android.ollintest.util.TestDBHandlerUtils;
+import com.example.android.ollintest.util.Utilities;
 
 /**
  * Created by netzahdzc on 7/18/16.

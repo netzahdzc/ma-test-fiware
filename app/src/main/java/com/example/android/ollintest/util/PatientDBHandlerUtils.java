@@ -5,15 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.android.ollintest.DatabaseContract;
 import com.example.android.ollintest.DatabaseHelper;
-import com.example.android.ollintest.EditActivity;
-import com.example.android.ollintest.R;
-import com.example.android.ollintest.Utilities;
 
 /**
  * Created by netzahdzc on 7/20/16.
@@ -176,7 +170,7 @@ public class PatientDBHandlerUtils {
     // This method updates info from database
     public int updateData(long uniquePatientId, String patientName, String patientSurname,
                           int patientGender, String patientBirthday, byte[] patientPhoto) {
-Log.v("XXX", "uniquePatientId:"+uniquePatientId+", patientGender:"+ patientGender +", patientBirthday"+ patientBirthday);
+
         DateUtil dateObj = new DateUtil();
 
         // New value for one column

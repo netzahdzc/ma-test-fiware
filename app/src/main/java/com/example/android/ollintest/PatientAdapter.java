@@ -24,6 +24,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.android.ollintest.util.Utilities;
+
 import java.util.ArrayList;
 
 /**

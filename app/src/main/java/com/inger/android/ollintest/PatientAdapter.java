@@ -96,7 +96,14 @@ public class PatientAdapter extends ArrayAdapter<Patient> {
             imageView.setVisibility(View.VISIBLE);
         } else {
             // Otherwise hide the ImageView (set visibility to GONE)
-            imageView.setVisibility(View.GONE);
+//            imageView.setVisibility(View.GONE);
+
+            // If there is no picture, then I set a placeholder
+            if (currentObject.getPatientGender() == 1)
+                imageView.setImageResource(R.drawable.profile_m);
+            if (currentObject.getPatientGender() == 2)
+                imageView.setImageResource(R.drawable.profile_w);
+            imageView.setVisibility(View.VISIBLE);
         }
 
         // Set the theme color for the list item

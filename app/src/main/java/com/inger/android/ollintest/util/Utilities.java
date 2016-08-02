@@ -91,7 +91,7 @@ public class Utilities {
     }
 
     private static int getOrientation(Context context, Uri photoUri) {
-        return 90;
+        return 0;
     }
 
 }

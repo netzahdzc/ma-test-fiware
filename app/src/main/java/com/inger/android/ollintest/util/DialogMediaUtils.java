@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.RatingBar.OnRatingBarChangeListener;
@@ -66,6 +67,7 @@ public class DialogMediaUtils {
         });
 
         initDialogButtons();
+
     }
 
     private void initDialogButtons() {

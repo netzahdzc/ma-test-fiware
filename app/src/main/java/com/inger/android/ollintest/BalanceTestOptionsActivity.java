@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.inger.android.ollintest.util.PatientDBHandlerUtils;
 import com.inger.android.ollintest.util.PatientUtils;
 import com.inger.android.ollintest.util.SessionUtil;
+import com.inger.android.ollintest.util.TestDBHandlerUtils;
 import com.inger.android.ollintest.util.Utilities;
 
 /**
@@ -25,6 +26,11 @@ public class BalanceTestOptionsActivity extends AppCompatActivity {
     final int FEET_TOGETHER_TEST_OPTION = 3;
     final int ONE_LEG_TEST_OPTION = 4;
 
+    private TextView button_feet_together_option;
+    private TextView button_semi_tandem_option;
+    private TextView button_tandem_option;
+    private TextView button_one_leg_option;
+
     private long uniquePatientId;
     private byte[] inputPatientPhotoData;
 
@@ -33,9 +39,13 @@ public class BalanceTestOptionsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.balance_test_options);
 
-        loadActivityData();
+        button_feet_together_option = (TextView) findViewById(R.id.button_feet_together_option);
+        button_semi_tandem_option = (TextView) findViewById(R.id.button_semi_tandem_option);
+        button_tandem_option = (TextView) findViewById(R.id.button_tandem_option);
+        button_one_leg_option = (TextView) findViewById(R.id.button_one_leg_option);
 
-        final TextView button_feet_together_option = (TextView) findViewById(R.id.button_feet_together_option);
+        loadActivityData();
+        disableTestButtons();
 
         button_feet_together_option.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -46,8 +56,6 @@ public class BalanceTestOptionsActivity extends AppCompatActivity {
             }
         });
 
-        final TextView button_semi_tandem_option = (TextView) findViewById(R.id.button_semi_tandem_option);
-
         button_semi_tandem_option.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent semiTandemScreen = new Intent(getApplicationContext(), WizardBalanceTestActivity.class);
@@ -57,8 +65,6 @@ public class BalanceTestOptionsActivity extends AppCompatActivity {
             }
         });
 
-        final TextView button_tandem_option = (TextView) findViewById(R.id.button_tandem_option);
-
         button_tandem_option.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent tandemScreen = new Intent(getApplicationContext(), WizardBalanceTestActivity.class);
@@ -67,8 +73,6 @@ public class BalanceTestOptionsActivity extends AppCompatActivity {
                 startActivity(tandemScreen);
             }
         });
-
-        final TextView button_one_leg_option = (TextView) findViewById(R.id.button_one_leg_option);
 
         button_one_leg_option.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -93,6 +97,10 @@ public class BalanceTestOptionsActivity extends AppCompatActivity {
                         cursor.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL2)
                 );
 
+                int mPatientGender = cursor.getInt(
+                        cursor.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL3)
+                );
+
                 String mPatientBirthday = cursor.getString(
                         cursor.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL4)
                 );
@@ -102,8 +110,15 @@ public class BalanceTestOptionsActivity extends AppCompatActivity {
                 );
 
                 ImageView patientPhoto = (ImageView) findViewById(R.id.header_patient_photo);
-                patientPhoto.setImageBitmap(Utilities.getImage(mPatientPhoto));
-                setOriginalImage(mPatientPhoto);
+                if (mPatientPhoto == null) {
+                    if (mPatientGender == 1)
+                        patientPhoto.setImageResource(R.drawable.profile_m);
+                    if (mPatientGender == 2)
+                        patientPhoto.setImageResource(R.drawable.profile_w);
+                } else {
+                    patientPhoto.setImageBitmap(Utilities.getImage(mPatientPhoto));
+                    setOriginalImage(mPatientPhoto);
+                }
 
                 TextView patientNameText = (TextView) findViewById(R.id.header_patient_name);
                 patientNameText.setText(PatientUtils.getFormatName(mPatientName + " " + mPatientSurname));
@@ -131,6 +146,87 @@ public class BalanceTestOptionsActivity extends AppCompatActivity {
     // To get image loaded when select
     void setOriginalImage(byte[] imageBytes) {
         inputPatientPhotoData = imageBytes;
+    }
+
+    public void disableTestButtons() {
+        TestDBHandlerUtils testDBObj = new TestDBHandlerUtils(getApplicationContext());
+        testDBObj.openDB();
+
+        button_feet_together_option.setEnabled(true);
+        button_feet_together_option.setBackgroundColor(getResources().getColor(R.color.ok_button));
+        button_semi_tandem_option.setEnabled(false);
+        button_semi_tandem_option.setBackgroundColor(getResources().getColor(R.color.hint));
+        button_tandem_option.setEnabled(false);
+        button_tandem_option.setBackgroundColor(getResources().getColor(R.color.hint));
+        button_one_leg_option.setEnabled(false);
+        button_one_leg_option.setBackgroundColor(getResources().getColor(R.color.hint));
+
+        Cursor cursor = testDBObj.getTodayTest(uniquePatientId);
+
+        try {
+            cursor.moveToFirst();
+
+            // Reading all data and setting it up to be displayed
+            if (cursor != null) {
+                do {
+                    int optionTestType = cursor.getInt(
+                            cursor.getColumnIndexOrThrow(DatabaseContract.Test.COLUMN_NAME_COL3)
+                    );
+
+                    if (optionTestType == FEET_TOGETHER_TEST_OPTION) {
+                        button_feet_together_option.setEnabled(false);
+                        button_feet_together_option.setBackgroundColor(getResources().getColor(R.color.hint));
+                        button_semi_tandem_option.setEnabled(true);
+                        button_semi_tandem_option.setBackgroundColor(getResources().getColor(R.color.ok_button));
+                        button_tandem_option.setEnabled(false);
+                        button_tandem_option.setBackgroundColor(getResources().getColor(R.color.hint));
+                        button_one_leg_option.setEnabled(false);
+                        button_one_leg_option.setBackgroundColor(getResources().getColor(R.color.hint));
+                    }
+
+                    if (optionTestType == SEMI_TANDEM_TEST_OPTION) {
+                        button_feet_together_option.setEnabled(false);
+                        button_feet_together_option.setBackgroundColor(getResources().getColor(R.color.hint));
+                        button_semi_tandem_option.setEnabled(false);
+                        button_semi_tandem_option.setBackgroundColor(getResources().getColor(R.color.hint));
+                        button_tandem_option.setEnabled(true);
+                        button_tandem_option.setBackgroundColor(getResources().getColor(R.color.ok_button));
+                        button_one_leg_option.setEnabled(false);
+                        button_one_leg_option.setBackgroundColor(getResources().getColor(R.color.hint));
+                    }
+
+                    if (optionTestType == TANDEM_TEST_OPTION) {
+                        button_feet_together_option.setEnabled(false);
+                        button_feet_together_option.setBackgroundColor(getResources().getColor(R.color.hint));
+                        button_semi_tandem_option.setEnabled(false);
+                        button_semi_tandem_option.setBackgroundColor(getResources().getColor(R.color.hint));
+                        button_tandem_option.setEnabled(false);
+                        button_tandem_option.setBackgroundColor(getResources().getColor(R.color.hint));
+                        button_one_leg_option.setEnabled(true);
+                        button_one_leg_option.setBackgroundColor(getResources().getColor(R.color.ok_button));
+                    }
+
+                    if (optionTestType == ONE_LEG_TEST_OPTION) {
+                        button_feet_together_option.setEnabled(false);
+                        button_feet_together_option.setBackgroundColor(getResources().getColor(R.color.hint));
+                        button_semi_tandem_option.setEnabled(false);
+                        button_semi_tandem_option.setBackgroundColor(getResources().getColor(R.color.hint));
+                        button_tandem_option.setEnabled(false);
+                        button_tandem_option.setBackgroundColor(getResources().getColor(R.color.hint));
+                        button_one_leg_option.setEnabled(false);
+                        button_one_leg_option.setBackgroundColor(getResources().getColor(R.color.hint));
+                    }
+                } while (cursor.moveToNext());
+            }
+        } catch (Exception e) {
+            // exception handling
+        } finally {
+            if (cursor != null) {
+//                cursor.close();
+            }
+        }
+
+        testDBObj.closeDB();
     }
 
     public void loadActivityData() {

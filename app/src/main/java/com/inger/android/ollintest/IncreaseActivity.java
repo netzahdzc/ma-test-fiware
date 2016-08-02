@@ -80,7 +80,7 @@ public class IncreaseActivity extends AppCompatActivity {
                 TextView patientBirthday = (TextView) findViewById(R.id.date_field);
                 String mPatientBirthday = patientBirthday.getText().toString();
 
-                if (validate(mPatientName, mPatientSurname, mPatientGender, mPatientBirthday, getImage())) {
+                if (validate(mPatientName, mPatientSurname, mPatientGender, mPatientBirthday)) {
                     PatientDBHandlerUtils patientDBObj = new PatientDBHandlerUtils(getApplicationContext());
                     patientDBObj.openDB();
                     patientDBObj.insertData(mPatientName, mPatientSurname, mPatientGender,
@@ -167,12 +167,12 @@ public class IncreaseActivity extends AppCompatActivity {
 
     // This method validate empty and integer values
     public boolean validate(String patientName, String patientSurname, int patientGender,
-                            String patientBirthday, byte patientPhoto[]) {
+                            String patientBirthday) {
         boolean flag = false;
 
         try {
             if (patientName != "" && patientSurname != "" && patientGender != 0 &&
-                    patientBirthday != "" && patientPhoto != null) {
+                    patientBirthday != "") {
                 flag = true;
             }
         } catch (NumberFormatException e) {

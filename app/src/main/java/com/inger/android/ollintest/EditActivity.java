@@ -91,7 +91,7 @@ public class EditActivity extends AppCompatActivity {
                 TextView patientBirthDate = (TextView) findViewById(R.id.date_field);
                 String mPatientBirthDate = patientBirthDate.getText().toString();
 
-                if (validate(mName, mLastName, mPatientSex, mPatientBirthDate, getImage())) {
+                if (validate(mName, mLastName, mPatientSex, mPatientBirthDate)) {
                     PatientDBHandlerUtils patientDBObj = new PatientDBHandlerUtils(getApplicationContext());
                     patientDBObj.openDB();
 
@@ -262,10 +262,6 @@ public class EditActivity extends AppCompatActivity {
                         cursor.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL3)
                 );
 
-//                String mPatientGender = cursor.getString(
-//                        cursor.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL3)
-//                );
-
                 String mPatientBirthday = cursor.getString(
                         cursor.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL4)
                 );
@@ -275,8 +271,15 @@ public class EditActivity extends AppCompatActivity {
                 );
 
                 ImageView patientPhoto = (ImageView) findViewById(R.id.edit_patient_photo);
-                patientPhoto.setImageBitmap(Utilities.getImage(mPatientPhoto));
-                setOriginalImage(mPatientPhoto);
+                if (mPatientPhoto == null) {
+                    if (mPatientGender == 1)
+                        patientPhoto.setImageResource(R.drawable.profile_m);
+                    if (mPatientGender == 2)
+                        patientPhoto.setImageResource(R.drawable.profile_w);
+                } else{
+                    patientPhoto.setImageBitmap(Utilities.getImage(mPatientPhoto));
+                    setOriginalImage(mPatientPhoto);
+                }
 
                 TextView uniquePatientIdText = (TextView) findViewById(R.id.edit_unique_patient_id);
                 uniquePatientIdText.setText(mUniquePatientId + "");
@@ -308,12 +311,12 @@ public class EditActivity extends AppCompatActivity {
     // This method validate empty and integer values
 
     public boolean validate(String patientName, String patientSurname, int patientGender,
-                            String patientBirthday, byte patientPhoto[]) {
+                            String patientBirthday) {
         boolean flag = false;
 
         try {
             if (patientName != "" && patientSurname != "" && patientGender != 0 &&
-                    patientBirthday != "" && patientPhoto != null) {
+                    patientBirthday != "") {
                 flag = true;
             }
         } catch (NumberFormatException e) {

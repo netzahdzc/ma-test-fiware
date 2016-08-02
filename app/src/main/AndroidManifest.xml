@@ -19,11 +19,15 @@
         android:theme="@style/AppTheme">
         <activity
             android:name="com.inger.android.ollintest.MainActivity"
-            android:label="@string/patient_list"></activity>
+            android:label="@string/patient_list"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"></activity>
         <activity
             android:name="com.inger.android.ollintest.IncreaseActivity"
             android:label="@string/header_add_patient"
-            android:parentActivityName="com.inger.android.ollintest.MainActivity">
+            android:parentActivityName="com.inger.android.ollintest.MainActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
@@ -33,7 +37,9 @@
         <activity
             android:name="com.inger.android.ollintest.EditActivity"
             android:label="@string/header_edit_patient"
-            android:parentActivityName="com.inger.android.ollintest.PatientFolderActivity">
+            android:parentActivityName="com.inger.android.ollintest.PatientFolderActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
@@ -43,7 +49,9 @@
         <activity
             android:name="com.inger.android.ollintest.SettingsActivity"
             android:label="@string/header_settings"
-            android:parentActivityName="com.inger.android.ollintest.MainActivity">
+            android:parentActivityName="com.inger.android.ollintest.MainActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
@@ -53,7 +61,9 @@
         <activity
             android:name="com.inger.android.ollintest.AboutActivity"
             android:label="@string/header_about"
-            android:parentActivityName="com.inger.android.ollintest.SettingsActivity">
+            android:parentActivityName="com.inger.android.ollintest.SettingsActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
@@ -63,7 +73,9 @@
         <activity
             android:name="com.inger.android.ollintest.PrivacyActivity"
             android:label="@string/header_privacy"
-            android:parentActivityName="com.inger.android.ollintest.AboutActivity">
+            android:parentActivityName="com.inger.android.ollintest.AboutActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
@@ -73,7 +85,9 @@
         <activity
             android:name="com.inger.android.ollintest.ActivationAccountActivity"
             android:label="@string/header_activation"
-            android:parentActivityName="com.inger.android.ollintest.SettingsActivity">
+            android:parentActivityName="com.inger.android.ollintest.SettingsActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
@@ -83,7 +97,9 @@
         <activity
             android:name="com.inger.android.ollintest.EditAccountActivity"
             android:label="@string/header_edit_user_acount"
-            android:parentActivityName="com.inger.android.ollintest.SettingsActivity">
+            android:parentActivityName="com.inger.android.ollintest.SettingsActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
@@ -92,7 +108,9 @@
         </activity>
         <activity
             android:name="com.inger.android.ollintest.FAQsListViewActivity"
-            android:label="@string/header_faqs">
+            android:label="@string/header_faqs"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
@@ -102,7 +120,9 @@
         <activity
             android:name="com.inger.android.ollintest.PatientControlActivity"
             android:label="@string/header_control"
-            android:parentActivityName="com.inger.android.ollintest.PatientFolderActivity">
+            android:parentActivityName="com.inger.android.ollintest.PatientFolderActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
@@ -112,7 +132,9 @@
         <activity
             android:name="com.inger.android.ollintest.PatientFolderActivity"
             android:label="@string/header_folder"
-            android:parentActivityName="com.inger.android.ollintest.MainActivity">
+            android:parentActivityName="com.inger.android.ollintest.MainActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
@@ -122,7 +144,9 @@
         <activity
             android:name="com.inger.android.ollintest.TestsActivity"
             android:label="@string/header_tests"
-            android:parentActivityName="com.inger.android.ollintest.PatientFolderActivity">
+            android:parentActivityName="com.inger.android.ollintest.PatientFolderActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
@@ -132,7 +156,9 @@
         <activity
             android:name="com.inger.android.ollintest.WizardTestActivity"
             android:label="@string/header_wizard_tests"
-            android:parentActivityName="com.inger.android.ollintest.TestsActivity">
+            android:parentActivityName="com.inger.android.ollintest.TestsActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
@@ -142,7 +168,9 @@
         <activity
             android:name="com.inger.android.ollintest.BalanceTestOptionsActivity"
             android:label="@string/header_balance_test"
-            android:parentActivityName="com.inger.android.ollintest.TestsActivity">
+            android:parentActivityName="com.inger.android.ollintest.TestsActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
@@ -152,7 +180,9 @@
         <activity
             android:name="com.inger.android.ollintest.WizardBalanceTestActivity"
             android:label="@string/header_wizard_tests"
-            android:parentActivityName="com.inger.android.ollintest.BalanceTestOptionsActivity">
+            android:parentActivityName="com.inger.android.ollintest.BalanceTestOptionsActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
@@ -161,32 +191,48 @@
         </activity>
         <activity
             android:name="com.inger.android.ollintest.WalkingEvaluationListActivity"
-            android:label="@string/header_walkability_evaluation"></activity>
+            android:label="@string/header_walkability_evaluation"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"></activity>
         <activity
             android:name="com.inger.android.ollintest.BalanceEvaluationListActivity"
-            android:label="@string/header_balance_evaluation"></activity>
+            android:label="@string/header_balance_evaluation"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"></activity>
         <activity
             android:name="com.inger.android.ollintest.StrengthEvaluationListActivity"
-            android:label="@string/header_strength_evaluation"></activity>
+            android:label="@string/header_strength_evaluation"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"></activity>
         <activity
             android:name="com.inger.android.ollintest.CountDownActivity"
-            android:label="@string/header_counter"></activity>
+            android:label="@string/header_counter"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"></activity>
         <activity
             android:name="com.inger.android.ollintest.ConcentratedReportActivity"
-            android:label="@string/header_concentrated"></activity>
+            android:label="@string/header_concentrated"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"></activity>
         <activity
             android:name="com.inger.android.ollintest.RecoverPasswordActivity"
-            android:label="@string/header_recover_password"></activity>
+            android:label="@string/header_recover_password"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"></activity>
         <activity
             android:name="com.inger.android.ollintest.SignUpActivity"
-            android:label="@string/header_sign_up"></activity>
+            android:label="@string/header_sign_up"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"></activity>
 
         <service android:name="com.inger.android.ollintest.service.MotionSensors" />
         <service android:name="com.inger.android.ollintest.service.UploadToServer" />
 
         <activity
             android:name="com.inger.android.ollintest.LoginActivity"
-            android:label="@string/header_login">
+            android:label="@string/header_login"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

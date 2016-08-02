@@ -1,7 +1,13 @@
 package com.inger.android.ollintest;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
@@ -11,6 +17,7 @@ import android.view.View;
 import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.inger.android.ollintest.service.MotionSensors;
 import com.inger.android.ollintest.util.DateUtil;
@@ -62,6 +69,18 @@ public class CountDownActivity extends AppCompatActivity {
         crono = (Chronometer) findViewById(R.id.chronometer);
         crono.setVisibility(View.GONE);
 
+        crono.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
+            @Override
+            public void onChronometerTick(Chronometer chronometer) {
+                if (testType == STRENGTH_TEST)
+                    if (chronometer.getText().toString().equalsIgnoreCase("00:10"))
+                        playAlarm();
+                if (testType == BALANCE_TEST)
+                    if (chronometer.getText().toString().equalsIgnoreCase("00:30"))
+                        playAlarm();
+            }
+        });
+
         final TextView button_cancel = (TextView) findViewById(R.id.button_cancel);
         button_cancel.setEnabled(true);
 
@@ -84,19 +103,26 @@ public class CountDownActivity extends AppCompatActivity {
 
         button_start_counter.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                new CountDownTimer(5000, 1000) {
+
+                new CountDownTimer(5000, 100) {
                     TextView counter_text = (TextView) findViewById(R.id.counter_text);
+                    int secondsLeft = 1;
 
                     public void onTick(long millisUntilFinished) {
-                        counter_text.setText("" + millisUntilFinished / 1000);
-                        button_cancel.setEnabled(false);
-                        button_cancel.setBackgroundColor(getResources().getColor(R.color.hint));
+                        if (Math.round((float) millisUntilFinished / 1000.0f) != secondsLeft) {
+                            secondsLeft = Math.round((float) millisUntilFinished / 1000.0f);
+                            if (secondsLeft >= 1) {
+                                counter_text.setText("" + secondsLeft);
+                                button_cancel.setEnabled(false);
+                                button_cancel.setBackgroundColor(getResources().getColor(R.color.hint));
 
-                        button_start_counter.setVisibility(View.GONE);
+                                button_start_counter.setVisibility(View.GONE);
 
-                        button_stop_counter.setEnabled(false);
-                        button_stop_counter.setBackgroundColor(getResources().getColor(R.color.hint));
-                        button_stop_counter.setVisibility(View.VISIBLE);
+                                button_stop_counter.setEnabled(false);
+                                button_stop_counter.setBackgroundColor(getResources().getColor(R.color.hint));
+                                button_stop_counter.setVisibility(View.VISIBLE);
+                            }
+                        }
                     }
 
                     public void onFinish() {
@@ -112,6 +138,7 @@ public class CountDownActivity extends AppCompatActivity {
                         crono.setVisibility(View.VISIBLE);
                         counter_text.setVisibility(View.GONE);
 
+                        playAlarm();
                         startChronometer();
                         createTestFile();
                         startCollectingAccData();
@@ -175,6 +202,11 @@ public class CountDownActivity extends AppCompatActivity {
         });
     }
 
+    public void playAlarm() {
+        MediaPlayer mp = MediaPlayer.create(CountDownActivity.this, R.raw.long_beep);
+        mp.start();
+    }
+
     // This method load data to be displayed on screen
     public void loadHeaderData(Cursor cursor) {
         try {
@@ -188,6 +220,10 @@ public class CountDownActivity extends AppCompatActivity {
                         cursor.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL2)
                 );
 
+                int mPatientGender = cursor.getInt(
+                        cursor.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL3)
+                );
+
                 String mPatientBirthday = cursor.getString(
                         cursor.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL4)
                 );
@@ -197,7 +233,13 @@ public class CountDownActivity extends AppCompatActivity {
                 );
 
                 ImageView patientPhoto = (ImageView) findViewById(R.id.header_patient_photo);
-                patientPhoto.setImageBitmap(Utilities.getImage(mPatientPhoto));
+                if (mPatientPhoto == null) {
+                    if (mPatientGender == 1)
+                        patientPhoto.setImageResource(R.drawable.profile_m);
+                    if (mPatientGender == 2)
+                        patientPhoto.setImageResource(R.drawable.profile_w);
+                } else
+                    patientPhoto.setImageBitmap(Utilities.getImage(mPatientPhoto));
 
                 TextView patientNameText = (TextView) findViewById(R.id.header_patient_name);
                 patientNameText.setText(PatientUtils.getFormatName(mPatientName + " " + mPatientSurname));
@@ -299,7 +341,7 @@ public class CountDownActivity extends AppCompatActivity {
         TestDBHandlerUtils testDBObj = new TestDBHandlerUtils(getApplicationContext());
         testDBObj.openDB();
 
-        testDBObj.updateData(uniqueTestId, 0, 0, 0, "", "", "", "", "", "", "",
+        testDBObj.updateData(uniqueTestId, 0, testType, balanceTestOption, "", "", "", "", "", "", "",
                 "", "", "", "", 0, "", "sensorStopped");
 
         stopService(accService);
@@ -312,7 +354,7 @@ public class CountDownActivity extends AppCompatActivity {
             TestDBHandlerUtils testDBObj = new TestDBHandlerUtils(getApplicationContext());
             testDBObj.openDB();
 
-            testDBObj.updateData(uniqueTestId, 0, 0, 0, "", "", "", "", "", "", "",
+            testDBObj.updateData(uniqueTestId, 0, testType, balanceTestOption, "", "", "", "", "", "", "",
                     "", "", "", "", 0, "", "sensorRestarted");
 
             testDBObj.closeDB();
@@ -331,7 +373,7 @@ public class CountDownActivity extends AppCompatActivity {
         TestDBHandlerUtils testDBObj = new TestDBHandlerUtils(getApplicationContext());
         testDBObj.openDB();
 
-        testDBObj.updateData(uniqueTestId, 0, 0, 0, dateObj.getCurrentDate(), "", "", "",
+        testDBObj.updateData(uniqueTestId, 0, testType, balanceTestOption, dateObj.getCurrentDate(), "", "", "",
                 "", "", "", "", "", "", "", 0, "", "sensorFinished");
 
         stopService(accService);

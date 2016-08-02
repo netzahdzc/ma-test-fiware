@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.inger.android.ollintest.DatabaseContract;
 import com.inger.android.ollintest.DatabaseHelper;
@@ -321,6 +322,44 @@ public class TestDBHandlerUtils {
 //        db.close();
 
         return latestTest;
+    }
+
+    public Cursor getTodayTest(long uniqueParticipantId) {
+
+        DateUtil dateObj = new DateUtil();
+
+        // Define a projection that specifies which columns from the database
+        // you will actually use after this query.
+        String[] projection = {
+                DatabaseContract.Test._ID,
+                DatabaseContract.Test.COLUMN_NAME_COL1,
+                DatabaseContract.Test.COLUMN_NAME_COL2,
+                DatabaseContract.Test.COLUMN_NAME_COL3,
+                DatabaseContract.Test.COLUMN_NAME_COL19
+        };
+
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder =
+                DatabaseContract.Test._ID + " ASC ";
+
+        // Define 'where' part of query.
+        String selection = DatabaseContract.Test.COLUMN_NAME_COL1 + " LIKE ? AND " +
+                DatabaseContract.Test.COLUMN_NAME_COL19 + " LIKE ? ";
+
+        // Specify arguments in placeholder order.
+        String[] selectionArgs = {String.valueOf(uniqueParticipantId), String.valueOf(dateObj.getCurrentDateSQL()+"%")};
+
+        Cursor c = db.query(
+                DatabaseContract.Test.TABLE_NAME, // The table to query
+                projection,                         // The columns to return
+                selection,                          // The columns for the WHERE clause
+                selectionArgs,                      // The values for the WHERE clause
+                null,                               // don't group the rows
+                null,                               // don't filter by row groups
+                sortOrder                           // The sort order
+        );
+
+        return c;
     }
 
     public int getTestType(Cursor cursor) {

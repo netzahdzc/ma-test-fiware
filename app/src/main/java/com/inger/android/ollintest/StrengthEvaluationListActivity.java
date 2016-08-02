@@ -95,6 +95,10 @@ public class StrengthEvaluationListActivity extends AppCompatActivity {
                         cursor.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL2)
                 );
 
+                int mPatientGender = cursor.getInt(
+                        cursor.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL3)
+                );
+
                 String mPatientBirthday = cursor.getString(
                         cursor.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL4)
                 );
@@ -104,7 +108,14 @@ public class StrengthEvaluationListActivity extends AppCompatActivity {
                 );
 
                 ImageView patientPhoto = (ImageView) findViewById(R.id.header_patient_photo);
-                patientPhoto.setImageBitmap(Utilities.getImage(mPatientPhoto));
+                if (mPatientPhoto == null) {
+                    if (mPatientGender == 1)
+                        patientPhoto.setImageResource(R.drawable.profile_m);
+                    if (mPatientGender == 2)
+                        patientPhoto.setImageResource(R.drawable.profile_w);
+                } else{
+                    patientPhoto.setImageBitmap(Utilities.getImage(mPatientPhoto));
+                }
 
                 TextView patientNameText = (TextView) findViewById(R.id.header_patient_name);
                 patientNameText.setText(PatientUtils.getFormatName(mPatientName + " " + mPatientSurname));

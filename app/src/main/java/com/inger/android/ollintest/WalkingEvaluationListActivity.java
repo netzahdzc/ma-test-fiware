@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -60,6 +61,7 @@ public class WalkingEvaluationListActivity extends AppCompatActivity {
 
                 dialog.showDialog(uniqueTestId, q1Checkbox, q2Checkbox, q3Checkbox, q4Checkbox,
                         q5Checkbox, q6Checkbox, q7Checkbox, q8Checkbox, q9Checkbox, false);
+
             }
         });
 
@@ -81,6 +83,7 @@ public class WalkingEvaluationListActivity extends AppCompatActivity {
                 testDBObj.closeDB();
             }
         });
+
     }
 
     @Override
@@ -107,6 +110,10 @@ public class WalkingEvaluationListActivity extends AppCompatActivity {
                         cursor.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL2)
                 );
 
+                int mPatientGender = cursor.getInt(
+                        cursor.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL3)
+                );
+
                 String mPatientBirthday = cursor.getString(
                         cursor.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL4)
                 );
@@ -116,7 +123,14 @@ public class WalkingEvaluationListActivity extends AppCompatActivity {
                 );
 
                 ImageView patientPhoto = (ImageView) findViewById(R.id.header_patient_photo);
-                patientPhoto.setImageBitmap(Utilities.getImage(mPatientPhoto));
+                if (mPatientPhoto == null) {
+                    if (mPatientGender == 1)
+                        patientPhoto.setImageResource(R.drawable.profile_m);
+                    if (mPatientGender == 2)
+                        patientPhoto.setImageResource(R.drawable.profile_w);
+                } else{
+                    patientPhoto.setImageBitmap(Utilities.getImage(mPatientPhoto));
+                }
 
                 TextView patientNameText = (TextView) findViewById(R.id.header_patient_name);
                 patientNameText.setText(PatientUtils.getFormatName(mPatientName + " " + mPatientSurname));

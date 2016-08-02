@@ -35,7 +35,7 @@ public class Patient {
     /**
      * Sex of patient
      */
-    private String mPatientGender;
+    private int mPatientGender;
 
     /**
      * Date of birth of patient
@@ -56,7 +56,7 @@ public class Patient {
      * Create a new Patient object.
      */
     public Patient(long uniquePatientId, String patientName, String patientSurname,
-                   String patientGender, String patientBirthday, byte[] patientPhotoResourceId) {
+                   int patientGender, String patientBirthday, byte[] patientPhotoResourceId) {
         mUniquePatientId = uniquePatientId;
         mPatientName = patientName;
         mPatientSurname = patientSurname;
@@ -110,14 +110,14 @@ public class Patient {
     /**
      * Get Patient sex
      */
-    public String getPatientGender() {
+    public int getPatientGender() {
         return mPatientGender;
     }
 
     /**
      * Set Patient sex
      */
-    public void setPatientGender(String patientGender) {
+    public void setPatientGender(int patientGender) {
         this.mPatientGender = patientGender;
     }
 

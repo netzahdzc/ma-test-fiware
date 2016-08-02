@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
                             cursor.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL2)
                     );
 
-                    String mParticipantGender = cursor.getString(
+                    int mParticipantGender = cursor.getInt(
                             cursor.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL3)
                     );
 

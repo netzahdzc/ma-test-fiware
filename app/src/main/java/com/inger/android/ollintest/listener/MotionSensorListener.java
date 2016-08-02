@@ -39,6 +39,7 @@ public class MotionSensorListener implements SensorEventListener {
                     accDBObj.openDB();
 //                if (sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
                     // TODO define how am I going to get correct acc values. Search about sensor fusion (the idea will be to implement for devices capable to collect such sensors).?
+                    // TODO What Android SDK or mobile device support whichever library, function I need to retrieve desired acc
                     final double accX, accY, accZ, accTimestamp;
                     final int accAccuracy;
 

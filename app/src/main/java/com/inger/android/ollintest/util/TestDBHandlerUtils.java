@@ -295,10 +295,11 @@ public class TestDBHandlerUtils {
 
         // Define 'where' part of query.
         String selection = DatabaseContract.Test.COLUMN_NAME_COL1 + " LIKE ? AND " +
-                DatabaseContract.Test.COLUMN_NAME_COL2 + " LIKE ? ";
+                DatabaseContract.Test.COLUMN_NAME_COL2 + " LIKE ? AND " +
+                DatabaseContract.Test.COLUMN_NAME_COL18 + " LIKE ? ";
 
         // Specify arguments in placeholder order.
-        String[] selectionArgs = {String.valueOf(uniqueParticipantId), String.valueOf(testTypeId)};
+        String[] selectionArgs = {String.valueOf(uniqueParticipantId), String.valueOf(testTypeId), "testCompleted"};
 
         Cursor cursor = db.query(
                 DatabaseContract.Test.TABLE_NAME, // The table to query
@@ -344,10 +345,13 @@ public class TestDBHandlerUtils {
 
         // Define 'where' part of query.
         String selection = DatabaseContract.Test.COLUMN_NAME_COL1 + " LIKE ? AND " +
-                DatabaseContract.Test.COLUMN_NAME_COL19 + " LIKE ? ";
+                DatabaseContract.Test.COLUMN_NAME_COL19 + " LIKE ? AND " +
+                DatabaseContract.Test.COLUMN_NAME_COL18 + " LIKE ? ";
 
         // Specify arguments in placeholder order.
-        String[] selectionArgs = {String.valueOf(uniqueParticipantId), String.valueOf(dateObj.getCurrentDateSQL()+"%")};
+        String[] selectionArgs = {String.valueOf(uniqueParticipantId),
+                String.valueOf(dateObj.getCurrentDateSQL()+"%"),
+        "testCompleted"};
 
         Cursor c = db.query(
                 DatabaseContract.Test.TABLE_NAME, // The table to query

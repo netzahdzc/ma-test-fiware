@@ -29,7 +29,7 @@ public class AccDBHandlerUtils {
 
     // This method allows to store info into database
     public void insertData(long uniquePatientId, long uniqueTestId, double accTimestamp, int accAccuracy,
-                           double accX, double accY, double accZ, String accType) {
+                           double accX, double accY, double accZ) {
 
         // Gets the data repository in write mode
         DateUtil dateObj = new DateUtil();
@@ -43,8 +43,7 @@ public class AccDBHandlerUtils {
         values.put(DatabaseContractAcc.SensorAcc.COLUMN_NAME_COL5, accX);
         values.put(DatabaseContractAcc.SensorAcc.COLUMN_NAME_COL6, accY);
         values.put(DatabaseContractAcc.SensorAcc.COLUMN_NAME_COL7, accZ);
-        values.put(DatabaseContractAcc.SensorAcc.COLUMN_NAME_COL8, accType);
-        values.put(DatabaseContractAcc.SensorAcc.COLUMN_NAME_COL9, dateObj.getCurrentDate());
+        values.put(DatabaseContractAcc.SensorAcc.COLUMN_NAME_COL8, dateObj.getCurrentDate());
 
         // Insert the new row, returning the primary key value of the new row
         db.insert(

@@ -2,6 +2,7 @@ package com.inger.android.ollintest.util;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -13,19 +14,17 @@ public class DateUtil {
     public DateUtil() {  }
 
     public String getCurrentDate() {
-        TimeZone tz = TimeZone.getTimeZone("UTC");
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'"); // Quoted "Z" to indicate UTC, no timezone offset
-        df.setTimeZone(tz);
-        String nowAsISO = df.format(new Date());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'Z");
+//        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        String nowAsISO = sdf.format(new Date());
 
         return nowAsISO;
     }
 
     public String getCurrentDateSQL() {
-        TimeZone tz = TimeZone.getTimeZone("UTC");
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); // Quoted "Z" to indicate UTC, no timezone offset
-        df.setTimeZone(tz);
-        String nowAsISO = df.format(new Date());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        String nowAsISO = sdf.format(new Date());
 
         return nowAsISO;
     }

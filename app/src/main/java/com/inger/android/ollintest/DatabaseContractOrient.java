@@ -5,29 +5,28 @@ import android.provider.BaseColumns;
 /**
  * Created by netzahdzc on 7/4/16.
  */
-public final class DatabaseContractAcc {
+public final class DatabaseContractOrient {
 
     public static final int DATABASE_VERSION = 29;
-    public static final String DATABASE_NAME = "ollintest_accelerometer.db";
+    public static final String DATABASE_NAME = "ollintest_orientation.db";
     private static final String INT_TYPE = " INTEGER";
     private static final String REAL_TYPE = " REAL";
     private static final String TEXT_TYPE = " TEXT";
     private static final String IMAGE_TYPE = " BLOB ";
     private static final String COMMA_SEP = ", ";
 
-    private DatabaseContractAcc() {
+    private DatabaseContractOrient() {
     }
 
-    public static abstract class SensorAcc implements BaseColumns {
-        public static final String TABLE_NAME = "sensor_linear_acceleration";
+    public static abstract class SensorOrient implements BaseColumns {
+        public static final String TABLE_NAME = "sensor_orientation";
         public static final String COLUMN_NAME_COL1 = "patient_id";
         public static final String COLUMN_NAME_COL2 = "test_id";
         public static final String COLUMN_NAME_COL3 = "timestamp";
-        public static final String COLUMN_NAME_COL4 = "accuracy";
-        public static final String COLUMN_NAME_COL5 = "x";
-        public static final String COLUMN_NAME_COL6 = "y";
-        public static final String COLUMN_NAME_COL7 = "z";
-        public static final String COLUMN_NAME_COL8 = "created";
+        public static final String COLUMN_NAME_COL4 = "azimuth";
+        public static final String COLUMN_NAME_COL5 = "pitch";
+        public static final String COLUMN_NAME_COL6 = "roll";
+        public static final String COLUMN_NAME_COL7 = "created";
 
 
         public static final String CREATE_TABLE = "CREATE TABLE " +
@@ -35,11 +34,10 @@ public final class DatabaseContractAcc {
                 COLUMN_NAME_COL1 + INT_TYPE + COMMA_SEP +
                 COLUMN_NAME_COL2 + INT_TYPE + COMMA_SEP +
                 COLUMN_NAME_COL3 + REAL_TYPE + COMMA_SEP +
-                COLUMN_NAME_COL4 + INT_TYPE + COMMA_SEP +
+                COLUMN_NAME_COL4 + REAL_TYPE + COMMA_SEP +
                 COLUMN_NAME_COL5 + REAL_TYPE + COMMA_SEP +
                 COLUMN_NAME_COL6 + REAL_TYPE + COMMA_SEP +
-                COLUMN_NAME_COL7 + REAL_TYPE + COMMA_SEP +
-                COLUMN_NAME_COL8 + TEXT_TYPE + " )";
+                COLUMN_NAME_COL7 + TEXT_TYPE + " )";
 
         public static final String DELETE_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
     }

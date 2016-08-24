@@ -32,7 +32,7 @@ public class TechnicalDBHandlerUtils {
 
     // This method allows to store info into database
     public long insertData(long uniquePatientId, long uniqueTestId, String techMobileModel, String techMobileBrand,
-                           String techMobileAndroidApi, String techAppVersion, String techAccModel) {
+                           String techMobileAndroidApi, String techAppVersion) {
 
         // Gets the data repository in write mode
         DateUtil dateObj = new DateUtil();
@@ -45,8 +45,7 @@ public class TechnicalDBHandlerUtils {
         values.put(DatabaseContract.Technical.COLUMN_NAME_COL4, techMobileBrand);
         values.put(DatabaseContract.Technical.COLUMN_NAME_COL5, techMobileAndroidApi);
         values.put(DatabaseContract.Technical.COLUMN_NAME_COL6, techAppVersion);
-        values.put(DatabaseContract.Technical.COLUMN_NAME_COL7, techAccModel);
-        values.put(DatabaseContract.Technical.COLUMN_NAME_COL8, dateObj.getCurrentDate());
+        values.put(DatabaseContract.Technical.COLUMN_NAME_COL7, dateObj.getCurrentDate());
 
         // Insert the new row, returning the primary key value of the new row
         long newRowId;
@@ -81,10 +80,8 @@ public class TechnicalDBHandlerUtils {
             values.put(DatabaseContract.Technical.COLUMN_NAME_COL5, techMobileAndroidApi);
         if (!techAppVersion.isEmpty())
             values.put(DatabaseContract.Technical.COLUMN_NAME_COL6, techAppVersion);
-        if (!techAccModel.isEmpty())
-            values.put(DatabaseContract.Technical.COLUMN_NAME_COL7, techAccModel);
 
-        values.put(DatabaseContract.Technical.COLUMN_NAME_COL8, dateObj.getCurrentDate());
+        values.put(DatabaseContract.Technical.COLUMN_NAME_COL7, dateObj.getCurrentDate());
 
         // Which row to update, based on the ID
         String selection = DatabaseContract.Technical._ID + " LIKE ?";
@@ -116,8 +113,7 @@ public class TechnicalDBHandlerUtils {
                 DatabaseContract.Technical.COLUMN_NAME_COL4,
                 DatabaseContract.Technical.COLUMN_NAME_COL5,
                 DatabaseContract.Technical.COLUMN_NAME_COL6,
-                DatabaseContract.Technical.COLUMN_NAME_COL7,
-                DatabaseContract.Technical.COLUMN_NAME_COL8
+                DatabaseContract.Technical.COLUMN_NAME_COL7
         };
 
         // How you want the results sorted in the resulting Cursor

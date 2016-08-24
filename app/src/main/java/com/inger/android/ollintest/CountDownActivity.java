@@ -2,6 +2,8 @@ package com.inger.android.ollintest;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -140,7 +142,11 @@ public class CountDownActivity extends AppCompatActivity {
 
                         playAlarm();
                         startChronometer();
-                        createTestFile();
+                        try {
+                            createTestFile();
+                        } catch (PackageManager.NameNotFoundException e) {
+                            e.printStackTrace();
+                        }
                         startCollectingAccData();
                     }
                 }.start();
@@ -308,7 +314,7 @@ public class CountDownActivity extends AppCompatActivity {
         ab.setTitle(title + titleOption);
     }
 
-    public void createTestFile() {
+    public void createTestFile() throws PackageManager.NameNotFoundException {
         TestDBHandlerUtils testDBObj = new TestDBHandlerUtils(getApplicationContext());
         TechnicalDBHandlerUtils techDBObj = new TechnicalDBHandlerUtils(getApplicationContext());
         testDBObj.openDB();
@@ -316,10 +322,13 @@ public class CountDownActivity extends AppCompatActivity {
 
         uniqueTestId = testDBObj.insertData(uniquePatientId, testType, balanceTestOption,
                 null, null, null, null, null, null, null, null, null, null, null, 0, null, "sensorStarted");
-        // TODO is it possible to get the acc model or any other reference to monitor those who present shift in their timestamp?
-        // TODO The app version is hardcode, need to think an optimal way to retrieve such value
+
+        PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+        String version = pInfo.versionName;
+        int verCode = pInfo.versionCode;
+
         techDBObj.insertData(uniquePatientId, uniqueTestId, android.os.Build.MODEL, android.os.Build.MANUFACTURER,
-                String.valueOf(android.os.Build.VERSION.SDK_INT), "v1.0", "techAccModel");
+                String.valueOf(android.os.Build.VERSION.SDK_INT), "vN"+version+"_vC"+verCode);
 
         testDBObj.closeDB();
         techDBObj.closeDB();

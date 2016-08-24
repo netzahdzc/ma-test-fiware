@@ -10,7 +10,8 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
 
-import com.inger.android.ollintest.listener.MotionSensorListener;
+import com.inger.android.ollintest.listener.MotionSensorListenerAcc;
+import com.inger.android.ollintest.listener.MotionSensorListenerOrient;
 import com.inger.android.ollintest.util.SessionUtil;
 import com.inger.android.ollintest.util.TestDBHandlerUtils;
 
@@ -19,9 +20,10 @@ public class MotionSensors extends Service {
     private TestDBHandlerUtils testDBObj;
     private SessionUtil sessionObj;
 
-    private Sensor mSensor;
-    private MotionSensorListener mMotionSensor;
-    private SensorManager mSensorManager;
+    private Sensor mSensorAcc, mSensorOrient;
+    private MotionSensorListenerAcc mMotionSensorAcc;
+    private MotionSensorListenerOrient mMotionSensorOrient;
+    private SensorManager mSensorManagerAcc, mSensorManagerOrient;
     private Context mContext;
 
     private long uniquePatientId;
@@ -33,8 +35,10 @@ public class MotionSensors extends Service {
         super.onCreate();
 
         mContext = getApplicationContext();
-        mMotionSensor = new MotionSensorListener();
-        mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        mMotionSensorAcc = new MotionSensorListenerAcc();
+        mMotionSensorOrient = new MotionSensorListenerOrient();
+        mSensorManagerAcc = (SensorManager) getSystemService(SENSOR_SERVICE);
+        mSensorManagerOrient = (SensorManager) getSystemService(SENSOR_SERVICE);
 
         loadServiceDBs();
         registerDetector();
@@ -46,24 +50,33 @@ public class MotionSensors extends Service {
         HandlerThread mThread = new HandlerThread("RecorderThread");
         mThread.start();
 
-        // TODO what sensor will I use? should I include gyro?
-        mSensor = mSensorManager.getDefaultSensor(
-                Sensor.TYPE_ACCELEROMETER
-//                | Sensor.TYPE_MAGNETIC_FIELD
-//                | Sensor.TYPE_ORIENTATION
+        mSensorAcc = mSensorManagerAcc.getDefaultSensor(
+                Sensor.TYPE_LINEAR_ACCELERATION
         );
 
-        // TODO What speed for acc sensor should I define and why?
-        mSensorManager.registerListener(
-                mMotionSensor,
-                mSensor,
+        mSensorManagerAcc.registerListener(
+                mMotionSensorAcc,
+                mSensorAcc,
+                SensorManager.SENSOR_DELAY_FASTEST,
+                new Handler(mThread.getLooper()));
+
+        mSensorOrient = mSensorManagerOrient.getDefaultSensor(
+                Sensor.TYPE_ROTATION_VECTOR
+        );
+
+        mSensorManagerOrient.registerListener(
+                mMotionSensorOrient,
+                mSensorOrient,
                 SensorManager.SENSOR_DELAY_FASTEST,
                 new Handler(mThread.getLooper()));
     }
 
     public void loadSettings() {
-        if (mMotionSensor != null) {
-            mMotionSensor.setSettings(mContext, uniquePatientId, uniqueTestId);
+        if (mMotionSensorAcc != null) {
+            mMotionSensorAcc.setSettings(mContext, uniquePatientId, uniqueTestId);
+        }
+        if (mMotionSensorOrient != null) {
+            mMotionSensorOrient.setSettings(mContext, uniquePatientId, uniqueTestId);
         }
     }
 
@@ -77,7 +90,8 @@ public class MotionSensors extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mSensorManager.unregisterListener(mMotionSensor);
+        mSensorManagerAcc.unregisterListener(mMotionSensorAcc);
+        mSensorManagerOrient.unregisterListener(mMotionSensorOrient);
     }
 
     @Override

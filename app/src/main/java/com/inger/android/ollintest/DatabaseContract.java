@@ -129,8 +129,7 @@ public final class DatabaseContract {
         public static final String COLUMN_NAME_COL4 = "mobile_brand";
         public static final String COLUMN_NAME_COL5 = "mobile_android_api";
         public static final String COLUMN_NAME_COL6 = "app_version";
-        public static final String COLUMN_NAME_COL7 = "acc_model";
-        public static final String COLUMN_NAME_COL8 = "created";
+        public static final String COLUMN_NAME_COL7 = "created";
 
 
         public static final String CREATE_TABLE = "CREATE TABLE " +
@@ -142,8 +141,7 @@ public final class DatabaseContract {
                 COLUMN_NAME_COL4 + TEXT_TYPE + COMMA_SEP +
                 COLUMN_NAME_COL5 + TEXT_TYPE + COMMA_SEP +
                 COLUMN_NAME_COL6 + TEXT_TYPE + COMMA_SEP +
-                COLUMN_NAME_COL7 + TEXT_TYPE + COMMA_SEP +
-                COLUMN_NAME_COL8 + TEXT_TYPE + " )";
+                COLUMN_NAME_COL7 + TEXT_TYPE + " )";
 
         public static final String DELETE_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
     }

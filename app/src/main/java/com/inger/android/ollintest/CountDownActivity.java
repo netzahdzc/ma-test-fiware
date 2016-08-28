@@ -1,26 +1,30 @@
 package com.inger.android.ollintest;
 
+import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.PowerManager;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.inger.android.ollintest.service.BackgroundAudioService;
 import com.inger.android.ollintest.service.MotionSensors;
 import com.inger.android.ollintest.util.DateUtil;
 import com.inger.android.ollintest.util.DialogMessageUtils;
@@ -49,6 +53,7 @@ public class CountDownActivity extends AppCompatActivity {
     private Chronometer crono = null;
 
     private Intent accService;
+    private Intent playbackServiceIntent;
     private long uniquePatientId;
     private int testType;
     private int balanceTestOption;
@@ -67,21 +72,7 @@ public class CountDownActivity extends AppCompatActivity {
         balanceTestOption = getIntent().getIntExtra("balanceTestOption", 0);
 
         loadActivityData(testType, balanceTestOption);
-
-        crono = (Chronometer) findViewById(R.id.chronometer);
-        crono.setVisibility(View.GONE);
-
-        crono.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
-            @Override
-            public void onChronometerTick(Chronometer chronometer) {
-                if (testType == STRENGTH_TEST)
-                    if (chronometer.getText().toString().equalsIgnoreCase("00:10"))
-                        playAlarm();
-                if (testType == BALANCE_TEST)
-                    if (chronometer.getText().toString().equalsIgnoreCase("00:30"))
-                        playAlarm();
-            }
-        });
+        playbackServiceIntent = new Intent(this, BackgroundAudioService.class);
 
         final TextView button_cancel = (TextView) findViewById(R.id.button_cancel);
         button_cancel.setEnabled(true);
@@ -105,6 +96,8 @@ public class CountDownActivity extends AppCompatActivity {
 
         button_start_counter.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                crono = (Chronometer) findViewById(R.id.chronometer);
+                crono.setVisibility(View.GONE);
 
                 new CountDownTimer(5000, 100) {
                     TextView counter_text = (TextView) findViewById(R.id.counter_text);
@@ -142,6 +135,10 @@ public class CountDownActivity extends AppCompatActivity {
 
                         playAlarm();
                         startChronometer();
+
+                        playbackServiceIntent.putExtra("testType", testType);
+                        startService(playbackServiceIntent);
+
                         try {
                             createTestFile();
                         } catch (PackageManager.NameNotFoundException e) {
@@ -163,6 +160,7 @@ public class CountDownActivity extends AppCompatActivity {
                 button_restart_counter.setVisibility(View.VISIBLE);
 
                 stopCollectingAccData();
+                stopService(playbackServiceIntent);
             }
         });
 
@@ -191,6 +189,7 @@ public class CountDownActivity extends AppCompatActivity {
 
                 patientDBObj.closeDB();
                 finishCollectingData();
+                stopService(playbackServiceIntent);
             }
         });
 
@@ -328,7 +327,7 @@ public class CountDownActivity extends AppCompatActivity {
         int verCode = pInfo.versionCode;
 
         techDBObj.insertData(uniquePatientId, uniqueTestId, android.os.Build.MODEL, android.os.Build.MANUFACTURER,
-                String.valueOf(android.os.Build.VERSION.SDK_INT), "vN"+version+"_vC"+verCode);
+                String.valueOf(android.os.Build.VERSION.SDK_INT), "vN" + version + "_vC" + verCode);
 
         testDBObj.closeDB();
         techDBObj.closeDB();

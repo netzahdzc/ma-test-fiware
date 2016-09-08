@@ -71,13 +71,11 @@ public class MotionSensorListenerOrient implements SensorEventListener {
                     screen is face-up, tilting the left edge of the device toward the ground creates
                     a positive roll angle. The range of values is -π/2 to π/2.
                      */
-                    orientTimestamp = event.timestamp;
 
 //                    Log.v("ORIENT XXX", mUniquePatientId + "," + mUniqueTestId + "," + accTimestamp
 //                            + "," + azimuth + "," + pitch + "," + roll);
 
-                    orientDBObj.insertData(mUniquePatientId, mUniqueTestId, orientTimestamp,
-                            azimuth, pitch, roll);
+                    orientDBObj.insertData(mUniquePatientId, mUniqueTestId, azimuth, pitch, roll);
                     orientDBObj.closeDB();
                 }
             }

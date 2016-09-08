@@ -31,7 +31,7 @@ public class OrientDBHandlerUtils {
     }
 
     // This method allows to store info into database
-    public void insertData(long uniquePatientId, long uniqueTestId, double orientTimestamp,
+    public void insertData(long uniquePatientId, long uniqueTestId,
                            double azimuth, double pitch, double roll) {
 
         // Gets the data repository in write mode
@@ -41,11 +41,10 @@ public class OrientDBHandlerUtils {
         ContentValues values = new ContentValues();
         values.put(DatabaseContractOrient.SensorOrient.COLUMN_NAME_COL1, uniquePatientId);
         values.put(DatabaseContractOrient.SensorOrient.COLUMN_NAME_COL2, uniqueTestId);
-        values.put(DatabaseContractOrient.SensorOrient.COLUMN_NAME_COL3, orientTimestamp);
-        values.put(DatabaseContractOrient.SensorOrient.COLUMN_NAME_COL4, azimuth);
-        values.put(DatabaseContractOrient.SensorOrient.COLUMN_NAME_COL5, pitch);
-        values.put(DatabaseContractOrient.SensorOrient.COLUMN_NAME_COL6, roll);
-        values.put(DatabaseContractOrient.SensorOrient.COLUMN_NAME_COL7, dateObj.getCurrentDate());
+        values.put(DatabaseContractOrient.SensorOrient.COLUMN_NAME_COL3, azimuth);
+        values.put(DatabaseContractOrient.SensorOrient.COLUMN_NAME_COL4, pitch);
+        values.put(DatabaseContractOrient.SensorOrient.COLUMN_NAME_COL5, roll);
+        values.put(DatabaseContractOrient.SensorOrient.COLUMN_NAME_COL6, dateObj.getCurrentDate());
 
         // Insert the new row, returning the primary key value of the new row
         db.insert(

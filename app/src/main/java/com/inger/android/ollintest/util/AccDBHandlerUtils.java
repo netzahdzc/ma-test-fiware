@@ -28,7 +28,7 @@ public class AccDBHandlerUtils {
     }
 
     // This method allows to store info into database
-    public void insertData(long uniquePatientId, long uniqueTestId, double accTimestamp, int accAccuracy,
+    public void insertData(long uniquePatientId, long uniqueTestId, int accAccuracy,
                            double accX, double accY, double accZ) {
 
         // Gets the data repository in write mode
@@ -38,12 +38,11 @@ public class AccDBHandlerUtils {
         ContentValues values = new ContentValues();
         values.put(DatabaseContractAcc.SensorAcc.COLUMN_NAME_COL1, uniquePatientId);
         values.put(DatabaseContractAcc.SensorAcc.COLUMN_NAME_COL2, uniqueTestId);
-        values.put(DatabaseContractAcc.SensorAcc.COLUMN_NAME_COL3, accTimestamp);
-        values.put(DatabaseContractAcc.SensorAcc.COLUMN_NAME_COL4, accAccuracy);
-        values.put(DatabaseContractAcc.SensorAcc.COLUMN_NAME_COL5, accX);
-        values.put(DatabaseContractAcc.SensorAcc.COLUMN_NAME_COL6, accY);
-        values.put(DatabaseContractAcc.SensorAcc.COLUMN_NAME_COL7, accZ);
-        values.put(DatabaseContractAcc.SensorAcc.COLUMN_NAME_COL8, dateObj.getCurrentDate());
+        values.put(DatabaseContractAcc.SensorAcc.COLUMN_NAME_COL3, accAccuracy);
+        values.put(DatabaseContractAcc.SensorAcc.COLUMN_NAME_COL4, accX);
+        values.put(DatabaseContractAcc.SensorAcc.COLUMN_NAME_COL5, accY);
+        values.put(DatabaseContractAcc.SensorAcc.COLUMN_NAME_COL6, accZ);
+        values.put(DatabaseContractAcc.SensorAcc.COLUMN_NAME_COL7, dateObj.getCurrentDate());
 
         // Insert the new row, returning the primary key value of the new row
         db.insert(

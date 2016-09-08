@@ -42,14 +42,12 @@ public class MotionSensorListenerAcc implements SensorEventListener {
                     accX = event.values[0];
                     accY = event.values[1];
                     accZ = event.values[2];
-                    accTimestamp = event.timestamp;
                     accAccuracy = event.accuracy;
 
 //                    Log.v("ACC XXX", mUniquePatientId + "," + mUniqueTestId + "," + accTimestamp + "," +
 //                            accAccuracy + "," + accX + "," + accY + "," + accZ);
 
-                    accDBObj.insertData(mUniquePatientId, mUniqueTestId, accTimestamp, accAccuracy,
-                            accX, accY, accZ);
+                    accDBObj.insertData(mUniquePatientId, mUniqueTestId, accAccuracy, accX, accY, accZ);
                     accDBObj.closeDB();
                 }
             }

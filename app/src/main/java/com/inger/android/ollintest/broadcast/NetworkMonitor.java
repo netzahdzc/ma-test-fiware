@@ -36,9 +36,17 @@ public class NetworkMonitor extends BroadcastReceiver {
                                                // This sections is dedicated to start sending data to server-side
                                                Log.v(APP_NAME, "sending data to server");
 
+                                               // To fetch accelerometer data
                                                Intent i = new Intent(context, UploadToServer.class);
+                                               i.putExtra("sensorType", "acc");
                                                context.startService(i);
                                                context.stopService(i);
+
+                                               // To fetch orientation data
+                                               Intent ii = new Intent(context, UploadToServer.class);
+                                               ii.putExtra("sensorType", "orient");
+                                               context.startService(ii);
+                                               context.stopService(ii);
                                            }
                                        }.start();
                                    }

@@ -9,6 +9,7 @@ import java.net.URL;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
 import android.os.StrictMode;
@@ -25,8 +26,9 @@ public class UploadToServer extends Service {
 
 
     private int serverResponseCode = 0;
+    private String sensorType = "";
     private String upLoadServerUri =
-            "http://posgrados.dgip.uaa.mx/temporalX/sqlite/UploadToServer.php";
+            "http://189.209.180.190/investigacion/sqlite/UploadToServer.php";
 
     public void deleteSentFile(String filePath) {
         File file = new File(filePath);
@@ -47,7 +49,7 @@ public class UploadToServer extends Service {
         StrictMode.setThreadPolicy(policy);
 
         // Get list with acc files
-        File[] files = new Filter().finder(APP_DIRECTORY_PATH + "/acc", "db");
+        File[] files = new Filter().finder(APP_DIRECTORY_PATH + "/" + sensorType, "db");
         Log.i(APP_NAME, "Elements on queue: " + files.length + "");
 
         // Upload previous loaded list
@@ -94,6 +96,9 @@ public class UploadToServer extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
+        Bundle b = intent.getExtras();
+        sensorType = b.getString("sensorType");
+
         return null;
     }
 

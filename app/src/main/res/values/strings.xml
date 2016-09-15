@@ -87,7 +87,7 @@
     <string name="register">Sign Up</string>
     <string name="login">Log In</string>
     <string name="header_login">3Ollin Test</string>
-    <string name="app_version">Version 1.0</string>
+    <string name="app_version">Version</string>
     <string name="app_long_name">Application for Monitoring Physical Performance Tests: Gait, Strength, and Balance.</string>
     <string name="privacy_terms_tab">Privacy terms</string>
     <string name="activation_code_description">The activation code lets you have the full services of 3Ollin Test, for instance the provision of information collected via online.

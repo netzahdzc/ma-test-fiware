@@ -26,7 +26,6 @@ public class UploadToServer extends Service {
 
 
     private int serverResponseCode = 0;
-    private String sensorType = "";
     private String upLoadServerUri =
             "http://189.209.180.190/investigacion/sqlite/UploadToServer.php";
 
@@ -48,9 +47,27 @@ public class UploadToServer extends Service {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+    }
+
+    @Override
+    public int onStartCommand(Intent intent , int flags , int startId) {
+        super.onStartCommand(intent, flags , startId);
+
+        Bundle b = intent.getExtras();
+        String sensorType = b.getString("sensorType");
+        Log.i(APP_NAME, "I'm on IBinder and I'm carrying this value: " + sensorType);
+
+        // We start checking into directories to retrieve and send file to server-side
+        startScan(sensorType);
+
+        return START_REDELIVER_INTENT;
+    }
+
+    private void startScan(String mSensorType){
         // Get list with acc files
-        File[] files = new Filter().finder(APP_DIRECTORY_PATH + "/" + sensorType, "db");
+        File[] files = new Filter().finder(APP_DIRECTORY_PATH + "/" + mSensorType, "db");
         Log.i(APP_NAME, "Elements on queue: " + files.length + "");
+        Log.i(APP_NAME, "sensorType: " + mSensorType);
 
         // Upload previous loaded list
         for (int i = 0; i < files.length; i++) {
@@ -80,7 +97,7 @@ public class UploadToServer extends Service {
             }
         }
 
-        // Get list with acc files
+        // Get list with sensor data
         File[] mainFile = new Filter().finder(APP_DIRECTORY_PATH, "db");
         Log.i(APP_NAME, files.length + "");
 
@@ -96,9 +113,6 @@ public class UploadToServer extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        Bundle b = intent.getExtras();
-        sensorType = b.getString("sensorType");
-
         return null;
     }
 

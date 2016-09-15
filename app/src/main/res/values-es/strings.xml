@@ -10,7 +10,7 @@
     <string name="add_participant">Registrar participante</string>
     <string name="add_patient">Registrar peciente</string>
     <string name="app_long_name">Monitoreo de Pruebas de Desempeño Físico: Marcha, Fuerza y Balance</string>
-    <string name="app_version">Versión 1.0</string>
+    <string name="app_version">Versión</string>
     <string name="authentication">Autenticación</string>
     <string name="authentication_message">Usuario no encontrado.</string>
     <string name="authentication_password_no">Por favor, capture la contraseña nuevamente. </string>

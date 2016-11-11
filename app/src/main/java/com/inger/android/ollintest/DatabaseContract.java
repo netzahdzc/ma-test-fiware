@@ -44,7 +44,7 @@ public final class DatabaseContract {
 
         public static final String DELETE_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
     }
-
+    // TODO patient_id, should be unique accross devices, currently it is unique along a singe device :s, NOTE: this should be update here and at the database documentation & structure
     public static abstract class Control implements BaseColumns {
         public static final String TABLE_NAME = "controls";
         public static final String COLUMN_NAME_COL1 = "patient_id";

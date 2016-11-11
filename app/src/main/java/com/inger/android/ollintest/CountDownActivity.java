@@ -96,6 +96,8 @@ public class CountDownActivity extends AppCompatActivity {
 
         button_start_counter.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                // TODO Identificar si después de haberse activado la escucha de los sensores, el dispositivo esta almacenando la info
+//                Log.v("ACC XXX", "xxxxxxx _ " + "button_start_counter");
                 crono = (Chronometer) findViewById(R.id.chronometer);
                 crono.setVisibility(View.GONE);
 
@@ -152,6 +154,7 @@ public class CountDownActivity extends AppCompatActivity {
 
         button_stop_counter.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+//                Log.v("ACC XXX", "xxxxxxx _ " + "button_stop_counter");
                 stopChronometer();
 
                 button_cancel.setVisibility(View.GONE);
@@ -166,6 +169,7 @@ public class CountDownActivity extends AppCompatActivity {
 
         button_finish.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+//                Log.v("ACC XXX", "xxxxxxx _ " + "button_finish");
                 PatientDBHandlerUtils patientDBObj = new PatientDBHandlerUtils(getApplicationContext());
                 patientDBObj.openDB();
 
@@ -334,6 +338,7 @@ public class CountDownActivity extends AppCompatActivity {
     }
 
     public void startCollectingAccData() {
+//        Log.v("ACC XXX", "xxxxxxx _ " + "startCollectingAccData");
         if (uniqueTestId != 0)
             startService(accService);
         else

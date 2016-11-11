@@ -9,6 +9,7 @@ import android.hardware.SensorManager;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
+import android.util.Log;
 
 import com.inger.android.ollintest.listener.MotionSensorListenerAcc;
 import com.inger.android.ollintest.listener.MotionSensorListenerOrient;
@@ -47,6 +48,7 @@ public class MotionSensors extends Service {
 
     @SuppressLint("InlinedApi")
     public void registerDetector() {
+//        Log.v("ACC XXX", "xxxxxxx _ " + "registerDetector - " + Sensor.TYPE_ROTATION_VECTOR);
         HandlerThread mThread = new HandlerThread("RecorderThread");
         mThread.start();
 
@@ -72,10 +74,13 @@ public class MotionSensors extends Service {
     }
 
     public void loadSettings() {
+
         if (mMotionSensorAcc != null) {
+//            Log.v("ACC XXX", "xxxxxxx _ " + "loadSettings - " + mMotionSensorAcc +" " + mContext +" "+ uniquePatientId+" "+ uniqueTestId);
             mMotionSensorAcc.setSettings(mContext, uniquePatientId, uniqueTestId);
         }
         if (mMotionSensorOrient != null) {
+//            Log.v("ACC XXX", "xxxxxxx _ " + "loadSettings - " + mMotionSensorOrient +" " + mContext +" "+ uniquePatientId+" "+ uniqueTestId);
             mMotionSensorOrient.setSettings(mContext, uniquePatientId, uniqueTestId);
         }
     }

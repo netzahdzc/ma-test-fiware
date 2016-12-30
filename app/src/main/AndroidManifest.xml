@@ -98,6 +98,18 @@
                 android:value="com.inger.android.ollintest.ActivationAccountActivity" />
         </activity>
         <activity
+            android:name="com.inger.android.ollintest.ManualUploadActivity"
+            android:label="@string/header_manual_upload"
+            android:parentActivityName="com.inger.android.ollintest.SettingsActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.inger.android.ollintest.ManualUploadActivity" />
+        </activity>
+        <activity
             android:name="com.inger.android.ollintest.EditAccountActivity"
             android:label="@string/header_edit_user_acount"
             android:parentActivityName="com.inger.android.ollintest.SettingsActivity"
@@ -244,12 +256,12 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name="com.inger.android.ollintest.broadcast.NetworkMonitor">
+        <!--<receiver android:name="com.inger.android.ollintest.broadcast.NetworkMonitor">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
                 <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
             </intent-filter>
-        </receiver>
+        </receiver>-->
         <receiver android:name="com.inger.android.ollintest.broadcast.AlarmReceiver"/>
     </application>
 </manifest>

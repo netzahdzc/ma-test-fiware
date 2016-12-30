@@ -3,21 +3,37 @@ package com.inger.android.ollintest;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.inger.android.ollintest.util.DialogMessageUtils;
+import com.inger.android.ollintest.util.Filter;
 import com.inger.android.ollintest.util.PatientDBHandlerUtils;
 import com.inger.android.ollintest.util.PatientUtils;
 import com.inger.android.ollintest.util.SessionUtil;
 import com.inger.android.ollintest.util.TestDBHandlerUtils;
 import com.inger.android.ollintest.util.Utilities;
 
+import java.io.File;
+import java.util.Arrays;
+import java.util.Collections;
+
+import static com.inger.android.ollintest.ManualUploadActivity.getDate;
+
 /**
  * Created by netzahdzc on 7/18/16.
  */
 public class ConcentratedReportActivity extends AppCompatActivity {
+
+    static final int TIME_FORMAT = 3;
+    private static final String APP_NAME = "three_ollin_test";
+    private DialogMessageUtils mMessage;
+    private final String APP_DIRECTORY_PATH = String.valueOf(
+            Environment.getExternalStorageDirectory() + "/" + APP_NAME);
 
     final int WALKING_TEST = 1;
     final int STRENGTH_TEST = 2;
@@ -37,8 +53,11 @@ public class ConcentratedReportActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.concentrated_finish_activity);
 
+        mMessage = new DialogMessageUtils(this);
         uniqueTestId = getIntent().getLongExtra("uniqueTestId", 0);
         loadActivityData(uniqueTestId);
+
+        checkFileWasWrote();
 
         final TextView button_finish_report = (TextView) findViewById(R.id.button_finish_report);
         button_finish_report.setOnClickListener(new View.OnClickListener() {
@@ -51,12 +70,12 @@ public class ConcentratedReportActivity extends AppCompatActivity {
                 Cursor mCursorTest = testDBObj.readData(uniqueTestId);
                 testType = testDBObj.getTestType(mCursorTest);
 
-                if (testType == WALKING_TEST || testType == STRENGTH_TEST) {
+                if(testType == WALKING_TEST || testType == STRENGTH_TEST) {
                     Intent testsScreen = new Intent(ConcentratedReportActivity.this, TestsActivity.class);
                     testsScreen.putExtra("uniquePatientId", uniquePatientId);
                     testsScreen.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivityForResult(testsScreen, 1);
-                } else if (testType == BALANCE_TEST) {
+                } else if(testType == BALANCE_TEST) {
                     Intent balanceTestsOptionsScreen = new Intent(ConcentratedReportActivity.this,
                             BalanceTestOptionsActivity.class);
                     balanceTestsOptionsScreen.putExtra("uniquePatientId", uniquePatientId);
@@ -82,6 +101,57 @@ public class ConcentratedReportActivity extends AppCompatActivity {
 
         uniqueTestId = getIntent().getLongExtra("uniqueTestId", 0);
         loadActivityData(uniqueTestId);
+    }
+
+    public void checkFileWasWrote(){
+        TestDBHandlerUtils testDBObj = new TestDBHandlerUtils(getApplicationContext());
+        testDBObj.openDB();
+
+        Cursor mCursorTest = testDBObj.readData(uniqueTestId);
+        testType = testDBObj.getTestType(mCursorTest);
+
+        String dataBaseDate = PatientUtils.convertFromISO8601(testDBObj.
+                getLatestTestTypeControl(uniquePatientId, testType), TIME_FORMAT);
+
+        String accFileDate = loadLastDateFiles("acc");
+        String orientFileDate = loadLastDateFiles("orient");
+
+        /*Log.i("XXX", "XXX dataBaseDate: " + dataBaseDate + ", fileDate: " + accFileDate );
+        Log.i("XXX", "XXX dataBaseDate: " + dataBaseDate + ", fileDate: " + orientFileDate );*/
+
+        if(!dataBaseDate.equalsIgnoreCase(accFileDate) || !dataBaseDate.equalsIgnoreCase(orientFileDate)) {
+            mMessage.dialogWarningMessage(
+                    getResources().getString(R.string.important), //Title
+                    getResources().getString(R.string.file_problem), //Body message
+                    false //To close current Activity when confirm
+            );
+        }
+
+        testDBObj.closeDB();
+    }
+
+    public String loadLastDateFiles(String directory){
+        String outcome = getResources().getString(R.string.remaining_data_date);
+        File[] files = new Filter().finder(APP_DIRECTORY_PATH + "/" + directory , "db");
+        Arrays.sort(files);
+
+        // Upload previous loaded list
+        for (int i = 0; i < files.length; i++) {
+            /** In order to ensure that we are not sending (uploading & deleting) any file
+             * currently been used to store acc data. This section, compare epoch time to filter
+             * new ones. Thus, we only send (upload & delete) files older than 10 min. Which is
+             * enough time to ensure that at least 1 patient has already finish his tests.
+             */
+            String[] fileNameChunks = files[i].getPath().split("\\.");
+            String[] fileTime = fileNameChunks[0].split("/");
+            String[] time = fileTime[fileTime.length - 1].split("_");
+
+            long fileTimeMilliseconds = Long.parseLong(time[time.length - 1]);
+
+            outcome = getDate(fileTimeMilliseconds, "dd/MM/yyyy HH:mm");
+        }
+
+        return outcome;
     }
 
     // This method load data to be displayed on screen
@@ -187,7 +257,6 @@ public class ConcentratedReportActivity extends AppCompatActivity {
                 TextView patientAgeText = (TextView) findViewById(R.id.header_patient_age);
                 patientAgeText.setText(PatientUtils.getAge(mPatientBirthday) +
                         getResources().getString(R.string.suffix_year));
-
             }
         } catch (Exception e) {
             // exception handling

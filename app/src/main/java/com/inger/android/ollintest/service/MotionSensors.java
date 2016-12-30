@@ -74,7 +74,6 @@ public class MotionSensors extends Service {
     }
 
     public void loadSettings() {
-
         if (mMotionSensorAcc != null) {
 //            Log.v("ACC XXX", "xxxxxxx _ " + "loadSettings - " + mMotionSensorAcc +" " + mContext +" "+ uniquePatientId+" "+ uniqueTestId);
             mMotionSensorAcc.setSettings(mContext, uniquePatientId, uniqueTestId);
@@ -103,7 +102,6 @@ public class MotionSensors extends Service {
     public IBinder onBind(Intent intent) {
         return null;
     }
-
 
     public void loadServiceDBs() {
         testDBObj = new TestDBHandlerUtils(mContext);

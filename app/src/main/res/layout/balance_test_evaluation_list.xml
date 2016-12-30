@@ -93,7 +93,6 @@
                 <TextView
                     android:id="@+id/button_repeat_test"
                     style="@style/folderButtonStyle"
-                    android:background="@color/danger_button"
                     android:text="@string/button_repeat" />
 
                 <View
@@ -103,7 +102,9 @@
                 <TextView
                     android:id="@+id/button_continue_evaluation"
                     style="@style/folderButtonStyle"
+                    android:background="@color/danger_button"
                     android:text="@string/button_continue" />
+
             </LinearLayout>
 
         </LinearLayout>

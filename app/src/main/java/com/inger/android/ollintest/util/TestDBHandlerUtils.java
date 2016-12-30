@@ -325,6 +325,54 @@ public class TestDBHandlerUtils {
         return latestTest;
     }
 
+    public String getLatestTestTypeControl(long uniqueParticipantId, int testTypeId) {
+
+        String latestTest = "";
+
+        // Define a projection that specifies which columns from the database
+        // you will actually use after this query.
+        String[] projection = {
+                DatabaseContract.Test._ID,
+                DatabaseContract.Test.COLUMN_NAME_COL1,
+                DatabaseContract.Test.COLUMN_NAME_COL2,
+                DatabaseContract.Test.COLUMN_NAME_COL4
+        };
+
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder =
+                DatabaseContract.Test._ID + " DESC LIMIT 1";
+
+        // Define 'where' part of query.
+        String selection = DatabaseContract.Test.COLUMN_NAME_COL1 + " LIKE ? AND " +
+                DatabaseContract.Test.COLUMN_NAME_COL2 + " LIKE ? ";
+
+        // Specify arguments in placeholder order.
+        String[] selectionArgs = {String.valueOf(uniqueParticipantId), String.valueOf(testTypeId)};
+
+        Cursor cursor = db.query(
+                DatabaseContract.Test.TABLE_NAME, // The table to query
+                projection,                         // The columns to return
+                selection,                          // The columns for the WHERE clause
+                selectionArgs,                      // The values for the WHERE clause
+                null,                               // don't group the rows
+                null,                               // don't filter by row groups
+                sortOrder                           // The sort order
+        );
+
+        // Reading all data and setting it up to be displayed
+        if (cursor.moveToFirst()) {
+            latestTest = cursor.getString(
+                    cursor.getColumnIndexOrThrow(DatabaseContract.Test.COLUMN_NAME_COL4)
+            );
+        }
+
+//        cursor.close();
+
+//        db.close();
+
+        return latestTest;
+    }
+
     public Cursor getTodayTest(long uniqueParticipantId) {
 
         DateUtil dateObj = new DateUtil();

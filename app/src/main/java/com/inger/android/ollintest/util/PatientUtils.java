@@ -9,6 +9,7 @@ public class PatientUtils {
 
     static final int BIRTHDAY_FORMAT = 1;
     static final int UPDATE_FORMAT = 2;
+    static final int TIME_FORMAT = 3;
 
     public static String getFormatName(String fullName) {
         fullName = fullName.replaceAll("\\s+", " ");
@@ -107,6 +108,28 @@ public class PatientUtils {
 
                 formattedDate = day + "/" + month + "/" + year;
             }
+
+            // We received follow formatted date: YYYY-MM-DDTHH:MM:SSZ+HH:MM
+            if (option == TIME_FORMAT) {
+                String[] dateArray = date.split("-");
+                String day_rest = dateArray[2];
+                String month = dateArray[1];
+                String year = dateArray[0];
+
+                String[] dayArray = day_rest.split("T");
+                String day = dayArray[0];
+                String time = dayArray[1];
+
+                String[] timeArray = time.split(":");
+                String hour = timeArray[0];
+                String minute = timeArray[1];
+
+                if (day.length() == 1) day = "0" + day;
+                if (month.length() == 1) month = "0" + month;
+
+                formattedDate = day + "/" + month + "/" + year + " " + hour + ":" + minute;
+            }
+
         }
 
         return formattedDate;

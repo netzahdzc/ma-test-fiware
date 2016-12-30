@@ -45,13 +45,13 @@
     <string name="button_control">Control</string>
     <string name="button_end">Detener</string>
     <string name="button_feet_together">Pies juntos</string>
-    <string name="button_finish_test">Finaizar prueba</string>
+    <string name="button_finish_test">Finalizar prueba</string>
     <string name="button_finished">Finalizar</string>
     <string name="button_next">Siguiente</string>
     <string name="button_one_leg_test">Una pierna</string>
     <string name="button_quality">Cálidad de datos </string>
     <string name="button_repeat">Repetir prueba</string>
-    <string name="button_restart">Repetir</string>
+    <string name="button_restart">Reaunudar</string>
     <string name="button_restore">[ Resablecer contraseña ]</string>
     <string name="button_save">Guardar</string>
     <string name="button_semi_tandem_test">Semi-tándem</string>
@@ -175,7 +175,7 @@
     <string name="submit_form">Enviar</string>
     <string name="test">Realizar prueba</string>
     <string name="tug_test_get_up">Indique al AM que se levante de la silla.</string>
-    <string name="tug_test_preparation">Los AM deben utilizar su calzado regular y pueden tener ayuda para caminar si es necesario. Comience sentando al AM en una silla sin descansabrazos e identifique una línea en el suelo a 3 metros.</string>
+    <string name="tug_test_preparation">Los AM deben utilizar su calzado regular y pueden tener ayuda para caminar si es necesario. Comience sentando al AM en una silla sin descansabrazos e identifique una línea en el suelo a 7 metros.</string>
     <string name="tug_test_return">Indique al AM que regrese hacia la silla a su ritmo normal.</string>
     <string name="tug_test_sit">Indique al AM que se siente de nuevo.</string>
     <string name="tug_test_start">Presione INICIAR, empezará un conteo regresivo, diga \"Ahora\" cuando el conteo llegue a cero para comenzar con la prueba.</string>
@@ -188,10 +188,10 @@
     <string name="update_data">[ Actualizar ]</string>
     <string name="update_form">Actualizar</string>
     <string name="updated">Expediente actualizado.</string>
-    <string name="user_activate_account_tab">Cuenta activada</string>
+    <string name="user_activate_account_tab">Activar cuenta</string>
     <string name="user_birthday_hint">Fecha de nacimiento</string>
     <string name="user_created_successfuly">Cuenta de usuario creada satisfactoriamente</string>
-    <string name="user_edit_account_tab">Cuenta editada</string>
+    <string name="user_edit_account_tab">Editar cuenta</string>
     <string name="user_email_hint">E-mail</string>
     <string name="user_gender_female">Femenino</string>
     <string name="user_gender_hint">Género</string>
@@ -227,4 +227,15 @@
     <string name="privacy_terms_content">El propósito de estas Políticas de Privacidad es informar a los usuarios del uso de su información personal al completar la solicitud de registro en 3Ollin Test. \n\n Nota: definimos información personal como el conjunto de datos que permiten identificarle, como por ejemplo su nombre, domicilio, correo electrónico, y número telefónico. \n\n A. USO DE INFORMACIÓN. La información personal recolectada por consentimiento del usuario directo e indirectos será utilizada como parte del expediente electrónico de los pacientes para el monitoreo de riesgo de caídas. Esta información podrá ser utilizada con fines estadísticos por la organización responsable de esta aplicación; respetando en todo momento la identidad del usuarios. \n\n B. REVELACIÓN DE INFORMACIÓN. La organización responsable de esta aplicación no comercializará ni arrendará información personal de los usuarios del sistema. No se utilizará ni revelará a terceros información individual proporcionada. Sólo la información estadística podrá ser revelada a terceros. \n\n C. SEGURIDAD. En ciertos módulos de la aplicación para teléfonos celulares, la información es tratada y almacenada en formato codificada. \n\n D. MODIFICACIONES EN LAS POLÍTICAS DE PRIVACIDAD. La organización responsable de esta aplicación se reserva el derecho de introducir modificaciones en sus Políticas de Privacidad, con el fin de adaptarlas a nuevos requerimientos legislativos, jurisprudencia, técnicos o por cualquier otro motivo que le permita brindar un mejor servicio a los usuarios. La organización responsable de esta aplicación se compromete a publicará tales modificaciones a través de este medio. \n\n E. INTEGRIDAD. Las presentes Políticas de Privacidad son parte integrante de los Términos y Condiciones de Uso del Sistema. En consecuencia, el uso que los usuarios pudieran hacer de los servicios de esta aplicación para teléfonos celulares implica que han leído, entendido y aceptado los términos antes expuestos. Si el usuario no estuviera de acuerdo con tales Políticas y/o con sus Términos de Uso, tendrá la opción de no utilizar la aplicación.</string>
     <string name="project_name">3Ollin-Test</string>
     <string name="title_activity_navigation">Título de navegador</string>
+    <string name="confirmation_title">Importante</string>
+    <string name="confirmation_dialog">¿Realmente desea repetir la prueba?</string>
+    <string name="sensor_data_tab">Envío manual</string>
+    <string name="label_sensed_data">Datos sensados</string>
+    <string name="header_manual_upload">Envío manual de datos</string>
+    <string name="button_upload">Cargar datos</string>
+    <string name="upload_description">Archivos almacenados desde:</string>
+    <string name="remaining_data_date">No hay datos pendientes</string>
+    <string name="loading">Enviando ...</string>
+    <string name="wifi_problem">No se ha establecido conexión a internet. Por favor, conecte el dispositivo a una red WiFi, he intente nuevamente.</string>
+    <string name="file_problem">Al parecer estamos teniendo problemas con los sensores del dispositivo. Por favor, realice la prueba nuevamente.</string>
 </resources>

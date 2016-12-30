@@ -96,7 +96,6 @@ public class CountDownActivity extends AppCompatActivity {
 
         button_start_counter.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // TODO Identificar si después de haberse activado la escucha de los sensores, el dispositivo esta almacenando la info
 //                Log.v("ACC XXX", "xxxxxxx _ " + "button_start_counter");
                 crono = (Chronometer) findViewById(R.id.chronometer);
                 crono.setVisibility(View.GONE);
@@ -129,7 +128,7 @@ public class CountDownActivity extends AppCompatActivity {
                         button_start_counter.setVisibility(View.GONE);
 
                         button_stop_counter.setEnabled(true);
-                        button_stop_counter.setBackgroundColor(getResources().getColor(R.color.ok_button));
+                        button_stop_counter.setBackgroundColor(getResources().getColor(R.color.danger_button));
                         button_stop_counter.setVisibility(View.VISIBLE);
 
                         crono.setVisibility(View.VISIBLE);

@@ -18,7 +18,6 @@ public class NetworkMonitor extends BroadcastReceiver {
     // This is a class variable since the idea is that each time the user get wifi connection,
     // a new schedule settled automatically, substituting the previous one
     private Timer timerWiFi = new Timer();
-    // TODO include a manual mechanism to upload data under demand
 
     @Override
     public void onReceive(final Context context, Intent intent) {

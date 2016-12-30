@@ -45,7 +45,7 @@ public class BalanceTestOptionsActivity extends AppCompatActivity {
         button_one_leg_option = (TextView) findViewById(R.id.button_one_leg_option);
 
         loadActivityData();
-        disableTestButtons();
+        //disableTestButtons();
 
         button_feet_together_option.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

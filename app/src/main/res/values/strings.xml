@@ -50,7 +50,7 @@
     <string name="button_end">Stop</string>
     <string name="header_counter">Counter</string>
     <string name="button_cancel">Cancel</string>
-    <string name="button_restart">Restart</string>
+    <string name="button_restart">Resume</string>
     <string name="header_evaluation">Test evaluation</string>
     <string name="repeat_test">Repeat test</string>
     <string name="button_continue">Continue</string>
@@ -174,7 +174,7 @@ E. INTEGRIDAD. Las presentes Políticas de Privacidad son parte integrante de lo
     <string name="strength_test_preparation">Tell the OA to sit in the middle of a chair without armrests, to place his/her hands on the opposite shoulder crossed at the wrists and to keep his/her arms against his/her chest, his/her feet flat on the floor and his/her back straight.</string>
     <string name="strength_test_start">Press START begins a countdown, say \"Now\" when the count reaches zero to begin the test.</string>
     <string name="tug_test_warning">WARNING: Always stay near the Older Adult (OA) to prevent falls.</string>
-    <string name="tug_test_preparation">The OA should use their regular footwear and can use a walking aid if needed. Begin by having the OA sit back in a chair without armrests and identify a line 3 meters away on the floor.</string>
+    <string name="tug_test_preparation">The OA should use their regular footwear and can use a walking aid if needed. Begin by having the OA sit back in a chair without armrests and identify a line 7 meters away on the floor.</string>
     <string name="tug_test_start">Press START begins a countdown, say \"Now\" when the count reaches zero to begin the test.</string>
     <string name="tug_test_get_up">Tell the OA to stand up from the chair.</string>
     <string name="tug_test_walk">Tell the OA to walk to the line marked on the floor at his normal pace.</string>
@@ -243,4 +243,15 @@ E. INTEGRIDAD. Las presentes Políticas de Privacidad son parte integrante de lo
     <string name="units_mmHH">mm HH</string>
     <string name="important">Important</string>
     <string name="something_wrong_with_sensors">Someting when wrong with sensors. Please, start over.</string>
+    <string name="confirmation_dialog">Would you really wish to repeat the test?</string>
+    <string name="confirmation_title">Important</string>
+    <string name="sensor_data_tab">Manual upload</string>
+    <string name="label_sensed_data">Sensed data</string>
+    <string name="header_manual_upload">Manual data upload</string>
+    <string name="button_upload">Upload data</string>
+    <string name="upload_description">Remaining files are from:</string>
+    <string name="remaining_data_date">No remaining data</string>
+    <string name="loading">Uploading ...</string>
+    <string name="wifi_problem">There is no Internet connection. Please, connect to a WiFi network and try uploading data again.</string>
+    <string name="file_problem">Seems that we are having troubles with some sensor data. Please, repeat the test.</string>
 </resources>

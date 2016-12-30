@@ -1,8 +1,10 @@
 package com.inger.android.ollintest;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
@@ -68,19 +70,8 @@ public class WalkingEvaluationListActivity extends AppCompatActivity {
         final TextView button_repeat_test = (TextView) findViewById(R.id.button_repeat_test);
         button_repeat_test.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                repeatTest();
-
-                TestDBHandlerUtils testDBObj = new TestDBHandlerUtils(getApplicationContext());
-                testDBObj.openDB();
-                Cursor cursorTest = testDBObj.readData(uniqueTestId);
-
-                Intent countDownScreen = new Intent(WalkingEvaluationListActivity.this, CountDownActivity.class);
-                countDownScreen.putExtra("testType", testDBObj.getTestType(cursorTest));
-                countDownScreen.putExtra("balanceTestOption", testDBObj.getBalanceTestOption(cursorTest));
-                countDownScreen.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivityForResult(countDownScreen, 1);
-
-                testDBObj.closeDB();
+                AlertDialog diaBox = AskOption();
+                diaBox.show();
             }
         });
 
@@ -173,6 +164,40 @@ public class WalkingEvaluationListActivity extends AppCompatActivity {
 
         patientDBObj.closeDB();
         sessionObj.closeDB();
+    }
+
+    private AlertDialog AskOption() {
+        AlertDialog myQuittingDialogBox =new AlertDialog.Builder(this)
+                .setTitle(getResources().getString(R.string.confirmation_title))
+                .setMessage(getResources().getString(R.string.confirmation_dialog))
+                .setIcon(R.mipmap.ic_warning)
+
+                .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        dialog.dismiss();
+                        repeatTest();
+
+                        TestDBHandlerUtils testDBObj = new TestDBHandlerUtils(getApplicationContext());
+                        testDBObj.openDB();
+                        Cursor cursorTest = testDBObj.readData(uniqueTestId);
+
+                        Intent countDownScreen = new Intent(WalkingEvaluationListActivity.this, CountDownActivity.class);
+                        countDownScreen.putExtra("testType", testDBObj.getTestType(cursorTest));
+                        countDownScreen.putExtra("balanceTestOption", testDBObj.getBalanceTestOption(cursorTest));
+                        countDownScreen.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivityForResult(countDownScreen, 1);
+
+                        testDBObj.closeDB();
+                    }
+
+                })
+                .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create();
+        return myQuittingDialogBox;
     }
 
     @Override

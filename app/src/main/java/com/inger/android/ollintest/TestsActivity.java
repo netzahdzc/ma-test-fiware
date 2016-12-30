@@ -46,7 +46,7 @@ public class TestsActivity extends AppCompatActivity {
         button_balance_test = (TextView) findViewById(R.id.button_balance_test);
 
         loadActivityData();
-        disableTestButtons();
+        //disableTestButtons();
 
         button_walking_test.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

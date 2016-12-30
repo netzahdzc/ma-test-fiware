@@ -8,7 +8,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
@@ -19,7 +22,6 @@ import android.util.Log;
 import com.inger.android.ollintest.util.Filter;
 
 public class UploadToServer extends Service {
-
     private static final String APP_NAME = "three_ollin_test";
     private final String APP_DIRECTORY_PATH = String.valueOf(
             Environment.getExternalStorageDirectory() + "/" + APP_NAME);
@@ -46,7 +48,6 @@ public class UploadToServer extends Service {
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-
     }
 
     @Override
@@ -59,6 +60,7 @@ public class UploadToServer extends Service {
 
         // We start checking into directories to retrieve and send file to server-side
         startScan(sensorType);
+
 
         return START_REDELIVER_INTENT;
     }

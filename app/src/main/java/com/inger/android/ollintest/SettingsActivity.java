@@ -39,6 +39,14 @@ public class SettingsActivity extends AppCompatActivity {
                 startActivity(aboutScreen);
             }
         });
+
+        final TextView button_sensor_data = (TextView) findViewById(R.id.button_sensor_data);
+        button_sensor_data.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent manualUploadScreen = new Intent(getApplicationContext(), ManualUploadActivity.class);
+                startActivity(manualUploadScreen);
+            }
+        });
     }
 
 }

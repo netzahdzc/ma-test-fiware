@@ -8,8 +8,8 @@ android {
         applicationId "com.inger.android.ollintest"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 11
-        versionName "1"
+        versionCode 1
+        versionName "2"
     }
     buildTypes {
         release {

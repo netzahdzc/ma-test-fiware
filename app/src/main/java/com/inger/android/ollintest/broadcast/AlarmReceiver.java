@@ -39,5 +39,4 @@ public class AlarmReceiver extends BroadcastReceiver implements MediaPlayer.OnCo
         }
         mediaPlayer.release();
     }
-
 }

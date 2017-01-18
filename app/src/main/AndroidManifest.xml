@@ -86,6 +86,18 @@
                 android:value="com.inger.android.ollintest.PrivacyActivity" />
         </activity>
         <activity
+            android:name="com.inger.android.ollintest.DescriptionApp"
+            android:label="@string/header_about"
+            android:parentActivityName="com.inger.android.ollintest.AboutActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.inger.android.ollintest.DescriptionApp" />
+        </activity>
+        <activity
             android:name="com.inger.android.ollintest.ActivationAccountActivity"
             android:label="@string/header_activation"
             android:parentActivityName="com.inger.android.ollintest.SettingsActivity"

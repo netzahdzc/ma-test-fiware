@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">3Ollin Test</string>
+    <string name="app_name">3Ollin-Test</string>
     <string name="increase">Add a new Patient</string>
     <string name="edit_title">Updating</string>
     <string name="update_button">Update</string>
@@ -54,7 +54,7 @@
     <string name="header_evaluation">Test evaluation</string>
     <string name="repeat_test">Repeat test</string>
     <string name="button_continue">Continue</string>
-    <string name="header_faqs">FAQs</string>
+    <string name="header_faqs">FAQ\'s</string>
     <string name="walking_question_one">No abnormal gait</string>
     <string name="walking_question_two">Slow tentative pace</string>
     <string name="walking_question_three">Loss of balance</string>
@@ -83,16 +83,14 @@
     <string name="username">Username</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="project_name">3Ollin Test</string>
+    <string name="project_name">3Ollin-Test</string>
     <string name="register">Sign Up</string>
     <string name="login">Log In</string>
-    <string name="header_login">3Ollin Test</string>
+    <string name="header_login">3Ollin-Test</string>
     <string name="app_version">Version</string>
     <string name="app_long_name">Application for Monitoring Physical Performance Tests: Gait, Strength, and Balance.</string>
     <string name="privacy_terms_tab">Privacy terms</string>
-    <string name="activation_code_description">The activation code lets you have the full services of 3Ollin Test, for instance the provision of information collected via online.
-        \n\n
-        The activation code distribution is limited to physicians and specialists who cooperate with the National Institute of Geriatrics of Mexico City.</string>
+    <string name="activation_code_description">The activation code lets you have the full services of 3Ollin-Test, for instance the provision of information collected via online.\n\nThe activation code distribution is limited to physicians and specialists who cooperate with the National Institute of Geriatrics of Mexico City.</string>
     <string name="button_next">Next</string>
     <string name="button_skip">Skip</string>
     <string name="patient_name_hint">Name</string>
@@ -131,19 +129,7 @@
     <string name="label_walking_test">TUG:</string>
     <string name="label_balance_test">Balance:</string>
     <string name="label_strength_test">Strength:</string>
-    <string name="privacy_terms_content">El propósito de estas Políticas de Privacidad es informar a los usuarios sobre el uso de su información personal al completar la solicitud de registro en 3Ollin Test.
-\n\n
-Nota: definimos información personal como el conjunto de datos que permiten identificarle, como por ejemplo su nombre, domicilio, correo electrónico, y número telefónico.
-\n\n
-A. USO DE INFORMACIÓN. La información personal recolectada por consentimiento del usuario directo e indirectos será utilizada como parte del expediente electrónico de los pacientes para el monitoreo de riesgo de caídas. Esta información podrá ser utilizada con fines estadísticos por la organización responsable de esta aplicación; respetando en todo momento la identidad del usuarios.
-\n\n
-B. REVELACIÓN DE INFORMACIÓN. La organización responsable de esta aplicación no comercializará ni arrendará información personal de los usuarios del sistema. No se utilizará ni revelará a terceros información individual proporcionada. Sólo la información estadística podrá ser revelada a terceros.
-\n\n
-C. SEGURIDAD. En ciertos módulos de la aplicación para teléfonos celulares, la información es tratada y almacenada en formato codificada.
-\n\n
-D. MODIFICACIONES EN LAS POLÍTICAS DE PRIVACIDAD. La organización responsable de esta aplicación se reserva el derecho de introducir modificaciones en sus Políticas de Privacidad, con el fin de adaptarlas a nuevos requerimientos legislativos, jurisprudencia, técnicos o por cualquier otro motivo que le permita brindar un mejor servicio a los usuarios. La organización responsable de esta aplicación se compromete a publicará tales modificaciones a través de este medio.
-\n\n
-E. INTEGRIDAD. Las presentes Políticas de Privacidad son parte integrante de los Términos y Condiciones de Uso del Sistema. En consecuencia, el uso que los usuarios pudieran hacer de los servicios de esta aplicación para teléfonos celulares implica que han leído, entendido y aceptado los términos antes expuestos. Si el usuario no estuviera de acuerdo con tales Políticas y/o con sus Términos de Uso, tendrá la opción de no utilizar la aplicación.
+    <string name="privacy_terms_content">El propósito de estas Políticas de Privacidad es informar a los usuarios sobre el uso de su información personal al completar la solicitud de registro en 3Ollin-Test.\n\nNota: definimos información personal como el conjunto de datos que permiten identificarle, como por ejemplo su nombre, domicilio, correo electrónico, y número telefónico.\n\nA. USO DE INFORMACIÓN. La información personal recolectada por consentimiento del usuario directo e indirectos será utilizada como parte del expediente electrónico de los pacientes para el monitoreo de riesgo de caídas. Esta información podrá ser utilizada con fines estadísticos por la organización responsable de esta aplicación; respetando en todo momento la identidad del usuarios.\n\nB. REVELACIÓN DE INFORMACIÓN. La organización responsable de esta aplicación no comercializará ni arrendará información personal de los usuarios del sistema. No se utilizará ni revelará a terceros información individual proporcionada. Sólo la información estadística podrá ser revelada a terceros.\n\nC. SEGURIDAD. En ciertos módulos de la aplicación para teléfonos celulares, la información es tratada y almacenada en formato codificada.\n\nD. MODIFICACIONES EN LAS POLÍTICAS DE PRIVACIDAD. La organización responsable de esta aplicación se reserva el derecho de introducir modificaciones en sus Políticas de Privacidad, con el fin de adaptarlas a nuevos requerimientos legislativos, jurisprudencia, técnicos o por cualquier otro motivo que le permita brindar un mejor servicio a los usuarios. La organización responsable de esta aplicación se compromete a publicará tales modificaciones a través de este medio.\n\nE. INTEGRIDAD. Las presentes Políticas de Privacidad son parte integrante de los Términos y Condiciones de Uso del Sistema. En consecuencia, el uso que los usuarios pudieran hacer de los servicios de esta aplicación para teléfonos celulares implica que han leído, entendido y aceptado los términos antes expuestos. Si el usuario no estuviera de acuerdo con tales Políticas y/o con sus Términos de Uso, tendrá la opción de no utilizar la aplicación.
 </string>
     <string name="label_request_password">Request a new password by typing the E-mail you used to create you account:</string>
     <string name="label_email">Email</string>
@@ -198,11 +184,11 @@ E. INTEGRIDAD. Las presentes Políticas de Privacidad son parte integrante de lo
     <string name="yes">Yes</string>
     <string name="deleting_header">Deleting</string>
     <string name="faq_q_activation_code">How to get an activation code?</string>
-    <string name="faq_r_activation_code">Activation codes are assigned and distributed only to members of the Institute of Geriatrics of Mexico City.</string>
-    <string name="faq_q_tug_test">What are the driving tests?</string>
-    <string name="faq_r_tug_test">Example of answer.</string>
+    <string name="faq_r_activation_code">Activation codes are assigned and distributed only to members and collaborator of the Institute of Geriatrics of Mexico City.</string>
+    <string name="faq_q_tug_test">What are the driving physical tests?</string>
+    <string name="faq_r_tug_test">There will be three physical performance tests based on: Walk, Strength, and Balance.\n\nIn the Walking test the participants will be asked to get up from a chair, walk three meters, turn around, walk back to the chair and sit down again. During the test the older adults must use their regular footwear and use any assistance device that normally requires.\n\nIn the Strength test, the older adults will be asked to get up and sit on a chair repeatedly as fast as possible for 30 seconds.\n\nIn the Balance test the older adults will be asked to maintain four positions progressively: feet together, semi-tandem, tandem, and unipodal, for 10 seconds. The participants should not use any type of help (walking stick) and should keep their eyes open.</string>
     <string name="faq_q_contact_data">Contact data</string>
-    <string name="faq_r_contact_data">To erquest personalized aupport, please, e-mail you situation to: example@gmail.com</string>
+    <string name="faq_r_contact_data">To erquest personalized aupport, please, e-mail you situation to: 3ollin.test@gmail.com</string>
     <string name="left_menu_home">Home</string>
     <string name="left_menu_setting">Settings</string>
     <string name="left_menu_help">Help</string>
@@ -245,13 +231,16 @@ E. INTEGRIDAD. Las presentes Políticas de Privacidad son parte integrante de lo
     <string name="something_wrong_with_sensors">Someting when wrong with sensors. Please, start over.</string>
     <string name="confirmation_dialog">Would you really wish to repeat the test?</string>
     <string name="confirmation_title">Important</string>
-    <string name="sensor_data_tab">Manual upload</string>
+    <string name="sensor_data_tab">Upload data</string>
     <string name="label_sensed_data">Sensed data</string>
-    <string name="header_manual_upload">Manual data upload</string>
+    <string name="header_manual_upload">Data upload</string>
     <string name="button_upload">Upload data</string>
     <string name="upload_description">Remaining files are from:</string>
     <string name="remaining_data_date">No remaining data</string>
     <string name="loading">Uploading ...</string>
     <string name="wifi_problem">There is no Internet connection. Please, connect to a WiFi network and try uploading data again.</string>
     <string name="file_problem">Seems that we are having troubles with some sensor data. Please, repeat the test.</string>
+    <string name="about_description_button">Description</string>
+    <string name="about_description">3Ollin-Test is an application developed by the National Institute of Geriatrics in Mexico.\n\nIn 2012, WHO reports that falls are the second world wide cause of death of the elderly population. The incidence of falls varies between countries, in average the 30-40 percent of the population of 65+ fall each year, but the rate increases as population age over 75+, where the incidence rises up to 45-50 percent.\n\nIn general, physical performance is a good indicator of risk in older adults. Thus, the goal of this application is to collect sensors data from a mobile device while patients perform a controlled physical test. Based on this data, we might construct algorithms to measure the risk of fall.</string>
+    <string name="account_no_activated">The account still inactive. Please, refer to section ACTIVATE ACCOUNT for further information.</string>
 </resources>

@@ -5,7 +5,7 @@
     <string name="account_already_activated">Su cuenta ha sido activada.</string>
     <string name="action_settings">Configuración</string>
     <string name="activation_code">Código de activación</string>
-    <string name="activation_code_description">El código de activación le permite disponer de los servicios completos de 3Ollin Test, como por ejemplo: la disposición de información recolectada vía online. \n\n La distribución del código de activación esta limitada a médicos y especialistas que colaboran con el Instituto Nacional de Geriatría de la ciudad de México.</string>
+    <string name="activation_code_description">El código de activación le permite disponer de los servicios completos de 3Ollin-Test, como por ejemplo: la disposición de información recolectada vía online.\n\nLa distribución del código de activación esta limitada a médicos y especialistas que colaboran con el Instituto Nacional de Geriatría de la ciudad de México.</string>
     <string name="activation_code_updated">Código actualizado satisfactoriamente.</string>
     <string name="add_participant">Registrar participante</string>
     <string name="add_patient">Registrar peciente</string>
@@ -24,7 +24,7 @@
     <string name="walking_question_eight">Pasos cortos</string>
     <string name="walking_question_nine">No usa el dispositivo de asistencia correctamente</string>
     <string name="strength_question_one">El AM concluyó sin problemas la prueba</string>
-    <string name="strength_question_two">El paciento no pudo realizar la prueba</string>
+    <string name="strength_question_two">El paciente no pudo realizar la prueba</string>
     <string name="strength_question_three">El paciente usó los brazos para incorporarse</string>
     <string name="balance_question_one">El AM concluyó sin problemas las pruebas</string>
     <string name="balance_question_two">El AM movió los pies</string>
@@ -35,8 +35,8 @@
     <string name="balance_step_stay_feet_together">Describa y demuestre la posición de pies juntos. Indique al AM que se pare con los pies lado a lado.</string>
     <string name="balance_step_stay_next_elderly">ATENCIÓN: Manténgase siempre cerca del Adulto Mayor (AM) para prevenir caídas.</string>
     <string name="balance_step_stay_one_leg">Describa y demuestre la posición unipodal. Indique al AM que se pare en un pie.</string>
-    <string name="balance_step_stay_semi_tandem">Describa y demuestre la posición de pies en semi-tandem. Indique al AM que coloque el empeine de un pie a la altura del dedo gordo del otro pie.</string>
-    <string name="balance_step_stay_tandem">Describa y demuestre la posición de tandem. Indique al paciente que coloque un pie delante del otro, el talón tocando la punta del pie.</string>
+    <string name="balance_step_stay_semi_tandem">Describa y demuestre la posición de pies en semi-tándem. Indique al AM que coloque el empeine de un pie a la altura del dedo gordo del otro pie.</string>
+    <string name="balance_step_stay_tandem">Describa y demuestre la posición de tándem. Indique al paciente que coloque un pie delante del otro, el talón tocando la punta del pie.</string>
     <string name="balance_step_to_start">Presione INICIAR, la aplicación hace un conteo regresivo: 3, 2, 1, acompañado de un sonido de inicio. Diga \"Ahora\" cuando el conteo llegue a cero para comenzar con la prueba. Después de 10 segundos, la aplicación emite un sonido de alto.</string>
     <string name="button_balance_test">Prueba de balance</string>
     <string name="button_cancel">Cancelar</string>
@@ -48,7 +48,7 @@
     <string name="button_finish_test">Finalizar prueba</string>
     <string name="button_finished">Finalizar</string>
     <string name="button_next">Siguiente</string>
-    <string name="button_one_leg_test">Una pierna</string>
+    <string name="button_one_leg_test">Unipodal</string>
     <string name="button_quality">Cálidad de datos </string>
     <string name="button_repeat">Repetir prueba</string>
     <string name="button_restart">Reaunudar</string>
@@ -73,10 +73,10 @@
     <string name="email_no_exist">El e-mail no esta asociada a ninguna cuenta. Por favor, confirme e intente nuevamente.</string>
     <string name="faq_q_activation_code">¿Cómo obtener un código de activación?</string>
     <string name="faq_q_contact_data">Datos de contacto</string>
-    <string name="faq_q_tug_test">¿En qué consisten las pruebas de marcha?</string>
-    <string name="faq_r_activation_code">Los códigos de activación son asignados y distribuidos únicamente por miembros del Insituto Nacional de la Ciudad de México.</string>
-    <string name="faq_r_contact_data">Para solicitar suporte personalizado, por favor, establezca contacto a través del correo: ejemplo@gmail.com</string>
-    <string name="faq_r_tug_test">Ejemplo de respuesta.</string>
+    <string name="faq_q_tug_test">¿En qué consisten las pruebas de desempeño físico?</string>
+    <string name="faq_r_activation_code">Los códigos de activación son asignados y distribuidos únicamente a miembros y colaboradores del Instituto Nacional de Geriatría de la Ciudad de México.</string>
+    <string name="faq_r_contact_data">Para solicitar suporte personalizado, por favor, establezca contacto a través del correo: 3ollin.test@gmail.com</string>
+    <string name="faq_r_tug_test">Se realizarán tres pruebas de desempeño físico: Marcha, Fuerza y Balance.\n\nEn la prueba de Marcha se le pedirá al Adulto Mayor (AM) levantarse de una silla, caminar tres metros, girar, caminar de regreso a la silla y volverse a sentar. Durante la prueba la persona debe utilizar su calzado regular y utilizar cualquier dispositivo de asistencia que normalmente requiera.\n\nEn la prueba de Fuerza, se le pedirá al AM levantarse y sentarse de una silla repetidamente tan rápido como le sea posible durante 30 segundos.\n\nEn la prueba de Balance se le pedirá al AM que mantenga cuatro posiciones progresivamente: pies juntos, semi-tándem, tándem y unipodal, durante 10 segundos. Los AM no deben utilizar ningún tipo de ayuda (bastón o andadera) y deben mantener los ojos abiertos.\n\nLas instrucciones para ejecutar de manera adecuada cada una de las pruebas se encuentran en la sección de Pruebas de la aplicación.</string>
     <string name="header_about">Acerca de</string>
     <string name="header_activation">Código de activación</string>
     <string name="header_add_patient">Registrar paciente</string>
@@ -88,7 +88,7 @@
     <string name="header_edit_patient">Editar paciente</string>
     <string name="header_edit_user_acount">Editar perfil</string>
     <string name="header_evaluation">Evaluación de prueba</string>
-    <string name="header_faqs">FAQs</string>
+    <string name="header_faqs">Preguntas Frecuentes</string>
     <string name="header_folder">Expediente</string>
     <string name="header_new_patient">Expediente del paciente</string>
     <string name="header_privacy">Términos de privacidad</string>
@@ -102,7 +102,7 @@
     <string name="header_walking_tests">Prueba TUG</string>
     <string name="header_wizard_tests">Información general de la prueba</string>
     <string name="increase">Registrar paciente</string>
-    <string name="label_balance_semi_feet_one_leg_option">Una pierna</string>
+    <string name="label_balance_semi_feet_one_leg_option">Unipodal</string>
     <string name="label_balance_semi_feet_together_option">Pies juntos</string>
     <string name="label_balance_semi_tandem_option">Semi-tándem</string>
     <string name="label_balance_tandem_option">Tándem</string>
@@ -132,7 +132,7 @@
     <string name="left_menu_help">Ayuda</string>
     <string name="left_menu_home">Inicio</string>
     <string name="left_menu_logout">Salir</string>
-    <string name="left_menu_setting">Configruación</string>
+    <string name="left_menu_setting">Configuración</string>
     <string name="left_menu_title">Menú</string>
     <string name="load_image">[ Cambiar foto ]</string>
     <string name="login">Iniciar</string>
@@ -224,18 +224,21 @@
     <string name="material_icon_check_empty">[X]</string>
     <string name="navigation_drawer_close">Cerrar navegador</string>
     <string name="navigation_drawer_open">Abrir navegador</string>
-    <string name="privacy_terms_content">El propósito de estas Políticas de Privacidad es informar a los usuarios del uso de su información personal al completar la solicitud de registro en 3Ollin Test. \n\n Nota: definimos información personal como el conjunto de datos que permiten identificarle, como por ejemplo su nombre, domicilio, correo electrónico, y número telefónico. \n\n A. USO DE INFORMACIÓN. La información personal recolectada por consentimiento del usuario directo e indirectos será utilizada como parte del expediente electrónico de los pacientes para el monitoreo de riesgo de caídas. Esta información podrá ser utilizada con fines estadísticos por la organización responsable de esta aplicación; respetando en todo momento la identidad del usuarios. \n\n B. REVELACIÓN DE INFORMACIÓN. La organización responsable de esta aplicación no comercializará ni arrendará información personal de los usuarios del sistema. No se utilizará ni revelará a terceros información individual proporcionada. Sólo la información estadística podrá ser revelada a terceros. \n\n C. SEGURIDAD. En ciertos módulos de la aplicación para teléfonos celulares, la información es tratada y almacenada en formato codificada. \n\n D. MODIFICACIONES EN LAS POLÍTICAS DE PRIVACIDAD. La organización responsable de esta aplicación se reserva el derecho de introducir modificaciones en sus Políticas de Privacidad, con el fin de adaptarlas a nuevos requerimientos legislativos, jurisprudencia, técnicos o por cualquier otro motivo que le permita brindar un mejor servicio a los usuarios. La organización responsable de esta aplicación se compromete a publicará tales modificaciones a través de este medio. \n\n E. INTEGRIDAD. Las presentes Políticas de Privacidad son parte integrante de los Términos y Condiciones de Uso del Sistema. En consecuencia, el uso que los usuarios pudieran hacer de los servicios de esta aplicación para teléfonos celulares implica que han leído, entendido y aceptado los términos antes expuestos. Si el usuario no estuviera de acuerdo con tales Políticas y/o con sus Términos de Uso, tendrá la opción de no utilizar la aplicación.</string>
+    <string name="privacy_terms_content">El propósito de estas Políticas de Privacidad es informar a los usuarios del uso de su información personal al completar la solicitud de registro en 3Ollin-Test.\n\nNota: definimos información personal como el conjunto de datos que permiten identificarle, como por ejemplo su nombre, domicilio, correo electrónico, y número telefónico.\n\nA. USO DE INFORMACIÓN. La información personal recolectada por consentimiento del usuario directo e indirectos será utilizada como parte del expediente electrónico de los pacientes para el monitoreo de riesgo de caídas. Esta información podrá ser utilizada con fines estadísticos por la organización responsable de esta aplicación; respetando en todo momento la identidad del usuarios.\n\nB. REVELACIÓN DE INFORMACIÓN. La organización responsable de esta aplicación no comercializará ni arrendará información personal de los usuarios del sistema. No se utilizará ni revelará a terceros información individual proporcionada. Sólo la información estadística podrá ser revelada a terceros.\n\nC. SEGURIDAD. En ciertos módulos de la aplicación para teléfonos celulares, la información es tratada y almacenada en formato codificada.\n\nD. MODIFICACIONES EN LAS POLÍTICAS DE PRIVACIDAD. La organización responsable de esta aplicación se reserva el derecho de introducir modificaciones en sus Políticas de Privacidad, con el fin de adaptarlas a nuevos requerimientos legislativos, jurisprudencia, técnicos o por cualquier otro motivo que le permita brindar un mejor servicio a los usuarios. La organización responsable de esta aplicación se compromete a publicará tales modificaciones a través de este medio.\n\nE. INTEGRIDAD. Las presentes Políticas de Privacidad son parte integrante de los Términos y Condiciones de Uso del Sistema. En consecuencia, el uso que los usuarios pudieran hacer de los servicios de esta aplicación para teléfonos celulares implica que han leído, entendido y aceptado los términos antes expuestos. Si el usuario no estuviera de acuerdo con tales Políticas y/o con sus Términos de Uso, tendrá la opción de no utilizar la aplicación.</string>
     <string name="project_name">3Ollin-Test</string>
     <string name="title_activity_navigation">Título de navegador</string>
     <string name="confirmation_title">Importante</string>
     <string name="confirmation_dialog">¿Realmente desea repetir la prueba?</string>
-    <string name="sensor_data_tab">Envío manual</string>
+    <string name="sensor_data_tab">Envío de datos</string>
     <string name="label_sensed_data">Datos sensados</string>
-    <string name="header_manual_upload">Envío manual de datos</string>
+    <string name="header_manual_upload">Envío de datos</string>
     <string name="button_upload">Cargar datos</string>
     <string name="upload_description">Archivos almacenados desde:</string>
     <string name="remaining_data_date">No hay datos pendientes</string>
     <string name="loading">Enviando ...</string>
     <string name="wifi_problem">No se ha establecido conexión a internet. Por favor, conecte el dispositivo a una red WiFi, he intente nuevamente.</string>
     <string name="file_problem">Al parecer estamos teniendo problemas con los sensores del dispositivo. Por favor, realice la prueba nuevamente.</string>
+    <string name="about_description">3Ollin-Test en una aplicación desarrollada por el Instituto Nacional de Geriatría.\n\nEn 2012, la OMS publica que la segunda causa mundial de muerte en los adultos mayores son las caídas. La incidencia de caídas varía entre cada país, aproximadamente del 30-40 porcentaje de la población de 65+ caen cada año, pero la tasa se incrementa con la edad para los adultos mayores de 75+ y en este grupo etario la incidencia sube hasta 45-50 porciento.\n\nEn general, el desempeño físico es un buen indicador de riesgo de caídas en adultos mayores. El objetivo de esta aplicación es el de utilizar la información obtenida mediante los sensores en el dispositivo móvil, para evaluar el desempeño físico de un adulto mayor (AM) al calcular de manera automatizada parámetros de las pruebas de la práctica clínica para posteriormente construir un algoritmo que cuantifique el riesgo que tiene el AM de sufrir una caída: si el desempeño físico empeora, el riesgo de caídas aumentará.\n\nResulta indispensable la identificación de los adultos mayores con mayor riesgo a sufrir una caída para poder implementar estrategias de prevención.</string>
+    <string name="about_description_button">Descripción</string>
+    <string name="account_no_activated" >La cuenta se encuentra inactiva. Por favor, ingrese a la sección ACTIVAR CUENTA para más información.</string>
 </resources>

@@ -5,13 +5,8 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.IBinder;
-import android.view.View;
-import android.widget.TextView;
 
 import com.inger.android.ollintest.R;
 import com.inger.android.ollintest.broadcast.AlarmReceiver;
@@ -67,12 +62,14 @@ public class BackgroundAudioService extends Service {
     }
 
     public void scheduleAlarm(int duration) {
-        Long time = new GregorianCalendar().getTimeInMillis() + duration * 1000;
+        if(duration!=0) {
+            Long time = new GregorianCalendar().getTimeInMillis() + duration * 1000;
 
-        Intent intentAlarm = new Intent(this, AlarmReceiver.class);
+            Intent intentAlarm = new Intent(this, AlarmReceiver.class);
 
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, time, PendingIntent.getBroadcast(this, 1,
-                intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
+            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, time, PendingIntent.getBroadcast(this, 1,
+                    intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
+        }
     }
 }

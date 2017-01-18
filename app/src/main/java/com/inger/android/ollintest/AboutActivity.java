@@ -36,6 +36,14 @@ public class AboutActivity extends AppCompatActivity {
                 }
             });
 
+            final TextView about_description_button = (TextView) findViewById(R.id.button_about_description);
+            about_description_button.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent descriptionScreen = new Intent(getApplicationContext(), DescriptionApp.class);
+                    startActivity(descriptionScreen);
+                }
+            });
+
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }

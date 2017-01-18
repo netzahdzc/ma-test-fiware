@@ -39,6 +39,12 @@ public class ManualUploadActivity extends AppCompatActivity {
     private final String APP_DIRECTORY_PATH = String.valueOf(
             Environment.getExternalStorageDirectory() + "/" + APP_NAME);
     private DialogMessageUtils mMessage;
+    private DatabaseHelper mDbHelper;
+    private SessionUtil sessionObj;
+
+    private Cursor mCursorUser;
+
+    private long mUniqueUserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +56,25 @@ public class ManualUploadActivity extends AppCompatActivity {
         final TextView upload_data = (TextView) findViewById(R.id.button_manual_upload);
         final TextView data_date = (TextView) findViewById(R.id.remaining_data_date);
         mMessage = new DialogMessageUtils(this);
+
+        mDbHelper = new DatabaseHelper(getApplicationContext());
+        sessionObj = new SessionUtil(getApplicationContext());
+        sessionObj.openDB();
+
+        mUniqueUserId = sessionObj.getUserSession();
+        mCursorUser = readData(mUniqueUserId);
+        sessionObj.closeDB();
+
+        LinearLayout account_still_inactive_layout = (LinearLayout) findViewById(R.id.account_still_inactive_layout);
+        TextView button_manual_upload = (TextView) findViewById(R.id.button_manual_upload);
+
+        if(checkIfAccountActivated(mCursorUser)) {
+            account_still_inactive_layout.setVisibility(View.GONE);
+            button_manual_upload.setVisibility(View.VISIBLE);
+        }else{
+            account_still_inactive_layout.setVisibility(View.VISIBLE);
+            button_manual_upload.setVisibility(View.GONE);
+        }
 
         data_date.setText(loadLastDateFiles());
 
@@ -130,6 +155,70 @@ public class ManualUploadActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(milliSeconds);
         return formatter.format(calendar.getTime());
+    }
+
+    // This method reads info from database
+    public Cursor readData(long uniqueUserId) {
+
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+
+        // Define a projection that specifies which columns from the database
+        // you will actually use after this query.
+        String[] projection = {
+                DatabaseContract.User._ID,
+                DatabaseContract.User.COLUMN_NAME_COL1,
+                DatabaseContract.User.COLUMN_NAME_COL2,
+                DatabaseContract.User.COLUMN_NAME_COL3,
+                DatabaseContract.User.COLUMN_NAME_COL4,
+                DatabaseContract.User.COLUMN_NAME_COL5,
+                DatabaseContract.User.COLUMN_NAME_COL6,
+                DatabaseContract.User.COLUMN_NAME_COL7,
+                DatabaseContract.User.COLUMN_NAME_COL8,
+                DatabaseContract.User.COLUMN_NAME_COL9,
+                DatabaseContract.User.COLUMN_NAME_COL10
+        };
+
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder =
+                DatabaseContract.User._ID + " DESC";
+
+        // Define 'where' part of query.
+        String selection = DatabaseContract.User._ID + " LIKE ?";
+
+        // Specify arguments in placeholder order.
+        String[] selectionArgs = {String.valueOf(uniqueUserId)};
+
+        Cursor c = db.query(
+                DatabaseContract.User.TABLE_NAME, // The table to query
+                projection,                         // The columns to return
+                selection,                          // The columns for the WHERE clause
+                selectionArgs,                      // The values for the WHERE clause
+                null,                               // don't group the rows
+                null,                               // don't filter by row groups
+                sortOrder                           // The sort order
+        );
+
+        return c;
+    }
+
+    // This method load data to be displayed on screen
+    public boolean checkIfAccountActivated(Cursor cursor) {
+        boolean mActivationFlag = false;
+
+        // Reading all data and setting it up to be displayed
+        if (cursor.moveToFirst()) {
+
+            int mActivationStatus = cursor.getInt(
+                    cursor.getColumnIndexOrThrow(DatabaseContract.User.COLUMN_NAME_COL7)
+            );
+
+            if (mActivationStatus == 1) mActivationFlag = true;
+
+        }
+
+        cursor.close();
+
+        return mActivationFlag;
     }
 
     @Override

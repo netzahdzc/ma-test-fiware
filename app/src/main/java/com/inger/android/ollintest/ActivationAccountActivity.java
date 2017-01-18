@@ -15,6 +15,8 @@ import com.inger.android.ollintest.util.DateUtil;
 import com.inger.android.ollintest.util.DialogMessageUtils;
 import com.inger.android.ollintest.util.SessionUtil;
 
+import java.util.regex.Pattern;
+
 /**
  * Created by netzahdzc on 7/18/16.
  */
@@ -189,9 +191,9 @@ public class ActivationAccountActivity extends AppCompatActivity {
         return mActivationFlag;
     }
 
-    // This is a temporal method. It should be adapted to make a request online
+    // TODO A smarter mechanism could better. Consider an online confirmation.
     public boolean confirmCodeOnline(String activationCode) {
-        return true;
+        return Pattern.matches("^INGER[0-9]{3}$", activationCode);
     }
 
     @Override

@@ -31,7 +31,6 @@ public class MotionSensorListenerAcc implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent event) {
         Sensor sensor = event.sensor;
-        // TODO A critial one: I need to print an alert to inform the user that his/her device might not be functional due sensor issues; some devices doesnt write anything due incompatibility with SDK, thus, this should be monitored and the test should be blocked beforehand.
 
         synchronized (this) {
 //            /*Log.v("ACC XXX", "cc "+Sensor.TYPE_LINEAR_ACCELERATION);

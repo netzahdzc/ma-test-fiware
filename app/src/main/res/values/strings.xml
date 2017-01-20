@@ -90,11 +90,11 @@
     <string name="app_version">Version</string>
     <string name="app_long_name">Application for Monitoring Physical Performance Tests: Gait, Strength, and Balance.</string>
     <string name="privacy_terms_tab">Privacy terms</string>
-    <string name="activation_code_description">The activation code lets you have the full services of 3Ollin-Test, for instance the provision of information collected via online.\n\nThe activation code distribution is limited to physicians and specialists who cooperate with the National Institute of Geriatrics of Mexico City.</string>
+    <string name="activation_code_description">The activation code allow you to have the complete services of 3Ollin-Test, for instance, it gives you access to the information collected via online\n\nThe activation code distribution is limited to physicians and specialists who cooperate with the National Institute of Geriatrics of Mexico City.</string>
     <string name="button_next">Next</string>
     <string name="button_skip">Skip</string>
     <string name="patient_name_hint">Name</string>
-    <string name="patient_surname_hint">Surname</string>
+    <string name="patient_surname_hint">Last name</string>
     <string name="patient_gender_hint">Gender</string>
     <string name="patient_birthday_hint">Date of birth</string>
     <string name="button_semi_tandem_test">Semi-tandem</string>
@@ -114,7 +114,7 @@
     <string name="user_password_confirmation">Repeat Password</string>
     <string name="user_birthday_hint">Date of birth</string>
     <string name="user_gender_hint">Gender</string>
-    <string name="user_surname_hint">Surname</string>
+    <string name="user_surname_hint">Last name</string>
     <string name="user_name_hint">Name</string>
     <string name="button_control">Control</string>
     <string name="button_tests">Tests</string>
@@ -129,7 +129,7 @@
     <string name="label_walking_test">TUG:</string>
     <string name="label_balance_test">Balance:</string>
     <string name="label_strength_test">Strength:</string>
-    <string name="privacy_terms_content">El propósito de estas Políticas de Privacidad es informar a los usuarios sobre el uso de su información personal al completar la solicitud de registro en 3Ollin-Test.\n\nNota: definimos información personal como el conjunto de datos que permiten identificarle, como por ejemplo su nombre, domicilio, correo electrónico, y número telefónico.\n\nA. USO DE INFORMACIÓN. La información personal recolectada por consentimiento del usuario directo e indirectos será utilizada como parte del expediente electrónico de los pacientes para el monitoreo de riesgo de caídas. Esta información podrá ser utilizada con fines estadísticos por la organización responsable de esta aplicación; respetando en todo momento la identidad del usuarios.\n\nB. REVELACIÓN DE INFORMACIÓN. La organización responsable de esta aplicación no comercializará ni arrendará información personal de los usuarios del sistema. No se utilizará ni revelará a terceros información individual proporcionada. Sólo la información estadística podrá ser revelada a terceros.\n\nC. SEGURIDAD. En ciertos módulos de la aplicación para teléfonos celulares, la información es tratada y almacenada en formato codificada.\n\nD. MODIFICACIONES EN LAS POLÍTICAS DE PRIVACIDAD. La organización responsable de esta aplicación se reserva el derecho de introducir modificaciones en sus Políticas de Privacidad, con el fin de adaptarlas a nuevos requerimientos legislativos, jurisprudencia, técnicos o por cualquier otro motivo que le permita brindar un mejor servicio a los usuarios. La organización responsable de esta aplicación se compromete a publicará tales modificaciones a través de este medio.\n\nE. INTEGRIDAD. Las presentes Políticas de Privacidad son parte integrante de los Términos y Condiciones de Uso del Sistema. En consecuencia, el uso que los usuarios pudieran hacer de los servicios de esta aplicación para teléfonos celulares implica que han leído, entendido y aceptado los términos antes expuestos. Si el usuario no estuviera de acuerdo con tales Políticas y/o con sus Términos de Uso, tendrá la opción de no utilizar la aplicación.
+    <string name="privacy_terms_content">The purpose of these Privacy Policies is to inform users about the use of their personal information to complete the application for registration at 3Ollin-Test. \n\nNote: We define personal information as the identifiable set of data, such as your name, address, e-mail address, and telephone number. \n\nA. USE OF INFORMATION. Personal information collected by consent of the user will be used as part of the patients\' electronic file for the monitoring of the risk of falls. This information may be used for statistical purposes by the organisation responsible for this application; respecting at all times the identity of the users. \n\nB. DISCLOSURE OF INFORMATION. The organization responsible for this application will not market or lease personal information of users of the system. They do not take advantage of the individual information provided. Only statistical information can be disclosed to third parties. \n\nC. SECURITY. In some modules of the application, the information is treated and stored in coded format to shell personal information. \n\nD. MODIFICATIONS IN PRIVACY POLICIES. The organisation responsible for this application reserves the right to make changes to the Privacy Policies, in order to adapt to new legislative requirements, jurisprudence, technicians and any other reason that allows to provide a better service to users. The organisation responsible for this application undertakes to disclose the modifications through this medium. \ n\nE. INTEGRITY. The Privacy Policies are an integral part of the Terms and Conditions of Use of the System. Consequently, the use of this application implies that users have read, understood and accepted the terms before being exposed. If the user does not agree with the Policies and/or the Terms of Use, the application can not be used.
 </string>
     <string name="label_request_password">Request a new password by typing the E-mail you used to create you account:</string>
     <string name="label_email">Email</string>
@@ -148,20 +148,20 @@
     <string name="button_balance_test">Balance test</string>
     <string name="button_restore">[ Restore password ]</string>
     <string name="balance_step_stay_next_elderly">WARNING: Always stay near the Older Adult (OA) to prevent falls.</string>
-    <string name="balance_step_stay_one_leg">Describe and demonstrate the position. Tell the OA to stand on one foot.</string>
-    <string name="balance_step_stay_semi_tandem">Describe and demonstrate the position of feet in semitandem. Tell the OA to place the instep of one foot so it is touching the big toe of the other foot.</string>
-    <string name="balance_step_stay_tandem">Describe and demonstrate the tandem position. Tell the OA to place one foot in front of the other, heel touching toe.</string>
-    <string name="balance_step_stay_feet_together">Describe and demonstrate the position. Tell the OA to stand with his/her feet side by side.</string>
+    <string name="balance_step_stay_one_leg">Describe and demonstrate the position. Tell the OA to stand on one foot. Take into account that the OA will assume such position for 10 s.</string>
+    <string name="balance_step_stay_semi_tandem">Describe and demonstrate the position of feet in semitandem. Tell the OA to place the instep of one foot so it is touching the big toe of the other foot. Take into account that the OA will assume such position for 10 s</string>
+    <string name="balance_step_stay_tandem">Describe and demonstrate the tandem position. Tell the OA to place one foot in front of the other, heel touching toe. Take into account that the OA will assume such position for 10 s</string>
+    <string name="balance_step_stay_feet_together">Describe and demonstrate the position. Tell the OA to stand with his/her feet side by side. Take into account that the OA will assume such position for 10 s</string>
     <string name="balance_step_hold_elderly">Hold his/her arms and help him/her assume the correct foot position.</string>
     <string name="balance_step_release_elderly">When the OA is steady, let go, but remain close to hold him/her in case he/she loses their balance.</string>
     <string name="balance_step_to_start">Press START, the application makes a countdown: 3, 2, 1, accompanied by a sound start. Say \"Now\" when the count reaches zero to begin the test. After 10 seconds, the application chirps high.</string>
     <string name="balance_step_if_cannot_hold">IMPORTANT: If the patient can hold the position for 10 seconds without moving his/her feet or needing support, go on to the next position. If not, stop the test.</string>
     <string name="strength_test_warning">WARNING: Always stay near the Older Adult (OA) to prevent falls.</string>
     <string name="strength_test_preparation">Tell the OA to sit in the middle of a chair without armrests, to place his/her hands on the opposite shoulder crossed at the wrists and to keep his/her arms against his/her chest, his/her feet flat on the floor and his/her back straight.</string>
-    <string name="strength_test_start">Press START begins a countdown, say \"Now\" when the count reaches zero to begin the test.</string>
+    <string name="strength_test_start">Press START, a countdown will begin. Say \"Go\" when the count reaches zero to begin the test.</string>
     <string name="tug_test_warning">WARNING: Always stay near the Older Adult (OA) to prevent falls.</string>
     <string name="tug_test_preparation">The OA should use their regular footwear and can use a walking aid if needed. Begin by having the OA sit back in a chair without armrests and identify a line 7 meters away on the floor.</string>
-    <string name="tug_test_start">Press START begins a countdown, say \"Now\" when the count reaches zero to begin the test.</string>
+    <string name="tug_test_start">Press START, a countdown will begin. Say \"Go\" when the count reaches zero to begin the test.</string>
     <string name="tug_test_get_up">Tell the OA to stand up from the chair.</string>
     <string name="tug_test_walk">Tell the OA to walk to the line marked on the floor at his normal pace.</string>
     <string name="tug_test_turn_around">Tell the OA to turn around.</string>
@@ -235,12 +235,13 @@
     <string name="label_sensed_data">Sensed data</string>
     <string name="header_manual_upload">Data upload</string>
     <string name="button_upload">Upload data</string>
-    <string name="upload_description">Remaining files are from:</string>
+    <string name="upload_description">Remaining files since:</string>
     <string name="remaining_data_date">No remaining data</string>
     <string name="loading">Uploading ...</string>
     <string name="wifi_problem">There is no Internet connection. Please, connect to a WiFi network and try uploading data again.</string>
     <string name="file_problem">Seems that we are having troubles with some sensor data. Please, repeat the test.</string>
     <string name="about_description_button">Description</string>
     <string name="about_description">3Ollin-Test is an application developed by the National Institute of Geriatrics in Mexico.\n\nIn 2012, WHO reports that falls are the second world wide cause of death of the elderly population. The incidence of falls varies between countries, in average the 30-40 percent of the population of 65+ fall each year, but the rate increases as population age over 75+, where the incidence rises up to 45-50 percent.\n\nIn general, physical performance is a good indicator of risk in older adults. Thus, the goal of this application is to collect sensors data from a mobile device while patients perform a controlled physical test. Based on this data, we might construct algorithms to measure the risk of fall.</string>
-    <string name="account_no_activated">The account still inactive. Please, refer to section ACTIVATE ACCOUNT for further information.</string>
+    <string name="account_no_activated">The account is inactive. Please, refer to section ACTIVATE ACCOUNT for further information.</string>
+    <string name="upload_description_fiware">Remaining file (fiware) since:</string>
 </resources>

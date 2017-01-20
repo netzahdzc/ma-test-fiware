@@ -34,6 +34,9 @@ import java.util.ArrayList;
  */
 public class PatientAdapter extends ArrayAdapter<Patient> {
 
+    private static final int MALE = 1;
+    private static final int FEMALE = 2;
+
     View listItemView;
     long uniqueParticipantId;
 
@@ -99,9 +102,9 @@ public class PatientAdapter extends ArrayAdapter<Patient> {
 //            imageView.setVisibility(View.GONE);
 
             // If there is no picture, then I set a placeholder
-            if (currentObject.getPatientGender() == 1)
+            if (currentObject.getPatientGender() == MALE)
                 imageView.setImageResource(R.drawable.profile_m);
-            if (currentObject.getPatientGender() == 2)
+            if (currentObject.getPatientGender() == FEMALE)
                 imageView.setImageResource(R.drawable.profile_w);
             imageView.setVisibility(View.VISIBLE);
         }

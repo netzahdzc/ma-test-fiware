@@ -29,10 +29,10 @@
     <string name="balance_question_one">El AM concluyó sin problemas las pruebas</string>
     <string name="balance_question_two">El AM movió los pies</string>
     <string name="balance_question_three">El AM necesita ayuda para mantener el equilibrio</string>
-    <string name="balance_step_hold_elderly">Sostenga los brazos del AM y ayúdelo a asumir la posición correcta de los pies.</string>
+    <string name="balance_step_hold_elderly">Sostenga los brazos del AM y ayúdelo a asumir la posición correcta de los pies. Tome en consideración que el AM asumirá esta posición durante 10 s.</string>
     <string name="balance_step_if_cannot_hold">IMPORTANTE: Si el paciente puede sostener la posición por 10 segundos sin mover los pies o que necesite ayuda, vaya a la siguiente posición. Si no es así, detenga la prueba.</string>
-    <string name="balance_step_release_elderly">Cuando el AM se encuentre estable, suéltelo, pero permanezca cerca para volverlo a sostener en caso de que pierda el equilibrio.</string>
-    <string name="balance_step_stay_feet_together">Describa y demuestre la posición de pies juntos. Indique al AM que se pare con los pies lado a lado.</string>
+    <string name="balance_step_release_elderly">Cuando el AM se encuentre estable, suéltelo, pero permanezca cerca para volverlo a sostener en caso de que pierda el equilibrio. Tome en consideración que el AM asumirá esta posición durante 10 s.</string>
+    <string name="balance_step_stay_feet_together">Describa y demuestre la posición de pies juntos. Indique al AM que se pare con los pies lado a lado. Tome en consideración que el AM asumirá esta posición durante 10 s.</string>
     <string name="balance_step_stay_next_elderly">ATENCIÓN: Manténgase siempre cerca del Adulto Mayor (AM) para prevenir caídas.</string>
     <string name="balance_step_stay_one_leg">Describa y demuestre la posición unipodal. Indique al AM que se pare en un pie.</string>
     <string name="balance_step_stay_semi_tandem">Describa y demuestre la posición de pies en semi-tándem. Indique al AM que coloque el empeine de un pie a la altura del dedo gordo del otro pie.</string>
@@ -241,4 +241,5 @@
     <string name="about_description">3Ollin-Test en una aplicación desarrollada por el Instituto Nacional de Geriatría.\n\nEn 2012, la OMS publica que la segunda causa mundial de muerte en los adultos mayores son las caídas. La incidencia de caídas varía entre cada país, aproximadamente del 30-40 porcentaje de la población de 65+ caen cada año, pero la tasa se incrementa con la edad para los adultos mayores de 75+ y en este grupo etario la incidencia sube hasta 45-50 porciento.\n\nEn general, el desempeño físico es un buen indicador de riesgo de caídas en adultos mayores. El objetivo de esta aplicación es el de utilizar la información obtenida mediante los sensores en el dispositivo móvil, para evaluar el desempeño físico de un adulto mayor (AM) al calcular de manera automatizada parámetros de las pruebas de la práctica clínica para posteriormente construir un algoritmo que cuantifique el riesgo que tiene el AM de sufrir una caída: si el desempeño físico empeora, el riesgo de caídas aumentará.\n\nResulta indispensable la identificación de los adultos mayores con mayor riesgo a sufrir una caída para poder implementar estrategias de prevención.</string>
     <string name="about_description_button">Descripción</string>
     <string name="account_no_activated" >La cuenta se encuentra inactiva. Por favor, ingrese a la sección ACTIVAR CUENTA para más información.</string>
+    <string name="upload_description_fiware">Archivos almacenados (fiware) desde:</string>
 </resources>

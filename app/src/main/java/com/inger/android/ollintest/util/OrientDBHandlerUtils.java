@@ -2,6 +2,7 @@ package com.inger.android.ollintest.util;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
@@ -22,12 +23,22 @@ public class OrientDBHandlerUtils {
         mDbHelper = new DatabaseHelperOrient(context);
     }
 
+    public OrientDBHandlerUtils(Context context, String sourceFileUri){
+        mDbHelper = new DatabaseHelperOrient(context, sourceFileUri);
+    }
+
     public void openDB() {
         db = mDbHelper.getWritableDatabase();
     }
 
     public void closeDB() {
         db.close();
+    }
+
+    public String getPath(){
+        String path = "";
+        path = mDbHelper.getDatabaseName();
+        return path;
     }
 
     // This method allows to store info into database
@@ -52,6 +63,44 @@ public class OrientDBHandlerUtils {
                 null,
                 values);
 
+    }
+
+    // This method reads info from database
+    public Cursor readData() {
+
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+
+        // Define a projection that specifies which columns from the database
+        // you will actually use after this query.
+        String[] projection = {
+                DatabaseContractOrient.SensorOrient.COLUMN_NAME_COL1,
+                DatabaseContractOrient.SensorOrient.COLUMN_NAME_COL2,
+                DatabaseContractOrient.SensorOrient.COLUMN_NAME_COL3,
+                DatabaseContractOrient.SensorOrient.COLUMN_NAME_COL4,
+                DatabaseContractOrient.SensorOrient.COLUMN_NAME_COL5,
+                DatabaseContractOrient.SensorOrient.COLUMN_NAME_COL6
+        };
+
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder = null;
+
+        // Define 'where' part of query.
+        String selection = null;
+
+        // Specify arguments in placeholder order.
+        String[] selectionArgs = null;
+
+        Cursor c = db.query(
+                DatabaseContractOrient.SensorOrient.TABLE_NAME, // The table to query
+                projection,                                     // The columns to return
+                selection,                                      // The columns for the WHERE clause
+                selectionArgs,                                  // The values for the WHERE clause
+                null,                                           // don't group the rows
+                null,                                           // don't filter by row groups
+                sortOrder                                       // The sort order
+        );
+
+        return c;
     }
 }
 

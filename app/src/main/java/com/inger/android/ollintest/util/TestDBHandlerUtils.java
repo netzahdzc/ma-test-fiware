@@ -230,6 +230,57 @@ public class TestDBHandlerUtils {
         return c;
     }
 
+    // This method reads info from database
+    public Cursor readAllData() {
+
+        // Define a projection that specifies which columns from the database
+        // you will actually use after this query.
+        String[] projection = {
+                DatabaseContract.Test._ID,
+                DatabaseContract.Test.COLUMN_NAME_COL1,
+                DatabaseContract.Test.COLUMN_NAME_COL2,
+                DatabaseContract.Test.COLUMN_NAME_COL3,
+                DatabaseContract.Test.COLUMN_NAME_COL4,
+                DatabaseContract.Test.COLUMN_NAME_COL5,
+                DatabaseContract.Test.COLUMN_NAME_COL6,
+                DatabaseContract.Test.COLUMN_NAME_COL7,
+                DatabaseContract.Test.COLUMN_NAME_COL8,
+                DatabaseContract.Test.COLUMN_NAME_COL9,
+                DatabaseContract.Test.COLUMN_NAME_COL10,
+                DatabaseContract.Test.COLUMN_NAME_COL11,
+                DatabaseContract.Test.COLUMN_NAME_COL12,
+                DatabaseContract.Test.COLUMN_NAME_COL13,
+                DatabaseContract.Test.COLUMN_NAME_COL14,
+                DatabaseContract.Test.COLUMN_NAME_COL15,
+                DatabaseContract.Test.COLUMN_NAME_COL16,
+                DatabaseContract.Test.COLUMN_NAME_COL17,
+                DatabaseContract.Test.COLUMN_NAME_COL18,
+                DatabaseContract.Test.COLUMN_NAME_COL19
+        };
+
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder =
+                DatabaseContract.Test._ID + " DESC ";
+
+        // Define 'where' part of query.
+        String selection = null;
+
+        // Specify arguments in placeholder order.
+        String[] selectionArgs = null;
+
+        Cursor c = db.query(
+                DatabaseContract.Test.TABLE_NAME, // The table to query
+                projection,                         // The columns to return
+                selection,                          // The columns for the WHERE clause
+                selectionArgs,                      // The values for the WHERE clause
+                null,                               // don't group the rows
+                null,                               // don't filter by row groups
+                sortOrder                           // The sort order
+        );
+
+        return c;
+    }
+
     public long getUniqueIDOfLatestTestType(long uniqueParticipantId) {
 
         long latestTestID = 0;

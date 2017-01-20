@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
+import android.util.Log;
 
 import java.io.File;
 
@@ -25,6 +26,10 @@ public class DatabaseHelperOrient extends SQLiteOpenHelper {
                         DB_NAME_ARRAY[0] + "_" + System.currentTimeMillis() + "." + DB_NAME_ARRAY[1],
                 null,
                 DatabaseContractOrient.DATABASE_VERSION);
+    }
+
+    public DatabaseHelperOrient(Context context, String filePath) {
+        super(context, filePath, null, DatabaseContractOrient.DATABASE_VERSION);
     }
 
     // Method is called during creation of the database

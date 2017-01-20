@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
@@ -16,7 +17,19 @@ import com.inger.android.ollintest.listener.MotionSensorListenerOrient;
 import com.inger.android.ollintest.util.SessionUtil;
 import com.inger.android.ollintest.util.TestDBHandlerUtils;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+
 public class MotionSensors extends Service {
+
+    private static final String FIWARE_PATH = "fiware";
+    private static final String APP_NAME = "three_ollin_test";
+    private final String APP_DIRECTORY_PATH = String.valueOf(
+            Environment.getExternalStorageDirectory() + "/" + APP_NAME);
 
     private TestDBHandlerUtils testDBObj;
     private SessionUtil sessionObj;
@@ -29,6 +42,7 @@ public class MotionSensors extends Service {
 
     private long uniquePatientId;
     private long uniqueTestId;
+
 
 
     @Override
@@ -94,8 +108,58 @@ public class MotionSensors extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        copy2FIWAREDir(mMotionSensorAcc.getDataBaseName(), "acc");
+        copy2FIWAREDir(mMotionSensorOrient.getDataBaseName(), "orient");
         mSensorManagerAcc.unregisterListener(mMotionSensorAcc);
         mSensorManagerOrient.unregisterListener(mMotionSensorOrient);
+    }
+
+    public void copy2FIWAREDir(String databasePath, String mSensorType){
+        String[] path = databasePath.split("/");
+        String dbName = path[path.length - 1];
+
+        String originPath = APP_DIRECTORY_PATH + "/" + mSensorType + "/";
+        String destinyPath = APP_DIRECTORY_PATH + "/" + FIWARE_PATH + "/" + mSensorType + "/";
+
+        copyFile(originPath, dbName, destinyPath);
+        //Log.v("XXX", dbName);
+    }
+
+    private void copyFile(String inputPath, String inputFile, String outputPath) {
+        InputStream in = null;
+        OutputStream out = null;
+        try {
+
+            //create output directory if it doesn't exist
+            File dir = new File (outputPath);
+            if (!dir.exists())
+            {
+                dir.mkdirs();
+            }
+
+
+            in = new FileInputStream(inputPath + inputFile);
+            out = new FileOutputStream(outputPath + inputFile);
+
+            byte[] buffer = new byte[1024];
+            int read;
+            while ((read = in.read(buffer)) != -1) {
+                out.write(buffer, 0, read);
+            }
+            in.close();
+            in = null;
+
+            // write the output file (You have now copied the file)
+            out.flush();
+            out.close();
+            out = null;
+
+        }  catch (FileNotFoundException fnfe1) {
+            Log.e("tag", fnfe1.getMessage());
+        }
+        catch (Exception e) {
+            Log.e("tag", e.getMessage());
+        }
     }
 
     @Override

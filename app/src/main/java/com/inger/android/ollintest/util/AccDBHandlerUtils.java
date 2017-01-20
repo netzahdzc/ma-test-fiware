@@ -2,8 +2,11 @@ package com.inger.android.ollintest.util;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
+import com.inger.android.ollintest.DatabaseContract;
 import com.inger.android.ollintest.DatabaseContractAcc;
 import com.inger.android.ollintest.DatabaseHelperAcc;
 
@@ -19,12 +22,22 @@ public class AccDBHandlerUtils {
         mDbHelper = new DatabaseHelperAcc(context);
     }
 
+    public AccDBHandlerUtils(Context context, String sourceFileUri){
+        mDbHelper = new DatabaseHelperAcc(context, sourceFileUri);
+    }
+
     public void openDB() {
         db = mDbHelper.getWritableDatabase();
     }
 
     public void closeDB() {
         db.close();
+    }
+
+    public String getPath(){
+        String path = "";
+        path = mDbHelper.getDatabaseName();
+        return path;
     }
 
     // This method allows to store info into database
@@ -49,7 +62,45 @@ public class AccDBHandlerUtils {
                 DatabaseContractAcc.SensorAcc.TABLE_NAME,
                 null,
                 values);
+    }
 
+    // This method reads info from database
+    public Cursor readData() {
+
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+
+        // Define a projection that specifies which columns from the database
+        // you will actually use after this query.
+        String[] projection = {
+                DatabaseContractAcc.SensorAcc.COLUMN_NAME_COL1,
+                DatabaseContractAcc.SensorAcc.COLUMN_NAME_COL2,
+                DatabaseContractAcc.SensorAcc.COLUMN_NAME_COL3,
+                DatabaseContractAcc.SensorAcc.COLUMN_NAME_COL4,
+                DatabaseContractAcc.SensorAcc.COLUMN_NAME_COL5,
+                DatabaseContractAcc.SensorAcc.COLUMN_NAME_COL6,
+                DatabaseContractAcc.SensorAcc.COLUMN_NAME_COL7
+        };
+
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder = null;
+
+        // Define 'where' part of query.
+        String selection = null;
+
+        // Specify arguments in placeholder order.
+        String[] selectionArgs = null;
+
+        Cursor c = db.query(
+                DatabaseContractAcc.SensorAcc.TABLE_NAME,   // The table to query
+                projection,                                 // The columns to return
+                selection,                                  // The columns for the WHERE clause
+                selectionArgs,                              // The values for the WHERE clause
+                null,                                       // don't group the rows
+                null,                                       // don't filter by row groups
+                sortOrder                                   // The sort order
+        );
+
+        return c;
     }
 }
 

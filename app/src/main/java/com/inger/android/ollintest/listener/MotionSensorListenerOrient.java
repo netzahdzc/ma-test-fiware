@@ -82,6 +82,10 @@ public class MotionSensorListenerOrient implements SensorEventListener {
         }
     }
 
+    public String getDataBaseName(){
+        return orientDBObj.getPath();
+    }
+
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 

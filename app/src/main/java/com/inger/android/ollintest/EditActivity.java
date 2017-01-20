@@ -48,6 +48,8 @@ import java.util.List;
 
 public class EditActivity extends AppCompatActivity {
 
+    private static int MALE = 1;
+    private static int FEMALE = 2;
     private static final int SELECT_PICTURE = 100;
     final int BIRTHDAY_FORMAT = 1;
     final int UPDATE_FORMAT = 2;
@@ -272,9 +274,9 @@ public class EditActivity extends AppCompatActivity {
 
                 ImageView patientPhoto = (ImageView) findViewById(R.id.edit_patient_photo);
                 if (mPatientPhoto == null) {
-                    if (mPatientGender == 1)
+                    if (mPatientGender == MALE)
                         patientPhoto.setImageResource(R.drawable.profile_m);
-                    if (mPatientGender == 2)
+                    if (mPatientGender == FEMALE)
                         patientPhoto.setImageResource(R.drawable.profile_w);
                 } else{
                     patientPhoto.setImageBitmap(Utilities.getImage(mPatientPhoto));

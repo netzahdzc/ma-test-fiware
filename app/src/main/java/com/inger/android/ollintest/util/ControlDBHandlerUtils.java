@@ -99,4 +99,43 @@ public class ControlDBHandlerUtils {
 
         return c;
     }
+
+    // This method reads info from database
+    public Cursor readAllData() {
+
+        // Define a projection that specifies which columns from the database
+        // you will actually use after this query.
+        String[] projection = {
+                DatabaseContract.Control._ID,
+                DatabaseContract.Control.COLUMN_NAME_COL1,
+                DatabaseContract.Control.COLUMN_NAME_COL2,
+                DatabaseContract.Control.COLUMN_NAME_COL3,
+                DatabaseContract.Control.COLUMN_NAME_COL4,
+                DatabaseContract.Control.COLUMN_NAME_COL5,
+                DatabaseContract.Control.COLUMN_NAME_COL6,
+                DatabaseContract.Control.COLUMN_NAME_COL7,
+                DatabaseContract.Control.COLUMN_NAME_COL8
+        };
+
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder = DatabaseContract.Control._ID + " DESC LIMIT 1";
+
+        // Define 'where' part of query.
+        String selection = null;
+
+        // Specify arguments in placeholder order.
+        String[] selectionArgs = null;
+
+        Cursor c = db.query(
+                DatabaseContract.Control.TABLE_NAME, // The table to query
+                projection,                         // The columns to return
+                selection,                          // The columns for the WHERE clause
+                selectionArgs,                      // The values for the WHERE clause
+                null,                               // don't group the rows
+                null,                               // don't filter by row groups
+                sortOrder                           // The sort order
+        );
+
+        return c;
+    }
 }

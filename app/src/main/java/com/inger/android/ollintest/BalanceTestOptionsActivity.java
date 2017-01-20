@@ -19,6 +19,9 @@ import com.inger.android.ollintest.util.Utilities;
  */
 public class BalanceTestOptionsActivity extends AppCompatActivity {
 
+    final int MALE = 1;
+    final int FEMALE = 2;
+
     final int BALANCE_TEST = 3;
 
     final int TANDEM_TEST_OPTION = 1;
@@ -111,9 +114,9 @@ public class BalanceTestOptionsActivity extends AppCompatActivity {
 
                 ImageView patientPhoto = (ImageView) findViewById(R.id.header_patient_photo);
                 if (mPatientPhoto == null) {
-                    if (mPatientGender == 1)
+                    if (mPatientGender == MALE)
                         patientPhoto.setImageResource(R.drawable.profile_m);
-                    if (mPatientGender == 2)
+                    if (mPatientGender == FEMALE)
                         patientPhoto.setImageResource(R.drawable.profile_w);
                 } else {
                     patientPhoto.setImageBitmap(Utilities.getImage(mPatientPhoto));

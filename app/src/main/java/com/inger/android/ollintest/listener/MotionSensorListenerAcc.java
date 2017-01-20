@@ -16,6 +16,7 @@ import com.inger.android.ollintest.util.OrientDBHandlerUtils;
  */
 public class MotionSensorListenerAcc implements SensorEventListener {
 
+    private static final String FIWARE_PATH = "fiware";
     private AccDBHandlerUtils accDBObj;
 
     private long mUniquePatientId;
@@ -55,6 +56,10 @@ public class MotionSensorListenerAcc implements SensorEventListener {
                 }
             }
         }
+    }
+
+    public String getDataBaseName(){
+        return accDBObj.getPath();
     }
 
     @Override

@@ -21,6 +21,9 @@ import com.inger.android.ollintest.util.Utilities;
  */
 public class TestsActivity extends AppCompatActivity {
 
+    final int MALE = 1;
+    final int FEMALE = 2;
+
     final int WALKING_TEST = 1;
     final int STRENGTH_TEST = 2;
     final int BALANCE_TEST = 3;
@@ -106,9 +109,9 @@ public class TestsActivity extends AppCompatActivity {
 
                 ImageView patientPhoto = (ImageView) findViewById(R.id.header_patient_photo);
                 if (mPatientPhoto == null) {
-                    if (mPatientGender == 1)
+                    if (mPatientGender == MALE)
                         patientPhoto.setImageResource(R.drawable.profile_m);
-                    if (mPatientGender == 2)
+                    if (mPatientGender == FEMALE)
                         patientPhoto.setImageResource(R.drawable.profile_w);
                 } else {
                     patientPhoto.setImageBitmap(Utilities.getImage(mPatientPhoto));

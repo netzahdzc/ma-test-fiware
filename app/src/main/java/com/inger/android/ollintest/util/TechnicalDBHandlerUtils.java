@@ -138,4 +138,42 @@ public class TechnicalDBHandlerUtils {
         return c;
     }
 
+    // This method reads info from database
+    public Cursor readDataByTestId(long testId) {
+
+        // Define a projection that specifies which columns from the database
+        // you will actually use after this query.
+        String[] projection = {
+                DatabaseContract.Technical._ID,
+                DatabaseContract.Technical.COLUMN_NAME_COL1,
+                DatabaseContract.Technical.COLUMN_NAME_COL2,
+                DatabaseContract.Technical.COLUMN_NAME_COL3,
+                DatabaseContract.Technical.COLUMN_NAME_COL4,
+                DatabaseContract.Technical.COLUMN_NAME_COL5,
+                DatabaseContract.Technical.COLUMN_NAME_COL6,
+                DatabaseContract.Technical.COLUMN_NAME_COL7
+        };
+
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder = DatabaseContract.Technical._ID + " DESC ";
+
+        // Define 'where' part of query.
+        String selection = DatabaseContract.Technical.COLUMN_NAME_COL2 + " LIKE ?";
+
+        // Specify arguments in placeholder order.
+        String[] selectionArgs = {String.valueOf(testId)};
+
+        Cursor c = db.query(
+                DatabaseContract.Technical.TABLE_NAME, // The table to query
+                projection,                         // The columns to return
+                selection,                          // The columns for the WHERE clause
+                selectionArgs,                      // The values for the WHERE clause
+                null,                               // don't group the rows
+                null,                               // don't filter by row groups
+                sortOrder                           // The sort order
+        );
+
+        return c;
+    }
+
 }

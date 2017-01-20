@@ -105,7 +105,10 @@ public class PatientDBHandlerUtils {
                 DatabaseContract.Patient.COLUMN_NAME_COL2,
                 DatabaseContract.Patient.COLUMN_NAME_COL3,
                 DatabaseContract.Patient.COLUMN_NAME_COL4,
-                DatabaseContract.Patient.COLUMN_NAME_COL5
+                DatabaseContract.Patient.COLUMN_NAME_COL5,
+                DatabaseContract.Patient.COLUMN_NAME_COL6,
+                DatabaseContract.Patient.COLUMN_NAME_COL7,
+                DatabaseContract.Patient.COLUMN_NAME_COL8
         };
 
         // How you want the results sorted in the resulting Cursor

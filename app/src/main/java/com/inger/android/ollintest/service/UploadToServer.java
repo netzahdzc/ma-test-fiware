@@ -172,6 +172,7 @@ public class UploadToServer extends Service {
                     String newFileName = dbNamePath[0] + "_" + System.currentTimeMillis() + "." + dbNamePath[1];
                     uploadMainFile(files[i].getPath(), newFileName);
 
+                    Log.v("adadas", "qweqweqwe");
                     uploadMainFileFiware("ControlTests");
                     uploadMainFileFiware("Patients");
                     uploadMainFileFiware("Questionnaires");
@@ -305,11 +306,12 @@ public class UploadToServer extends Service {
 
     // To upload main file to FIWARE in JSON documents
     public int uploadMainFileFiware(String option) throws JSONException {
+        Log.v(APP_NAME, "Processing " + option + " data");
         HttpURLConnection urlConnection;
         JSONObject data = extract2Parse(option);
 
         Log.v("XXX-00", FIWARE_ORION_PATH);
-        Log.v("XX- enviar", data.toString());
+        Log.v("XX- batch send*******", data.toString());
 
         try {
             // Open a HTTP  connection to  the URL
@@ -356,10 +358,10 @@ public class UploadToServer extends Service {
             Log.v("XXX salida:", sb.toString() + "");
 
             serverResponseCode = OK;
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             serverResponseCode = ERROR;
             Log.e(APP_NAME, "FileNotFoundException");
-        } catch (EOFException e){
+        } catch (EOFException e) {
             serverResponseCode = ERROR;
             Log.e(APP_NAME, "EOFException");
         } catch (MalformedURLException ex) {
@@ -401,75 +403,77 @@ public class UploadToServer extends Service {
             controlDBObj.openDB();
 
             Cursor mControlTest = controlDBObj.readAllData();
-            if (mControlTest.moveToFirst()) {
-                patient_id = mControlTest.getString(
-                        mControlTest.getColumnIndexOrThrow(DatabaseContract.Control.COLUMN_NAME_COL1)
-                );
-                weight = mControlTest.getString(
-                        mControlTest.getColumnIndexOrThrow(DatabaseContract.Control.COLUMN_NAME_COL2)
-                );
-                height = mControlTest.getString(
-                        mControlTest.getColumnIndexOrThrow(DatabaseContract.Control.COLUMN_NAME_COL3)
-                );
-                waist_size = mControlTest.getString(
-                        mControlTest.getColumnIndexOrThrow(DatabaseContract.Control.COLUMN_NAME_COL4)
-                );
-                heart_rate = mControlTest.getString(
-                        mControlTest.getColumnIndexOrThrow(DatabaseContract.Control.COLUMN_NAME_COL5)
-                );
-                systolic_blood = mControlTest.getString(
-                        mControlTest.getColumnIndexOrThrow(DatabaseContract.Control.COLUMN_NAME_COL6)
-                );
-                diastolic_blood = mControlTest.getString(
-                        mControlTest.getColumnIndexOrThrow(DatabaseContract.Control.COLUMN_NAME_COL7)
-                );
-                time_interval = mControlTest.getString(
-                        mControlTest.getColumnIndexOrThrow(DatabaseContract.Control.COLUMN_NAME_COL8)
-                );
+            if (mControlTest != null) {
+                while (mControlTest.moveToNext()) {
+                    patient_id = mControlTest.getString(
+                            mControlTest.getColumnIndexOrThrow(DatabaseContract.Control.COLUMN_NAME_COL1)
+                    );
+                    weight = mControlTest.getString(
+                            mControlTest.getColumnIndexOrThrow(DatabaseContract.Control.COLUMN_NAME_COL2)
+                    );
+                    height = mControlTest.getString(
+                            mControlTest.getColumnIndexOrThrow(DatabaseContract.Control.COLUMN_NAME_COL3)
+                    );
+                    waist_size = mControlTest.getString(
+                            mControlTest.getColumnIndexOrThrow(DatabaseContract.Control.COLUMN_NAME_COL4)
+                    );
+                    heart_rate = mControlTest.getString(
+                            mControlTest.getColumnIndexOrThrow(DatabaseContract.Control.COLUMN_NAME_COL5)
+                    );
+                    systolic_blood = mControlTest.getString(
+                            mControlTest.getColumnIndexOrThrow(DatabaseContract.Control.COLUMN_NAME_COL6)
+                    );
+                    diastolic_blood = mControlTest.getString(
+                            mControlTest.getColumnIndexOrThrow(DatabaseContract.Control.COLUMN_NAME_COL7)
+                    );
+                    time_interval = mControlTest.getString(
+                            mControlTest.getColumnIndexOrThrow(DatabaseContract.Control.COLUMN_NAME_COL8)
+                    );
 
-                // Building JSON document
-                String uniquePostId = getUniqueID().replaceAll("-", "") + "-" + "control" + "-" +
-                        patient_id + "" + System.currentTimeMillis();
-                main = new JSONObject();
-                main.put("id", uniquePostId);
-                main.put("type", "ControlTest");
+                    // Building JSON document
+                    String uniquePostId = getUniqueID().replaceAll("-", "") + "-" + "control" + "-" +
+                            patient_id + "" + System.currentTimeMillis();
+                    main = new JSONObject();
+                    main.put("id", uniquePostId);
+                    main.put("type", "ControlTest");
 
-                standardContent = new JSONObject();
-                standardContent.put("value", weight);
-                standardContent.put("type", "kg");
-                main.put("omh:body_weight", standardContent);
+                    standardContent = new JSONObject();
+                    standardContent.put("value", weight);
+                    standardContent.put("type", "kg");
+                    main.put("omh:body_weight", standardContent);
 
-                standardContent = new JSONObject();
-                standardContent.put("value", height);
-                standardContent.put("type", "cm");
-                main.put("omh:body_height", standardContent);
+                    standardContent = new JSONObject();
+                    standardContent.put("value", height);
+                    standardContent.put("type", "cm");
+                    main.put("omh:body_height", standardContent);
 
-                standardContent = new JSONObject();
-                standardContent.put("value", waist_size);
-                standardContent.put("type", "cm");
-                main.put("waistCircumference", standardContent);
+                    standardContent = new JSONObject();
+                    standardContent.put("value", waist_size);
+                    standardContent.put("type", "cm");
+                    main.put("waistCircumference", standardContent);
 
-                standardContent = new JSONObject();
-                standardContent.put("value", heart_rate);
-                standardContent.put("type", "beats/min");
-                main.put("omh:heart_rate", standardContent);
+                    standardContent = new JSONObject();
+                    standardContent.put("value", heart_rate);
+                    standardContent.put("type", "beats/min");
+                    main.put("omh:heart_rate", standardContent);
 
-                standardContent = new JSONObject();
-                standardContent.put("value", systolic_blood);
-                standardContent.put("type", "mmHg");
-                main.put("omh:systolic_blood_pressure", standardContent);
+                    standardContent = new JSONObject();
+                    standardContent.put("value", systolic_blood);
+                    standardContent.put("type", "mmHg");
+                    main.put("omh:systolic_blood_pressure", standardContent);
 
-                standardContent = new JSONObject();
-                standardContent.put("value", diastolic_blood);
-                standardContent.put("type", "mmHg");
-                main.put("omh:diastolic_blood_pressure", standardContent);
+                    standardContent = new JSONObject();
+                    standardContent.put("value", diastolic_blood);
+                    standardContent.put("type", "mmHg");
+                    main.put("omh:diastolic_blood_pressure", standardContent);
 
-                standardContent = new JSONObject();
-                standardContent.put("value", time_interval);
-                standardContent.put("type", "omh:time-interval");
-                main.put("omh:effective_time_frame", standardContent);
+                    standardContent = new JSONObject();
+                    standardContent.put("value", time_interval);
+                    standardContent.put("type", "omh:time-interval");
+                    main.put("omh:effective_time_frame", standardContent);
 
-                entitiesArray.put(main);
+                    entitiesArray.put(main);
+                }
             }
         }
 
@@ -490,68 +494,70 @@ public class UploadToServer extends Service {
             patientDBObj.openDB();
 
             Cursor mControlPatien = patientDBObj.readAllData();
-            if (mControlPatien.moveToFirst()) {
-                patient_id = mControlPatien.getString(
-                        mControlPatien.getColumnIndexOrThrow(DatabaseContract.Patient._ID)
-                );
-                name = mControlPatien.getString(
-                        mControlPatien.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL1)
-                );
-                surname = mControlPatien.getString(
-                        mControlPatien.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL2)
-                );
-                gender = mControlPatien.getString(
-                        mControlPatien.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL3)
-                );
-                birthday = mControlPatien.getString(
-                        mControlPatien.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL4)
-                );
-                trash = mControlPatien.getString(
-                        mControlPatien.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL6)
-                );
-                created = mControlPatien.getString(
-                        mControlPatien.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL7)
-                );
-                lastUpdate = mControlPatien.getString(
-                        mControlPatien.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL8)
-                );
+            if (mControlPatien != null) {
+                while (mControlPatien.moveToNext()) {
+                    patient_id = mControlPatien.getString(
+                            mControlPatien.getColumnIndexOrThrow(DatabaseContract.Patient._ID)
+                    );
+                    name = mControlPatien.getString(
+                            mControlPatien.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL1)
+                    );
+                    surname = mControlPatien.getString(
+                            mControlPatien.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL2)
+                    );
+                    gender = mControlPatien.getString(
+                            mControlPatien.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL3)
+                    );
+                    birthday = mControlPatien.getString(
+                            mControlPatien.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL4)
+                    );
+                    trash = mControlPatien.getString(
+                            mControlPatien.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL6)
+                    );
+                    created = mControlPatien.getString(
+                            mControlPatien.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL7)
+                    );
+                    lastUpdate = mControlPatien.getString(
+                            mControlPatien.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL8)
+                    );
 
-                // Building JSON document
-                String uniquePostId = getUniqueID().replaceAll("-", "") + "-" + "patient" + "-" +
-                        patient_id + "" + System.currentTimeMillis();
-                main = new JSONObject();
-                main.put("id", uniquePostId);
-                main.put("type", "ControlTest");
+                    // Building JSON document
+                    String uniquePostId = getUniqueID().replaceAll("-", "") + "-" + "patient" + "-" +
+                            patient_id + "" + System.currentTimeMillis();
+                    main = new JSONObject();
+                    main.put("id", uniquePostId);
+                    main.put("type", "ControlTest");
 
-                standardContent = new JSONObject();
-                standardContent.put("value", name);
-                main.put("name", standardContent);
+                    standardContent = new JSONObject();
+                    standardContent.put("value", name);
+                    main.put("name", standardContent);
 
-                standardContent = new JSONObject();
-                standardContent.put("value", surname);
-                main.put("surname", standardContent);
+                    standardContent = new JSONObject();
+                    standardContent.put("value", surname);
+                    main.put("surname", standardContent);
 
-                standardContent = new JSONObject();
-                standardContent.put("value", gender);
-                main.put("gender", standardContent);
+                    standardContent = new JSONObject();
+                    standardContent.put("value", gender);
+                    main.put("gender", standardContent);
 
-                standardContent = new JSONObject();
-                standardContent.put("value", birthday);
-                main.put("birthday", standardContent);
+                    standardContent = new JSONObject();
+                    standardContent.put("value", birthday);
+                    main.put("birthday", standardContent);
 
-                standardContent = new JSONObject();
-                standardContent.put("value", trash);
-                main.put("trash", standardContent);
+                    standardContent = new JSONObject();
+                    standardContent.put("value", trash);
+                    main.put("trash", standardContent);
 
-                standardContent = new JSONObject();
-                standardContent.put("value", created);
-                main.put("created", standardContent);
+                    standardContent = new JSONObject();
+                    standardContent.put("value", created);
+                    main.put("created", standardContent);
 
-                standardContent = new JSONObject();
-                standardContent.put("value", lastUpdate);
-                main.put("lastUpdate", standardContent);
+                    standardContent = new JSONObject();
+                    standardContent.put("value", lastUpdate);
+                    main.put("lastUpdate", standardContent);
 
-                entitiesArray.put(main);
+                    entitiesArray.put(main);
+                }
             }
         }
 
@@ -573,75 +579,77 @@ public class UploadToServer extends Service {
             userDBObj.openDB();
 
             Cursor mControlUser = userDBObj.readAllData();
-            if (mControlUser.moveToFirst()) {
-                user_id = mControlUser.getString(
-                        mControlUser.getColumnIndexOrThrow(DatabaseContract.User._ID)
-                );
-                name = mControlUser.getString(
-                        mControlUser.getColumnIndexOrThrow(DatabaseContract.User.COLUMN_NAME_COL1)
-                );
-                surname = mControlUser.getString(
-                        mControlUser.getColumnIndexOrThrow(DatabaseContract.User.COLUMN_NAME_COL2)
-                );
-                gender = mControlUser.getString(
-                        mControlUser.getColumnIndexOrThrow(DatabaseContract.User.COLUMN_NAME_COL3)
-                );
-                activationCode = mControlUser.getString(
-                        mControlUser.getColumnIndexOrThrow(DatabaseContract.User.COLUMN_NAME_COL6)
-                );
-                email = mControlUser.getString(
-                        mControlUser.getColumnIndexOrThrow(DatabaseContract.User.COLUMN_NAME_COL4)
-                );
-                trash = mControlUser.getString(
-                        mControlUser.getColumnIndexOrThrow(DatabaseContract.User.COLUMN_NAME_COL8)
-                );
-                created = mControlUser.getString(
-                        mControlUser.getColumnIndexOrThrow(DatabaseContract.User.COLUMN_NAME_COL9)
-                );
-                lastUpdate = mControlUser.getString(
-                        mControlUser.getColumnIndexOrThrow(DatabaseContract.User.COLUMN_NAME_COL10)
-                );
+            if (mControlUser != null) {
+                while (mControlUser.moveToNext()) {
+                    user_id = mControlUser.getString(
+                            mControlUser.getColumnIndexOrThrow(DatabaseContract.User._ID)
+                    );
+                    name = mControlUser.getString(
+                            mControlUser.getColumnIndexOrThrow(DatabaseContract.User.COLUMN_NAME_COL1)
+                    );
+                    surname = mControlUser.getString(
+                            mControlUser.getColumnIndexOrThrow(DatabaseContract.User.COLUMN_NAME_COL2)
+                    );
+                    gender = mControlUser.getString(
+                            mControlUser.getColumnIndexOrThrow(DatabaseContract.User.COLUMN_NAME_COL3)
+                    );
+                    activationCode = mControlUser.getString(
+                            mControlUser.getColumnIndexOrThrow(DatabaseContract.User.COLUMN_NAME_COL6)
+                    );
+                    email = mControlUser.getString(
+                            mControlUser.getColumnIndexOrThrow(DatabaseContract.User.COLUMN_NAME_COL4)
+                    );
+                    trash = mControlUser.getString(
+                            mControlUser.getColumnIndexOrThrow(DatabaseContract.User.COLUMN_NAME_COL8)
+                    );
+                    created = mControlUser.getString(
+                            mControlUser.getColumnIndexOrThrow(DatabaseContract.User.COLUMN_NAME_COL9)
+                    );
+                    lastUpdate = mControlUser.getString(
+                            mControlUser.getColumnIndexOrThrow(DatabaseContract.User.COLUMN_NAME_COL10)
+                    );
 
-                // Building JSON document
-                String uniquePostId = getUniqueID().replaceAll("-", "") + "-" + "user" + "-" +
-                        user_id + "" + System.currentTimeMillis();
-                main = new JSONObject();
-                main.put("id", uniquePostId);
-                main.put("type", "ControlTest");
+                    // Building JSON document
+                    String uniquePostId = getUniqueID().replaceAll("-", "") + "-" + "user" + "-" +
+                            user_id + "" + System.currentTimeMillis();
+                    main = new JSONObject();
+                    main.put("id", uniquePostId);
+                    main.put("type", "ControlTest");
 
-                standardContent = new JSONObject();
-                standardContent.put("value", name);
-                main.put("name", standardContent);
+                    standardContent = new JSONObject();
+                    standardContent.put("value", name);
+                    main.put("name", standardContent);
 
-                standardContent = new JSONObject();
-                standardContent.put("value", surname);
-                main.put("surname", standardContent);
+                    standardContent = new JSONObject();
+                    standardContent.put("value", surname);
+                    main.put("surname", standardContent);
 
-                standardContent = new JSONObject();
-                standardContent.put("value", gender);
-                main.put("gender", standardContent);
+                    standardContent = new JSONObject();
+                    standardContent.put("value", gender);
+                    main.put("gender", standardContent);
 
-                standardContent = new JSONObject();
-                standardContent.put("value", activationCode);
-                main.put("activationCode", standardContent);
+                    standardContent = new JSONObject();
+                    standardContent.put("value", activationCode);
+                    main.put("activationCode", standardContent);
 
-                standardContent = new JSONObject();
-                standardContent.put("value", email);
-                main.put("email", standardContent);
+                    standardContent = new JSONObject();
+                    standardContent.put("value", email);
+                    main.put("email", standardContent);
 
-                standardContent = new JSONObject();
-                standardContent.put("value", trash);
-                main.put("trash", standardContent);
+                    standardContent = new JSONObject();
+                    standardContent.put("value", trash);
+                    main.put("trash", standardContent);
 
-                standardContent = new JSONObject();
-                standardContent.put("value", created);
-                main.put("created", standardContent);
+                    standardContent = new JSONObject();
+                    standardContent.put("value", created);
+                    main.put("created", standardContent);
 
-                standardContent = new JSONObject();
-                standardContent.put("value", lastUpdate);
-                main.put("lastUpdate", standardContent);
+                    standardContent = new JSONObject();
+                    standardContent.put("value", lastUpdate);
+                    main.put("lastUpdate", standardContent);
 
-                entitiesArray.put(main);
+                    entitiesArray.put(main);
+                }
             }
         }
 
@@ -668,116 +676,118 @@ public class UploadToServer extends Service {
             testDBObj.openDB();
 
             Cursor mControlTest = testDBObj.readAllData();
-            if (mControlTest.moveToFirst()) {
-                test_id = mControlTest.getString(
-                        mControlTest.getColumnIndexOrThrow(DatabaseContract.Test._ID)
-                );
-                patient_id = mControlTest.getString(
-                        mControlTest.getColumnIndexOrThrow(DatabaseContract.Test._ID)
-                );
-                question1 = mControlTest.getString(
-                        mControlTest.getColumnIndexOrThrow(DatabaseContract.Test.COLUMN_NAME_COL6)
-                );
-                question2 = mControlTest.getString(
-                        mControlTest.getColumnIndexOrThrow(DatabaseContract.Test.COLUMN_NAME_COL7)
-                );
-                question3 = mControlTest.getString(
-                        mControlTest.getColumnIndexOrThrow(DatabaseContract.Test.COLUMN_NAME_COL8)
-                );
-                question4 = mControlTest.getString(
-                        mControlTest.getColumnIndexOrThrow(DatabaseContract.Test.COLUMN_NAME_COL9)
-                );
-                question5 = mControlTest.getString(
-                        mControlTest.getColumnIndexOrThrow(DatabaseContract.Test.COLUMN_NAME_COL10)
-                );
-                question6 = mControlTest.getString(
-                        mControlTest.getColumnIndexOrThrow(DatabaseContract.Test.COLUMN_NAME_COL11)
-                );
-                question7 = mControlTest.getString(
-                        mControlTest.getColumnIndexOrThrow(DatabaseContract.Test.COLUMN_NAME_COL12)
-                );
-                question8 = mControlTest.getString(
-                        mControlTest.getColumnIndexOrThrow(DatabaseContract.Test.COLUMN_NAME_COL13)
-                );
-                question9 = mControlTest.getString(
-                        mControlTest.getColumnIndexOrThrow(DatabaseContract.Test.COLUMN_NAME_COL14)
-                );
-                question10 = mControlTest.getString(
-                        mControlTest.getColumnIndexOrThrow(DatabaseContract.Test.COLUMN_NAME_COL15)
-                );
-                status = mControlTest.getString(
-                        mControlTest.getColumnIndexOrThrow(DatabaseContract.Test.COLUMN_NAME_COL18)
-                );
-                lastUpdate = mControlTest.getString(
-                        mControlTest.getColumnIndexOrThrow(DatabaseContract.Test.COLUMN_NAME_COL19)
-                );
+            if (mControlTest != null) {
+                while (mControlTest.moveToNext()) {
+                    test_id = mControlTest.getString(
+                            mControlTest.getColumnIndexOrThrow(DatabaseContract.Test._ID)
+                    );
+                    patient_id = mControlTest.getString(
+                            mControlTest.getColumnIndexOrThrow(DatabaseContract.Test._ID)
+                    );
+                    question1 = mControlTest.getString(
+                            mControlTest.getColumnIndexOrThrow(DatabaseContract.Test.COLUMN_NAME_COL6)
+                    );
+                    question2 = mControlTest.getString(
+                            mControlTest.getColumnIndexOrThrow(DatabaseContract.Test.COLUMN_NAME_COL7)
+                    );
+                    question3 = mControlTest.getString(
+                            mControlTest.getColumnIndexOrThrow(DatabaseContract.Test.COLUMN_NAME_COL8)
+                    );
+                    question4 = mControlTest.getString(
+                            mControlTest.getColumnIndexOrThrow(DatabaseContract.Test.COLUMN_NAME_COL9)
+                    );
+                    question5 = mControlTest.getString(
+                            mControlTest.getColumnIndexOrThrow(DatabaseContract.Test.COLUMN_NAME_COL10)
+                    );
+                    question6 = mControlTest.getString(
+                            mControlTest.getColumnIndexOrThrow(DatabaseContract.Test.COLUMN_NAME_COL11)
+                    );
+                    question7 = mControlTest.getString(
+                            mControlTest.getColumnIndexOrThrow(DatabaseContract.Test.COLUMN_NAME_COL12)
+                    );
+                    question8 = mControlTest.getString(
+                            mControlTest.getColumnIndexOrThrow(DatabaseContract.Test.COLUMN_NAME_COL13)
+                    );
+                    question9 = mControlTest.getString(
+                            mControlTest.getColumnIndexOrThrow(DatabaseContract.Test.COLUMN_NAME_COL14)
+                    );
+                    question10 = mControlTest.getString(
+                            mControlTest.getColumnIndexOrThrow(DatabaseContract.Test.COLUMN_NAME_COL15)
+                    );
+                    status = mControlTest.getString(
+                            mControlTest.getColumnIndexOrThrow(DatabaseContract.Test.COLUMN_NAME_COL18)
+                    );
+                    lastUpdate = mControlTest.getString(
+                            mControlTest.getColumnIndexOrThrow(DatabaseContract.Test.COLUMN_NAME_COL19)
+                    );
 
-                // Building JSON document
-                String uniquePostId = getUniqueID().replaceAll("-", "") + "-" + "questionnaire" + "-" +
-                        test_id + "" + System.currentTimeMillis();
-                main = new JSONObject();
-                main.put("id", uniquePostId);
-                main.put("type", "Questionnaire");
+                    // Building JSON document
+                    String uniquePostId = getUniqueID().replaceAll("-", "") + "-" + "questionnaire" + "-" +
+                            test_id + "" + System.currentTimeMillis();
+                    main = new JSONObject();
+                    main.put("id", uniquePostId);
+                    main.put("type", "Questionnaire");
 
-                standardContent = new JSONObject();
-                standardContent.put("value", test_id);
-                standardContent.put("type", "id");
-                main.put("test", standardContent);
+                    standardContent = new JSONObject();
+                    standardContent.put("value", test_id);
+                    standardContent.put("type", "id");
+                    main.put("test", standardContent);
 
-                standardContent = new JSONObject();
-                standardContent.put("value", patient_id);
-                standardContent.put("type", "id");
-                main.put("patient", standardContent);
+                    standardContent = new JSONObject();
+                    standardContent.put("value", patient_id);
+                    standardContent.put("type", "id");
+                    main.put("patient", standardContent);
 
-                standardContent = new JSONObject();
-                standardContent.put("value", question1);
-                main.put("question1", standardContent);
+                    standardContent = new JSONObject();
+                    standardContent.put("value", question1);
+                    main.put("question1", standardContent);
 
-                standardContent = new JSONObject();
-                standardContent.put("value", question2);
-                main.put("question2", standardContent);
+                    standardContent = new JSONObject();
+                    standardContent.put("value", question2);
+                    main.put("question2", standardContent);
 
-                standardContent = new JSONObject();
-                standardContent.put("value", question3);
-                main.put("question3", standardContent);
+                    standardContent = new JSONObject();
+                    standardContent.put("value", question3);
+                    main.put("question3", standardContent);
 
-                standardContent = new JSONObject();
-                standardContent.put("value", question4);
-                main.put("question4", standardContent);
+                    standardContent = new JSONObject();
+                    standardContent.put("value", question4);
+                    main.put("question4", standardContent);
 
-                standardContent = new JSONObject();
-                standardContent.put("value", question5);
-                main.put("question5", standardContent);
+                    standardContent = new JSONObject();
+                    standardContent.put("value", question5);
+                    main.put("question5", standardContent);
 
-                standardContent = new JSONObject();
-                standardContent.put("value", question6);
-                main.put("question6", standardContent);
+                    standardContent = new JSONObject();
+                    standardContent.put("value", question6);
+                    main.put("question6", standardContent);
 
-                standardContent = new JSONObject();
-                standardContent.put("value", question7);
-                main.put("question7", standardContent);
+                    standardContent = new JSONObject();
+                    standardContent.put("value", question7);
+                    main.put("question7", standardContent);
 
-                standardContent = new JSONObject();
-                standardContent.put("value", question8);
-                main.put("question8", standardContent);
+                    standardContent = new JSONObject();
+                    standardContent.put("value", question8);
+                    main.put("question8", standardContent);
 
-                standardContent = new JSONObject();
-                standardContent.put("value", question9);
-                main.put("question9", standardContent);
+                    standardContent = new JSONObject();
+                    standardContent.put("value", question9);
+                    main.put("question9", standardContent);
 
-                standardContent = new JSONObject();
-                standardContent.put("value", question10);
-                main.put("question10", standardContent);
+                    standardContent = new JSONObject();
+                    standardContent.put("value", question10);
+                    main.put("question10", standardContent);
 
-                standardContent = new JSONObject();
-                standardContent.put("value", status);
-                main.put("status", standardContent);
+                    standardContent = new JSONObject();
+                    standardContent.put("value", status);
+                    main.put("status", standardContent);
 
-                standardContent = new JSONObject();
-                standardContent.put("value", lastUpdate);
-                main.put("lastUpdate", standardContent);
+                    standardContent = new JSONObject();
+                    standardContent.put("value", lastUpdate);
+                    main.put("lastUpdate", standardContent);
 
-                entitiesArray.put(main);
+                    entitiesArray.put(main);
+                }
             }
         }
 
@@ -1170,7 +1180,7 @@ public class UploadToServer extends Service {
         //if (batch.size() >= 1)
         //    standardContent.put("value", "[SEGMENTED]");
         //else
-            standardContent.put("value", batch.get(0));
+        standardContent.put("value", batch.get(0));
         standardContent.put("type", "sensor-data");
         standardContent.put("metadata", metadataContent);
         main.put("data", standardContent);
@@ -1251,10 +1261,10 @@ public class UploadToServer extends Service {
             Log.v("XXX salida:", sb.toString() + "");
 
             serverResponseCode = OK;
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             serverResponseCode = ERROR;
             Log.e(APP_NAME, "FileNotFoundException");
-        } catch (EOFException e){
+        } catch (EOFException e) {
             serverResponseCode = ERROR;
             Log.e(APP_NAME, "EOFException");
         } catch (MalformedURLException ex) {
@@ -1301,7 +1311,7 @@ public class UploadToServer extends Service {
         int j = 0;
         while (j < batch.size()) {
             try {
-                Log.v("XX", batch.get(j)+"");
+                Log.v("XX", batch.get(j) + "");
                 // Open a HTTP  connection to  the URL
                 Log.v("XXX salida:", "Open HTTP  connection to  the URL");
                 urlConnection = (HttpURLConnection) ((new URL(FIWARE_ORION_PATH + "/" + "entities" + "/" + uniquePostId +

@@ -310,12 +310,10 @@ public class UploadToServer extends Service {
         HttpURLConnection urlConnection;
         JSONObject data = extract2Parse(option);
 
-        Log.v("XXX-00", FIWARE_ORION_PATH);
-        Log.v("XX- batch send*******", data.toString());
+        Log.v(APP_NAME, "Preparing batch: " + data.toString());
 
         try {
             // Open a HTTP  connection to  the URL
-            Log.v("XXX salida:", "Open HTTP  connection to  the URL");
             urlConnection = (HttpURLConnection) ((new URL(FIWARE_ORION_PATH + "/" + "op" + "/" + "update").openConnection()));
             urlConnection.setDoInput(true); // Allow Inputs
             urlConnection.setDoOutput(true); // Allow Outputs
@@ -330,7 +328,7 @@ public class UploadToServer extends Service {
             }
 
             //Write
-            Log.v("XXX salida:", "Writing document");
+            Log.v(APP_NAME, "Writing document");
             OutputStream outputStream = urlConnection.getOutputStream();
             BufferedWriter writer = new BufferedWriter(
                     new OutputStreamWriter(outputStream, ENCODING));
@@ -340,7 +338,7 @@ public class UploadToServer extends Service {
             outputStream.close();
 
             //Read
-            Log.v("XXX salida:", "Reading document");
+            Log.v(APP_NAME, "Reading document");
             BufferedReader bufferedReader = new BufferedReader(
                     new InputStreamReader(urlConnection.getInputStream(), ENCODING));
 
@@ -351,11 +349,11 @@ public class UploadToServer extends Service {
                 sb.append(line);
             }
 
-            Log.v("XXX salida:", "Closing document");
+            Log.v(APP_NAME, "Closing document");
             bufferedReader.close();
 
             //close the streams
-            Log.v("XXX salida:", sb.toString() + "");
+            Log.v(APP_NAME, sb.toString() + "");
 
             serverResponseCode = OK;
         } catch (FileNotFoundException e) {
@@ -1212,13 +1210,11 @@ public class UploadToServer extends Service {
         List batch = (List) jsonAndBatch.get(1);
         String uniquePostId = (String) jsonAndBatch.get(2);
 
-        Log.v("XX- enviar", data.toString());
-
-        Log.v("XXX", "number of elements in batch: " + batch.size());
+        Log.v(APP_NAME, "Preparing batch: " + data.toString());
+        Log.v(APP_NAME, "Number of elements in batch: " + batch.size());
 
         try {
             // Open a HTTP  connection to  the URL
-            Log.v("XXX salida:", "Open HTTP  connection to  the URL");
             urlConnection = (HttpURLConnection) ((new URL(FIWARE_ORION_PATH + "/" + "entities").openConnection()));
             urlConnection.setDoInput(true); // Allow Inputs
             urlConnection.setDoOutput(true); // Allow Outputs
@@ -1233,7 +1229,7 @@ public class UploadToServer extends Service {
             }
 
             //Write
-            Log.v("XXX salida:", "Writing document");
+            Log.v(APP_NAME, "Writing document");
             OutputStream outputStream = urlConnection.getOutputStream();
             BufferedWriter writer = new BufferedWriter(
                     new OutputStreamWriter(outputStream, ENCODING));
@@ -1243,7 +1239,7 @@ public class UploadToServer extends Service {
             outputStream.close();
 
             //Read
-            Log.v("XXX salida:", "Reading document");
+            Log.v(APP_NAME, "Reading document");
             BufferedReader bufferedReader = new BufferedReader(
                     new InputStreamReader(urlConnection.getInputStream(), ENCODING));
 
@@ -1254,11 +1250,11 @@ public class UploadToServer extends Service {
                 sb.append(line);
             }
 
-            Log.v("XXX salida:", "Closing document");
+            Log.v(APP_NAME, "Closing document");
             bufferedReader.close();
 
             //close the streams
-            Log.v("XXX salida:", sb.toString() + "");
+            Log.v(APP_NAME, sb.toString() + "");
 
             serverResponseCode = OK;
         } catch (FileNotFoundException e) {
@@ -1306,14 +1302,11 @@ public class UploadToServer extends Service {
     public void sendPuts(String uniquePostId, List batch) {
         HttpURLConnection urlConnection;
 
-        Log.v("XXX", "number of elements in batch: " + batch.size());
-
         int j = 0;
         while (j < batch.size()) {
             try {
-                Log.v("XX", batch.get(j) + "");
+                Log.v(APP_NAME, "Sensor batch: " + batch.get(j) + "");
                 // Open a HTTP  connection to  the URL
-                Log.v("XXX salida:", "Open HTTP  connection to  the URL");
                 urlConnection = (HttpURLConnection) ((new URL(FIWARE_ORION_PATH + "/" + "entities" + "/" + uniquePostId +
                         "/" + "metadata?options=append").openConnection()));
                 urlConnection.setDoInput(true); // Allow Inputs
@@ -1329,7 +1322,7 @@ public class UploadToServer extends Service {
                 }
 
                 //Write
-                Log.v("XXX salida:", "Writing document");
+                Log.v(APP_NAME, "Writing document");
                 OutputStream outputStream = urlConnection.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(
                         new OutputStreamWriter(outputStream, ENCODING));
@@ -1339,7 +1332,7 @@ public class UploadToServer extends Service {
                 outputStream.close();
 
                 //Read
-                Log.v("XXX salida:", "Reading document");
+                Log.v(APP_NAME, "Reading document");
                 BufferedReader bufferedReader = new BufferedReader(
                         new InputStreamReader(urlConnection.getInputStream(), ENCODING));
 
@@ -1350,11 +1343,11 @@ public class UploadToServer extends Service {
                     sb.append(line);
                 }
 
-                Log.v("XXX salida:", "Closing document");
+                Log.v(APP_NAME, "Closing document");
                 bufferedReader.close();
 
                 //close the streams
-                Log.v("XXX salida:", sb.toString() + "");
+                Log.v(APP_NAME, sb.toString() + "");
 
                 serverResponseCode = OK;
             } catch (MalformedURLException ex) {

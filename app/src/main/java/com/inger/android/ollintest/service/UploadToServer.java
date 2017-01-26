@@ -71,12 +71,12 @@ public class UploadToServer extends Service {
     private static final String APP_NAME = "three_ollin_test";
     private static final String FIWARE_PATH = "fiware";
     private static final String FIWARE_ORION_PATH = "http://207.249.127.162:1026/v2";
-    private static final String INGER_PATH = "http://investigacion.inger.gob.mx";
+    private static final String INGER_PATH = "http://investigacion.inger.gob.mx:8000";
 
     private final String APP_DIRECTORY_PATH = String.valueOf(
             Environment.getExternalStorageDirectory() + "/" + APP_NAME);
 
-    private String upLoadServerUri = INGER_PATH + "/investigacion/sqlite/UploadToServer.php";
+    private String upLoadServerUri = INGER_PATH + "/sqlite/UploadToServer.php";
     private int serverResponseCode = 0;
     static final int MAX_CONNECTIONS = 5;
     static final String ENCODING = "UTF-8";
@@ -148,9 +148,11 @@ public class UploadToServer extends Service {
                     }
                     if (option.equals("fiware")) {
                         try {
-                            if (uploadFIWAREFile(mSensorType, files[i].getPath()) == OK) {
+                            // TODO Check how to refrieve FIWARE code number instead of this funky solution
+                            if (uploadFIWAREFile(mSensorType, files[i].getPath()) != 0) {
                                 // Delete file, since we have already sent them
-                                //deleteSentFile(files[i].getPath());
+                                Log.v("XXX FIWARE para DELETE", files[i].getPath());
+                                deleteSentFile(files[i].getPath());
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -172,7 +174,7 @@ public class UploadToServer extends Service {
                     String newFileName = dbNamePath[0] + "_" + System.currentTimeMillis() + "." + dbNamePath[1];
                     uploadMainFile(files[i].getPath(), newFileName);
 
-                    Log.v("adadas", "qweqweqwe");
+                    //Log.v("adadas", "qweqweqwe");
                     uploadMainFileFiware("ControlTests");
                     uploadMainFileFiware("Patients");
                     uploadMainFileFiware("Questionnaires");
@@ -349,6 +351,8 @@ public class UploadToServer extends Service {
                 sb.append(line);
             }
 
+            Log.v("XXX line: ", "(uploadMainFileFiware) " + line);
+
             Log.v(APP_NAME, "Closing document");
             bufferedReader.close();
 
@@ -358,14 +362,14 @@ public class UploadToServer extends Service {
             serverResponseCode = OK;
         } catch (FileNotFoundException e) {
             serverResponseCode = ERROR;
-            Log.e(APP_NAME, "FileNotFoundException");
+            Log.e(APP_NAME, "FileNotFoundException: " + e);
         } catch (EOFException e) {
             serverResponseCode = ERROR;
             Log.e(APP_NAME, "EOFException");
-        } catch (MalformedURLException ex) {
-            ex.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
             serverResponseCode = ERROR;
-            Log.e(APP_NAME, "MalformedURLException");
+            Log.e(APP_NAME, "MalformedURLException: " + e);
         } catch (Exception e) {
             e.printStackTrace();
             serverResponseCode = ERROR;
@@ -860,7 +864,9 @@ public class UploadToServer extends Service {
 
                 // Responses from the server (code and message)
                 serverResponseCode = conn.getResponseCode();
-                // String serverResponseMessage = conn.getResponseMessage();
+                //String serverResponseMessage = conn.getResponseMessage();
+                //Log.v("XXX CODE: ", serverResponseCode + "");
+                //Log.v("XXX MESSAGE", serverResponseMessage);
 
                 if (serverResponseCode == OK) {
                     Log.i(APP_NAME, "File Upload Complete: " + serverResponseCode);
@@ -875,11 +881,11 @@ public class UploadToServer extends Service {
 
             } catch (MalformedURLException ex) {
                 ex.printStackTrace();
-
+                serverResponseCode = ERROR;
                 Log.e(APP_NAME, "MalformedURLException");
             } catch (Exception e) {
                 e.printStackTrace();
-
+                serverResponseCode = ERROR;
                 Log.e(APP_NAME, "Got Exception : see logcat");
                 Log.e(APP_NAME, "Exception : " + e.getMessage(), e);
             }
@@ -1250,6 +1256,7 @@ public class UploadToServer extends Service {
                 sb.append(line);
             }
 
+            Log.v("XXX line", line + "");
             Log.v(APP_NAME, "Closing document");
             bufferedReader.close();
 
@@ -1259,14 +1266,14 @@ public class UploadToServer extends Service {
             serverResponseCode = OK;
         } catch (FileNotFoundException e) {
             serverResponseCode = ERROR;
-            Log.e(APP_NAME, "FileNotFoundException");
+            Log.e(APP_NAME, "FileNotFoundException: " + e);
         } catch (EOFException e) {
             serverResponseCode = ERROR;
-            Log.e(APP_NAME, "EOFException");
-        } catch (MalformedURLException ex) {
-            ex.printStackTrace();
+            Log.e(APP_NAME, "EOFException: " + e);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
             serverResponseCode = ERROR;
-            Log.e(APP_NAME, "MalformedURLException");
+            Log.e(APP_NAME, "MalformedURLException: " + e);
         } catch (Exception e) {
             e.printStackTrace();
             serverResponseCode = ERROR;
@@ -1294,7 +1301,7 @@ public class UploadToServer extends Service {
         //       }
         //   }
         //if (serverResponseCode == OK) sendPuts(uniquePostId, batch);
-
+        Log.v("XXX return from FIWARE", serverResponseCode + "");
         return serverResponseCode;
     }
 

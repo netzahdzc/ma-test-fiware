@@ -94,6 +94,8 @@ public class ManualUploadActivity extends AppCompatActivity {
                     data_date.setText(getResources().getString(R.string.loading));
                     data_date_.setText(getResources().getString(R.string.loading));
 
+                    //TODO Unable clic access to the Upload Data button while displaying: "Uploading..." message
+
                     // This sections is dedicated to start sending data to server-side
                     Log.v(APP_NAME, "sending data to server");
 

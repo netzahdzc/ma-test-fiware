@@ -52,7 +52,7 @@ public class CountDownActivity extends AppCompatActivity {
     private DialogMessageUtils mMessage;
     private Chronometer crono = null;
 
-    private Intent accService;
+    private Intent sensorService;
     private Intent playbackServiceIntent;
     private long uniquePatientId;
     private int testType;
@@ -65,7 +65,7 @@ public class CountDownActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.count_down);
 
-        accService = new Intent(getApplicationContext(), MotionSensors.class);
+        sensorService = new Intent(getApplicationContext(), MotionSensors.class);
         mMessage = new DialogMessageUtils(this);
 
         testType = getIntent().getIntExtra("testType", 0);
@@ -339,14 +339,13 @@ public class CountDownActivity extends AppCompatActivity {
     public void startCollectingAccData() {
 //        Log.v("ACC XXX", "xxxxxxx _ " + "startCollectingAccData");
         if (uniqueTestId != 0)
-            startService(accService);
+            startService(sensorService);
         else
             mMessage.dialogWarningMessage(
                     getResources().getString(R.string.important), //Title
                     getResources().getString(R.string.something_wrong_with_sensors), //Body message
                     false //To close current Activity when confirm
             );
-
     }
 
     public void stopCollectingAccData() {
@@ -356,7 +355,7 @@ public class CountDownActivity extends AppCompatActivity {
         testDBObj.updateData(uniqueTestId, 0, testType, balanceTestOption, "", "", "", "", "", "", "",
                 "", "", "", "", 0, "", "sensorStopped");
 
-        stopService(accService);
+        stopService(sensorService);
 
         testDBObj.closeDB();
     }
@@ -388,7 +387,7 @@ public class CountDownActivity extends AppCompatActivity {
         testDBObj.updateData(uniqueTestId, 0, testType, balanceTestOption, dateObj.getCurrentDate(), "", "", "",
                 "", "", "", "", "", "", "", 0, "", "sensorFinished");
 
-        stopService(accService);
+        stopService(sensorService);
 
         testDBObj.closeDB();
     }

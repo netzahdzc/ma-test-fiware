@@ -1,9 +1,12 @@
 package com.inger.android.ollintest;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.StrictMode;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -56,6 +59,9 @@ public class ConcentratedReportActivity extends AppCompatActivity {
         mMessage = new DialogMessageUtils(this);
         uniqueTestId = getIntent().getLongExtra("uniqueTestId", 0);
         loadActivityData(uniqueTestId);
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
         checkFileWasWrote();
 
@@ -110,27 +116,47 @@ public class ConcentratedReportActivity extends AppCompatActivity {
         Cursor mCursorTest = testDBObj.readData(uniqueTestId);
         testType = testDBObj.getTestType(mCursorTest);
 
-        String dataBaseDate = PatientUtils.convertFromISO8601(testDBObj.
-                getLatestTestTypeControl(uniquePatientId, testType), TIME_FORMAT);
+        String dataBaseDate = PatientUtils.convertFromISO8601(
+                testDBObj.getLatestTestTypeControl(uniquePatientId, testType), TIME_FORMAT);
 
         String accFileDate = loadLastDateFiles("acc");
         String orientFileDate = loadLastDateFiles("orient");
 
-        /*Log.i("XXX", "XXX dataBaseDate: " + dataBaseDate + ", fileDate: " + accFileDate );
-        Log.i("XXX", "XXX dataBaseDate: " + dataBaseDate + ", fileDate: " + orientFileDate );*/
+        /*AlertDialog diaBox_temp = AskOption(
+                "ACC \ndataBaseDate: " + dataBaseDate + ", fileDate: " + accFileDate +
+                "\n\nORI \ndataBaseDate: " + dataBaseDate + ", fileDate: " + orientFileDate +
+                "\n\nC1: " + dataBaseDate.equalsIgnoreCase(accFileDate) +
+                "\nC2: " + dataBaseDate.equalsIgnoreCase(orientFileDate));
+        diaBox_temp.show();*/
 
         if(!dataBaseDate.equalsIgnoreCase(accFileDate) || !dataBaseDate.equalsIgnoreCase(orientFileDate)) {
-            mMessage.dialogWarningMessage(
-                    getResources().getString(R.string.important), //Title
-                    getResources().getString(R.string.file_problem), //Body message
-                    false //To close current Activity when confirm
-            );
+            AlertDialog diaBox = AskOption(getResources().getString(R.string.file_problem));
+            diaBox.show();
         }
 
         testDBObj.closeDB();
     }
 
+    private AlertDialog AskOption(String message) {
+        AlertDialog myQuittingDialogBox =new AlertDialog.Builder(this)
+                .setTitle(getResources().getString(R.string.important))
+                .setMessage(message)
+                .setIcon(R.mipmap.ic_warning)
+                .setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        dialog.dismiss();
+                    }
+
+                })
+                .create();
+        return myQuittingDialogBox;
+    }
+
     public String loadLastDateFiles(String directory){
+        // Create  directory if it doesn't exist
+        File dir = new File (APP_DIRECTORY_PATH + "/" + directory);
+        if (!dir.exists())  dir.mkdirs();
+
         String outcome = getResources().getString(R.string.remaining_data_date);
         File[] files = new Filter().finder(APP_DIRECTORY_PATH + "/" + directory , "db");
         Arrays.sort(files);

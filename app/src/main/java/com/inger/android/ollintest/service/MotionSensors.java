@@ -12,8 +12,7 @@ import android.os.HandlerThread;
 import android.os.IBinder;
 import android.util.Log;
 
-import com.inger.android.ollintest.listener.MotionSensorListenerAcc;
-import com.inger.android.ollintest.listener.MotionSensorListenerOrient;
+import com.inger.android.ollintest.listener.MotionSensorListener;
 import com.inger.android.ollintest.util.SessionUtil;
 import com.inger.android.ollintest.util.TestDBHandlerUtils;
 
@@ -34,10 +33,9 @@ public class MotionSensors extends Service {
     private TestDBHandlerUtils testDBObj;
     private SessionUtil sessionObj;
 
-    private Sensor mSensorAcc, mSensorOrient;
-    private MotionSensorListenerAcc mMotionSensorAcc;
-    private MotionSensorListenerOrient mMotionSensorOrient;
-    private SensorManager mSensorManagerAcc, mSensorManagerOrient;
+    private Sensor mSensor;
+    private MotionSensorListener mMotionSensor;
+    private SensorManager mSensorManager;
     private Context mContext;
 
     private long uniquePatientId;
@@ -50,10 +48,8 @@ public class MotionSensors extends Service {
         super.onCreate();
 
         mContext = getApplicationContext();
-        mMotionSensorAcc = new MotionSensorListenerAcc();
-        mMotionSensorOrient = new MotionSensorListenerOrient();
-        mSensorManagerAcc = (SensorManager) getSystemService(SENSOR_SERVICE);
-        mSensorManagerOrient = (SensorManager) getSystemService(SENSOR_SERVICE);
+        mMotionSensor = new MotionSensorListener();
+        mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
         loadServiceDBs();
         registerDetector();
@@ -62,39 +58,23 @@ public class MotionSensors extends Service {
 
     @SuppressLint("InlinedApi")
     public void registerDetector() {
-//        Log.v("ACC XXX", "xxxxxxx _ " + "registerDetector - " + Sensor.TYPE_ROTATION_VECTOR);
         HandlerThread mThread = new HandlerThread("RecorderThread");
         mThread.start();
 
-        mSensorAcc = mSensorManagerAcc.getDefaultSensor(
-                Sensor.TYPE_LINEAR_ACCELERATION
-        );
+        mSensor = mSensorManager.getDefaultSensor(
+                Sensor.TYPE_LINEAR_ACCELERATION);
 
-        mSensorManagerAcc.registerListener(
-                mMotionSensorAcc,
-                mSensorAcc,
-                SensorManager.SENSOR_DELAY_FASTEST,
-                new Handler(mThread.getLooper()));
-
-        mSensorOrient = mSensorManagerOrient.getDefaultSensor(
-                Sensor.TYPE_ROTATION_VECTOR
-        );
-
-        mSensorManagerOrient.registerListener(
-                mMotionSensorOrient,
-                mSensorOrient,
+        mSensorManager.registerListener(
+                mMotionSensor,
+                mSensor,
                 SensorManager.SENSOR_DELAY_FASTEST,
                 new Handler(mThread.getLooper()));
     }
 
     public void loadSettings() {
-        if (mMotionSensorAcc != null) {
+        if (mMotionSensor != null) {
 //            Log.v("ACC XXX", "xxxxxxx _ " + "loadSettings - " + mMotionSensorAcc +" " + mContext +" "+ uniquePatientId+" "+ uniqueTestId);
-            mMotionSensorAcc.setSettings(mContext, uniquePatientId, uniqueTestId);
-        }
-        if (mMotionSensorOrient != null) {
-//            Log.v("ACC XXX", "xxxxxxx _ " + "loadSettings - " + mMotionSensorOrient +" " + mContext +" "+ uniquePatientId+" "+ uniqueTestId);
-            mMotionSensorOrient.setSettings(mContext, uniquePatientId, uniqueTestId);
+            mMotionSensor.setSettings(mContext, uniquePatientId, uniqueTestId);
         }
     }
 
@@ -108,10 +88,9 @@ public class MotionSensors extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        copy2FIWAREDir(mMotionSensorAcc.getDataBaseName(), "acc");
-        copy2FIWAREDir(mMotionSensorOrient.getDataBaseName(), "orient");
-        mSensorManagerAcc.unregisterListener(mMotionSensorAcc);
-        mSensorManagerOrient.unregisterListener(mMotionSensorOrient);
+        copy2FIWAREDir(mMotionSensor.getOrientDataBaseName(), "orient");
+        copy2FIWAREDir(mMotionSensor.getAccDataBaseName(), "acc");
+        mSensorManager.unregisterListener(mMotionSensor);
     }
 
     public void copy2FIWAREDir(String databasePath, String mSensorType){

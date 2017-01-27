@@ -228,7 +228,7 @@
     <string name="units_bpm">bmp</string>
     <string name="units_mmHH">mm HH</string>
     <string name="important">Important</string>
-    <string name="something_wrong_with_sensors">Someting when wrong with sensors. Please, start over.</string>
+    <string name="something_wrong_with_sensors">Something went wrong with sensors. Please, start over.</string>
     <string name="confirmation_dialog">Would you really wish to repeat the test?</string>
     <string name="confirmation_title">Important</string>
     <string name="sensor_data_tab">Upload data</string>

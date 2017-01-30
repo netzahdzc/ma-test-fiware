@@ -65,6 +65,7 @@ import org.json.JSONStringer;
 
 public class UploadToServer extends Service {
 
+    private static final boolean FIWARE_TEST_MODE = false;
     private static final int OK = 200;
     private static final int ERROR = 422;
 
@@ -187,22 +188,30 @@ public class UploadToServer extends Service {
     }
 
     private void startScan(String mSensorType) {
-        // Get list with sensor files from INGER
-        File[] ingerFiles = new Filter().finder(APP_DIRECTORY_PATH + "/" + mSensorType, "db");
-        Log.i(APP_NAME, "Elements on queue: " + ingerFiles.length + "");
-        Log.i(APP_NAME, "sensorType: " + mSensorType);
-        processFiles(ingerFiles, mSensorType, "inger");
+        // FIWARE_TEST_MODE allow skip the sharind data to INGER server to avoid
+        // data miss-interpretation.
+        // Moreover, this section get list with sensor files from INGER.
+        if (!FIWARE_TEST_MODE) {
+            File[] ingerFiles = new Filter().finder(APP_DIRECTORY_PATH + "/" + mSensorType, "db");
+            Log.i(APP_NAME, "Elements on queue: " + ingerFiles.length + "");
+            Log.i(APP_NAME, "sensorType: " + mSensorType);
+            processFiles(ingerFiles, mSensorType, "inger");
+        }
 
-        // Get list with sensor files from INGER
+        // This section handle data specifically for the FIWARE cloud.
         File[] fiwareFiles = new Filter().finder(APP_DIRECTORY_PATH + "/" + FIWARE_PATH + "/" + mSensorType, "db");
         Log.i(APP_NAME, "Elements on queue: " + fiwareFiles.length + "");
         Log.i(APP_NAME, "sensorType: " + mSensorType);
         processFiles(fiwareFiles, mSensorType, "fiware");
 
-        // Get list of main database. The one including user records.
-        File[] mainFile = new Filter().finder(APP_DIRECTORY_PATH, "db");
-        Log.i(APP_NAME, "Elements on queue: " + mainFile.length + "");
-        processFiles(mainFile, mSensorType, "main");
+        // FIWARE_TEST_MODE allow skip the sharind data to INGER server to avoid
+        // data miss-interpretation
+        // This section, allows to get list of main database. The one including user records.
+        if (!FIWARE_TEST_MODE) {
+            File[] mainFile = new Filter().finder(APP_DIRECTORY_PATH, "db");
+            Log.i(APP_NAME, "Elements on queue: " + mainFile.length + "");
+            processFiles(mainFile, mSensorType, "main");
+        }
     }
 
     @Nullable
@@ -279,7 +288,9 @@ public class UploadToServer extends Service {
 
                 // Responses from the server (code and message)
                 serverResponseCode = conn.getResponseCode();
-                // String serverResponseMessage = conn.getResponseMessage();
+                String serverResponseMessage = conn.getResponseMessage();
+                Log.v(APP_NAME, "XXX CODE: " + serverResponseCode + "");
+                Log.v(APP_NAME, "XXX MESSAGE" + serverResponseMessage);
 
                 if (serverResponseCode == OK) {
                     Log.i(APP_NAME, "File Upload Complete: " + serverResponseCode);
@@ -324,6 +335,8 @@ public class UploadToServer extends Service {
             urlConnection.setRequestProperty("Connection", "Keep-Alive");
             urlConnection.setRequestProperty("Content-Type", "application/json");
             urlConnection.setRequestProperty("Accept", "application/json");
+            urlConnection.setRequestProperty("Fiware-Service", "3ollintest");
+            urlConnection.setRequestProperty("Fiware-ServicePath", "/smartphone");
 
             if (Build.VERSION.SDK != null && Build.VERSION.SDK_INT > 13) {
                 urlConnection.setRequestProperty("Connection", "close");
@@ -351,7 +364,7 @@ public class UploadToServer extends Service {
                 sb.append(line);
             }
 
-            Log.v("XXX line: ", "(uploadMainFileFiware) " + line);
+            Log.v(APP_NAME, "XXX line: (uploadMainFileFiware) " + line);
 
             Log.v(APP_NAME, "Closing document");
             bufferedReader.close();
@@ -864,9 +877,9 @@ public class UploadToServer extends Service {
 
                 // Responses from the server (code and message)
                 serverResponseCode = conn.getResponseCode();
-                //String serverResponseMessage = conn.getResponseMessage();
-                //Log.v("XXX CODE: ", serverResponseCode + "");
-                //Log.v("XXX MESSAGE", serverResponseMessage);
+                String serverResponseMessage = conn.getResponseMessage();
+                Log.v(APP_NAME, "XXX CODE: " + serverResponseCode + "");
+                Log.v(APP_NAME, "XXX MESSAGE" + serverResponseMessage);
 
                 if (serverResponseCode == OK) {
                     Log.i(APP_NAME, "File Upload Complete: " + serverResponseCode);
@@ -1229,6 +1242,8 @@ public class UploadToServer extends Service {
             urlConnection.setRequestProperty("Connection", "Keep-Alive");
             urlConnection.setRequestProperty("Content-Type", "application/json");
             urlConnection.setRequestProperty("Accept", "application/json");
+            urlConnection.setRequestProperty("Fiware-Service", "3ollintest");
+            urlConnection.setRequestProperty("Fiware-ServicePath", "/smartphone");
 
             if (Build.VERSION.SDK != null && Build.VERSION.SDK_INT > 13) {
                 urlConnection.setRequestProperty("Connection", "close");
@@ -1256,7 +1271,7 @@ public class UploadToServer extends Service {
                 sb.append(line);
             }
 
-            Log.v("XXX line", line + "");
+            Log.v(APP_NAME, line + "");
             Log.v(APP_NAME, "Closing document");
             bufferedReader.close();
 
@@ -1301,7 +1316,7 @@ public class UploadToServer extends Service {
         //       }
         //   }
         //if (serverResponseCode == OK) sendPuts(uniquePostId, batch);
-        Log.v("XXX return from FIWARE", serverResponseCode + "");
+        Log.v(APP_NAME, "XXX return from FIWARE "+ serverResponseCode + "");
         return serverResponseCode;
     }
 
@@ -1323,6 +1338,8 @@ public class UploadToServer extends Service {
                 urlConnection.setRequestProperty("Connection", "Keep-Alive");
                 urlConnection.setRequestProperty("Content-Type", "application/json");
                 urlConnection.setRequestProperty("Accept", "application/json");
+                urlConnection.setRequestProperty("Fiware-Service", "3ollintest");
+                urlConnection.setRequestProperty("Fiware-ServicePath", "/smartphone");
 
                 if (Build.VERSION.SDK != null && Build.VERSION.SDK_INT > 13) {
                     urlConnection.setRequestProperty("Connection", "close");

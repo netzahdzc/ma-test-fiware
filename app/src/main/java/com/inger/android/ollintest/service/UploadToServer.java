@@ -65,6 +65,8 @@ import org.json.JSONStringer;
 
 public class UploadToServer extends Service {
 
+    // true: will send data only to FIWARE
+    // false: will send data to INGER and FIWARE
     private static final boolean FIWARE_TEST_MODE = false;
     private static final int OK = 200;
     private static final int ERROR = 422;

@@ -60,6 +60,8 @@ public class CountDownActivity extends AppCompatActivity {
     private long uniqueTestId;
     private long lastPause;
 
+    private static final String APP_NAME = "three_ollin_test";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -381,6 +383,7 @@ public class CountDownActivity extends AppCompatActivity {
 
     public void finishCollectingData() {
         DateUtil dateObj = new DateUtil();
+
         TestDBHandlerUtils testDBObj = new TestDBHandlerUtils(getApplicationContext());
         testDBObj.openDB();
 

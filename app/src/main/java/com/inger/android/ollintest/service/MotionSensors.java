@@ -13,6 +13,7 @@ import android.os.IBinder;
 import android.util.Log;
 
 import com.inger.android.ollintest.listener.MotionSensorListener;
+import com.inger.android.ollintest.util.DateUtil;
 import com.inger.android.ollintest.util.SessionUtil;
 import com.inger.android.ollintest.util.TestDBHandlerUtils;
 
@@ -40,8 +41,6 @@ public class MotionSensors extends Service {
 
     private long uniquePatientId;
     private long uniqueTestId;
-
-
 
     @Override
     public void onCreate() {
@@ -78,7 +77,6 @@ public class MotionSensors extends Service {
         }
     }
 
-
     @SuppressWarnings("deprecation")
     @Override
     public void onStart(Intent intent, int startId) {
@@ -90,6 +88,7 @@ public class MotionSensors extends Service {
         super.onDestroy();
         copy2FIWAREDir(mMotionSensor.getOrientDataBaseName(), "orient");
         copy2FIWAREDir(mMotionSensor.getAccDataBaseName(), "acc");
+        mMotionSensor.stopDataCollection();
         mSensorManager.unregisterListener(mMotionSensor);
     }
 

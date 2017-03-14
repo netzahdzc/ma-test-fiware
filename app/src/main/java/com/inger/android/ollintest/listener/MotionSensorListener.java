@@ -67,9 +67,11 @@ public class MotionSensorListener implements SensorEventListener {
 
                     // Convert the rotation-vector to a 4x4 matrix.
                     float[] mRotationMatrix = new float[16];
-                    SensorManager.getRotationMatrixFromVector(mRotationMatrix,
+                    float[] mRotationMatrixFromVector = new float[16];
+
+                    SensorManager.getRotationMatrixFromVector(mRotationMatrixFromVector,
                             event.values);
-                    SensorManager.remapCoordinateSystem(mRotationMatrix,
+                    SensorManager.remapCoordinateSystem(mRotationMatrixFromVector,
                             SensorManager.AXIS_X, SensorManager.AXIS_Z, mRotationMatrix);
                     float[] orientationValues = new float[3];
                     SensorManager.getOrientation(mRotationMatrix, orientationValues);

@@ -194,12 +194,12 @@ public class PatientFolderActivity extends AppCompatActivity {
         tugTestText.setText(PatientUtils.convertFromISO8601(testDBObj.
                 getLatestTestType(uniquePatientId, WALKING_TEST), UPDATE_FORMAT));
 
-        TextView balanceTestText = (TextView) findViewById(R.id.last_balance_test);
-        balanceTestText.setText(PatientUtils.convertFromISO8601(testDBObj.
-                getLatestTestType(uniquePatientId, STRENGTH_TEST), UPDATE_FORMAT));
-
         TextView strengthTestText = (TextView) findViewById(R.id.last_strength_test);
         strengthTestText.setText(PatientUtils.convertFromISO8601(testDBObj.
+                getLatestTestType(uniquePatientId, STRENGTH_TEST), UPDATE_FORMAT));
+
+        TextView balanceTestText = (TextView) findViewById(R.id.last_balance_test);
+        balanceTestText.setText(PatientUtils.convertFromISO8601(testDBObj.
                 getLatestTestType(uniquePatientId, BALANCE_TEST), UPDATE_FORMAT));
 
         testDBObj.closeDB();

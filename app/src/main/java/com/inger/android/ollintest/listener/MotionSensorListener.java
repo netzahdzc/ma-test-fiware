@@ -28,21 +28,21 @@ public class MotionSensorListener implements SensorEventListener {
 
     private long mUniquePatientId;
     private long mUniqueTestId;
-    private boolean mAllowRecording = false;
+    //private boolean mAllowRecording = false;
 
     public void setSettings(Context context, long uniquePatientId, long uniqueTestId) {
         accDBObj = new AccDBHandlerUtils(context);
         orientDBObj = new OrientDBHandlerUtils(context);
         mUniquePatientId = uniquePatientId;
         mUniqueTestId = uniqueTestId;
-        mAllowRecording = true;
+        //mAllowRecording = true;
     }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
         synchronized (this) {
             if (event.sensor.getType() == Sensor.TYPE_LINEAR_ACCELERATION) {
-                if (mAllowRecording) {
+                //if (mAllowRecording) {
                     // -------------- ACCELERATION SECTION --------------
                     accDBObj.openDB();
                     final double accX, accY, accZ;//, accTimestamp = 0.0;
@@ -56,7 +56,7 @@ public class MotionSensorListener implements SensorEventListener {
                     //DateUtil dateObj = new DateUtil();
 
                     //Log.v(APP_NAME, "ACC XXX " + mUniquePatientId + "," + mUniqueTestId + "," +
-                    //        accAccuracy + ", " + accX + ", " + accY + ", " + accZ + " ==> " + dateObj.getCurrentDate());
+                    //        accAccuracy + ", " + accX + ", " + accY + ", " + accZ);
 
                     accDBObj.insertData(mUniquePatientId, mUniqueTestId, accAccuracy, accX, accY, accZ);
                     accDBObj.closeDB();
@@ -107,7 +107,8 @@ public class MotionSensorListener implements SensorEventListener {
 
                     orientDBObj.insertData(mUniquePatientId, mUniqueTestId, azimuth, pitch, roll);
                     orientDBObj.closeDB();
-                }
+
+                //}
             }
         }
     }
@@ -116,9 +117,9 @@ public class MotionSensorListener implements SensorEventListener {
         return accDBObj.getPath();
     }
 
-    public void stopDataCollection(){
+    /*public void stopDataCollection(){
         mAllowRecording = false;
-    }
+    }*/
 
     public String getOrientDataBaseName() {
         return orientDBObj.getPath();

@@ -102,5 +102,40 @@ public class AccDBHandlerUtils {
 
         return c;
     }
+
+    // This method reads last data point
+    public Cursor readLastData() {
+
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+
+        // Define a projection that specifies which columns from the database
+        // you will actually use after this query.
+        String[] projection = {
+                DatabaseContractAcc.SensorAcc.COLUMN_NAME_COL1,
+                DatabaseContractAcc.SensorAcc.COLUMN_NAME_COL2,
+                DatabaseContractAcc.SensorAcc.COLUMN_NAME_COL7
+        };
+
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder = DatabaseContractAcc.SensorAcc.COLUMN_NAME_COL7 + " DESC LIMIT 1 ";
+
+        // Define 'where' part of query.
+        String selection = null;
+
+        // Specify arguments in placeholder order.
+        String[] selectionArgs = null;
+
+        Cursor c = db.query(
+                DatabaseContractAcc.SensorAcc.TABLE_NAME,   // The table to query
+                projection,                                 // The columns to return
+                selection,                                  // The columns for the WHERE clause
+                selectionArgs,                              // The values for the WHERE clause
+                null,                                       // don't group the rows
+                null,                                       // don't filter by row groups
+                sortOrder                                   // The sort order
+        );
+
+        return c;
+    }
 }
 

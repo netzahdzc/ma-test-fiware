@@ -88,7 +88,7 @@ public class MotionSensors extends Service {
         super.onDestroy();
         copy2FIWAREDir(mMotionSensor.getOrientDataBaseName(), "orient");
         copy2FIWAREDir(mMotionSensor.getAccDataBaseName(), "acc");
-        mMotionSensor.stopDataCollection();
+        //mMotionSensor.stopDataCollection();
         mSensorManager.unregisterListener(mMotionSensor);
     }
 

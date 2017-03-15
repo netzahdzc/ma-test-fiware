@@ -295,12 +295,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="@string/label_balance_test"
+                    android:text="@string/label_strength_test"
                     android:textAppearance="?android:textAppearance"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/last_balance_test"
+                    android:id="@+id/last_strength_test"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
@@ -320,19 +320,18 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="@string/label_strength_test"
+                    android:text="@string/label_balance_test"
                     android:textAppearance="?android:textAppearance"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/last_strength_test"
+                    android:id="@+id/last_balance_test"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
                     android:textAppearance="?android:textAppearance"
                     tools:text="15/July/2015" />
-
             </LinearLayout>
 
         </LinearLayout>

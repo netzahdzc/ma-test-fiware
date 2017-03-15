@@ -242,4 +242,5 @@
     <string name="about_description_button">Descripción</string>
     <string name="account_no_activated" >La cuenta se encuentra inactiva. Por favor, ingrese a la sección ACTIVAR CUENTA para más información.</string>
     <string name="upload_description_fiware">Archivos almacenados (fiware) desde:</string>
+    <string name="storing">Almacenando datos ...</string>
 </resources>

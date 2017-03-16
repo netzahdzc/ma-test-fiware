@@ -345,7 +345,8 @@ public class ConcentratedReportActivity extends AppCompatActivity {
     }
 
     Handler h = new Handler();
-    int delay = 60000; //60 seconds
+    // TODO Time should be removed, instead it could be better to monitor acc database to ensure there is no more data coming, thus, ensure we can continue with another test sample
+    int delay = 90000; //90 seconds
     Runnable runnable;
     private AccDBHandlerUtils accDBObj;
 

@@ -345,7 +345,7 @@ public class ConcentratedReportActivity extends AppCompatActivity {
     }
 
     Handler h = new Handler();
-    int delay = 35000; //35 seconds
+    int delay = 60000; //60 seconds
     Runnable runnable;
     private AccDBHandlerUtils accDBObj;
 

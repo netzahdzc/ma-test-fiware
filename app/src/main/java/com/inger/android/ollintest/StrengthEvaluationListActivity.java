@@ -3,14 +3,21 @@ package com.inger.android.ollintest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.inger.android.ollintest.util.AccDBHandlerUtils;
 import com.inger.android.ollintest.util.DialogMediaUtils;
 import com.inger.android.ollintest.util.PatientDBHandlerUtils;
 import com.inger.android.ollintest.util.PatientUtils;
@@ -25,6 +32,14 @@ public class StrengthEvaluationListActivity extends AppCompatActivity {
 
     private long uniquePatientId;
     private long uniqueTestId;
+
+    LinearLayout loading_block = null;
+    TextView button_repeat_test = null;
+    TextView button_continue_test = null;
+    ProgressBar loading_bar = null;
+
+    // TODO Time should be removed, instead it could be better to monitor acc database to ensure there is no more data coming, thus, ensure we can continue with another test sample
+    int delay = 60000; //60 seconds
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,13 +68,19 @@ public class StrengthEvaluationListActivity extends AppCompatActivity {
             }
         });
 
-        final TextView button_repeat_test = (TextView) findViewById(R.id.button_repeat_test);
+        button_repeat_test = (TextView) findViewById(R.id.button_repeat_test);
+        button_continue_test = (TextView) findViewById(R.id.button_continue_evaluation);
+        loading_bar = (ProgressBar) findViewById(R.id.loading);
+        loading_block = (LinearLayout) findViewById(R.id.loadingLinearLayout);
+
         button_repeat_test.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 AlertDialog diaBox = AskOption();
                 diaBox.show();
             }
         });
+
+        handleUploadBar();
     }
 
     @Override
@@ -189,4 +210,45 @@ public class StrengthEvaluationListActivity extends AppCompatActivity {
     public void onBackPressed() {
     }
 
+    // Disable buttons until there is no more data recording on the database
+    public void handleUploadBar() {
+        loading_block.setVisibility(View.VISIBLE);
+
+        // Disabling buttons
+        loading_bar.setMax(delay);
+        button_repeat_test.setEnabled(false);
+        button_repeat_test.setBackgroundColor(getResources().getColor(R.color.hint));
+
+        button_continue_test.setEnabled(false);
+        button_continue_test.setBackgroundColor(getResources().getColor(R.color.hint));
+
+        new CountDownTimer(delay, 100) {
+            int secondsLeft = 1;
+
+            public void onTick(long millisUntilFinished) {
+                if (Math.round((float) millisUntilFinished) != secondsLeft) {
+                    secondsLeft = Math.round((float) millisUntilFinished);
+                    loading_bar.setProgress(delay-secondsLeft);
+                }
+            }
+
+            @Override
+            public void onFinish() {
+                button_repeat_test.setEnabled(true);
+                button_repeat_test.setBackgroundColor(getResources().getColor(R.color.ok_button));
+
+                button_continue_test.setEnabled(true);
+                button_continue_test.setBackgroundColor(getResources().getColor(R.color.ok_button));
+
+                loading_block.setVisibility(View.GONE);
+
+                playAlarm();
+            }
+        }.start();
+    }
+
+    public void playAlarm() {
+        MediaPlayer mp = MediaPlayer.create(StrengthEvaluationListActivity.this, R.raw.alert);
+        mp.start();
+    }
 }

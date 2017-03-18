@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
@@ -14,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -39,9 +41,9 @@ import static com.inger.android.ollintest.ManualUploadActivity.getDate;
  */
 public class ConcentratedReportActivity extends AppCompatActivity {
 
+    LinearLayout loading_block = null;
     TextView button_finish_report = null;
     ProgressBar loading_bar = null;
-    TextView loading_text = null;
 
     static final int TIME_FORMAT = 3;
     private static final String APP_NAME = "three_ollin_test";
@@ -62,6 +64,9 @@ public class ConcentratedReportActivity extends AppCompatActivity {
     private long uniqueTestId;
     private int testType;
 
+    // TODO Time should be removed, instead it could be better to monitor acc database to ensure there is no more data coming, thus, ensure we can continue with another test sample
+    int delay = 90000; //90 seconds
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +83,7 @@ public class ConcentratedReportActivity extends AppCompatActivity {
 
         button_finish_report = (TextView) findViewById(R.id.button_finish_report);
         loading_bar = (ProgressBar) findViewById(R.id.loading);
-        loading_text = (TextView) findViewById(R.id.loadingText);
+        loading_block = (LinearLayout) findViewById(R.id.loadingLinearLayout);
 
         button_finish_report.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -113,6 +118,8 @@ public class ConcentratedReportActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        handleUploadBar();
     }
 
     @Override
@@ -344,19 +351,8 @@ public class ConcentratedReportActivity extends AppCompatActivity {
     public void onBackPressed() {
     }
 
-    Handler h = new Handler();
-    // TODO Time should be removed, instead it could be better to monitor acc database to ensure there is no more data coming, thus, ensure we can continue with another test sample
-    int delay = 90000; //90 seconds
-    Runnable runnable;
-    private AccDBHandlerUtils accDBObj;
-
     // Disable buttons until there is no more data recording on the database
-    @Override
-    protected void onStart() {
-        //accDBObj = new AccDBHandlerUtils(getApplicationContext());
-        //accDBObj.openDB();
-        //Log.v("Last input", "Last input 00 " );
-
+    public void handleUploadBar() {
         // Disabling buttons
         loading_bar.setMax(delay);
         button_finish_report.setEnabled(false);
@@ -375,65 +371,18 @@ public class ConcentratedReportActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                // Do nothing
+                button_finish_report.setEnabled(true);
+                button_finish_report.setBackgroundColor(getResources().getColor(R.color.ok_button));
+
+                loading_block.setVisibility(View.GONE);
+
+                playAlarm();
             }
         }.start();
-
-        // Start handler as activity become visible
-        h.postDelayed(new Runnable() {
-            public void run() {
-                //Cursor cursor = accDBObj.readLastData();
-                //double lastInput = 0.0, previousLastInput = 0.0;
-                try {
-                    //Log.v("Last input", "Last input 22 ");
-                    /*
-                    cursor.moveToFirst();
-
-                    // Reading all data and setting it up to be displayed
-                    if (cursor != null) {
-                        do {
-                            lastInput = cursor.getDouble(cursor.getColumnIndexOrThrow(DatabaseContractAcc.SensorAcc.COLUMN_NAME_COL7));
-                            Log.v("Last input", "Last input AA: " + lastInput);
-                        } while (cursor.moveToNext());
-                    }
-
-                    // Enable button untill we ensure all records have been stored
-                    if(lastInput == previousLastInput){
-                        button_finish_report.setEnabled(true);
-                        button_finish_report.setBackgroundColor(getResources().getColor(R.color.ok_button));
-                        Log.v("Last input", "Last input CC: " + lastInput);
-                    }else{
-                        previousLastInput = lastInput;
-                        Log.v("Last input", "Last input BB: " + previousLastInput);
-                    }*/
-                    button_finish_report.setEnabled(true);
-                    button_finish_report.setBackgroundColor(getResources().getColor(R.color.ok_button));
-
-                    loading_bar.setVisibility(View.INVISIBLE);
-                    loading_text.setVisibility(View.INVISIBLE);
-
-                } catch (Exception e) {
-                    // exception handling
-                    Log.v("Last input", "Last input ZZ: " + e.toString());
-                } finally {
-                    /*if (cursor != null) {
-                        //cursor.close();
-                    }*/
-                }
-
-                runnable=this;
-
-                h.postDelayed(runnable, delay);
-            }
-        }, delay);
-
-        super.onStart();
     }
 
-    @Override
-    protected void onPause() {
-        Log.v("Last input", "PAUSE" );
-        h.removeCallbacks(runnable); //stop handler when activity not visible
-        super.onPause();
+    public void playAlarm() {
+        MediaPlayer mp = MediaPlayer.create(ConcentratedReportActivity.this, R.raw.alert);
+        mp.start();
     }
 }

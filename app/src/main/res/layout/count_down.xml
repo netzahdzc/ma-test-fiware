@@ -97,10 +97,10 @@
                 style="@style/folderButtonStyle"
                 android:text="@string/button_cancel" />
 
-            <TextView
+            <!--<TextView
                 android:id="@+id/button_restart_counter"
                 style="@style/folderButtonStyle"
-                android:text="@string/button_restart" />
+                android:text="@string/button_restart" />-->
 
             <View
                 android:layout_width="8sp"
@@ -114,7 +114,7 @@
             <TextView
                 android:id="@+id/button_stop_counter"
                 style="@style/folderButtonStyle"
-                android:background="@color/danger_button"
+                android:background="@color/warning_button"
                 android:text="@string/button_end" />
 
             <TextView

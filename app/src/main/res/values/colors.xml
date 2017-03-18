@@ -80,4 +80,7 @@
     <color name="background">#ebebeb</color>
     <color name="black">#000000</color>
 
+    <!-- Yellow -->
+    <color name="warning_button">#c1c100</color>
+
 </resources>

@@ -244,5 +244,7 @@
     <string name="about_description">3Ollin-Test is an application developed by the National Institute of Geriatrics in Mexico.\n\nIn 2012, WHO reports that falls are the second world wide cause of death of the elderly population. The incidence of falls varies between countries, in average the 30-40 percent of the population of 65+ fall each year, but the rate increases as population age over 75+, where the incidence rises up to 45-50 percent.\n\nIn general, physical performance is a good indicator of risk in older adults. Thus, the goal of this application is to collect sensors data from a mobile device while patients perform a controlled physical test. Based on this data, we might construct algorithms to measure the risk of fall.</string>
     <string name="account_no_activated">The account is inactive. Please, refer to section ACTIVATE ACCOUNT for further information.</string>
     <string name="upload_description_fiware">Remaining file (fiware) since:</string>
-    <string name="storing">Storing sensor data ...</string>
+    <string name="storing">Checking and storing data.</string>
+    <string name="storing_warning">Please, keep the device still until the process finish.</string>
+    <string name="button_edit">Edit</string>
 </resources>

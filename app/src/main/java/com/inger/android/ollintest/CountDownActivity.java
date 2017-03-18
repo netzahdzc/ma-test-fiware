@@ -77,7 +77,7 @@ public class CountDownActivity extends AppCompatActivity {
         playbackServiceIntent = new Intent(this, BackgroundAudioService.class);
 
         final TextView button_cancel = (TextView) findViewById(R.id.button_cancel);
-        button_cancel.setEnabled(true);
+        //button_cancel.setEnabled(true);
 
         button_cancel.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -90,8 +90,8 @@ public class CountDownActivity extends AppCompatActivity {
         final TextView button_stop_counter = (TextView) findViewById(R.id.button_stop_counter);
         button_stop_counter.setVisibility(View.GONE);
 
-        final TextView button_restart_counter = (TextView) findViewById(R.id.button_restart_counter);
-        button_restart_counter.setVisibility(View.GONE);
+        //final TextView button_restart_counter = (TextView) findViewById(R.id.button_restart_counter);
+        //button_restart_counter.setVisibility(View.GONE);
 
         final TextView button_finish = (TextView) findViewById(R.id.button_finish);
         button_finish.setVisibility(View.GONE);
@@ -111,10 +111,11 @@ public class CountDownActivity extends AppCompatActivity {
                             secondsLeft = Math.round((float) millisUntilFinished / 1000.0f);
                             if (secondsLeft >= 1) {
                                 counter_text.setText("" + secondsLeft);
-                                button_cancel.setEnabled(false);
-                                button_cancel.setBackgroundColor(getResources().getColor(R.color.hint));
+                                //button_cancel.setEnabled(false);
+                                //button_cancel.setBackgroundColor(getResources().getColor(R.color.hint));
 
                                 button_start_counter.setVisibility(View.GONE);
+                                button_cancel.setVisibility(View.GONE);
 
                                 button_stop_counter.setEnabled(false);
                                 button_stop_counter.setBackgroundColor(getResources().getColor(R.color.hint));
@@ -124,13 +125,14 @@ public class CountDownActivity extends AppCompatActivity {
                     }
 
                     public void onFinish() {
-                        button_cancel.setEnabled(false);
-                        button_cancel.setBackgroundColor(getResources().getColor(R.color.hint));
+                        //button_cancel.setEnabled(false);
+                        //button_cancel.setBackgroundColor(getResources().getColor(R.color.hint));
 
                         button_start_counter.setVisibility(View.GONE);
+                        button_finish.setVisibility(View.GONE);
 
                         button_stop_counter.setEnabled(true);
-                        button_stop_counter.setBackgroundColor(getResources().getColor(R.color.danger_button));
+                        button_stop_counter.setBackgroundColor(getResources().getColor(R.color.ok_button));
                         button_stop_counter.setVisibility(View.VISIBLE);
 
                         crono.setVisibility(View.VISIBLE);
@@ -161,9 +163,9 @@ public class CountDownActivity extends AppCompatActivity {
                 button_cancel.setVisibility(View.GONE);
                 button_finish.setVisibility(View.VISIBLE);
                 button_stop_counter.setVisibility(View.GONE);
-                button_restart_counter.setVisibility(View.VISIBLE);
+                //button_restart_counter.setVisibility(View.VISIBLE);
 
-                stopCollectingAccData();
+                //stopCollectingAccData();
                 stopService(playbackServiceIntent);
             }
         });
@@ -171,8 +173,8 @@ public class CountDownActivity extends AppCompatActivity {
         button_finish.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 //                Log.v("ACC XXX", "xxxxxxx _ " + "button_finish");
-                PatientDBHandlerUtils patientDBObj = new PatientDBHandlerUtils(getApplicationContext());
-                patientDBObj.openDB();
+                //PatientDBHandlerUtils patientDBObj = new PatientDBHandlerUtils(getApplicationContext());
+                //patientDBObj.openDB();
 
                 if (testType == WALKING_TEST) {
                     Intent walkingEvaluationListScreen = new Intent(getApplicationContext(), WalkingEvaluationListActivity.class);
@@ -192,13 +194,13 @@ public class CountDownActivity extends AppCompatActivity {
                     startActivity(balanceEvaluationListScreen);
                 }
 
-                patientDBObj.closeDB();
+                //patientDBObj.closeDB();
                 finishCollectingData();
                 stopService(playbackServiceIntent);
             }
         });
 
-        button_restart_counter.setOnClickListener(new View.OnClickListener() {
+        /*button_restart_counter.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 restartChronometer();
 
@@ -209,7 +211,7 @@ public class CountDownActivity extends AppCompatActivity {
 
                 restartCollectingAccData();
             }
-        });
+        });*/
     }
 
     public void playAlarm() {
@@ -350,7 +352,7 @@ public class CountDownActivity extends AppCompatActivity {
             );
     }
 
-    public void stopCollectingAccData() {
+    /*public void stopCollectingAccData() {
         TestDBHandlerUtils testDBObj = new TestDBHandlerUtils(getApplicationContext());
         testDBObj.openDB();
 
@@ -360,9 +362,9 @@ public class CountDownActivity extends AppCompatActivity {
         stopService(sensorService);
 
         testDBObj.closeDB();
-    }
+    }*/
 
-    public void restartCollectingAccData() {
+    /*public void restartCollectingAccData() {
         if (uniqueTestId != 0) {
             TestDBHandlerUtils testDBObj = new TestDBHandlerUtils(getApplicationContext());
             testDBObj.openDB();
@@ -379,7 +381,7 @@ public class CountDownActivity extends AppCompatActivity {
                     getResources().getString(R.string.something_wrong_with_sensors), //Body message
                     false //To close current Activity when confirm
             );
-    }
+    }*/
 
     public void finishCollectingData() {
         DateUtil dateObj = new DateUtil();
@@ -390,7 +392,18 @@ public class CountDownActivity extends AppCompatActivity {
         testDBObj.updateData(uniqueTestId, 0, testType, balanceTestOption, dateObj.getCurrentDate(), "", "", "",
                 "", "", "", "", "", "", "", 0, "", "sensorFinished");
 
-        stopService(sensorService);
+        int delay = 30000; //30 seconds
+        new CountDownTimer(delay, 100) {
+            public void onTick(long millisUntilFinished) {
+                // Do nothing
+            }
+
+            @Override
+            public void onFinish() {
+                //Log.v(APP_NAME, "Calling stopService");
+                stopService(sensorService);
+            }
+        }.start();
 
         testDBObj.closeDB();
     }
@@ -417,10 +430,10 @@ public class CountDownActivity extends AppCompatActivity {
         crono.start();
     }
 
-    public void restartChronometer() {
+    /*public void restartChronometer() {
         crono.setBase(crono.getBase() + SystemClock.elapsedRealtime() - lastPause);
         crono.start();
-    }
+    }*/
 
     public void stopChronometer() {
         lastPause = SystemClock.elapsedRealtime();

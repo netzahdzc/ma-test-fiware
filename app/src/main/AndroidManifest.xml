@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.inger.android.ollintest">
+    package="com.cicese.android.matest">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
@@ -23,120 +23,120 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.inger.android.ollintest.MainActivity"
+            android:name="com.cicese.android.matest.MainActivity"
             android:label="@string/patient_list"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"></activity>
         <activity
-            android:name="com.inger.android.ollintest.IncreaseActivity"
+            android:name="com.cicese.android.matest.IncreaseActivity"
             android:label="@string/header_add_patient"
-            android:parentActivityName="com.inger.android.ollintest.MainActivity"
+            android:parentActivityName="com.cicese.android.matest.MainActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.inger.android.ollintest.IncreaseActivity" />
+                android:value="com.cicese.android.matest.IncreaseActivity" />
         </activity>
         <activity
-            android:name="com.inger.android.ollintest.EditActivity"
+            android:name="com.cicese.android.matest.EditActivity"
             android:label="@string/header_edit_patient"
-            android:parentActivityName="com.inger.android.ollintest.PatientFolderActivity"
+            android:parentActivityName="com.cicese.android.matest.PatientFolderActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.inger.android.ollintest.EditActivity" />
+                android:value="com.cicese.android.matest.EditActivity" />
         </activity>
         <activity
-            android:name="com.inger.android.ollintest.SettingsActivity"
+            android:name="com.cicese.android.matest.SettingsActivity"
             android:label="@string/header_settings"
-            android:parentActivityName="com.inger.android.ollintest.MainActivity"
+            android:parentActivityName="com.cicese.android.matest.MainActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.inger.android.ollintest.SettingsActivity" />
+                android:value="com.cicese.android.matest.SettingsActivity" />
         </activity>
         <activity
-            android:name="com.inger.android.ollintest.AboutActivity"
+            android:name="com.cicese.android.matest.AboutActivity"
             android:label="@string/header_about"
-            android:parentActivityName="com.inger.android.ollintest.SettingsActivity"
+            android:parentActivityName="com.cicese.android.matest.SettingsActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.inger.android.ollintest.AboutActivity" />
+                android:value="com.cicese.android.matest.AboutActivity" />
         </activity>
         <activity
-            android:name="com.inger.android.ollintest.PrivacyActivity"
+            android:name="com.cicese.android.matest.PrivacyActivity"
             android:label="@string/header_privacy"
-            android:parentActivityName="com.inger.android.ollintest.AboutActivity"
+            android:parentActivityName="com.cicese.android.matest.AboutActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.inger.android.ollintest.PrivacyActivity" />
+                android:value="com.cicese.android.matest.PrivacyActivity" />
         </activity>
         <activity
-            android:name="com.inger.android.ollintest.DescriptionApp"
+            android:name="com.cicese.android.matest.DescriptionApp"
             android:label="@string/header_about"
-            android:parentActivityName="com.inger.android.ollintest.AboutActivity"
+            android:parentActivityName="com.cicese.android.matest.AboutActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.inger.android.ollintest.DescriptionApp" />
+                android:value="com.cicese.android.matest.DescriptionApp" />
         </activity>
         <activity
-            android:name="com.inger.android.ollintest.ActivationAccountActivity"
+            android:name="com.cicese.android.matest.ActivationAccountActivity"
             android:label="@string/header_activation"
-            android:parentActivityName="com.inger.android.ollintest.SettingsActivity"
+            android:parentActivityName="com.cicese.android.matest.SettingsActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.inger.android.ollintest.ActivationAccountActivity" />
+                android:value="com.cicese.android.matest.ActivationAccountActivity" />
         </activity>
         <activity
-            android:name="com.inger.android.ollintest.ManualUploadActivity"
+            android:name="com.cicese.android.matest.ManualUploadActivity"
             android:label="@string/header_manual_upload"
-            android:parentActivityName="com.inger.android.ollintest.SettingsActivity"
+            android:parentActivityName="com.cicese.android.matest.SettingsActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.inger.android.ollintest.ManualUploadActivity" />
+                android:value="com.cicese.android.matest.ManualUploadActivity" />
         </activity>
         <activity
-            android:name="com.inger.android.ollintest.EditAccountActivity"
+            android:name="com.cicese.android.matest.EditAccountActivity"
             android:label="@string/header_edit_user_acount"
-            android:parentActivityName="com.inger.android.ollintest.SettingsActivity"
+            android:parentActivityName="com.cicese.android.matest.SettingsActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.inger.android.ollintest.EditAccountActivity" />
+                android:value="com.cicese.android.matest.EditAccountActivity" />
         </activity>
         <activity
-            android:name="com.inger.android.ollintest.FAQsListViewActivity"
+            android:name="com.cicese.android.matest.FAQsListViewActivity"
             android:label="@string/header_faqs"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden">
@@ -144,122 +144,122 @@
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.inger.android.ollintest.FAQsListViewActivity" />
+                android:value="com.cicese.android.matest.FAQsListViewActivity" />
         </activity>
         <activity
-            android:name="com.inger.android.ollintest.PatientControlActivity"
+            android:name="com.cicese.android.matest.PatientControlActivity"
             android:label="@string/header_control"
-            android:parentActivityName="com.inger.android.ollintest.PatientFolderActivity"
+            android:parentActivityName="com.cicese.android.matest.PatientFolderActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.inger.android.ollintest.PatientControlActivity" />
+                android:value="com.cicese.android.matest.PatientControlActivity" />
         </activity>
         <activity
-            android:name="com.inger.android.ollintest.PatientFolderActivity"
+            android:name="com.cicese.android.matest.PatientFolderActivity"
             android:label="@string/header_folder"
-            android:parentActivityName="com.inger.android.ollintest.MainActivity"
+            android:parentActivityName="com.cicese.android.matest.MainActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.inger.android.ollintest.PatientFolderActivity" />
+                android:value="com.cicese.android.matest.PatientFolderActivity" />
         </activity>
         <activity
-            android:name="com.inger.android.ollintest.TestsActivity"
+            android:name="com.cicese.android.matest.TestsActivity"
             android:label="@string/header_tests"
-            android:parentActivityName="com.inger.android.ollintest.PatientFolderActivity"
+            android:parentActivityName="com.cicese.android.matest.PatientFolderActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.inger.android.ollintest.TestsActivity" />
+                android:value="com.cicese.android.matest.TestsActivity" />
         </activity>
         <activity
-            android:name="com.inger.android.ollintest.WizardTestActivity"
+            android:name="com.cicese.android.matest.WizardTestActivity"
             android:label="@string/header_wizard_tests"
-            android:parentActivityName="com.inger.android.ollintest.TestsActivity"
+            android:parentActivityName="com.cicese.android.matest.TestsActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.inger.android.ollintest.WizardTestActivity" />
+                android:value="com.cicese.android.matest.WizardTestActivity" />
         </activity>
         <activity
-            android:name="com.inger.android.ollintest.BalanceTestOptionsActivity"
+            android:name="com.cicese.android.matest.BalanceTestOptionsActivity"
             android:label="@string/header_balance_test"
-            android:parentActivityName="com.inger.android.ollintest.TestsActivity"
+            android:parentActivityName="com.cicese.android.matest.TestsActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.inger.android.ollintest.BalanceTestOptionsActivity" />
+                android:value="com.cicese.android.matest.BalanceTestOptionsActivity" />
         </activity>
         <activity
-            android:name="com.inger.android.ollintest.WizardBalanceTestActivity"
+            android:name="com.cicese.android.matest.WizardBalanceTestActivity"
             android:label="@string/header_wizard_tests"
-            android:parentActivityName="com.inger.android.ollintest.BalanceTestOptionsActivity"
+            android:parentActivityName="com.cicese.android.matest.BalanceTestOptionsActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.inger.android.ollintest.WizardBalanceTestActivity" />
+                android:value="com.cicese.android.matest.WizardBalanceTestActivity" />
         </activity>
         <activity
-            android:name="com.inger.android.ollintest.WalkingEvaluationListActivity"
+            android:name="com.cicese.android.matest.WalkingEvaluationListActivity"
             android:label="@string/header_walkability_evaluation"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"></activity>
         <activity
-            android:name="com.inger.android.ollintest.BalanceEvaluationListActivity"
+            android:name="com.cicese.android.matest.BalanceEvaluationListActivity"
             android:label="@string/header_balance_evaluation"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"></activity>
         <activity
-            android:name="com.inger.android.ollintest.StrengthEvaluationListActivity"
+            android:name="com.cicese.android.matest.StrengthEvaluationListActivity"
             android:label="@string/header_strength_evaluation"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"></activity>
         <activity
-            android:name="com.inger.android.ollintest.CountDownActivity"
+            android:name="com.cicese.android.matest.CountDownActivity"
             android:label="@string/header_counter"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"></activity>
         <activity
-            android:name="com.inger.android.ollintest.ConcentratedReportActivity"
+            android:name="com.cicese.android.matest.ConcentratedReportActivity"
             android:label="@string/header_concentrated"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"></activity>
         <activity
-            android:name="com.inger.android.ollintest.RecoverPasswordActivity"
+            android:name="com.cicese.android.matest.RecoverPasswordActivity"
             android:label="@string/header_recover_password"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"></activity>
         <activity
-            android:name="com.inger.android.ollintest.SignUpActivity"
+            android:name="com.cicese.android.matest.SignUpActivity"
             android:label="@string/header_sign_up"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"></activity>
 
-        <service android:name="com.inger.android.ollintest.service.MotionSensors" />
-        <service android:name="com.inger.android.ollintest.service.UploadToServer" />
-        <service android:name="com.inger.android.ollintest.service.BackgroundAudioService" />
+        <service android:name="com.cicese.android.matest.service.MotionSensors" />
+        <service android:name="com.cicese.android.matest.service.UploadToServer" />
+        <service android:name="com.cicese.android.matest.service.BackgroundAudioService" />
 
         <activity
-            android:name="com.inger.android.ollintest.LoginActivity"
+            android:name="com.cicese.android.matest.LoginActivity"
             android:label="@string/header_login"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden">
@@ -276,6 +276,6 @@
                 <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
             </intent-filter>
         </receiver>-->
-        <receiver android:name="com.inger.android.ollintest.broadcast.AlarmReceiver"/>
+        <receiver android:name="com.cicese.android.matest.broadcast.AlarmReceiver"/>
     </application>
 </manifest>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">3Ollin-Test</string>
+    <string name="app_name">MA-Test</string>
     <string name="about_tab">Acerca de</string>
     <string name="account_already_activated">Su cuenta ha sido activada.</string>
     <string name="action_settings">Configuración</string>

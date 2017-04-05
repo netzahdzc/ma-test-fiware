@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">3Ollin-Test</string>
+    <string name="app_name">MA-Test</string>
     <string name="increase">Add a new Patient</string>
     <string name="edit_title">Updating</string>
     <string name="update_button">Update</string>

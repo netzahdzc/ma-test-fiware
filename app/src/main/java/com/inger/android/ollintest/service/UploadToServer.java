@@ -80,7 +80,7 @@ public class UploadToServer extends Service {
     private static final int TEST_MODE = INGER;
     private static final String APP_NAME = "three_ollin_test";
     private static final String FIWARE_PATH = "fiware";
-    private static final String FIWARE_ORION_PATH = "http://207.249.127.162:1026/v2";
+    private static final String FIWARE_ORION_PATH = " "; // IP address should be here
     private static final String INGER_PATH = "http://investigacion.inger.gob.mx:8000";
 
     private final String APP_DIRECTORY_PATH = String.valueOf(

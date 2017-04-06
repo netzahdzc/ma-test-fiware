@@ -193,7 +193,7 @@ public class ActivationAccountActivity extends AppCompatActivity {
 
     // TODO A smarter mechanism could better. Consider an online confirmation.
     public boolean confirmCodeOnline(String activationCode) {
-        return Pattern.matches("^INGER[0-9]{3}$", activationCode);
+        return Pattern.matches("^MATEST[0-9]{3}$", activationCode);
     }
 
     @Override

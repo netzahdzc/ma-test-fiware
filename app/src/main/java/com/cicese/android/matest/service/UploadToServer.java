@@ -49,28 +49,28 @@ import org.json.JSONObject;
 
 public class UploadToServer extends Service {
 
-    private static final int INGER = 1;
+    private static final int BACKUP = 1;
     private static final int FIWARE = 2;
-    private static final int INGER_FIWARE = 3;
+    private static final int BACKUP_FIWARE = 3;
     private static final int OK = 200;
     private static final int ERROR = 422;
 
     /*
     TEST_MODE options:
-        INGER; sends data only to INGER server keeping FIWARE files on the device.
-        FIWARE; sends data only to FIWARE Cloud keeping INGER files on the divice.
-        INGER_FIWARE; sends data to both servers.
+        INGER; sends data only to BACKUP server keeping FIWARE files on the device.
+        FIWARE; sends data only to FIWARE Cloud keeping BACKUP files on the divice.
+        BACKUP_FIWARE; sends data to both servers.
      */
-    private static final int TEST_MODE = INGER;
+    private static final int TEST_MODE = BACKUP;
     private static final String APP_NAME = "three_ollin_test";
     private static final String FIWARE_PATH = "fiware";
-    private static final String FIWARE_ORION_PATH = " "; // IP address should be here
-    private static final String INGER_PATH = "http://investigacion.inger.gob.mx:8000";
+    private static final String FIWARE_ORION_PATH = "http://207.249.127.162:1026/v2";
+    private static final String BACKUP_PATH = "http://207.249.127.162:8000";
 
     private final String APP_DIRECTORY_PATH = String.valueOf(
             Environment.getExternalStorageDirectory() + "/" + APP_NAME);
 
-    private String upLoadServerUri = INGER_PATH + "/sqlite/UploadToServer.php";
+    private String upLoadServerUri = BACKUP_PATH + "/sqlite/UploadToServer.php";
     private int serverResponseCode = 0;
     static final int MAX_CONNECTIONS = 5;
     static final String ENCODING = "UTF-8";
@@ -113,9 +113,9 @@ public class UploadToServer extends Service {
     }
 
     private void processFiles(File[] files, String mSensorType, String option) {
-        if (option.equals("inger") || option.equals("fiware")) {
-            // Upload previous loaded list of file to INGER server
-            // Upload previous loaded list of file to INGER server
+        if (option.equals("backup") || option.equals("fiware")) {
+            // Upload previous loaded list of file to BACKUP server
+            // Upload previous loaded list of file to BACKUP server
             for (int i = 0; i < files.length; i++) {
                 Log.i(APP_NAME, "Current element to analise: " + files[i].getPath() + "");
 
@@ -134,13 +134,13 @@ public class UploadToServer extends Service {
                 Log.v(APP_NAME, fileTimeMilliseconds + " < " + tenMinutesAgo);
 
                 if (fileTimeMilliseconds < tenMinutesAgo) {
-                    if (option.equals("inger") && (TEST_MODE == INGER || TEST_MODE == INGER_FIWARE)) {
-                        if (uploadINGERFile(files[i].getPath()) == OK) {
+                    if (option.equals("backup") && (TEST_MODE == BACKUP || TEST_MODE == BACKUP_FIWARE)) {
+                        if (uploadBACKUPFile(files[i].getPath()) == OK) {
                             // Delete file, since we have already sent them
                             deleteSentFile(files[i].getPath());
                         }
                     }
-                    if (option.equals("fiware") && (TEST_MODE == FIWARE || TEST_MODE == INGER_FIWARE) ) {
+                    if (option.equals("fiware") && (TEST_MODE == FIWARE || TEST_MODE == BACKUP_FIWARE) ) {
                         try {
                             // TODO Check how to refrieve FIWARE code number instead of this funky solution
                             if (uploadFIWAREFile(mSensorType, files[i].getPath()) != 0) {
@@ -167,11 +167,11 @@ public class UploadToServer extends Service {
                     String[] dbNamePath = files[i].getPath().split("\\.");
                     String newFileName = dbNamePath[0] + "_" + System.currentTimeMillis() + "." + dbNamePath[1];
 
-                    if(TEST_MODE == INGER || TEST_MODE == INGER_FIWARE){
+                    if(TEST_MODE == BACKUP || TEST_MODE == BACKUP_FIWARE){
                         uploadMainFile(files[i].getPath(), newFileName);
                     }
 
-                    if(TEST_MODE == FIWARE || TEST_MODE == INGER_FIWARE){
+                    if(TEST_MODE == FIWARE || TEST_MODE == BACKUP_FIWARE){
                         uploadMainFileFiware("ControlTests");
                         uploadMainFileFiware("Patients");
                         uploadMainFileFiware("Questionnaires");
@@ -185,28 +185,28 @@ public class UploadToServer extends Service {
     }
 
     private void startScan(String mSensorType) {
-        // TEST_MODE allow skip the sharind data to INGER server to avoid
+        // TEST_MODE allow skip the sharind data to BACKUP server to avoid
         // data miss-interpretation.
-        // Moreover, this section get list with sensor files for INGER.
-        if (TEST_MODE == INGER || TEST_MODE == INGER_FIWARE) {
-            File[] ingerFiles = new Filter().finder(APP_DIRECTORY_PATH + "/" + mSensorType, "db");
-            Log.i(APP_NAME, "Elements on queue: " + ingerFiles.length + "");
+        // Moreover, this section get list with sensor files for BACKUP.
+        if (TEST_MODE == BACKUP || TEST_MODE == BACKUP_FIWARE) {
+            File[] backupFiles = new Filter().finder(APP_DIRECTORY_PATH + "/" + mSensorType, "db");
+            Log.i(APP_NAME, "Elements on queue: " + backupFiles.length + "");
             Log.i(APP_NAME, "sensorType: " + mSensorType);
-            processFiles(ingerFiles, mSensorType, "inger");
+            processFiles(backupFiles, mSensorType, "backup");
         }
 
         // This section handle data specifically for the FIWARE cloud.
-        if (TEST_MODE == FIWARE || TEST_MODE == INGER_FIWARE) {
+        if (TEST_MODE == FIWARE || TEST_MODE == BACKUP_FIWARE) {
             File[] fiwareFiles = new Filter().finder(APP_DIRECTORY_PATH + "/" + FIWARE_PATH + "/" + mSensorType, "db");
             Log.i(APP_NAME, "Elements on queue: " + fiwareFiles.length + "");
             Log.i(APP_NAME, "sensorType: " + mSensorType);
             processFiles(fiwareFiles, mSensorType, "fiware");
         }
 
-        // TEST_MODE allow skip the sharind data to INGER server to avoid
+        // TEST_MODE allow skip the sharind data to BACKUP server to avoid
         // data miss-interpretation
         // This section, allows to get list of main database. The one including user records.
-        if (TEST_MODE == INGER || TEST_MODE == INGER_FIWARE) {
+        if (TEST_MODE == BACKUP || TEST_MODE == BACKUP_FIWARE) {
             File[] mainFile = new Filter().finder(APP_DIRECTORY_PATH, "db");
             Log.i(APP_NAME, "Elements on queue: " + mainFile.length + "");
             processFiles(mainFile, mSensorType, "main");
@@ -810,8 +810,8 @@ public class UploadToServer extends Service {
         return core;
     }
 
-    // To upload files to INGER server
-    public int uploadINGERFile(String sourceFileUri) {
+    // To upload files to BACKUP server
+    public int uploadBACKUPFile(String sourceFileUri) {
         final String fileName = sourceFileUri;
 
         HttpURLConnection conn = null;

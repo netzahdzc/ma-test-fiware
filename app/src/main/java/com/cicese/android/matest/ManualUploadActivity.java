@@ -32,7 +32,7 @@ import java.util.Collections;
  */
 public class ManualUploadActivity extends AppCompatActivity {
 
-    private static final String APP_NAME = "three_ollin_test";
+    private static final String APP_NAME = "ma_test";
     private static final String FIWARE_PATH = "fiware";
 
     private final String APP_DIRECTORY_PATH = String.valueOf(
@@ -51,7 +51,7 @@ public class ManualUploadActivity extends AppCompatActivity {
         setContentView(R.layout.manual_upload);
 
         final Context context = this;
-        final String APP_NAME = "three_ollin_test";
+        final String APP_NAME = "ma_test";
         final TextView upload_data = (TextView) findViewById(R.id.button_manual_upload);
         final TextView data_date = (TextView) findViewById(R.id.remaining_data_date);
         final TextView data_date_ = (TextView) findViewById(R.id.remaining_data_date_fiware);

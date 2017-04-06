@@ -14,7 +14,7 @@ import com.cicese.android.matest.service.UploadToServer;
 
 public class NetworkMonitor extends BroadcastReceiver {
 
-    private final String APP_NAME = "three_ollin_test";
+    private final String APP_NAME = "ma_test";
     // This is a class variable since the idea is that each time the user get wifi connection,
     // a new schedule settled automatically, substituting the previous one
     private Timer timerWiFi = new Timer();

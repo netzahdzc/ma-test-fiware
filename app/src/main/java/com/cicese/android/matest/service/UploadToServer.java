@@ -58,11 +58,11 @@ public class UploadToServer extends Service {
     /*
     TEST_MODE options:
         INGER; sends data only to BACKUP server keeping FIWARE files on the device.
-        FIWARE; sends data only to FIWARE Cloud keeping BACKUP files on the divice.
+        FIWARE; sends data only to FIWARE Cloud keeping BACKUP files on the device.
         BACKUP_FIWARE; sends data to both servers.
      */
     private static final int TEST_MODE = BACKUP;
-    private static final String APP_NAME = "three_ollin_test";
+    private static final String APP_NAME = "ma_test";
     private static final String FIWARE_PATH = "fiware";
     private static final String FIWARE_ORION_PATH = "http://207.249.127.162:1026/v2";
     private static final String BACKUP_PATH = "http://207.249.127.162:8000";
@@ -334,7 +334,7 @@ public class UploadToServer extends Service {
             urlConnection.setRequestProperty("Connection", "Keep-Alive");
             urlConnection.setRequestProperty("Content-Type", "application/json");
             urlConnection.setRequestProperty("Accept", "application/json");
-            urlConnection.setRequestProperty("Fiware-Service", "3ollintest");
+            urlConnection.setRequestProperty("Fiware-Service", "matest");
             urlConnection.setRequestProperty("Fiware-ServicePath", "/smartphone");
 
             if (Build.VERSION.SDK != null && Build.VERSION.SDK_INT > 13) {
@@ -1241,7 +1241,7 @@ public class UploadToServer extends Service {
             urlConnection.setRequestProperty("Connection", "Keep-Alive");
             urlConnection.setRequestProperty("Content-Type", "application/json");
             urlConnection.setRequestProperty("Accept", "application/json");
-            urlConnection.setRequestProperty("Fiware-Service", "3ollintest");
+            urlConnection.setRequestProperty("Fiware-Service", "matest");
             urlConnection.setRequestProperty("Fiware-ServicePath", "/smartphone");
 
             if (Build.VERSION.SDK != null && Build.VERSION.SDK_INT > 13) {
@@ -1337,7 +1337,7 @@ public class UploadToServer extends Service {
                 urlConnection.setRequestProperty("Connection", "Keep-Alive");
                 urlConnection.setRequestProperty("Content-Type", "application/json");
                 urlConnection.setRequestProperty("Accept", "application/json");
-                urlConnection.setRequestProperty("Fiware-Service", "3ollintest");
+                urlConnection.setRequestProperty("Fiware-Service", "matest");
                 urlConnection.setRequestProperty("Fiware-ServicePath", "/smartphone");
 
                 if (Build.VERSION.SDK != null && Build.VERSION.SDK_INT > 13) {

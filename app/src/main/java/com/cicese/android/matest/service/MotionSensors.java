@@ -26,7 +26,7 @@ import java.io.OutputStream;
 public class MotionSensors extends Service {
 
     private static final String FIWARE_PATH = "fiware";
-    private static final String APP_NAME = "three_ollin_test";
+    private static final String APP_NAME = "ma_test";
     private final String APP_DIRECTORY_PATH = String.valueOf(
             Environment.getExternalStorageDirectory() + "/" + APP_NAME);
 

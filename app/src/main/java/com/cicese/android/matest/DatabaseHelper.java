@@ -12,7 +12,7 @@ import java.io.File;
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final String APP_NAME = "three_ollin_test";
+    private static final String APP_NAME = "ma_test";
     private static final String APP_DIRECTORY_PATH = String.valueOf(
             Environment.getExternalStorageDirectory() + "/" + APP_NAME);
 

@@ -9,7 +9,7 @@
     <string name="activation_code_updated">Código actualizado satisfactoriamente.</string>
     <string name="add_participant">Registrar participante</string>
     <string name="add_patient">Registrar peciente</string>
-    <string name="app_long_name">Monitoreo de Pruebas de Desempeño Físico: Marcha, Fuerza y Balance</string>
+    <string name="app_long_name">Prueba de evaluación para pruebas físicas</string>
     <string name="app_version">Versión</string>
     <string name="authentication">Autenticación</string>
     <string name="authentication_message">Usuario no encontrado.</string>
@@ -75,7 +75,7 @@
     <string name="faq_q_contact_data">Datos de contacto</string>
     <string name="faq_q_tug_test">¿En qué consisten las pruebas de desempeño físico?</string>
     <string name="faq_r_activation_code">Los códigos de activación son asignados y distribuidos únicamente a miembros y colaboradores del proyecto.</string>
-    <string name="faq_r_contact_data">Para solicitar suporte personalizado, por favor, establezca contacto a través del correo: 3ollin.test@gmail.com</string>
+    <string name="faq_r_contact_data">Para solicitar suporte personalizado, por favor, establezca contacto a través del correo: netzahdzc@gmail.com</string>
     <string name="faq_r_tug_test">Se realizarán tres pruebas de desempeño físico: Marcha, Fuerza y Balance.\n\nEn la prueba de Marcha se le pedirá al Adulto Mayor (AM) levantarse de una silla, caminar tres metros, girar, caminar de regreso a la silla y volverse a sentar. Durante la prueba la persona debe utilizar su calzado regular y utilizar cualquier dispositivo de asistencia que normalmente requiera.\n\nEn la prueba de Fuerza, se le pedirá al AM levantarse y sentarse de una silla repetidamente tan rápido como le sea posible durante 30 segundos.\n\nEn la prueba de Balance se le pedirá al AM que mantenga cuatro posiciones progresivamente: pies juntos, semi-tándem, tándem y unipodal, durante 10 segundos. Los AM no deben utilizar ningún tipo de ayuda (bastón o andadera) y deben mantener los ojos abiertos.\n\nLas instrucciones para ejecutar de manera adecuada cada una de las pruebas se encuentran en la sección de Pruebas de la aplicación.</string>
     <string name="header_about">Acerca de</string>
     <string name="header_activation">Código de activación</string>

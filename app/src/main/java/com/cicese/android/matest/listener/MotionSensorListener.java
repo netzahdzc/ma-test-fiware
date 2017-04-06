@@ -15,7 +15,7 @@ import com.cicese.android.matest.util.OrientDBHandlerUtils;
  */
 public class MotionSensorListener implements SensorEventListener {
 
-    private static final String APP_NAME = "three_ollin_test";
+    private static final String APP_NAME = "ma_test";
 
     private AccDBHandlerUtils accDBObj;
     private OrientDBHandlerUtils orientDBObj;

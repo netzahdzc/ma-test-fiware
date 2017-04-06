@@ -51,7 +51,7 @@ public class CountDownActivity extends AppCompatActivity {
     private long uniqueTestId;
     private long lastPause;
 
-    private static final String APP_NAME = "three_ollin_test";
+    private static final String APP_NAME = "ma_test";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

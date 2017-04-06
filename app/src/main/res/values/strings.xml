@@ -88,7 +88,7 @@
     <string name="login">Log In</string>
     <string name="header_login">MA-Test</string>
     <string name="app_version">Version</string>
-    <string name="app_long_name">Application for Monitoring Physical Performance Tests: Gait, Strength, and Balance.</string>
+    <string name="app_long_name">Measure Assessment Test</string>
     <string name="privacy_terms_tab">Privacy terms</string>
     <string name="activation_code_description">The activation code allow you to have the complete services of MA-Test, for instance, it gives you access to the information collected via online\n\nThe activation code distribution is limited to physicians and specialists who cooperate with CICESE.</string>
     <string name="button_next">Next</string>
@@ -188,7 +188,7 @@
     <string name="faq_q_tug_test">What are the driving physical tests?</string>
     <string name="faq_r_tug_test">There will be three physical performance tests based on: Walk, Strength, and Balance.\n\nIn the Walking test the participants will be asked to get up from a chair, walk three meters, turn around, walk back to the chair and sit down again. During the test the older adults must use their regular footwear and use any assistance device that normally requires.\n\nIn the Strength test, the older adults will be asked to get up and sit on a chair repeatedly as fast as possible for 30 seconds.\n\nIn the Balance test the older adults will be asked to maintain four positions progressively: feet together, semi-tandem, tandem, and unipodal, for 10 seconds. The participants should not use any type of help (walking stick) and should keep their eyes open.</string>
     <string name="faq_q_contact_data">Contact data</string>
-    <string name="faq_r_contact_data">To erquest personalized aupport, please, e-mail you situation to: 3ollin.test@gmail.com</string>
+    <string name="faq_r_contact_data">To erquest personalized aupport, please, e-mail you situation to: netzahdzc@gmail.com</string>
     <string name="left_menu_home">Home</string>
     <string name="left_menu_setting">Settings</string>
     <string name="left_menu_help">Help</string>

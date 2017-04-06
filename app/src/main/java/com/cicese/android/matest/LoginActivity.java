@@ -21,7 +21,7 @@ import java.io.IOException;
  */
 public class LoginActivity extends AppCompatActivity {
 
-    private static final String APP_NAME = "three_ollin_test";
+    private static final String APP_NAME = "ma_test";
     private final String APP_ACC_DIRECTORY_PATH = String.valueOf(
             Environment.getExternalStorageDirectory() + "/" + APP_NAME + "/acc");
     private DialogMessageUtils mMessage;

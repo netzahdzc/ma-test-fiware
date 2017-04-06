@@ -39,7 +39,7 @@ public class ConcentratedReportActivity extends AppCompatActivity {
     ProgressBar loading_bar = null;
 
     static final int TIME_FORMAT = 3;
-    private static final String APP_NAME = "three_ollin_test";
+    private static final String APP_NAME = "ma_test";
     private DialogMessageUtils mMessage;
     private final String APP_DIRECTORY_PATH = String.valueOf(
             Environment.getExternalStorageDirectory() + "/" + APP_NAME);

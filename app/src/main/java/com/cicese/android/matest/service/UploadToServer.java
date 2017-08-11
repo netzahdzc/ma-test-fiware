@@ -257,6 +257,7 @@ public class UploadToServer extends Service {
                 conn.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
                 conn.setRequestProperty("uploaded_file", newName);
 
+
                 dos = new DataOutputStream(conn.getOutputStream());
 
                 dos.writeBytes(twoHyphens + boundary + lineEnd);
@@ -336,6 +337,8 @@ public class UploadToServer extends Service {
             urlConnection.setRequestProperty("Accept", "application/json");
             urlConnection.setRequestProperty("Fiware-Service", "matest");
             urlConnection.setRequestProperty("Fiware-ServicePath", "/smartphone");
+            // TODO A token must be created right before send the batch of data
+            // TODO header must include X-Auth-Token
 
             if (Build.VERSION.SDK != null && Build.VERSION.SDK_INT > 13) {
                 urlConnection.setRequestProperty("Connection", "close");

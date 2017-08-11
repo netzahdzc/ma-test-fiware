@@ -8,7 +8,7 @@ import android.provider.BaseColumns;
 public final class DatabaseContractOrient {
 
     public static final int DATABASE_VERSION = 30;
-    public static final String DATABASE_NAME = "ollintest_orientation.db";
+    public static final String DATABASE_NAME = "matest_orientation.db";
     private static final String INT_TYPE = " INTEGER";
     private static final String REAL_TYPE = " REAL";
     private static final String TEXT_TYPE = " TEXT";

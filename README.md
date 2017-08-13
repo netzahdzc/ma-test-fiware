@@ -1,4 +1,4 @@
-3Ollin Test App
+MA-Test App
 ===================================
 
 This app allows user to collect objective data for futher (server-side) analysis of balance, strenght, and risk of falls. This is an ongoin project.

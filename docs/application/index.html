@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Mobile Application - Open Health-Context</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Mobile Application";
+    var mkdocs_page_input_path = "application.md";
+    var mkdocs_page_url = "/application/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Open Health-Context</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../introduction/">Introduction</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Mobile Application</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#mobile-application">Mobile application</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#walkthrough">Walkthrough</a></li>
+        
+            <li><a class="toctree-l3" href="#-log-in">- Log in</a></li>
+        
+            <li><a class="toctree-l3" href="#-patient-registration">- Patient registration</a></li>
+        
+            <li><a class="toctree-l3" href="#-test-performance">- Test performance</a></li>
+        
+            <li><a class="toctree-l3" href="#-evaluation-of-test-performed">- Evaluation of test performed</a></li>
+        
+            <li><a class="toctree-l3" href="#-upload-data">- Upload data</a></li>
+        
+            <li><a class="toctree-l3" href="#-other-services">- Other services</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../dashboard/">Dashboard</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../architecture/">Architecture</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Open Health-Context</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Mobile Application</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="mobile-application">Mobile application</h1>
+<p>The main purpose of the healthcare application is to expedite the harmonization and sharing of mobile sensing datasets for the healthcare domain. It focuses on mobile devices that collect data from sensors used on physical tests by following clinical protocols to assess the risk of falls.</p>
+<h2 id="walkthrough">Walkthrough</h2>
+<p>The Mobility Assessment Test (a.k.a., MAT), is a mobile application developed on Android to collect sensor data from smarphones. It has been designed to appropriately guide users to conduct superviced physical test such as Timed Up and Go (a.k.a., TUG), Strength test, and Balance test.</p>
+<p>Below images, describe the flow of the process a user should follow in order to run a test.</p>
+<h2 id="-log-in">- Log in</h2>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"></td>
+<td align="left">The mechanism for logging in is very straightforward, first the user should sign-up, fill in a formulary that requires personal information such as name and age. Once, the user has been registered, he should log-in by typing required credentials (i.e. email and password) and pressing the [ Log-in ] button.</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><img alt="Image title" src="../images/screenshots/login.png" /></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"></td>
+<td align="left">The main screen consiste of 3 key sections. (1) A left menu, that can be opened by pressing on the hamburger icon, (2) an addition button to register a new patient that will be observed / evaluated while performing a physical test, and (3) a patient list.</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><img alt="Image title" src="../images/screenshots/main.png" /></td>
+</tr>
+</tbody>
+</table>
+<h2 id="-patient-registration">- Patient registration</h2>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"></td>
+<td align="left">In order to register a new patient. Please, press the addition sign; previously mentioned, and fill in the formulary as it will be requested. <em>Note that due privacy aspects, the photograph is not a mandatory field, thus, this could be leave as it is.</em></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><img alt="Image title" src="../images/screenshots/add_patient1.png" /> <img alt="" src="../images/screenshots/arrow_right.png" /> <img alt="Image title" src="../images/screenshots/add_patient2.png" /> <img alt="" src="../images/screenshots/arrow_right.png" /> <img alt="Image title" src="../images/screenshots/add_patient3.png" /></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"></td>
+<td align="left">After creating a patient record. The user can have access to the patient file by clicking on respective name (from the main section aforementioned). Optionally, control measurements can be recorded, such as height, waist size, heard rate, and so on, by filling in respective formulary.</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><img alt="Image title" src="../images/screenshots/add_patients_control1.png" /> <img alt="" src="../images/screenshots/arrow_right.png" /> <img alt="Image title" src="../images/screenshots/add_patients_control2.png" /> <img alt="" src="../images/screenshots/arrow_right.png" /> <img alt="Image title" src="../images/screenshots/add_patients_control3.png" /></td>
+</tr>
+</tbody>
+</table>
+<h2 id="-test-performance">- Test performance</h2>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"></td>
+<td align="left">Collecting data from a particular test, is one of the key features of the application. To do so, is it necessary to press on the [ Test ] button whiting the specific patient record.</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><img alt="Image title" src="../images/screenshots/main_patient_section.png" /></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"></td>
+<td align="left">Then, click on the name of the test to be performed, for example, Strength, or Balance test.</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><img alt="Image title" src="../images/screenshots/tests_available.png" /></td>
+</tr>
+</tbody>
+</table>
+<p><strong>TUG Test (Test Up and Go).</strong> A simple test used to assess a person's mobility and requires both static and dynamic balance. It uses the time that a person takes to rise from a chair, walk three meters, turn around, walk back to the chair, and sit down</p>
+<p><strong>Strenght test (a.k.a., 30-Second Chair Standard Test).</strong> Is administered using a folding chair without arms, with seat height of 17 inches (43.2 cm). The chair, with rubber tips on the legs, is placed against a wall to prevent it from moving</p>
+<p><strong>Balance test (a.k.a., 4-Stage Balance Test).</strong> Is based on the assessment of postural hypotension. There are four progressively more challenging positions. Patients should not use an assistive device (cane or walker) and keep their eyes open. </p>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"></td>
+<td align="left">Independently of the test selected. An illustrative tutorial will be displayed to guide the user along the process.</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><img alt="Image title" src="../images/screenshots/tutorial_tug1.png" /> <img alt="" src="../images/screenshots/arrow_right.png" /> <img alt="Image title" src="../images/screenshots/tutorial_tug3.png" /> <img alt="" src="../images/screenshots/arrow_right.png" /> <img alt="Image title" src="../images/screenshots/tutorial_tug8.png" /></td>
+</tr>
+</tbody>
+</table>
+<p>It is important note that the device should be carried / wore on the lower back of the patient while performing the physical test, as illustrated on below image. Thus, an appropriately coordination to activate the application and place the device should be taken into account.</p>
+<p><img alt="Image title" src="../images/screenshots/lowerback.png" /> </p>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"></td>
+<td align="left">In order to start the test, press the [ Start ] button, and (immediately) place the mobile device on the lower back of the patient.</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><img alt="Image title" src="../images/screenshots/test1.png" /></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"></td>
+<td align="left">After a countdown of 3 seconds, the application will start collecting sensor data. It is important to note that the application will stop to do so automatically (i.e., 30 seconds for the strength test and 10 seconds for the balance test), with the unique exception of the TUG test, which will stop until the user manually press the [ Finish ] button.</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><img alt="Image title" src="../images/screenshots/test3.png" /> <img alt="" src="../images/screenshots/arrow_right.png" /> <img alt="Image title" src="../images/screenshots/test4.png" /></td>
+</tr>
+</tbody>
+</table>
+<h2 id="-evaluation-of-test-performed">- Evaluation of test performed</h2>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"></td>
+<td align="left">To qualitatively evaluate the test, tick on the answers based on your personal observation. Finally, rank the test and provide any textual feedback to be considerate by those attempting on using the collected data on research studies.</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><img alt="Image title" src="../images/screenshots/test6.png" /> <img alt="" src="../images/screenshots/arrow_right.png" /> <img alt="Image title" src="../images/screenshots/test7.png" /></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"></td>
+<td align="left">It is important, to follow direction and messages displayed by the application, so the data is appropriately stored. If there is no problem with the collected data, the patient's record will be update immediately, showing the date of the most recent test performed (as showed in below section of the Record screen).</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><img alt="Image title" src="../images/screenshots/test8.png" /> <img alt="" src="../images/screenshots/arrow_right.png" /> <img alt="Image title" src="../images/screenshots/main_patient_section_after_test.png" /></td>
+</tr>
+</tbody>
+</table>
+<h2 id="-upload-data">- Upload data</h2>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"></td>
+<td align="left">Finally, in order to upload the data towards the Fiware server. It is paramount to open the Settings section, located on the left menu. Then, click on the [ Upload Data ] buttons.</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><img alt="Image title" src="../images/screenshots/left_menu.png" /> <img alt="" src="../images/screenshots/arrow_right.png" /> <img alt="Image title" src="../images/screenshots/settings.png" /> <img alt="" src="../images/screenshots/arrow_right.png" /> <img alt="Image title" src="../images/screenshots/data_upload.png" /></td>
+</tr>
+</tbody>
+</table>
+<h2 id="-other-services">- Other services</h2>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"></td>
+<td align="left">There are a few relevant services to take into consideration. For instance, in order to be able of uploading data to the Fiware server, it is necessary to hold an activation code (which keeps control of the users with privileges share data onto the main server). This data is controlled by the owner of the application, so, different mechanism could be used to provide it.</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><img alt="Image title" src="../images/screenshots/activation_code.png" /></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"></td>
+<td align="left">Moreover, complementary information about the applications.</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><img alt="Image title" src="../images/screenshots/about.png" /></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"></td>
+<td align="left">And ethical aspects can be found within respective section.</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"><img alt="Image title" src="../images/screenshots/faq.png" /></td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../dashboard/" class="btn btn-neutral float-right" title="Dashboard">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../introduction/" class="btn btn-neutral" title="Introduction"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../introduction/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../dashboard/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../js/theme.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/Users/netzahdzc/Development/workspace/ma-test-fiware/app/libs/universal-image-loader-1.9.3.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="a85588bec3e2c4584d593d3f15df1677321bca72">
+        <dex dex="/Users/netzahdzc/Development/workspace/ma-test-fiware/app/build/intermediates/pre-dexed/debug/universal-image-loader-1.9.3_6eaba7ecca3877007bd9e6e68a706567378febd5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/netzahdzc/Development/workspace/ma-test-fiware/app/libs/listviewanimations_lib-core_3.1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="f3f9629b068554d8513a2aaf34418171bf430851">
+        <dex dex="/Users/netzahdzc/Development/workspace/ma-test-fiware/app/build/intermediates/pre-dexed/debug/listviewanimations_lib-core_3.1.0_28239370c2c74aad77df858c9f035e0b21367ae8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/netzahdzc/Development/workspace/ma-test-fiware/app/libs/nineoldandroids-2.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="59f19e43354d32de831379c23ce03bb259a4c2b7">
+        <dex dex="/Users/netzahdzc/Development/workspace/ma-test-fiware/app/build/intermediates/pre-dexed/debug/nineoldandroids-2.4.0_68bea31e276a617b2926954e992df419b3566734.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/netzahdzc/Development/workspace/ma-test-fiware/app/libs/listviewanimations_lib-core-slh_3.1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="a4fe703aabd23e8c287c90396514418119109dd1">
+        <dex dex="/Users/netzahdzc/Development/workspace/ma-test-fiware/app/build/intermediates/pre-dexed/debug/listviewanimations_lib-core-slh_3.1.0_dc731fa9fe65f16f798cb347d6a919acbdc86848.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/netzahdzc/Development/workspace/ma-test-fiware/app/libs/listviewanimations_lib-manipulation_3.1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="63737e512fcd9e0ebe9bcd0bb375c2dded74116f">
+        <dex dex="/Users/netzahdzc/Development/workspace/ma-test-fiware/app/build/intermediates/pre-dexed/debug/listviewanimations_lib-manipulation_3.1.0_34f06131ce92a5d074c948580c03c1680b49cc0b.jar" />
+    </item>
+
+</items>

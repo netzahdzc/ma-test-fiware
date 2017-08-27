@@ -19,7 +19,7 @@ public final class DatabaseContract {
     }
 
     public static abstract class Patient implements BaseColumns {
-        public static final String TABLE_NAME = "patients";
+        public static final String TABLE_NAME = "participants";
         public static final String COLUMN_NAME_COL1 = "name";
         public static final String COLUMN_NAME_COL2 = "surname";
         public static final String COLUMN_NAME_COL3 = "gender";

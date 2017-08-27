@@ -15,11 +15,14 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,11 +31,13 @@ import android.os.IBinder;
 import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.telephony.TelephonyManager;
+import android.util.DisplayMetrics;
 import android.util.Log;
 
 import com.cicese.android.matest.DatabaseContract;
 import com.cicese.android.matest.DatabaseContractAcc;
 import com.cicese.android.matest.DatabaseContractOrient;
+import com.cicese.android.matest.R;
 import com.cicese.android.matest.util.AccDBHandlerUtils;
 import com.cicese.android.matest.util.ControlDBHandlerUtils;
 import com.cicese.android.matest.util.Filter;
@@ -61,11 +66,11 @@ public class UploadToServer extends Service {
         FIWARE; sends data only to FIWARE Cloud keeping BACKUP files on the device.
         BACKUP_FIWARE; sends data to both servers.
      */
-    private static final int TEST_MODE = BACKUP;
+    private static final int TEST_MODE = BACKUP_FIWARE;
     private static final String APP_NAME = "ma_test";
     private static final String FIWARE_PATH = "fiware";
-    private static final String FIWARE_ORION_PATH = "http://207.249.127.162:1026/v2";
-    private static final String BACKUP_PATH = "http://207.249.127.162:8000";
+    private static final String FIWARE_ORION_PATH = "http://207.249.127.152:1026/v2";
+    private static final String BACKUP_PATH = "http://207.249.127.152:8000";
 
     private final String APP_DIRECTORY_PATH = String.valueOf(
             Environment.getExternalStorageDirectory() + "/" + APP_NAME);
@@ -142,12 +147,19 @@ public class UploadToServer extends Service {
                     }
                     if (option.equals("fiware") && (TEST_MODE == FIWARE || TEST_MODE == BACKUP_FIWARE) ) {
                         try {
-                            // TODO Check how to refrieve FIWARE code number instead of this funky solution
-                            if (uploadFIWAREFile(mSensorType, files[i].getPath()) != 0) {
+                            // TODO Check how to retrieve FIWARE code number instead of this funky solution
+                            int structureCounter = 0;
+                            structureCounter += uploadFIWAREFile("deviceModel", files[i].getPath());
+                            structureCounter += uploadFIWAREFile(mSensorType, files[i].getPath());
+                            structureCounter += uploadFIWAREFile("deviceSmartphone", files[i].getPath());
+                            structureCounter += uploadFIWAREFile("motorPhysicalTest", files[i].getPath());
+                            // TODO Check the error: FileNotFoundException: java.io.FileNotFoundException: http://207.249.127.152:1026/v2/entities
+                            // TODO I commented this because, the app does not have control of existent entities
+                            //if ( structureCounter == (OK*4) ) {
                                 // Delete file, since we have already sent them
                                 Log.v("XXX FIWARE para DELETE", files[i].getPath());
                                 deleteSentFile(files[i].getPath());
-                            }
+                            //}
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -172,10 +184,32 @@ public class UploadToServer extends Service {
                     }
 
                     if(TEST_MODE == FIWARE || TEST_MODE == BACKUP_FIWARE){
-                        uploadMainFileFiware("ControlTests");
-                        uploadMainFileFiware("Patients");
-                        uploadMainFileFiware("Questionnaires");
-                        uploadMainFileFiware("Users");
+                        uploadMainFileFiware("ControlTests", null, null);
+                        uploadMainFileFiware("Patients", null, null);
+                        uploadMainFileFiware("Questionnaires", "TUG", null);
+                        uploadMainFileFiware("Questionnaires", "Strength", null);
+                        uploadMainFileFiware("Questionnaires", "Balance", null);
+                        uploadMainFileFiware("Question", "1", null);
+                        uploadMainFileFiware("Question", "2", null);
+                        uploadMainFileFiware("Question", "3", null);
+                        uploadMainFileFiware("Question", "4", null);
+                        uploadMainFileFiware("Question", "5", null);
+                        uploadMainFileFiware("Question", "6", null);
+                        uploadMainFileFiware("Question", "7", null);
+                        uploadMainFileFiware("Question", "8", null);
+                        uploadMainFileFiware("Question", "9", null);
+                        uploadMainFileFiware("Question", "10", null);
+                        uploadMainFileFiware("Answer", "1", null);
+                        uploadMainFileFiware("Answer", "2", null);
+                        uploadMainFileFiware("Answer", "3", null);
+                        uploadMainFileFiware("Answer", "4", null);
+                        uploadMainFileFiware("Answer", "5", null);
+                        uploadMainFileFiware("Answer", "6", null);
+                        uploadMainFileFiware("Answer", "7", null);
+                        uploadMainFileFiware("Answer", "8", null);
+                        uploadMainFileFiware("Answer", "9", null);
+                        uploadMainFileFiware("Answer", "10", null);
+                        uploadMainFileFiware("Users", null, null);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -318,10 +352,10 @@ public class UploadToServer extends Service {
     }
 
     // To upload main file to FIWARE in JSON documents
-    public int uploadMainFileFiware(String option) throws JSONException {
+    public int uploadMainFileFiware(String option, String exp1, String exp2) throws JSONException {
         Log.v(APP_NAME, "Processing " + option + " data");
         HttpURLConnection urlConnection;
-        JSONObject data = extract2Parse(option);
+        JSONObject data = extract2Parse(option, exp1, exp2);
 
         Log.v(APP_NAME, "Preparing batch: " + data.toString());
 
@@ -394,8 +428,9 @@ public class UploadToServer extends Service {
         return serverResponseCode;
     }
 
-    private JSONObject extract2Parse(String option) throws JSONException {
+    private JSONObject extract2Parse(String option, String exp1, String exp2) throws JSONException {
 
+        ArrayList<String> list;
         JSONObject core = new JSONObject();
         JSONArray entitiesArray = new JSONArray();
         JSONObject main;
@@ -404,6 +439,7 @@ public class UploadToServer extends Service {
 
 
         if (option.equals("ControlTests")) {
+            Log.v(APP_NAME, "Processing ControlTests data");
             String patient_id = "0";
             String weight = "0";
             String height = "0";
@@ -448,11 +484,14 @@ public class UploadToServer extends Service {
                     );
 
                     // Building JSON document
-                    String uniquePostId = getUniqueID().replaceAll("-", "") + "-" + "control" + "-" +
-                            patient_id + "" + System.currentTimeMillis();
+                    String uniquePostId = getUniqueID().replaceAll("-", "") + "CTS" + patient_id;
                     main = new JSONObject();
                     main.put("id", uniquePostId);
                     main.put("type", "ControlTest");
+
+                    standardContent = new JSONObject();
+                    standardContent.put("value", getUniqueID().replaceAll("-", "") + "P" + patient_id);
+                    main.put("refUser", standardContent);
 
                     standardContent = new JSONObject();
                     standardContent.put("value", weight);
@@ -471,7 +510,7 @@ public class UploadToServer extends Service {
 
                     standardContent = new JSONObject();
                     standardContent.put("value", heart_rate);
-                    standardContent.put("type", "beats/min");
+                    standardContent.put("type", "beats-min");
                     main.put("omh:heart_rate", standardContent);
 
                     standardContent = new JSONObject();
@@ -486,8 +525,7 @@ public class UploadToServer extends Service {
 
                     standardContent = new JSONObject();
                     standardContent.put("value", time_interval);
-                    standardContent.put("type", "omh:time-interval");
-                    main.put("omh:effective_time_frame", standardContent);
+                    main.put("dateModified", standardContent);
 
                     entitiesArray.put(main);
                 }
@@ -495,6 +533,7 @@ public class UploadToServer extends Service {
         }
 
         if (option.equals("Patients")) {
+            Log.v(APP_NAME, "Processing Patients data");
             String patient_id = "0";
             String name = "";
             String surname = "";
@@ -510,40 +549,39 @@ public class UploadToServer extends Service {
             PatientDBHandlerUtils patientDBObj = new PatientDBHandlerUtils(getApplicationContext());
             patientDBObj.openDB();
 
-            Cursor mControlPatien = patientDBObj.readAllData();
-            if (mControlPatien != null) {
-                while (mControlPatien.moveToNext()) {
-                    patient_id = mControlPatien.getString(
-                            mControlPatien.getColumnIndexOrThrow(DatabaseContract.Patient._ID)
+            Cursor mControlPatient = patientDBObj.readAllData();
+            if (mControlPatient != null) {
+                while (mControlPatient.moveToNext()) {
+                    patient_id = mControlPatient.getString(
+                            mControlPatient.getColumnIndexOrThrow(DatabaseContract.Patient._ID)
                     );
-                    name = mControlPatien.getString(
-                            mControlPatien.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL1)
+                    name = mControlPatient.getString(
+                            mControlPatient.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL1)
                     );
-                    surname = mControlPatien.getString(
-                            mControlPatien.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL2)
+                    surname = mControlPatient.getString(
+                            mControlPatient.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL2)
                     );
-                    gender = mControlPatien.getString(
-                            mControlPatien.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL3)
+                    gender = mControlPatient.getString(
+                            mControlPatient.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL3)
                     );
-                    birthday = mControlPatien.getString(
-                            mControlPatien.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL4)
+                    birthday = mControlPatient.getString(
+                            mControlPatient.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL4)
                     );
-                    trash = mControlPatien.getString(
-                            mControlPatien.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL6)
+                    trash = mControlPatient.getString(
+                            mControlPatient.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL6)
                     );
-                    created = mControlPatien.getString(
-                            mControlPatien.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL7)
+                    created = mControlPatient.getString(
+                            mControlPatient.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL7)
                     );
-                    lastUpdate = mControlPatien.getString(
-                            mControlPatien.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL8)
+                    lastUpdate = mControlPatient.getString(
+                            mControlPatient.getColumnIndexOrThrow(DatabaseContract.Patient.COLUMN_NAME_COL8)
                     );
 
                     // Building JSON document
-                    String uniquePostId = getUniqueID().replaceAll("-", "") + "-" + "patient" + "-" +
-                            patient_id + "" + System.currentTimeMillis();
+                    String uniquePostId = getUniqueID().replaceAll("-", "") + "P" +  patient_id;
                     main = new JSONObject();
                     main.put("id", uniquePostId);
-                    main.put("type", "ControlTest");
+                    main.put("type", "Participant");
 
                     standardContent = new JSONObject();
                     standardContent.put("value", name);
@@ -566,12 +604,8 @@ public class UploadToServer extends Service {
                     main.put("trash", standardContent);
 
                     standardContent = new JSONObject();
-                    standardContent.put("value", created);
-                    main.put("created", standardContent);
-
-                    standardContent = new JSONObject();
                     standardContent.put("value", lastUpdate);
-                    main.put("lastUpdate", standardContent);
+                    main.put("dateModified", standardContent);
 
                     entitiesArray.put(main);
                 }
@@ -579,6 +613,7 @@ public class UploadToServer extends Service {
         }
 
         if (option.equals("Users")) {
+            Log.v(APP_NAME, "Processing Users data");
             String user_id = "0";
             String name = "";
             String surname = "";
@@ -627,11 +662,10 @@ public class UploadToServer extends Service {
                     );
 
                     // Building JSON document
-                    String uniquePostId = getUniqueID().replaceAll("-", "") + "-" + "user" + "-" +
-                            user_id + "" + System.currentTimeMillis();
+                    String uniquePostId = getUniqueID().replaceAll("-", "") + "U" + user_id;
                     main = new JSONObject();
                     main.put("id", uniquePostId);
-                    main.put("type", "ControlTest");
+                    main.put("type", "User");
 
                     standardContent = new JSONObject();
                     standardContent.put("value", name);
@@ -640,10 +674,6 @@ public class UploadToServer extends Service {
                     standardContent = new JSONObject();
                     standardContent.put("value", surname);
                     main.put("surname", standardContent);
-
-                    standardContent = new JSONObject();
-                    standardContent.put("value", gender);
-                    main.put("gender", standardContent);
 
                     standardContent = new JSONObject();
                     standardContent.put("value", activationCode);
@@ -658,19 +688,111 @@ public class UploadToServer extends Service {
                     main.put("trash", standardContent);
 
                     standardContent = new JSONObject();
-                    standardContent.put("value", created);
-                    main.put("created", standardContent);
-
-                    standardContent = new JSONObject();
                     standardContent.put("value", lastUpdate);
-                    main.put("lastUpdate", standardContent);
+                    main.put("dateModified", standardContent);
 
                     entitiesArray.put(main);
                 }
             }
         }
 
+        // TODO Questionnaires and questions should be created on the server side, then pushed to...
+        // the mobile devices, so only answers are managed on the client side
+
         if (option.equals("Questionnaires")) {
+            Log.v(APP_NAME, "Processing Questionnaires data");
+            // Setting the batch of control entities
+            core.put("actionType", "APPEND");
+
+            String questionnaireType;
+            list = new ArrayList<String>();
+
+            switch(exp1){
+                case "TUG":{
+                    questionnaireType = "Timed Up and Go";
+                    list.add(getQuestion("id", exp1, "1"));
+                    list.add(getQuestion("id", exp1, "2"));
+                    list.add(getQuestion("id", exp1, "3"));
+                    list.add(getQuestion("id", exp1, "4"));
+                    list.add(getQuestion("id", exp1, "5"));
+                    list.add(getQuestion("id", exp1, "6"));
+                    list.add(getQuestion("id", exp1, "7"));
+                    list.add(getQuestion("id", exp1, "8"));
+                    list.add(getQuestion("id", exp1, "9"));
+                } break;
+                case "Strength":{
+                    questionnaireType = "Strength";
+                    list.add(getQuestion("id", exp1, "1"));
+                    list.add(getQuestion("id", exp1, "2"));
+                    list.add(getQuestion("id", exp1, "3"));
+                } break;
+                case "Balance":{
+                    questionnaireType = "Balance";
+                    list.add(getQuestion("id", exp1, "1"));
+                    list.add(getQuestion("id", exp1, "2"));
+                    list.add(getQuestion("id", exp1, "3"));
+                } break;
+                default: {
+                    questionnaireType = "";
+                }
+            }
+
+            main = new JSONObject();
+            main.put("id", "QNNRE1");
+            main.put("type", "Questionnaire");
+
+            standardContent = new JSONObject();
+            standardContent.put("value", questionnaireType);
+            main.put("questionnaireType", standardContent);
+
+            standardContent = new JSONObject();
+            standardContent.put("value", new JSONArray(list));
+            main.put("refQuestion", standardContent);
+
+            standardContent = new JSONObject();
+            standardContent.put("value", "Simple test used to assess a persons mobility.");
+            main.put("description", standardContent);
+
+            standardContent = new JSONObject();
+            standardContent.put("value", "2017-01-01T10:10:10.1000Z");
+            main.put("dateModified", standardContent);
+
+            entitiesArray.put(main);
+        }
+
+        // TODO As previously mentioned, questions should be created on the client side (i.e., a dashboard)
+        if (option.equals("Question")) {
+            Log.v(APP_NAME, "Processing Question data");
+            String uniqueId = "QON"+exp1;
+
+            // Setting the batch of control entities
+            core.put("actionType", "APPEND");
+
+            main = new JSONObject();
+            main.put("id", uniqueId);
+            main.put("type", "Question");
+
+            standardContent = new JSONObject();
+            standardContent.put("value", "health");
+            main.put("category", standardContent);
+
+            standardContent = new JSONObject();
+            standardContent.put("value", getQuestion("description", exp1, exp2));
+            main.put("value", standardContent);
+
+            standardContent = new JSONObject();
+            standardContent.put("value", "en");
+            main.put("language", standardContent);
+
+            standardContent = new JSONObject();
+            standardContent.put("value", "2017-01-01T10:10:10.1000Z");
+            main.put("dateModified", standardContent);
+
+            entitiesArray.put(main);
+        }
+
+        if (option.equals("Answer")) {
+            Log.v(APP_NAME, "Processing Answer data");
             String test_id = "0";
             String patient_id = "0";
             String question1 = "";
@@ -738,70 +860,75 @@ public class UploadToServer extends Service {
                             mControlTest.getColumnIndexOrThrow(DatabaseContract.Test.COLUMN_NAME_COL19)
                     );
 
+                    String refQuestion, answer;
+
+                    switch(exp1){
+                        case "1":{
+                            refQuestion = "QON1";
+                            answer = question1;
+                        } break;
+                        case "2":{
+                            refQuestion = "QON2";
+                            answer = question2;
+                        } break;
+                        case "3":{
+                            refQuestion = "QON3";
+                            answer = question3;
+                        } break;
+                        case "4":{
+                            refQuestion = "QON4";
+                            answer = question4;
+                        } break;
+                        case "5":{
+                            refQuestion = "QON5";
+                            answer = question5;
+                        } break;
+                        case "6":{
+                            refQuestion = "QON6";
+                            answer = question6;
+                        } break;
+                        case "7":{
+                            refQuestion = "QON7";
+                            answer = question7;
+                        } break;
+                        case "8":{
+                            refQuestion = "QON8";
+                            answer = question8;
+                        } break;
+                        case "9":{
+                            refQuestion = "QON9";
+                            answer = question9;
+                        } break;
+                        case "10":{
+                            refQuestion = "QON10";
+                            answer = question10;
+                        } break;
+                        default:
+                            refQuestion = "";
+                            answer = "";
+                    }
+
                     // Building JSON document
-                    String uniquePostId = getUniqueID().replaceAll("-", "") + "-" + "questionnaire" + "-" +
-                            test_id + "" + System.currentTimeMillis();
+                    String uniquePostId = getUniqueID().replaceAll("-", "") + "QON" + exp1 + "T"  + test_id;
                     main = new JSONObject();
                     main.put("id", uniquePostId);
-                    main.put("type", "Questionnaire");
+                    main.put("type", "Answer");
 
                     standardContent = new JSONObject();
-                    standardContent.put("value", test_id);
-                    standardContent.put("type", "id");
-                    main.put("test", standardContent);
+                    standardContent.put("value", refQuestion);
+                    main.put("refQuestion", standardContent);
 
                     standardContent = new JSONObject();
-                    standardContent.put("value", patient_id);
-                    standardContent.put("type", "id");
-                    main.put("patient", standardContent);
+                    standardContent.put("value", getUniqueID().replaceAll("-", "") + "P"  + patient_id);
+                    main.put("refUser", standardContent);
 
                     standardContent = new JSONObject();
-                    standardContent.put("value", question1);
-                    main.put("question1", standardContent);
-
-                    standardContent = new JSONObject();
-                    standardContent.put("value", question2);
-                    main.put("question2", standardContent);
-
-                    standardContent = new JSONObject();
-                    standardContent.put("value", question3);
-                    main.put("question3", standardContent);
-
-                    standardContent = new JSONObject();
-                    standardContent.put("value", question4);
-                    main.put("question4", standardContent);
-
-                    standardContent = new JSONObject();
-                    standardContent.put("value", question5);
-                    main.put("question5", standardContent);
-
-                    standardContent = new JSONObject();
-                    standardContent.put("value", question6);
-                    main.put("question6", standardContent);
-
-                    standardContent = new JSONObject();
-                    standardContent.put("value", question7);
-                    main.put("question7", standardContent);
-
-                    standardContent = new JSONObject();
-                    standardContent.put("value", question8);
-                    main.put("question8", standardContent);
-
-                    standardContent = new JSONObject();
-                    standardContent.put("value", question9);
-                    main.put("question9", standardContent);
-
-                    standardContent = new JSONObject();
-                    standardContent.put("value", question10);
-                    main.put("question10", standardContent);
-
-                    standardContent = new JSONObject();
-                    standardContent.put("value", status);
-                    main.put("status", standardContent);
+                    standardContent.put("value", answer);
+                    main.put("answer", standardContent);
 
                     standardContent = new JSONObject();
                     standardContent.put("value", lastUpdate);
-                    main.put("lastUpdate", standardContent);
+                    main.put("dateModified", standardContent);
 
                     entitiesArray.put(main);
                 }
@@ -811,6 +938,90 @@ public class UploadToServer extends Service {
         core.put("entities", entitiesArray);
 
         return core;
+    }
+
+    public String getQuestion(String option, String type, String question){
+        String valueQuestion;
+        String questionId = "QON" + question;
+
+        Configuration conf = getResources().getConfiguration();
+        conf.locale = new Locale("en");
+        Resources resources = new Resources(getAssets(), null, conf);
+
+        switch(type){
+            case "TUG":{
+                switch(question){
+                    case "1": {
+                        valueQuestion = resources.getString(R.string.walking_question_one).replace("'","");
+                    }break;
+                    case "2": {
+                        valueQuestion = resources.getString(R.string.walking_question_two).replace("'","");
+                    }break;
+                    case "3": {
+                        valueQuestion = resources.getString(R.string.walking_question_three).replace("'","");
+                    }break;
+                    case "4": {
+                        valueQuestion = resources.getString(R.string.walking_question_four).replace("'","");
+                    }break;
+                    case "5": {
+                        valueQuestion = resources.getString(R.string.walking_question_five).replace("'","");
+                    }break;
+                    case "6": {
+                        valueQuestion = resources.getString(R.string.walking_question_six).replace("'","");
+                    }break;
+                    case "7": {
+                        valueQuestion = resources.getString(R.string.walking_question_seven).replace("'","");
+                    }break;
+                    case "8": {
+                        valueQuestion = resources.getString(R.string.walking_question_eight).replace("'","");
+                    }break;
+                    case "9": {
+                        valueQuestion = resources.getString(R.string.walking_question_nine).replace("'","");
+                    }break;
+                    default:
+                        valueQuestion = "";
+                }
+            } break;
+            case "Strength":{
+                switch(question){
+                    case "1": {
+                        valueQuestion = resources.getString(R.string.strength_question_one).replace("'","");
+                    }break;
+                    case "2": {
+                        valueQuestion = resources.getString(R.string.strength_question_two).replace("'","");
+                    }break;
+                    case "3": {
+                        valueQuestion = resources.getString(R.string.strength_question_three).replace("'","");
+                    }break;
+                    default:
+                        valueQuestion = "";
+                }
+            } break;
+            case "Balance":{
+                switch(question){
+                    case "1": {
+                        valueQuestion = resources.getString(R.string.balance_question_one).replace("'","");
+                    }break;
+                    case "2": {
+                        valueQuestion = resources.getString(R.string.balance_question_two).replace("'","");
+                    }break;
+                    case "3": {
+                        valueQuestion = resources.getString(R.string.balance_question_three).replace("'","");
+                    }break;
+                    default:
+                        valueQuestion = "";
+                }
+            } break;
+            default: {
+                valueQuestion = "";
+            }
+        }
+
+        if(option.equals("id"))
+            return questionId;
+        else
+            return valueQuestion;
+
     }
 
     // To upload files to BACKUP server
@@ -974,7 +1185,7 @@ public class UploadToServer extends Service {
     }
 
     final int RESTART_COUNTER = 1;
-    final int BATCH_SIZE = 10;
+    //final int BATCH_SIZE = 10;
 
     private List extract2Parse(String sourceFileUri, String mSensorType) throws JSONException {
 
@@ -983,6 +1194,7 @@ public class UploadToServer extends Service {
         JSONObject metadataContent;
         List batch = new ArrayList();
         List jsonAndBatch = new ArrayList();
+        ArrayList<String> list;
 
         int c = RESTART_COUNTER;
         String patient_id = "0";
@@ -1018,7 +1230,7 @@ public class UploadToServer extends Service {
                     test_id = mAccCursor.getString(
                             mAccCursor.getColumnIndexOrThrow(DatabaseContractAcc.SensorAcc.COLUMN_NAME_COL2)
                     );
-                    // TODO It won't be included to fiware, but maybe I should. Think about it.
+                    // TODO It won't be included to fiware, but maybe I should think about it.
                     /*accuracy= mCursor.getString(
                             mCursor.getColumnIndexOrThrow(DatabaseContractAcc.SensorAcc.COLUMN_NAME_COL3)
                     );*/
@@ -1037,14 +1249,17 @@ public class UploadToServer extends Service {
                     chunk += x + "," + y + "," + z + "," + created + " ";
 
                     // Building a batch
-                    // TODO take care of the remaining less than the BATCH_SIZE. I'm leaving then to hell :P
-                    if (c == BATCH_SIZE) {
+                    // TODO take care of the remaining less than the BATCH_SIZE. I'm leaving them to hell :P
+                    /*if (c == BATCH_SIZE) {
                         batch.add(chunk);
                         c = RESTART_COUNTER;
                     }
 
-                    c++;
+                    c++;*/
                 }
+
+                // To collect the whole pack of data instead of chunks as previously coded
+                batch.add(chunk);
 
                 mAccCursor.close();
             }
@@ -1081,15 +1296,56 @@ public class UploadToServer extends Service {
 
                     // Building a batch
                     // TODO take care of the remaining less than the BATCH_SIZE. I'm leaving then to hell :P
-                    if (c == BATCH_SIZE) {
+                    /*if (c == BATCH_SIZE) {
                         batch.add(chunk);
                         c = RESTART_COUNTER;
                     }
 
-                    c++;
+                    c++;*/
                 }
 
+                // To collect the whole pack of data instead of chunks as previously coded
+                batch.add(chunk);
+
                 mOrientCursor.close();
+            }
+        }
+
+        // This will get the test_id, so I can retrieve metadata
+        if (!mSensorType.equals("orient") && !mSensorType.equals("acc")) {
+            try{
+                AccDBHandlerUtils mAccDbHelper = new AccDBHandlerUtils(getApplicationContext(), sourceFileUri);
+                mAccDbHelper.openDB();
+
+                Cursor mAccCursor = mAccDbHelper.readData();
+                if (mAccCursor != null) {
+                    while (mAccCursor.moveToNext()) {
+                        patient_id = mAccCursor.getString(
+                                mAccCursor.getColumnIndexOrThrow(DatabaseContractAcc.SensorAcc.COLUMN_NAME_COL1)
+                        );
+                        test_id = mAccCursor.getString(
+                                mAccCursor.getColumnIndexOrThrow(DatabaseContractAcc.SensorAcc.COLUMN_NAME_COL2)
+                        );
+                    }
+                    mAccCursor.close();
+                }
+            }catch (Exception e) {
+                OrientDBHandlerUtils mOrientDbHelper = new OrientDBHandlerUtils(getApplicationContext(), sourceFileUri);
+                mOrientDbHelper.openDB();
+
+                Cursor mOrientCursor = mOrientDbHelper.readData();
+                if (mOrientCursor != null) {
+                    while (mOrientCursor.moveToNext()) {
+                        patient_id = mOrientCursor.getString(
+                                mOrientCursor.getColumnIndexOrThrow(DatabaseContractOrient.SensorOrient.COLUMN_NAME_COL1)
+                        );
+                        test_id = mOrientCursor.getString(
+                                mOrientCursor.getColumnIndexOrThrow(DatabaseContractOrient.SensorOrient.COLUMN_NAME_COL2)
+                        );
+                    }
+
+                    mOrientCursor.close();
+                }
             }
         }
 
@@ -1119,6 +1375,12 @@ public class UploadToServer extends Service {
         String mobile_brand = "";
         String mobile_android_api = "";
         String app_version = "";
+        // TODO This data should come from the db instead
+        // TODO It is also necesary to check wither hw and fw values are appropiately been address
+        String mobile_manufacturer = Build.MANUFACTURER;
+        String hardwareVersion = Build.HARDWARE;
+        String firmwareVersion = Build.VERSION.RELEASE;
+
 
         Cursor mCursorTechnical = technicalDBObj.readDataByTestId(Integer.parseInt(test_id));
         if (mCursorTechnical.moveToFirst()) {
@@ -1136,89 +1398,201 @@ public class UploadToServer extends Service {
             );
         }
 
-        // Building JSON document
-        String sensor = "";
-        if (mSensorType.equals("acc")) sensor = "accelerometer";
-        if (mSensorType.equals("orient")) sensor = "orientation";
+        ///////// Building JSON document //////////
 
-        String uniquePostId = getUniqueID().replaceAll("-", "") + "-" + sensor + "-" + test_id + "" + System.currentTimeMillis();
-        main.put("id", uniquePostId);
-        main.put("type", "PhysicalTest");
+        // DEVICE-MODEL
+        // This entity will be used as part of the Device-Smartphone entity
+        if (mSensorType.equals("deviceModel")) {
+            Log.v(APP_NAME, "Working on: deviceModel");
+            String uniquePostId = getUniqueID().replaceAll("-", "") + "DM";
+            main.put("id", uniquePostId);
+            main.put("type", "DeviceModel");
 
-        standardContent = new JSONObject();
-        standardContent.put("value", getTestTypeOption(Integer.parseInt(test_option)));
-        standardContent.put("type", "test-option");
-        metadataContent = new JSONObject();
-        metadataContent.put("variant", standardContent);
-        standardContent = new JSONObject();
-        standardContent.put("value", getTestType(Integer.parseInt(test_type)));
-        standardContent.put("type", "test-type");
-        standardContent.put("metadata", metadataContent);
-        main.put("test", standardContent);
+            standardContent = new JSONObject();
+            standardContent.put("value", "smartphone");
+            main.put("category", standardContent);
 
-        standardContent = new JSONObject();
-        standardContent.put("value", sensor_speed);
-        standardContent.put("type", "hz");
-        metadataContent = new JSONObject();
-        metadataContent.put("speed", standardContent);
-        standardContent = new JSONObject();
-        standardContent.put("value", sensor_type);
-        standardContent.put("type", "sensor-type");
-        standardContent.put("metadata", metadataContent);
-        main.put("sensor", standardContent);
+            standardContent = new JSONObject();
+            standardContent.put("value", mobile_brand);
+            main.put("brandName", standardContent);
 
-        standardContent = new JSONObject();
-        standardContent.put("value", "csv");
-        standardContent.put("type", "format");
-        metadataContent = new JSONObject();
-        metadataContent.put("format", standardContent);
-        standardContent = new JSONObject();
-        standardContent.put("value", "Smartphone");
-        standardContent.put("type", "device-type");
-        metadataContent.put("device", standardContent);
-        standardContent = new JSONObject();
-        standardContent.put("value", mobile_model);
-        standardContent.put("type", "Smartphone");
-        metadataContent.put("model", standardContent);
-        standardContent = new JSONObject();
-        standardContent.put("value", mobile_brand);
-        standardContent.put("type", "Smartphone");
-        metadataContent.put("brand", standardContent);
-        standardContent = new JSONObject();
-        standardContent.put("value", app_version);
-        standardContent.put("type", "Smartphone");
-        metadataContent.put("software", standardContent);
-        standardContent = new JSONObject();
-        standardContent.put("value", mobile_android_api);
-        standardContent.put("type", "android-api");
-        metadataContent.put("library", standardContent);
-        standardContent = new JSONObject();
-        // TODO this mechanism might help to append chunks to respective post 1/2
-        // TODO but the ideal mechanism is to send a single huge JSON batch
-        // http://stackoverflow.com/questions/17650509/post-huge-json-object-in-android
-        //if (batch.size() >= 1)
-        //    standardContent.put("value", "[SEGMENTED]");
-        //else
-        standardContent.put("value", batch.get(0));
-        standardContent.put("type", "sensor-data");
-        standardContent.put("metadata", metadataContent);
-        main.put("data", standardContent);
+            standardContent = new JSONObject();
+            standardContent.put("value", mobile_model);
+            main.put("modelName", standardContent);
 
-        standardContent = new JSONObject();
-        standardContent.put("value", start_date_time);
-        standardContent.put("type", "omh:time-interval");
-        //standardContent.put("metadata", "");
-        main.put("omh:start_date_time", standardContent);
+            standardContent = new JSONObject();
+            standardContent.put("value", mobile_manufacturer);
+            main.put("manufacturerName", standardContent);
 
-        standardContent = new JSONObject();
-        standardContent.put("value", end_date_time);
-        standardContent.put("type", "omh:time-interval");
-        //standardContent.put("metadata", "");
-        main.put("omh:end_date_time", standardContent);
+            standardContent = new JSONObject();
+            standardContent.put("value", end_date_time);
+            main.put("dateCreated", standardContent);
 
-        jsonAndBatch.add(main);
-        jsonAndBatch.add(batch);
-        jsonAndBatch.add(uniquePostId);
+            jsonAndBatch.add(main);
+            jsonAndBatch.add(batch);
+            jsonAndBatch.add(uniquePostId);
+        }
+
+        // DEVICE-SENSOR
+        // This entity will be used as part of the Device-Smartphone structure
+        if (mSensorType.equals("acc") || mSensorType.equals("orient")) {
+            Log.v(APP_NAME, "Working on: sensors");
+            String sensor = "";
+            if (mSensorType.equals("acc")) sensor = "accelerometer";
+            if (mSensorType.equals("orient")) sensor = "orientation";
+
+            String uniquePostId = getUniqueID().replaceAll("-", "") + "" + mSensorType.toUpperCase() + test_id;
+            main.put("id", uniquePostId);
+            main.put("type", "Device");
+
+            standardContent = new JSONObject();
+            standardContent.put("value", "sensor");
+            main.put("category", standardContent);
+
+            standardContent = new JSONObject();
+            list = new ArrayList<String>();
+            list.add("sensing");
+            standardContent.put("value", new JSONArray(list));
+            main.put("function", standardContent);
+
+            standardContent = new JSONObject();
+            list = new ArrayList<String>();
+            list.add(sensor);
+            standardContent.put("value", new JSONArray(list));
+            main.put("controlledProperty", standardContent);
+
+            standardContent = new JSONObject();
+            standardContent.put("value", hardwareVersion);
+            main.put("hardwareVersion", standardContent);
+
+            standardContent = new JSONObject();
+            standardContent.put("value", firmwareVersion);
+            main.put("firmwareVersion", standardContent);
+
+            standardContent = new JSONObject();
+            // TODO this mechanism might help to append chunks to respective post 1/2
+            // TODO but the ideal mechanism is to send a single huge JSON batch
+            // http://stackoverflow.com/questions/17650509/post-huge-json-object-in-android
+            //if (batch.size() >= 1)
+            //    standardContent.put("value", "[SEGMENTED]");
+            //else
+            standardContent.put("value", batch.get(0));
+            main.put("data", standardContent);
+
+            metadataContent = new JSONObject();
+            standardContent = new JSONObject();
+            standardContent.put("format", "cvs");
+            metadataContent.put("data", standardContent);
+            standardContent = new JSONObject();
+            standardContent.put("value", sensor_speed);
+            standardContent.put("type", "hz");
+            metadataContent.put("sampleRate", standardContent);
+            standardContent = new JSONObject();
+            standardContent.put("value", metadataContent);
+            main.put("configuration", standardContent);
+
+            standardContent = new JSONObject();
+            standardContent.put("value", end_date_time);
+            main.put("dateCreated", standardContent);
+
+            jsonAndBatch.add(main);
+            jsonAndBatch.add(batch);
+            jsonAndBatch.add(uniquePostId);
+        }
+
+        // DEVICE-SMARTPHONE
+        // This entity can host a number of Device-Sensor entities,
+        // it also, makes reference to the device model.
+        if (mSensorType.equals("deviceSmartphone")) {
+            Log.v(APP_NAME, "Working on: deviceSmartphone");
+            String uniquePostId = getUniqueID().replaceAll("-", "") + "DSM" + test_id;
+            main.put("id", uniquePostId);
+            main.put("type", "Device");
+
+            standardContent = new JSONObject();
+            standardContent.put("value", "smartphone");
+            main.put("category", standardContent);
+
+            standardContent = new JSONObject();
+            standardContent.put("value", mobile_android_api);
+            main.put("osVersion", standardContent);
+
+            standardContent = new JSONObject();
+            standardContent.put("value", app_version);
+            main.put("softwareVersion", standardContent);
+
+            standardContent = new JSONObject();
+            standardContent.put("value", hardwareVersion);
+            main.put("hardwareVersion", standardContent);
+
+            standardContent = new JSONObject();
+            standardContent.put("value", firmwareVersion);
+            main.put("firmwareVersion", standardContent);
+
+            standardContent = new JSONObject();
+            list = new ArrayList<String>();
+            list.add(getUniqueID().replaceAll("-", "") + "ACC" + test_id);
+            list.add(getUniqueID().replaceAll("-", "") + "ORIENT" + test_id);
+            standardContent.put("value", new JSONArray(list));
+            main.put("consistOf", standardContent);
+
+            standardContent = new JSONObject();
+            standardContent.put("value", getUniqueID().replaceAll("-", "") + "DM");
+            main.put("refDeviceModel", standardContent);
+
+            standardContent = new JSONObject();
+            standardContent.put("value", end_date_time);
+            main.put("dateCreated", standardContent);
+
+            jsonAndBatch.add(main);
+            jsonAndBatch.add(batch);
+            jsonAndBatch.add(uniquePostId);
+        }
+
+        // MOTOR-PHYSICAL-TEST
+        // This entity, holds previous Device-Smartphone strutures; which as overall involve all aforementioned entities (i.e., DeviceModel, Device-Sensor, and Device-Smaartphone)
+        if (mSensorType.equals("motorPhysicalTest")) {
+            Log.v(APP_NAME, "Working on: motorPhysicalTest");
+            String uniquePostId = getUniqueID().replaceAll("-", "") + "MPT" + test_id;
+            main.put("id", uniquePostId);
+            main.put("type", "MotorPhysicalTest");
+
+            standardContent = new JSONObject();
+            standardContent.put("value", getTestTypeOption(Integer.parseInt(test_option)));
+            main.put("testType", standardContent);
+
+            standardContent = new JSONObject();
+            standardContent.put("value", getUniqueID().replaceAll("-", "") + "P"  + patient_id);
+            main.put("refUser", standardContent);
+
+            standardContent = new JSONObject();
+            list = new ArrayList<String>();
+            list.add(getUniqueID().replaceAll("-", "") + "DSM" + test_id);
+            standardContent.put("value", new JSONArray(list));
+            main.put("refDevice", standardContent);
+
+            metadataContent = new JSONObject();
+            standardContent = new JSONObject();
+            standardContent.put("device", getUniqueID().replaceAll("-", "") + "DSM" + test_id);
+            standardContent.put("position", "lower-back");
+            metadataContent.put("data", standardContent);
+            metadataContent.put("relationship", "device-limbs");
+            standardContent = new JSONObject();
+            standardContent.put("value", metadataContent);
+            main.put("configuration", standardContent);
+
+            standardContent = new JSONObject();
+            standardContent.put("value", start_date_time);
+            main.put("dateTestStarted", standardContent);
+
+            standardContent = new JSONObject();
+            standardContent.put("value", end_date_time);
+            main.put("dateTestEnded", standardContent);
+
+            jsonAndBatch.add(main);
+            jsonAndBatch.add(batch);
+            jsonAndBatch.add(uniquePostId);
+        }
 
         return jsonAndBatch;
     }

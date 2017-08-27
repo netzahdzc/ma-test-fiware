@@ -245,6 +245,6 @@
     <string name="account_no_activated">The account is inactive. Please, refer to section ACTIVATE ACCOUNT for further information.</string>
     <string name="upload_description_fiware">Remaining file (fiware) since:</string>
     <string name="storing">Checking and storing data.</string>
-    <string name="storing_warning">Please, keep the device still until the process finish.</string>
+    <string name="storing_warning">Please, keep the device still until the process finishes.</string>
     <string name="button_edit">Edit</string>
 </resources>

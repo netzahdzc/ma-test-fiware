@@ -746,6 +746,7 @@ public class UploadToServer extends Service {
             main.put("questionnaireType", standardContent);
 
             standardContent = new JSONObject();
+            standardContent.put("type", "Array");
             standardContent.put("value", new JSONArray(list));
             main.put("refQuestion", standardContent);
 
@@ -1452,12 +1453,14 @@ public class UploadToServer extends Service {
             standardContent = new JSONObject();
             list = new ArrayList<String>();
             list.add("sensing");
+            standardContent.put("type", "Array");
             standardContent.put("value", new JSONArray(list));
             main.put("function", standardContent);
 
             standardContent = new JSONObject();
             list = new ArrayList<String>();
             list.add(sensor);
+            standardContent.put("type", "Array");
             standardContent.put("value", new JSONArray(list));
             main.put("controlledProperty", standardContent);
 
@@ -1533,6 +1536,7 @@ public class UploadToServer extends Service {
             list = new ArrayList<String>();
             list.add(getUniqueID().replaceAll("-", "") + "ACC" + test_id);
             list.add(getUniqueID().replaceAll("-", "") + "ORIENT" + test_id);
+            standardContent.put("type", "Array");
             standardContent.put("value", new JSONArray(list));
             main.put("consistOf", standardContent);
 
@@ -1568,6 +1572,7 @@ public class UploadToServer extends Service {
             standardContent = new JSONObject();
             list = new ArrayList<String>();
             list.add(getUniqueID().replaceAll("-", "") + "DSM" + test_id);
+            standardContent.put("type", "Array");
             standardContent.put("value", new JSONArray(list));
             main.put("refDevice", standardContent);
 

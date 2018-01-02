@@ -27,6 +27,7 @@ import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.IBinder;
 import android.os.StrictMode;
 import android.support.annotation.Nullable;
@@ -111,11 +112,18 @@ public class UploadToServer extends Service {
         String sensorType = b.getString("sensorType");
         Log.i(APP_NAME, "I'm on IBinder and I'm carrying this value: " + sensorType);
 
+        if(sensorType.equals("acc"))
+            allow_sent = true;
+
         // We start checking into directories to retrieve and send file to server-side
         startScan(sensorType);
 
         return START_REDELIVER_INTENT;
     }
+
+    // Check TODO about migrating the creation of questionnaires on the dashboard instead of
+    // retrieving the info from the client side
+    boolean allow_sent = false;
 
     private void processFiles(File[] files, String mSensorType, String option) {
         if (option.equals("backup") || option.equals("fiware")) {
@@ -145,7 +153,7 @@ public class UploadToServer extends Service {
                             deleteSentFile(files[i].getPath());
                         }
                     }
-                    if (option.equals("fiware") && (TEST_MODE == FIWARE || TEST_MODE == BACKUP_FIWARE) ) {
+                    if (option.equals("fiware") && (TEST_MODE == FIWARE || TEST_MODE == BACKUP_FIWARE)) {
                         try {
                             // TODO Check how to retrieve FIWARE code number instead of this funky solution
                             int structureCounter = 0;
@@ -172,6 +180,7 @@ public class UploadToServer extends Service {
         }
 
         if (option.equals("main")) {
+
             // Upload previous loaded list
             for (int i = 0; i < files.length; i++) {
                 try {
@@ -183,39 +192,67 @@ public class UploadToServer extends Service {
                         uploadMainFile(files[i].getPath(), newFileName);
                     }
 
-                    if(TEST_MODE == FIWARE || TEST_MODE == BACKUP_FIWARE){
+                    if((TEST_MODE == FIWARE || TEST_MODE == BACKUP_FIWARE) && allow_sent){
                         uploadMainFileFiware("ControlTests", null, null);
                         uploadMainFileFiware("Patients", null, null);
-                        uploadMainFileFiware("Questionnaires", "TUG", null);
-                        uploadMainFileFiware("Questionnaires", "Strength", null);
-                        uploadMainFileFiware("Questionnaires", "Balance", null);
-                        uploadMainFileFiware("Question", "1", null);
-                        uploadMainFileFiware("Question", "2", null);
-                        uploadMainFileFiware("Question", "3", null);
-                        uploadMainFileFiware("Question", "4", null);
-                        uploadMainFileFiware("Question", "5", null);
-                        uploadMainFileFiware("Question", "6", null);
-                        uploadMainFileFiware("Question", "7", null);
-                        uploadMainFileFiware("Question", "8", null);
-                        uploadMainFileFiware("Question", "9", null);
-                        uploadMainFileFiware("Question", "10", null);
-                        uploadMainFileFiware("Answer", "1", null);
-                        uploadMainFileFiware("Answer", "2", null);
-                        uploadMainFileFiware("Answer", "3", null);
-                        uploadMainFileFiware("Answer", "4", null);
-                        uploadMainFileFiware("Answer", "5", null);
-                        uploadMainFileFiware("Answer", "6", null);
-                        uploadMainFileFiware("Answer", "7", null);
-                        uploadMainFileFiware("Answer", "8", null);
-                        uploadMainFileFiware("Answer", "9", null);
-                        uploadMainFileFiware("Answer", "10", null);
+
+                        // TODO this should be a task for the dashboard not the client app
+                        Log.v(APP_NAME, "INTO just_one loop");
+                        trigger_uploadMainFileFiware("Questionnaires", "TUG", null);
+                        trigger_uploadMainFileFiware("Questionnaires", "Strength", null);
+
+                        trigger_uploadMainFileFiware("Question", "1", "TUG");
+                        trigger_uploadMainFileFiware("Question", "2", "TUG");
+                        trigger_uploadMainFileFiware("Question", "3", "TUG");
+                        trigger_uploadMainFileFiware("Question", "4", "TUG");
+                        trigger_uploadMainFileFiware("Question", "5", "TUG");
+                        trigger_uploadMainFileFiware("Question", "6", "TUG");
+                        trigger_uploadMainFileFiware("Question", "7", "TUG");
+                        trigger_uploadMainFileFiware("Question", "8", "TUG");
+                        trigger_uploadMainFileFiware("Question", "9", "TUG");
+                        trigger_uploadMainFileFiware("Question", "1", "Strength");
+                        trigger_uploadMainFileFiware("Question", "2", "Strength");
+                        trigger_uploadMainFileFiware("Question", "3", "Strength");
+                        trigger_uploadMainFileFiware("Question", "1", "Balance");
+                        trigger_uploadMainFileFiware("Question", "2", "Balance");
+                        trigger_uploadMainFileFiware("Question", "3", "Balance");
+
+                        trigger_uploadMainFileFiware("Answer", "1", null);
+                        trigger_uploadMainFileFiware("Answer", "2", null);
+                        trigger_uploadMainFileFiware("Answer", "3", null);
+                        trigger_uploadMainFileFiware("Answer", "4", null);
+                        trigger_uploadMainFileFiware("Answer", "5", null);
+                        trigger_uploadMainFileFiware("Answer", "6", null);
+                        trigger_uploadMainFileFiware("Answer", "7", null);
+                        trigger_uploadMainFileFiware("Answer", "8", null);
+                        trigger_uploadMainFileFiware("Answer", "9", null);
+                        trigger_uploadMainFileFiware("Answer", "10", null);
+
                         uploadMainFileFiware("Users", null, null);
+
+                        allow_sent = false;
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         }
+    }
+
+    public void trigger_uploadMainFileFiware(final String option, final String exp1, final String exp2){
+        // TODO a potential solution to guarantee that all json are posted is by
+        // delaying their post
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                try {
+                    Log.v(APP_NAME, "INTO trigger after awhile " + option);
+                    uploadMainFileFiware(option, exp1, exp2);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, 3000);
     }
 
     private void startScan(String mSensorType) {
@@ -435,7 +472,7 @@ public class UploadToServer extends Service {
         JSONArray entitiesArray = new JSONArray();
         JSONObject main;
         JSONObject standardContent;
-        JSONObject metadataContent;
+        JSONObject metadataContent, metadataContent_;
 
 
         if (option.equals("ControlTests")) {
@@ -490,42 +527,67 @@ public class UploadToServer extends Service {
                     main.put("type", "ControlTest");
 
                     standardContent = new JSONObject();
-                    standardContent.put("value", getUniqueID().replaceAll("-", "") + "P" + patient_id);
+                    standardContent.put("value", "http://207.249.127.162:1234/participants/" + patient_id);
                     main.put("refUser", standardContent);
 
                     standardContent = new JSONObject();
+                    metadataContent = new JSONObject();
+                    metadataContent_ = new JSONObject();
                     standardContent.put("value", weight);
-                    standardContent.put("type", "kg");
-                    main.put("omh:body_weight", standardContent);
+                    metadataContent.put("value", "kg");
+                    metadataContent_.put("type", metadataContent);
+                    standardContent.put("metadata", metadataContent_);
+                    main.put("omh@body_weight", standardContent);
 
                     standardContent = new JSONObject();
+                    metadataContent = new JSONObject();
+                    metadataContent_ = new JSONObject();
                     standardContent.put("value", height);
-                    standardContent.put("type", "cm");
-                    main.put("omh:body_height", standardContent);
+                    metadataContent.put("value", "cm");
+                    metadataContent_.put("type", metadataContent);
+                    standardContent.put("metadata", metadataContent_);
+                    main.put("omh@body_height", standardContent);
 
                     standardContent = new JSONObject();
+                    metadataContent = new JSONObject();
+                    metadataContent_ = new JSONObject();
                     standardContent.put("value", waist_size);
-                    standardContent.put("type", "cm");
+                    metadataContent.put("value", "cm");
+                    metadataContent_.put("type", metadataContent);
+                    standardContent.put("metadata", metadataContent_);
                     main.put("waistCircumference", standardContent);
 
                     standardContent = new JSONObject();
+                    metadataContent = new JSONObject();
+                    metadataContent_ = new JSONObject();
                     standardContent.put("value", heart_rate);
-                    standardContent.put("type", "beats-min");
-                    main.put("omh:heart_rate", standardContent);
+                    metadataContent.put("value", "beats-min");
+                    metadataContent_.put("type", metadataContent);
+                    standardContent.put("metadata", metadataContent_);
+                    main.put("omh@heart_rate", standardContent);
 
                     standardContent = new JSONObject();
+                    metadataContent = new JSONObject();
+                    metadataContent_ = new JSONObject();
                     standardContent.put("value", systolic_blood);
-                    standardContent.put("type", "mmHg");
-                    main.put("omh:systolic_blood_pressure", standardContent);
+                    metadataContent.put("value", "mmHg");
+                    metadataContent_.put("type", metadataContent);
+                    standardContent.put("metadata", metadataContent_);
+                    main.put("omh@systolic_blood_pressure", standardContent);
 
                     standardContent = new JSONObject();
+                    metadataContent = new JSONObject();
+                    metadataContent_ = new JSONObject();
                     standardContent.put("value", diastolic_blood);
-                    standardContent.put("type", "mmHg");
-                    main.put("omh:diastolic_blood_pressure", standardContent);
+                    metadataContent.put("value", "mmHg");
+                    metadataContent_.put("type", metadataContent);
+                    standardContent.put("metadata", metadataContent_);
+                    main.put("omh@diastolic_blood_pressure", standardContent);
 
                     standardContent = new JSONObject();
                     standardContent.put("value", time_interval);
-                    main.put("dateModified", standardContent);
+                    standardContent.put("type", "Text");
+                    main.put("dateCreated", standardContent);
 
                     entitiesArray.put(main);
                 }
@@ -578,7 +640,7 @@ public class UploadToServer extends Service {
                     );
 
                     // Building JSON document
-                    String uniquePostId = getUniqueID().replaceAll("-", "") + "P" +  patient_id;
+                    String uniquePostId = patient_id;
                     main = new JSONObject();
                     main.put("id", uniquePostId);
                     main.put("type", "Participant");
@@ -600,12 +662,13 @@ public class UploadToServer extends Service {
                     main.put("birthday", standardContent);
 
                     standardContent = new JSONObject();
-                    standardContent.put("value", trash);
+                    standardContent.put("value", parse_trash(trash));
                     main.put("trash", standardContent);
 
                     standardContent = new JSONObject();
-                    standardContent.put("value", lastUpdate);
-                    main.put("dateModified", standardContent);
+                    standardContent.put("value", created);
+                    standardContent.put("type", "Text");
+                    main.put("dateCreated", standardContent);
 
                     entitiesArray.put(main);
                 }
@@ -662,7 +725,7 @@ public class UploadToServer extends Service {
                     );
 
                     // Building JSON document
-                    String uniquePostId = getUniqueID().replaceAll("-", "") + "U" + user_id;
+                    String uniquePostId = user_id;
                     main = new JSONObject();
                     main.put("id", uniquePostId);
                     main.put("type", "User");
@@ -680,16 +743,21 @@ public class UploadToServer extends Service {
                     main.put("activationCode", standardContent);
 
                     standardContent = new JSONObject();
+                    standardContent.put("value", "Activated");
+                    main.put("activationStatus", standardContent);
+
+                    standardContent = new JSONObject();
                     standardContent.put("value", email);
                     main.put("email", standardContent);
 
                     standardContent = new JSONObject();
-                    standardContent.put("value", trash);
+                    standardContent.put("value", parse_trash(trash));
                     main.put("trash", standardContent);
 
                     standardContent = new JSONObject();
-                    standardContent.put("value", lastUpdate);
-                    main.put("dateModified", standardContent);
+                    standardContent.put("value", created);
+                    standardContent.put("type", "Text");
+                    main.put("dateCreated", standardContent);
 
                     entitiesArray.put(main);
                 }
@@ -738,7 +806,7 @@ public class UploadToServer extends Service {
             }
 
             main = new JSONObject();
-            main.put("id", "QNNRE1");
+            main.put("id", "QNNRE1" + exp1);
             main.put("type", "Questionnaire");
 
             standardContent = new JSONObject();
@@ -755,8 +823,9 @@ public class UploadToServer extends Service {
             main.put("description", standardContent);
 
             standardContent = new JSONObject();
-            standardContent.put("value", "2017-01-01T10:10:10.1000Z");
-            main.put("dateModified", standardContent);
+            standardContent.put("value", "2018-01-01T10:10:10.1000Z");
+            standardContent.put("type", "Text");
+            main.put("dateCreated", standardContent);
 
             entitiesArray.put(main);
         }
@@ -764,7 +833,7 @@ public class UploadToServer extends Service {
         // TODO As previously mentioned, questions should be created on the client side (i.e., a dashboard)
         if (option.equals("Question")) {
             Log.v(APP_NAME, "Processing Question data");
-            String uniqueId = "QON"+exp1;
+            String uniqueId = "QON" + exp1 + "" + exp2;
 
             // Setting the batch of control entities
             core.put("actionType", "APPEND");
@@ -774,11 +843,15 @@ public class UploadToServer extends Service {
             main.put("type", "Question");
 
             standardContent = new JSONObject();
+            standardContent.put("value", "QNNRE1" + exp2);
+            main.put("refQuestionnaire", standardContent);
+
+            standardContent = new JSONObject();
             standardContent.put("value", "health");
             main.put("category", standardContent);
 
             standardContent = new JSONObject();
-            standardContent.put("value", getQuestion("description", exp1, exp2));
+            standardContent.put("value", getQuestion("description", exp2, exp1));
             main.put("value", standardContent);
 
             standardContent = new JSONObject();
@@ -786,8 +859,9 @@ public class UploadToServer extends Service {
             main.put("language", standardContent);
 
             standardContent = new JSONObject();
-            standardContent.put("value", "2017-01-01T10:10:10.1000Z");
-            main.put("dateModified", standardContent);
+            standardContent.put("value", "2018-01-01T10:10:10.1000Z");
+            standardContent.put("type", "Text");
+            main.put("dateCreated", standardContent);
 
             entitiesArray.put(main);
         }
@@ -910,17 +984,17 @@ public class UploadToServer extends Service {
                     }
 
                     // Building JSON document
-                    String uniquePostId = getUniqueID().replaceAll("-", "") + "QON" + exp1 + "T"  + test_id;
+                    String uniquePostId = "ANW" + exp1 + "T"  + test_id;
                     main = new JSONObject();
                     main.put("id", uniquePostId);
                     main.put("type", "Answer");
 
                     standardContent = new JSONObject();
-                    standardContent.put("value", refQuestion);
+                    standardContent.put("value", refQuestion + parse_test(Integer.parseInt(getTestInfo(Integer.parseInt(test_id), "test_type"))));
                     main.put("refQuestion", standardContent);
 
                     standardContent = new JSONObject();
-                    standardContent.put("value", getUniqueID().replaceAll("-", "") + "P"  + patient_id);
+                    standardContent.put("value", "http://207.249.127.162:1234/participants/"  + patient_id);
                     main.put("refUser", standardContent);
 
                     standardContent = new JSONObject();
@@ -929,7 +1003,8 @@ public class UploadToServer extends Service {
 
                     standardContent = new JSONObject();
                     standardContent.put("value", lastUpdate);
-                    main.put("dateModified", standardContent);
+                    standardContent.put("type", "Text");
+                    main.put("dateCreated", standardContent);
 
                     entitiesArray.put(main);
                 }
@@ -943,7 +1018,7 @@ public class UploadToServer extends Service {
 
     public String getQuestion(String option, String type, String question){
         String valueQuestion;
-        String questionId = "QON" + question;
+        String questionId = "QON" + question + "" + type;
 
         Configuration conf = getResources().getConfiguration();
         conf.locale = new Locale("en");
@@ -1139,7 +1214,7 @@ public class UploadToServer extends Service {
 
     public String getTestType(int option) {
         String outcome = "";
-
+        Log.v(APP_NAME, "getTestType UU: " + option);
         switch (option) {
             case WALKING_TEST:
                 outcome = "Timed Up and Go";
@@ -1186,7 +1261,49 @@ public class UploadToServer extends Service {
     }
 
     final int RESTART_COUNTER = 1;
-    //final int BATCH_SIZE = 10;
+    final int BATCH_SIZE = 100;
+
+    public String getTestInfo(int test_id, String option){
+        String outcome = "";
+
+        TestDBHandlerUtils testDBObj = new TestDBHandlerUtils(getApplicationContext());
+        testDBObj.openDB();
+
+        Cursor mCursorTest = testDBObj.readData(test_id);
+        if (mCursorTest.moveToFirst()) {
+            Log.v(APP_NAME, "getTestInfo UU: " + option);
+            if(option == "test_type")
+                outcome = mCursorTest.getString(
+                        mCursorTest.getColumnIndexOrThrow(DatabaseContract.Test.COLUMN_NAME_COL2)
+                );
+            if(option == "test_option")
+                outcome = mCursorTest.getString(
+                        mCursorTest.getColumnIndexOrThrow(DatabaseContract.Test.COLUMN_NAME_COL3)
+                );
+            if(option == "start_date_time")
+                outcome = mCursorTest.getString(
+                        mCursorTest.getColumnIndexOrThrow(DatabaseContract.Test.COLUMN_NAME_COL4)
+                );
+            if(option == "end_date_time")
+                outcome = mCursorTest.getString(
+                        mCursorTest.getColumnIndexOrThrow(DatabaseContract.Test.COLUMN_NAME_COL5)
+                );
+            if(option == "data_evaluation_score")
+                outcome = mCursorTest.getString(
+                        mCursorTest.getColumnIndexOrThrow(DatabaseContract.Test.COLUMN_NAME_COL16)
+                );
+            if(option == "data_evaluation_description")
+                outcome = mCursorTest.getString(
+                        mCursorTest.getColumnIndexOrThrow(DatabaseContract.Test.COLUMN_NAME_COL17)
+                );
+            if(option == "status")
+                outcome = mCursorTest.getString(
+                        mCursorTest.getColumnIndexOrThrow(DatabaseContract.Test.COLUMN_NAME_COL18)
+                );
+        }
+        Log.v(APP_NAME, "getTestInfo UU: " + outcome);
+        return outcome;
+    }
 
     private List extract2Parse(String sourceFileUri, String mSensorType) throws JSONException {
 
@@ -1251,16 +1368,17 @@ public class UploadToServer extends Service {
 
                     // Building a batch
                     // TODO take care of the remaining less than the BATCH_SIZE. I'm leaving them to hell :P
-                    /*if (c == BATCH_SIZE) {
+                    if (c == BATCH_SIZE) {
                         batch.add(chunk);
-                        c = RESTART_COUNTER;
+                        // To ensure the look is ignored in further iterations
+                        c = BATCH_SIZE + RESTART_COUNTER;
                     }
 
-                    c++;*/
+                    c++;
                 }
 
                 // To collect the whole pack of data instead of chunks as previously coded
-                batch.add(chunk);
+                //batch.add(chunk);
 
                 mAccCursor.close();
             }
@@ -1297,16 +1415,17 @@ public class UploadToServer extends Service {
 
                     // Building a batch
                     // TODO take care of the remaining less than the BATCH_SIZE. I'm leaving then to hell :P
-                    /*if (c == BATCH_SIZE) {
+                    if (c == BATCH_SIZE) {
                         batch.add(chunk);
-                        c = RESTART_COUNTER;
+                        // To ensure the look is ignored in further iterations
+                        c = BATCH_SIZE + RESTART_COUNTER;
                     }
 
-                    c++;*/
+                    c++;
                 }
 
                 // To collect the whole pack of data instead of chunks as previously coded
-                batch.add(chunk);
+                //batch.add(chunk);
 
                 mOrientCursor.close();
             }
@@ -1477,10 +1596,10 @@ public class UploadToServer extends Service {
             // TODO but the ideal mechanism is to send a single huge JSON batch
             // http://stackoverflow.com/questions/17650509/post-huge-json-object-in-android
             //if (batch.size() >= 1)
-            //    standardContent.put("value", "[SEGMENTED]");
+                //standardContent.put("value", "[SEGMENTED]");
             //else
             standardContent.put("value", batch.get(0));
-            main.put("data", standardContent);
+            main.put("value", standardContent);
 
             metadataContent = new JSONObject();
             standardContent = new JSONObject();
@@ -1561,12 +1680,13 @@ public class UploadToServer extends Service {
             main.put("id", uniquePostId);
             main.put("type", "MotorPhysicalTest");
 
+            int test_type_temp = Integer.parseInt(getTestInfo(Integer.parseInt(test_id), "test_type"));
             standardContent = new JSONObject();
-            standardContent.put("value", getTestTypeOption(Integer.parseInt(test_option)));
+            standardContent.put("value", getTestType(test_type_temp));
             main.put("testType", standardContent);
 
             standardContent = new JSONObject();
-            standardContent.put("value", getUniqueID().replaceAll("-", "") + "P"  + patient_id);
+            standardContent.put("value", "http://207.249.127.162:1234/participants/"  + patient_id);
             main.put("refUser", standardContent);
 
             standardContent = new JSONObject();
@@ -1581,6 +1701,37 @@ public class UploadToServer extends Service {
             standardContent.put("device", getUniqueID().replaceAll("-", "") + "DSM" + test_id);
             standardContent.put("position", "lower-back");
             metadataContent.put("data", standardContent);
+            list = new ArrayList<String>();
+            switch (test_type_temp) {
+                case WALKING_TEST:
+                    list.add("ANW1T" + test_id);
+                    list.add("ANW2T" + test_id);
+                    list.add("ANW3T" + test_id);
+                    list.add("ANW4T" + test_id);
+                    list.add("ANW5T" + test_id);
+                    list.add("ANW6T" + test_id);
+                    list.add("ANW7T" + test_id);
+                    list.add("ANW8T" + test_id);
+                    list.add("ANW9T" + test_id);
+                    break;
+                case STRENGTH_TEST:
+                    list.add("ANW1T" + test_id);
+                    list.add("ANW2T" + test_id);
+                    list.add("ANW3T" + test_id);
+                    break;
+                case BALANCE_TEST:
+                    list.add("ANW1T" + test_id);
+                    list.add("ANW2T" + test_id);
+                    list.add("ANW3T" + test_id);
+                    break;
+                default:
+            }
+            metadataContent.put("refAnswers", new JSONArray(list));
+            metadataContent.put("testType", getTestInfo(Integer.parseInt(test_id), "test_option"));
+            metadataContent.put("testScore", getTestInfo(Integer.parseInt(test_id), "data_evaluation_score"));
+            metadataContent.put("testComments", getTestInfo(Integer.parseInt(test_id), "data_evaluation_description"));
+            metadataContent.put("testStatus", getTestInfo(Integer.parseInt(test_id), "status"));
+            metadataContent.put("refQuestionnaire", "QNNRE1" + parse_test(Integer.parseInt(getTestInfo(Integer.parseInt(test_id), "test_type"))));
             metadataContent.put("relationship", "device-limbs");
             standardContent = new JSONObject();
             standardContent.put("value", metadataContent);
@@ -1767,5 +1918,28 @@ public class UploadToServer extends Service {
             }
             j++;
         }
+    }
+
+    public String parse_trash(String option){
+        String outcome = "false";
+        if(option == "1") outcome = "true";
+        return outcome;
+    }
+
+    public String parse_test(int option){
+        String outcome = "";
+        switch (option) {
+            case WALKING_TEST:
+                outcome = "TUG";
+                break;
+            case STRENGTH_TEST:
+                outcome = "Strength";
+                break;
+            case BALANCE_TEST:
+                outcome = "Balance";
+                break;
+            default:
+        }
+        return outcome;
     }
 }

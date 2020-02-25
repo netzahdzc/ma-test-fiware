@@ -1,7 +1,7 @@
 MA-Test App
 ===================================
 
-This app allows user to collect objective data for futher (server-side) analysis of balance, strenght, and risk of falls. This is an ongoin project.
+This app allows user to collect objective data for further (server-side) analysis of balance, strength, and risk of falls. This is an ongoing project.
 
 Pre-requisites
 --------------
@@ -14,7 +14,7 @@ Pre-requisites
 Support
 -------
 
-Patches are encouraged, and may be submitted by forking this project and
+Patches are encouraged and may be submitted by forking this project and
 submitting a pull request through GitHub. Please see CONTRIBUTING.md for more details.
 
 License
